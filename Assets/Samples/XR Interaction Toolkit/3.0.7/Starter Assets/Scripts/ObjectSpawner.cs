@@ -250,21 +250,48 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             }
 
 
+
+            //get the prefab Spawnable in Resources/Prefabs folder
+            var prefab = Resources.Load<GameObject>("Prefabs/Spawnable");
+
+            //instantiate the prefab
+            var spawnedObject = Instantiate(prefab);
+
+            //set the position of the spawned object to the spawn point
+            spawnedObject.transform.position = spawnPoint;
+
+            //set the newObject as a child of the spawned object
+            newObject.transform.parent = spawnedObject.transform;
+
+
+
             UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable xRGrabInteractable;
 
             //if object doesn't have XRGrabInteractable component
-            if (newObject.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>() == null)
+            if (spawnedObject.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>() == null)
             {
 
                 //add an XRGrabInteractable component to the object
-                xRGrabInteractable = newObject.AddComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
+                xRGrabInteractable = spawnedObject.AddComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
 
                 
             }
             else
             {
-                xRGrabInteractable = newObject.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
+                xRGrabInteractable = spawnedObject.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
             }
+
+
+
+            //get ar transformer and if it's null, add it
+            var arTransformer = spawnedObject.GetComponent<Transformers.ARTransformer>();
+
+            if (arTransformer == null)
+            {
+                arTransformer = spawnedObject.AddComponent<Transformers.ARTransformer>();
+                arTransformer.minScale = newObject.transform.localScale.x;
+            }
+
 
             ////if object doesn't have ARTransformer component
             //if (newObject.GetComponent<Transformers.ARTransformer>() == null)
@@ -278,41 +305,46 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             //}
 
             //if object doesn't have a rigidbody component
-            if (newObject.GetComponent<Rigidbody>() == null)
-            {
-
-                //add a rigidbody component to the object
-                newObject.AddComponent<Rigidbody>();
-            }
-            var rigidBody = newObject.GetComponent<Rigidbody>();
-
-
 
 
             //if object doesn't have a collider component
-            if (newObject.GetComponent<Collider>() == null)
+            if (spawnedObject.GetComponentInChildren<Collider>() == null)
             {
 
                 //add a collider component to the object
-                newObject.AddComponent<BoxCollider>();
+                //spawnedObject.AddComponent<BoxCollider>();
+
+                newObject.AddComponent<MeshCollider>();
             }
 
-            var collider = newObject.GetComponent<BoxCollider>();
+            var collider = newObject.GetComponent<MeshCollider>();
 
 
             xRGrabInteractable.colliders.Add(collider);
 
 
-            rigidBody.useGravity = false;
-            //make it kinematic
-            rigidBody.isKinematic = true;
+
+            //if (spawnedObject.GetComponent<Rigidbody>() == null)
+            //{
+
+            //    //add a rigidbody component to the object
+            //    spawnedObject.AddComponent<Rigidbody>();
+            //}
+            //var rigidBody = spawnedObject.GetComponent<Rigidbody>();
+
+
+
+
+            //rigidBody.useGravity = false;
+            ////make it kinematic
+            //rigidBody.isKinematic = true;
 
             //add one to the index for spawning 
             //m_SpawnOptionIndex++;
 
 
 
-            objectSpawned?.Invoke(newObject);
+            objectSpawned?.Invoke(spawnedObject);
 
 
             return true;
