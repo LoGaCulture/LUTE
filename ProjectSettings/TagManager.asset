@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ToolCam
   - Map
+  - DragPiece
   layers:
   - Default
   - TransparentFX

@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 [OrderInfo("XR",
               "InteractWithXRObject",
@@ -40,25 +42,50 @@ public class InteractWithXRObject : Order
             interactorEv.onInteracted = new UnityEvent();
         }
 
-        interactorEv.onInteracted.AddListener(OnInteract);
+        //interactorEv.onInteracted.AddListener(OnInteract);
+
+
+
+        //get the xrgrabinteractable on the object
+        var grabInteractable = _xrObject.GetComponent<XRGrabInteractable>();
+        grabInteractable.selectEntered.AddListener(OnInteract);
     }
 
-    public void OnInteract()
+    public void OnInteract(SelectEnterEventArgs args)
     {
-        Debug.Log("Interacted with XR Object");
-
-        if (_xrObject != null)
+        Debug.Log("Selected");
+        
+        if(_xrObject != null)
         {
             var interactorEv = _xrObject.GetComponent<InteractorEvent>();
-            if (interactorEv != null)
-            {
-                interactorEv.onInteracted.RemoveListener(OnInteract);
-            }
+            
         }
 
+        var grabInteractable = _xrObject.GetComponent<XRGrabInteractable>();
+        grabInteractable.selectEntered.RemoveListener(OnInteract);
+
         _onInteraction.Invoke();
+
         Continue();
+
     }
+
+    //public void OnInteract()
+    //{
+    //    Debug.Log("Interacted with XR Object");
+
+    //    if (_xrObject != null)
+    //    {
+    //        var interactorEv = _xrObject.GetComponent<InteractorEvent>();
+    //        if (interactorEv != null)
+    //        {
+    //            interactorEv.onInteracted.RemoveListener(OnInteract);
+    //        }
+    //    }
+
+    //    _onInteraction.Invoke();
+    //    Continue();
+    //}
 
     public override string GetSummary()
     {

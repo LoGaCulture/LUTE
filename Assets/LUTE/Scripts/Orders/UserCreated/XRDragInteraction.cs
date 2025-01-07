@@ -44,8 +44,29 @@ public class XRDragInteraction : Order
         _transparentObject = Instantiate(_gameObjectToDrag, _gameObjectToDrag.transform.position + _dragOffset, _gameObjectToDrag.transform.rotation);
         _transparentObject.name = $"{_gameObjectToDrag.name}_Transparent";
 
+        //get the xrgrabinteractable of the gameobject to drag and set the movable property to true
+        UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable = _gameObjectToDrag.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
+        if (grabInteractable != null)
+        {
+            grabInteractable.trackPosition = true;
+        }
+
         // Set tag to identify it if necessary
         _gameObjectToDrag.tag = "DragPiece";
+        //and to all children
+        foreach (Transform child in _gameObjectToDrag.transform)
+        {
+            child.gameObject.tag = "DragPiece";
+        }
+
+
+        //set the trackposition to false on the transparent object
+        grabInteractable = _transparentObject.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
+        if (grabInteractable != null)
+        {
+            grabInteractable.trackPosition = false;
+        }
+
 
         // Add the OverlapDetector script to the transparent object
         var overlapDetector = _transparentObject.AddComponent<OverlapDetector>();
@@ -54,15 +75,40 @@ public class XRDragInteraction : Order
         // Set the callback function to be the OnPuzzleSolved function
         overlapDetector.PuzzleSolved += OnPuzzleSolved;
 
-        // Set the collider of the transparent object to be a trigger
-        var collider = _transparentObject.GetComponent<Collider>();
+        // Set the collider of the transparent object to be a trigger, either in component or in children
+        var collider = _transparentObject.GetComponent<MeshCollider>();
         if (collider != null)
         {
+            // Set convex to true
+            collider.convex = true;
             collider.isTrigger = true;
         }
+        else
+        {
+            collider = _transparentObject.GetComponentInChildren<MeshCollider>();
+            if (collider != null)
+            {
+                // Set convex to true
+                collider.convex = true;
+                collider.isTrigger = true;
+            }
+            else
+            {
+                // Add a box collider and fit it to the object
+                BoxCollider boxCollider = _transparentObject.AddComponent<BoxCollider>();
+                boxCollider.isTrigger = true;
+                boxCollider.size = _transparentObject.GetComponent<Renderer>().bounds.size;
+            }
+        }
 
-        // Add rigidbody to the transparent object
-        var rigidbody = _transparentObject.AddComponent<Rigidbody>();
+        // Check if rigidbody already exists
+        var rigidbody = _transparentObject.GetComponent<Rigidbody>();
+        if (rigidbody == null)
+        {
+            // Add rigidbody to the transparent object
+            rigidbody = _transparentObject.AddComponent<Rigidbody>();
+        }
+
         rigidbody.useGravity = false;
         rigidbody.isKinematic = true;
 

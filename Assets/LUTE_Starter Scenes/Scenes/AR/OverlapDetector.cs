@@ -12,13 +12,19 @@ public class OverlapDetector : MonoBehaviour
     // This function is called every frame while another collider is within the trigger collider
     private void OnTriggerStay(Collider other)
     {
+
+        //Debug.Log("Overlap Detected " + other.name);
+
         // Check if the other collider is the puzzle piece
         if (other.CompareTag("DragPiece"))
         {
 
 
             // Calculate the overlap area as a percentage of the puzzle piece's total area
-            float overlapPercentage = CalculateOverlapPercentage(this.GetComponent<Collider>(), other);
+            float overlapPercentage = CalculateOverlapPercentage(this.GetComponentInChildren<Collider>(), other);
+
+            //times by 100
+            overlapPercentage *= 100;
 
 
             Debug.Log("Overlap Detected with percentage: " + overlapPercentage);

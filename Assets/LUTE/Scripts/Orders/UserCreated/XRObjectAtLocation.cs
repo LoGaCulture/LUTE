@@ -21,8 +21,20 @@ public class XRObjectAtLocation : Order
     [Tooltip("The name of the object to place at the location")]
     [SerializeField] private string _objectName;
 
+    [SerializeField] private float _placementRadius = 3.0f;
+
+    [SerializeField] private float _raycastHeightOffset = 2.0f;
+
+
+    private Vector2 _sessionStartLatLon;
+    private bool _sessionStartLocationKnown = false;
+
+
+    private bool _objectPlaced = false;
+
     private GameObject _xrObject;
     private ARRaycastManager _arRaycastManager;
+    private ARPlaneManager _planeManager;
     private List<ARRaycastHit> _arRaycastHits = new List<ARRaycastHit>();
     private bool _locationInitialized = false;
 
@@ -30,7 +42,13 @@ public class XRObjectAtLocation : Order
 
     public override void OnEnter()
     {
+
+
+
         _xrObject = XRManager.Instance.GetXRObject();
+
+
+        Debug.Log("Placing object at location...");
 
         if (_xrObject == null)
         {
@@ -39,11 +57,43 @@ public class XRObjectAtLocation : Order
             return;
         }
 
+        _planeManager = _xrObject.GetComponentInChildren<ARPlaneManager>();
+        _arRaycastManager = _xrObject.GetComponentInChildren<ARRaycastManager>();
+
+        if(_planeManager == null || _arRaycastManager == null)
+        {
+            Debug.LogError("ARPlaneManager or ARRaycastManager not found in XR Object.");
+            Continue();
+            return;
+        }
+
+        //save it here or probably at the start of the app
+        if(Input.location.isEnabledByUser && Input.location.status == LocationServiceStatus.Running)
+        {
+            _sessionStartLatLon = new Vector2(Input.location.lastData.latitude, Input.location.lastData.longitude);
+            _sessionStartLocationKnown = true;
+        }
+        else
+        {
+            Debug.LogWarning("Location services are not enabled or running. The session start location will not be saved.");
+        }
+
         StartCoroutine(InitializeLocationServices());
     }
 
     private IEnumerator InitializeLocationServices()
     {
+
+        if(Input.location.status ==LocationServiceStatus.Running)
+        {
+            _locationInitialized = true;
+            StartCoroutine(CheckProximityAndPlace());
+
+            Debug.Log($"Location initialized: {Input.location.lastData.latitude}, {Input.location.lastData.longitude}");
+
+            yield break;
+        }
+
         // Check if location services are enabled
         if (!Input.location.isEnabledByUser)
         {
@@ -82,9 +132,39 @@ public class XRObjectAtLocation : Order
         _locationInitialized = true;
         Debug.Log($"Location initialized: {Input.location.lastData.latitude}, {Input.location.lastData.longitude}");
 
+        if(!_sessionStartLocationKnown)
+        {
+            _sessionStartLatLon = new Vector2(Input.location.lastData.latitude, Input.location.lastData.longitude);
+            _sessionStartLocationKnown = true;
+        }
+
         // Proceed to check proximity to target location
-        StartCoroutine(CheckProximityToTargetLocation());
+        StartCoroutine(CheckProximityAndPlace());
     }
+
+    private IEnumerator CheckProximityAndPlace()
+    {
+
+        Debug.Log("Checking proximity to target location...");
+
+        // Keep checking until we place or user quits
+        while (!_objectPlaced)
+        {
+            if (IsWithinTargetRadius())
+            {
+                // We are within the radius; let's do the combined approach
+                Debug.Log("Within target radius; placing object using plane detection + GPS coordinate.");
+                PlaceObjectUsingCombinedApproach();
+                yield break; // stop checking
+            }
+            else
+            {
+                Debug.Log("Not in range. Checking again in 5s...");
+                yield return new WaitForSeconds(5);
+            }
+        }
+    }
+
 
     private IEnumerator CheckProximityToTargetLocation()
     {
@@ -111,9 +191,10 @@ public class XRObjectAtLocation : Order
         Vector2d deviceLatLon = new Vector2d(Input.location.lastData.latitude, Input.location.lastData.longitude);
 
         float distance = GetDistanceInMeters(targetLatLon, deviceLatLon);
-        float radiusInMeters = 1.0f; // You can adjust the radius as needed
 
-        return distance <= radiusInMeters;
+        Debug.Log($"Distance to target: {distance} meters");
+
+        return distance <= _placementRadius;
     }
 
     private float GetDistanceInMeters(Vector2d point1, Vector2d point2)
@@ -132,6 +213,53 @@ public class XRObjectAtLocation : Order
         double distance = EarthRadius * c;
 
         return (float)distance;
+    }
+
+    private void PlaceObjectUsingCombinedApproach()
+    {
+        if (!_sessionStartLocationKnown)
+        {
+            Debug.LogWarning("Session start location is unknown; can't compute offset. Just place on first plane?");
+            // fallback: just place on first plane we detect
+            // Or do something else
+            _planeManager.planesChanged += PlaceOnFirstPlane;
+            return;
+        }
+
+        // 1) Compute the local AR offset for the target lat/lon
+        Vector2d targetLatLon = _objectLocation.Value.LatLongString();
+        Vector3 localPos = ConvertLatLonToARPosition(targetLatLon);
+
+        // 2) Raycast downward from (localPos.x, localPos.y+_raycastHeightOffset, localPos.z)
+        Vector3 raycastOrigin = localPos + Vector3.up * _raycastHeightOffset;
+        Ray downwardRay = new Ray(raycastOrigin, Vector3.down);
+        List<ARRaycastHit> hits = new List<ARRaycastHit>();
+
+        if (_arRaycastManager.Raycast(downwardRay, hits, TrackableType.Planes))
+        {
+            // If we hit a plane, place the object at that plane’s pose
+            var hit = hits[0];
+            Pose hitPose = hit.pose;
+            SpawnObject(hitPose.position, hitPose.rotation);
+        }
+        else
+        {
+            Debug.Log("No plane detected directly below that GPS position; will try planesChanged fallback.");
+
+            _planeManager.planesChanged += OnPlanesChanged;
+        }
+    }
+
+    private void PlaceOnFirstPlane(ARPlanesChangedEventArgs args)
+    {
+        if (_objectPlaced) return;
+
+        if (args.added != null && args.added.Count > 0)
+        {
+            var plane = args.added[0];
+            SpawnObject(plane.transform.position, plane.transform.rotation);
+            _planeManager.planesChanged -= PlaceOnFirstPlane;
+        }
     }
 
     private void InitializePlaneDetection()
@@ -171,6 +299,44 @@ public class XRObjectAtLocation : Order
             // Perform raycast to place object
             TryPlaceObject();
         }
+    }
+
+    private Vector3 ConvertLatLonToARPosition(Vector2d targetLatLon)
+    {
+        // 1) Distance in meters from "session start lat/lon" to target lat/lon
+        float distMetersX, distMetersZ;
+        // A rough approach is to treat changes in latitude as deltaZ and changes in longitude as deltaX
+        // or vice versa, depending on your coordinate system preference.
+
+        float latScale = 111320f;   // meters per degree of latitude (approx)
+        float lonScale = 111320f * Mathf.Cos((float)(_sessionStartLatLon.x * Mathf.Deg2Rad));
+
+        float deltaLat = (float)(targetLatLon.x - _sessionStartLatLon.x);
+        float deltaLon = (float)(targetLatLon.y - _sessionStartLatLon.y);
+
+        // We'll do: X = deltaLon * lonScale, Z = deltaLat * latScale
+        distMetersX = deltaLon * lonScale;
+        distMetersZ = deltaLat * latScale;
+
+        // 2) Construct the local position in the AR coordinate space
+        //    We assume the AR session's origin was near the device’s starting position.
+        //    The device’s initial lat/lon => (0,0,0).
+        //    So we offset from that.
+        return new Vector3(distMetersX, 0f, distMetersZ);
+    }
+
+    private void SpawnObject(Vector3 position, Quaternion rotation)
+    {
+        if (_objectPlaced) return;
+
+        _objectPlaced = true;
+        GameObject obj = Instantiate(_objectToPlace, position, rotation);
+        obj.name = _objectName;
+
+        XRObjectManager.Instance.AddObject(_objectName, obj);
+
+        Debug.Log($"Object '{_objectName}' placed at {position} with rotation {rotation}.");
+        Continue();
     }
 
     private void TryPlaceObject()

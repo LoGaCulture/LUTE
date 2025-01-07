@@ -12,6 +12,7 @@ public class XRObjectAtLocationEditor : OrderEditor
     protected SerializedProperty objectLocProp;
     protected SerializedProperty objectProp;
     protected SerializedProperty objectNameProp;
+    protected SerializedProperty placementRadius;
 
     protected int locationVarIndex = 0;
     protected int itemIndex = 0;
@@ -20,10 +21,11 @@ public class XRObjectAtLocationEditor : OrderEditor
     {
         base.OnEnable();
 
-        objectLocProp = serializedObject.FindProperty("objectLocation");
-        objectProp = serializedObject.FindProperty("objectToPlace");
-        objectNameProp = serializedObject.FindProperty("objectName");
-       
+        objectLocProp = serializedObject.FindProperty("_objectLocation");
+        objectProp = serializedObject.FindProperty("_objectToPlace");
+        objectNameProp = serializedObject.FindProperty("_objectName");
+        placementRadius = serializedObject.FindProperty("_placementRadius");
+
     }
 
     public override void OnInspectorGUI()
@@ -50,11 +52,14 @@ public class XRObjectAtLocationEditor : OrderEditor
         if (locationVars.Length > 0)
             objectLocProp.objectReferenceValue = locationVars[locationVarIndex];
 
-       
+
         EditorGUILayout.PropertyField(objectProp);
 
         //name property
         EditorGUILayout.PropertyField(objectNameProp);
+
+        //placement radius
+        EditorGUILayout.PropertyField(placementRadius);
 
         serializedObject.ApplyModifiedProperties();
     }

@@ -7,6 +7,7 @@ using UnityEngine.XR.ARSubsystems;
 using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
 using Unity.VisualScripting;
+using System.Collections;
 
 [OrderInfo("XR", "PlaceObjectOnPlane", "")]
 [AddComponentMenu("")]
@@ -36,6 +37,7 @@ public class PlaceObjectXR : Order
 
     private GameObject m_SpawnedObject;
     private ARPlaneManager planeManager;
+    private ObjectSpawner objectSpawner;
 
     private void OnObjectSpawned(GameObject obj)
     {
@@ -55,7 +57,7 @@ public class PlaceObjectXR : Order
             return;
         }
 
-        var objectSpawner = arObjectInstance.GetComponentInChildren<ObjectSpawner>();
+        //objectSpawner = arObjectInstance.GetComponentInChildren<ObjectSpawner>();
         if (objectSpawner == null)
         {
             Debug.LogError("ObjectSpawner not found in XR object.");
@@ -79,9 +81,45 @@ public class PlaceObjectXR : Order
         objectSpawner.objectPrefabs.Remove(m_PrefabToPlace);
         ObjectSpawner.IsCurrentlyPlacingObject = false;
 
+
+        m_SpawnedObject = obj;
+
+
+        StartCoroutine(waitForOneFrame());
+
         XRObjectManager.Instance.AddObject(m_ObjectName, obj);
 
         Continue();
+    }
+
+
+
+    // need to do this because otherwise it doesn't detect touch?? took me way too long to figure this out
+    IEnumerator waitForOneFrame()
+    {
+
+      
+
+        //get the xr grab interactable component
+        UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable = m_SpawnedObject.GetComponentInChildren<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
+
+        //disable it for one frame
+        grabInteractable.enabled = false;
+        //wait for one frame
+        yield return null;
+
+        //enable it again
+        grabInteractable.enabled = true;
+
+        //disable and enable the object to make it interactable
+        //m_SpawnedObject.SetActive(false);
+
+
+        //m_SpawnedObject.SetActive(true);
+
+
+        yield return null;
+
     }
 
     public override void OnEnter()
@@ -112,7 +150,7 @@ public class PlaceObjectXR : Order
 
         //Debug.Log(planeManager.gameObject);
 
-        ObjectSpawner objectSpawner = arObjectInstance.GetComponentInChildren<ObjectSpawner>();
+        objectSpawner = arObjectInstance.GetComponentInChildren<ObjectSpawner>();
         if (objectSpawner == null)
         {
             Debug.LogError("ObjectSpawner not found in XR object.");
@@ -177,7 +215,8 @@ public class PlaceObjectXR : Order
             interactable.isMovable = moveable;
             interactable.isRotatable = rotateable;
 
-          
+            raycastHitEvent.eventRaised -= PlaceObjectAt;
+
             Continue();
         }
         else
@@ -198,10 +237,12 @@ public class PlaceObjectXR : Order
                 Debug.Log("Placed object on added");
 
 
-                GameObject go = Instantiate(m_PrefabToPlace, plane.transform.position, plane.transform.rotation);
+                //GameObject go = Instantiate(m_PrefabToPlace, plane.transform.position, plane.transform.rotation);
                 //go.transform.parent = plane.transform;
 
-                XRObjectManager.Instance.AddObject(m_ObjectName, go);
+                objectSpawner.TrySpawnObject(plane.transform.position, Vector3.up);
+
+                //XRObjectManager.Instance.AddObject(m_ObjectName, go);
 
                 // Unsubscribe to prevent multiple placements
                 planeManager.planesChanged -= OnPlaneDetected;
@@ -217,10 +258,12 @@ public class PlaceObjectXR : Order
             {
                 Debug.Log("Placed object on updated");
 
-                GameObject go = Instantiate(m_PrefabToPlace, plane.transform.position, plane.transform.rotation);
+                //GameObject go = Instantiate(m_PrefabToPlace, plane.transform.position, plane.transform.rotation);
                 //go.transform.parent = plane.transform;
 
-                XRObjectManager.Instance.AddObject(m_ObjectName, go);
+                objectSpawner.TrySpawnObject(plane.transform.position, Vector3.up);
+
+                //XRObjectManager.Instance.AddObject(m_ObjectName, go);
 
                 // Unsubscribe to prevent multiple placements
                 planeManager.planesChanged -= OnPlaneDetected;
