@@ -27,7 +27,7 @@ public class OverlapDetector : MonoBehaviour
             overlapPercentage *= 100;
 
 
-            Debug.Log("Overlap Detected with percentage: " + overlapPercentage);
+            //Debug.Log("Overlap Detected with percentage: " + overlapPercentage);
 
             // If the overlap is sufficient, consider the puzzle solved
             if (overlapPercentage >= minimumOverlapPercentage)

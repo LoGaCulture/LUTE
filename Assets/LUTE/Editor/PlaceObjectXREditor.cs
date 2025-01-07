@@ -75,7 +75,11 @@ public class PlaceObjectXREditor : OrderEditor
         EditorGUILayout.PropertyField(planeAlignment);
         EditorGUILayout.PropertyField(autoPlace);
 
-        if (!autoPlace.boolValue)
+        //if (!autoPlace.boolValue)
+
+        //draw separating line
+        GUILayout.Box("", new GUILayoutOption[] { GUILayout.ExpandWidth(true), GUILayout.Height(1) });
+
         {
             EditorGUILayout.PropertyField(rotateable);
             EditorGUILayout.PropertyField(scaleable);

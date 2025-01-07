@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -97,7 +98,38 @@ public class XRDragInteraction : Order
                 // Add a box collider and fit it to the object
                 BoxCollider boxCollider = _transparentObject.AddComponent<BoxCollider>();
                 boxCollider.isTrigger = true;
-                boxCollider.size = _transparentObject.GetComponent<Renderer>().bounds.size;
+                // Fit the BoxCollider to the object's bounds
+                var renderer = _transparentObject.GetComponent<Renderer>();
+                if (renderer == null)
+                {
+                    renderer = _transparentObject.GetComponentInChildren<Renderer>();
+                }
+
+                if (renderer != null)
+                {
+                    boxCollider.isTrigger = true;
+                    boxCollider.size = renderer.bounds.size;
+                    boxCollider.center = renderer.bounds.center - _transparentObject.transform.position;
+                }
+                else
+                {
+                    Debug.LogWarning("No renderer found on the transparent object or its children to calculate bounds for BoxCollider.");
+                }
+            }
+        }
+
+        //set the collider of the gameobject to drag to be convex if it is a mesh collider
+        collider = _gameObjectToDrag.GetComponent<MeshCollider>();
+        if (collider != null)
+        {
+            collider.convex = true;
+        }
+        else
+        {
+            collider = _gameObjectToDrag.GetComponentInChildren<MeshCollider>();
+            if (collider != null)
+            {
+                collider.convex = true;
             }
         }
 
@@ -113,15 +145,42 @@ public class XRDragInteraction : Order
         rigidbody.isKinematic = true;
 
         // Set materials to transparent
-        foreach (Renderer renderer in _transparentObject.GetComponentsInChildren<Renderer>())
+
+
+        // Check if the transparent object is not null
+        if (_transparentObject != null)
         {
-            Material[] materials = renderer.materials;
-            for (int i = 0; i < materials.Length; i++)
+            // Get all renderers, including the one on the parent (if it exists) and its children
+            Renderer[] renderers = _transparentObject.GetComponents<Renderer>();
+            Renderer[] childRenderers = _transparentObject.GetComponentsInChildren<Renderer>();
+
+            // Combine parent and child renderers into a single list
+            List<Renderer> allRenderers = new List<Renderer>(renderers);
+            allRenderers.AddRange(childRenderers);
+
+            foreach (Renderer renderer in allRenderers)
             {
-                materials[i] = _transparentMaterial;
+                if (renderer != null)
+                {
+                    Material[] materials = renderer.materials;
+                    for (int i = 0; i < materials.Length; i++)
+                    {
+                        if (materials[i] != null)
+                        {
+                            materials[i] = _transparentMaterial;
+                        }
+                    }
+                    renderer.materials = materials;
+                }
             }
-            renderer.materials = materials;
         }
+        else
+        {
+            Debug.LogWarning("Transparent object is null. Cannot set materials to transparent.");
+        }
+
+
+
     }
 
     public void OnPuzzleSolved()
