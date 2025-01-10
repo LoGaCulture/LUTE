@@ -18,12 +18,12 @@ MonoBehaviour:
     m_Storage: []
   m_Images:
   - m_SerializedGuid:
-      m_GuidLow: 5175207330307635970
-      m_GuidHigh: 2036241144260567458
+      m_GuidLow: 5108048755675670490
+      m_GuidHigh: 1385538678314395556
     m_SerializedTextureGuid:
-      m_GuidLow: 307439819891399527
-      m_GuidHigh: 14258803069662868586
-    m_Size: {x: 0.1, y: 0.1}
-    m_SpecifySize: 1
-    m_Name: AppIcon
-    m_Texture: {fileID: 2800000, guid: 266fdb673ee304446a348171d871e1c5, type: 3}
+      m_GuidLow: 8384093242107071099
+      m_GuidHigh: 13653593495684243370
+    m_Size: {x: 0, y: 0}
+    m_SpecifySize: 0
+    m_Name: PlaceHolder
+    m_Texture: {fileID: 2800000, guid: 038b8a7b4862745aaadfd7c9f14e7bbd, type: 3}

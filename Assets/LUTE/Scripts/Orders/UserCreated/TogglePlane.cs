@@ -13,7 +13,7 @@ public class TogglePlane : Order
     public override void OnEnter()
     {
 
-        XRHelper.getXRScript().TogglePlaneDetection(toggle);
+        XRManager.Instance.TogglePlaneDetection(toggle);
 
 
         Debug.Log("TogglePlane");

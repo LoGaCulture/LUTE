@@ -139,12 +139,12 @@ GameObject:
   - component: {fileID: 543519200}
   - component: {fileID: 543519197}
   - component: {fileID: 543519196}
-  - component: {fileID: 543519201}
   - component: {fileID: 543519203}
   - component: {fileID: 543519204}
-  - component: {fileID: 543519202}
   - component: {fileID: 543519205}
   - component: {fileID: 543519206}
+  - component: {fileID: 543519207}
+  - component: {fileID: 543519208}
   m_Layer: 0
   m_Name: BasicFlowEngine
   m_TagString: Untagged
@@ -169,10 +169,8 @@ MonoBehaviour:
   description: 
   hideComponents: 0
   localizationId: 
-  selectedOrders:
-  - {fileID: 543519206}
-  selectedNodes:
-  - {fileID: 543519184}
+  selectedOrders: []
+  selectedNodes: []
   nodeViewHeight: 483
   hideOrders: []
   variables:
@@ -224,12 +222,12 @@ MonoBehaviour:
   - {fileID: 543519197}
   - {fileID: 543519200}
   - {fileID: 543519196}
-  - {fileID: 543519201}
+  - {fileID: 543519207}
   - {fileID: 543519204}
   - {fileID: 543519203}
-  - {fileID: 543519202}
-  - {fileID: 543519205}
   - {fileID: 543519206}
+  - {fileID: 543519205}
+  - {fileID: 543519208}
   eventHandler: {fileID: 543519185}
   isGrouped: 0
   groupIndex: -1
@@ -307,7 +305,7 @@ MonoBehaviour:
   characterNameColour:
     serializedVersion: 2
     rgba: 0
-  storyText: Let's try the Dragging Puzzle Example!
+  storyText: Let's try spawning an object at a location!
   typingSpeed: 40
   extendPrevious: 0
   voiceOverClip: {fileID: 0}
@@ -426,9 +424,8 @@ MonoBehaviour:
   characterNameColour:
     serializedVersion: 2
     rgba: 0
-  storyText: Now that we enabled the XR system, let's spawn a simple cube with the
-    Place Object on plane order. We can choose between it being placed automatically
-    on the first plane it detects, or for the user to have to press it.
+  storyText: Now that we enabled the XR system, let's spawn a simple cylinder with
+    the Place Object at Location order.
   typingSpeed: 40
   extendPrevious: 0
   voiceOverClip: {fileID: 0}
@@ -442,45 +439,6 @@ MonoBehaviour:
   waitForVO: 0
   setDialogueBox: {fileID: 0}
   showButton: 1
---- !u!114 &543519201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 543519182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e25b71ff91e05740a6eb925390d6f15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PrefabToPlace: {fileID: 919132149155446097, guid: a35ac90d68e0d8b478e3b9f662727f39, type: 3}
-  m_ObjectName: Cylinder
-  raycastHitEvent: {fileID: 11400000, guid: 503648b3444113b4896ceded8c86c177, type: 2}
-  automaticallyPlaceObject: 1
-  rotateable: 1
-  scaleable: 1
-  moveable: 1
-  planeAlignment: 100
---- !u!114 &543519202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 543519182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7692e1916de18f749b52f89b7a3c2e1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _objectName: Cylinder
-  _transparentMaterial: {fileID: 2100000, guid: dbbf39fbee9037a4ba6c7b13e55515e0, type: 2}
-  _dragOffset: {x: 0.6, y: 0, z: 0}
-  _minimumOverlapPercentage: 75
-  onPuzzleSolvedEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &543519203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,8 +457,8 @@ MonoBehaviour:
   characterNameColour:
     serializedVersion: 2
     rgba: 0
-  storyText: It can be rotated, moved, and dragged! Now, let's try the drag puzzle
-    interaction.
+  storyText: We can then use the order "Interact with XR Object" before continuing.
+    The user needs to touch the object.
   typingSpeed: 40
   extendPrevious: 0
   voiceOverClip: {fileID: 0}
@@ -545,7 +503,10 @@ MonoBehaviour:
   characterNameColour:
     serializedVersion: 2
     rgba: 0
-  storyText: Congratulations! You completed the interaction.
+  storyText: Congratulations! You completed the interaction. We can also change the
+    object interaction properties with the "Change XR Object" order (we can either
+    change the object itself, or just change the rotateable, movable and scaleable
+    properties.
   typingSpeed: 40
   extendPrevious: 0
   voiceOverClip: {fileID: 0}
@@ -568,14 +529,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 543519182}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82f8c5c118c24c84a94e32f8176c3f5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectName: Cylinder
+  _interactorEvent: {fileID: 0}
+  _onInteraction:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &543519207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543519182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcc651577bd56f144be88f0f7729bba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _objectLocation: {fileID: 543519193}
-  _objectToPlace: {fileID: 0}
-  _objectName: 
+  _objectToPlace: {fileID: 919132149155446097, guid: a35ac90d68e0d8b478e3b9f662727f39, type: 3}
+  _objectName: Cylinder
   _placementRadius: 3
   _raycastHeightOffset: 2
+--- !u!114 &543519208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543519182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16bae1f548ee2984390cd4b60e2d5d6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectName: Cylinder
+  _replacementPrefab: {fileID: 0}
+  moveable: 1
+  rotateable: 0
+  scaleable: 0
 --- !u!1 &958114700
 GameObject:
   m_ObjectHideFlags: 1

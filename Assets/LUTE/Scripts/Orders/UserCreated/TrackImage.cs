@@ -73,32 +73,29 @@ public class TrackImage : Order
     [SerializeField, Tooltip("The set of images to add to the image library at runtime")]
     private ImageData[] _images;
 
+    [SerializeField]
     private ARTrackedImageManager _trackedImageManager;
 
-    void Awake()
-    {
-        var xrObject = XRManager.Instance.GetXRObject();
-        if (xrObject == null)
-        {
-            Debug.LogError("XR Object not initialized.");
-            return;
-        }
-
-        _trackedImageManager = xrObject.GetComponentInChildren<ARTrackedImageManager>();
-        if (_trackedImageManager == null)
-        {
-            Debug.LogError("ARTrackedImageManager not found in XR Object.");
-            return;
-        }
-    }
 
     private ImageData GetImageByName(string name)
     {
         return _images.FirstOrDefault(image => image.name == name);
     }
 
-    private void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
+    private void OnTrackedImagesChanged(ARTrackablesChangedEventArgs<ARTrackedImage> eventArgs)
     {
+
+
+        //go through all the images of the library and print the name as a mutableruntime reference image library
+        if (_trackedImageManager.referenceLibrary is MutableRuntimeReferenceImageLibrary mutableLibrary)
+        {
+            foreach (var image in mutableLibrary)
+            {
+                Debug.Log("Image in library: " + image.name);
+            }
+        }
+
+
         foreach (var trackedImage in eventArgs.added)
         {
             ImageData image = GetImageByName(trackedImage.referenceImage.name);
@@ -124,7 +121,7 @@ public class TrackImage : Order
             if (image == null)
             {
                 Debug.LogError("Image not found: " + trackedImage.referenceImage.name);
-                continue;
+               continue;
             }
 
             if (!image.spawned)
@@ -144,11 +141,17 @@ public class TrackImage : Order
                 }
             }
         }
+
+
+
     }
+
+    
 
     private IEnumerator WaitAndLoad()
     {
-        yield return new WaitForSeconds(1);
+        //wait for next frame
+        yield return null;
 
         if (_trackedImageManager == null)
         {
@@ -157,15 +160,20 @@ public class TrackImage : Order
             yield break;
         }
 
-        _trackedImageManager.trackedImagesChanged += OnTrackedImagesChanged;
-        AddImagesToLibrary();
+        _trackedImageManager.enabled = true;
+        _trackedImageManager.trackablesChanged.AddListener(OnTrackedImagesChanged);
+        StartCoroutine(AddImagesToLibrary());
     }
 
-    private void AddImagesToLibrary()
+    private IEnumerator AddImagesToLibrary()
     {
+
         if (_trackedImageManager.referenceLibrary is MutableRuntimeReferenceImageLibrary mutableLibrary)
         {
-            try
+
+
+
+            //try
             {
                 foreach (var image in _images)
                 {
@@ -182,23 +190,85 @@ public class TrackImage : Order
                         image.texture = newTexture;
                     }
 
-                    image.jobState = mutableLibrary.ScheduleAddImageWithValidationJob(image.texture, image.name, image.width);
+                    // Schedule the add image job
+                    var jobState = mutableLibrary.ScheduleAddImageWithValidationJob(image.texture, image.name, image.width);
+                    image.jobState = jobState;
+
+                    // Wait for the job to complete
+                    while (!jobState.jobHandle.IsCompleted)
+                    {
+                       //return; // Wait for next frame
+                    }
+                    jobState.jobHandle.Complete();
+
+                    if (jobState.status != AddReferenceImageJobStatus.Success)
+                    {
+                        Debug.LogError($"Failed to add image {image.name} to the library: {jobState.status}");
+                    }
+                    else
+                    {
+                        Debug.Log($"Successfully added image {image.name} to the library.");
+
+                       
+
+
+                      
+                    }
                 }
+
+
+
+                //foreach (var trackedImage in _trackedImageManager.trackables)
+                //{
+                //    Destroy(trackedImage.gameObject);
+                //}
+
+
+
+
+                //_trackedImageManager.enabled = false;
+
+                //yield return null;
+
+
+                
+
+                //_trackedImageManager.referenceLibrary = mutableLibrary;
+
+                //yield return null;
+
+                //_trackedImageManager.enabled = true;
+
+                
             }
-            catch (Exception e)
-            {
-                Debug.LogError(e);
-            }
+ 
         }
         else
         {
             Debug.Log("The reference image library is not mutable.");
         }
+
+        Continue();
+        yield return null;
     }
 
     public override void OnEnter()
     {
         Debug.Log("OnEnter in TrackImage");
+
+        var xrObject = XRManager.Instance.GetXRObject();
+        if (xrObject == null)
+        {
+            Debug.LogError("XR Object not initialized.");
+            return;
+        }
+
+        _trackedImageManager = xrObject.GetComponentInChildren<ARTrackedImageManager>();
+        if (_trackedImageManager == null)
+        {
+            Debug.LogError("ARTrackedImageManager not found in XR Object.");
+            return;
+        }
 
         StartCoroutine(WaitAndLoad());
     }

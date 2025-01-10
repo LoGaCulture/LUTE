@@ -49,14 +49,14 @@ public class XRMenu : Order
             //if the plane visualiser is not null, set it to the plane visualiser of the XR object
             if (planeVisualiser != null)
             {
-                var planeManager = XRHelper.getXRScript().gameObject.GetComponentInChildren<ARPlaneManager>();
+                var planeManager = XRManager.Instance.GetXRObject().GetComponentInChildren<ARPlaneManager>();
                 planeManager.planePrefab = planeVisualiser;
             }
 
             //if the point cloud visualiser is not null, set it to the point cloud visualiser of the XR object
             if (pointCloudVisualiser != null)
             {
-                var pointCloudManager = XRHelper.getXRScript().gameObject.GetComponentInChildren<ARPointCloudManager>();
+                var pointCloudManager = XRManager.Instance.GetXRObject().GetComponentInChildren<ARPointCloudManager>();
                 pointCloudManager.pointCloudPrefab = pointCloudVisualiser;
             }
         };

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 [OrderInfo("XR",
@@ -23,6 +24,11 @@ public class XRDragInteraction : Order
     [Tooltip("Minimum overlap percentage required to consider the puzzle solved")]
     [Range(0, 100)]
     [SerializeField] private float _minimumOverlapPercentage = 75f;
+
+
+    public UnityEvent onPuzzleSolvedEvent;
+
+
 
     public override void OnEnter()
     {
@@ -185,6 +191,12 @@ public class XRDragInteraction : Order
 
     public void OnPuzzleSolved()
     {
+
+        // Call the event
+       
+        if(onPuzzleSolvedEvent != null)
+        onPuzzleSolvedEvent.Invoke();
+
         // Destroy the transparent object
         if (_transparentObject != null)
         {
