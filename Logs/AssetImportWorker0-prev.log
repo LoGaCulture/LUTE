@@ -15,7 +15,7 @@ C:/GitHub/LUTE
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-57174
+59628
 -job-worker-count
 13
 -background-job-worker-count
@@ -59,12 +59,12 @@ C:/GitHub/LUTE
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [33252]  Target information:
+Player connection [33804]  Target information:
 
-Player connection [33252]  * "[IP] 10.0.0.7 [Port] 0 [Flags] 2 [Guid] 4194785653 [EditorId] 4194785653 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-GA316GR) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [33804]  * "[IP] 10.0.0.7 [Port] 0 [Flags] 2 [Guid] 3314043805 [EditorId] 3314043805 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-GA316GR) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [33252] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [33252] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [33804] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [33804] Host joined alternative multi-casting on [225.0.0.222:34997]...
 JobSystem: Creating JobQueue using job-worker-count value 13
 [Physics::Module] Initialized fallback backend.
 [Physics::Module] Id: 0xdecafbad
@@ -75,7 +75,7 @@ Library Redirect Path: Library/
 [Physics::Module] SDK Version: 4.1.2
 [Physics::Module] Integration Version: 1.0.0
 [Physics::Module] Threading Mode: Multi-Threaded
-Refreshing native plugins compatible for Editor in 4.62 ms, found 6 plugins.
+Refreshing native plugins compatible for Editor in 6.02 ms, found 6 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 6000.0.29f1 (9fafe5c9db65)
 [Subsystems] Discovering subsystems at path D:/Program Files/Unity/Hub/Editor/6000.0.29f1/Editor/Data/Resources/UnitySubsystems
@@ -91,51 +91,51 @@ Initialize mono
 Mono path[0] = 'D:/Program Files/Unity/Hub/Editor/6000.0.29f1/Editor/Data/Managed'
 Mono path[1] = 'D:/Program Files/Unity/Hub/Editor/6000.0.29f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'D:/Program Files/Unity/Hub/Editor/6000.0.29f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56060
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56484
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: D:/Program Files/Unity/Hub/Editor/6000.0.29f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
 Register platform support module: D:/Program Files/Unity/Hub/Editor/6000.0.29f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
 Register platform support module: D:/Program Files/Unity/Hub/Editor/6000.0.29f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
-Registered in 0.002842 seconds.
-- Loaded All Assemblies, in  0.605 seconds
+Registered in 0.003125 seconds.
+- Loaded All Assemblies, in  0.338 seconds
 [usbmuxd] Start listen thread
 [usbmuxd] Listen thread started
 Native extension for iOS target not found
 Native extension for Android target not found
-Android Extension - Scanning For ADB Devices 270 ms
+Android Extension - Scanning For ADB Devices 272 ms
 Native extension for WindowsStandalone target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.633 seconds
-Domain Reload Profiling: 1237ms
-	BeginReloadAssembly (258ms)
+- Finished resetting the current domain, in  0.606 seconds
+Domain Reload Profiling: 944ms
+	BeginReloadAssembly (126ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (49ms)
+	RebuildCommonClasses (30ms)
 	RebuildNativeTypeToScriptingClass (9ms)
-	initialDomainReloadingComplete (49ms)
-	LoadAllAssembliesAndSetupDomain (238ms)
-		LoadAssemblies (264ms)
+	initialDomainReloadingComplete (37ms)
+	LoadAllAssembliesAndSetupDomain (136ms)
+		LoadAssemblies (127ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (230ms)
-			TypeCache.Refresh (229ms)
-				TypeCache.ScanAssembly (206ms)
+		AnalyzeDomain (132ms)
+			TypeCache.Refresh (131ms)
+				TypeCache.ScanAssembly (119ms)
 			BuildScriptInfoCaches (0ms)
 			ResolveRequiredComponents (0ms)
-	FinalizeReload (633ms)
+	FinalizeReload (607ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (588ms)
+		SetupLoadedEditorAssemblies (564ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (361ms)
-			SetLoadedEditorAssemblies (3ms)
-			BeforeProcessingInitializeOnLoad (4ms)
-			ProcessInitializeOnLoadAttributes (145ms)
-			ProcessInitializeOnLoadMethodAttributes (71ms)
-			AfterProcessingInitializeOnLoad (4ms)
+			InitializePlatformSupportModulesInManaged (360ms)
+			SetLoadedEditorAssemblies (4ms)
+			BeforeProcessingInitializeOnLoad (6ms)
+			ProcessInitializeOnLoadAttributes (129ms)
+			ProcessInitializeOnLoadMethodAttributes (62ms)
+			AfterProcessingInitializeOnLoad (3ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
 		AwakeInstancesAfterBackupRestoration (0ms)
@@ -145,10 +145,10 @@ Import Worker Mode flag is 0x00
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory is not a mono symbol file
 Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  0.742 seconds
+- Loaded All Assemblies, in  0.829 seconds
 Script 'VideoPlayer' has the same name as built-in Unity component.
 AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 4.90 ms, found 6 plugins.
+Refreshing native plugins compatible for Editor in 5.51 ms, found 6 plugins.
 Native extension for iOS target not found
 Native extension for Android target not found
 Native extension for WindowsStandalone target not found
@@ -187,732 +187,116 @@ Mono: successfully reloaded assembly
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Unable to send message (not connected to server process).
 [Package Manager] Cannot connect to Unity Package Manager local server
-- Finished resetting the current domain, in  1.332 seconds
-Domain Reload Profiling: 2071ms
-	BeginReloadAssembly (148ms)
+- Finished resetting the current domain, in  0.899 seconds
+Domain Reload Profiling: 1725ms
+	BeginReloadAssembly (162ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (4ms)
+		DisableScriptedObjects (7ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (23ms)
-	RebuildCommonClasses (26ms)
+		CreateAndSetChildDomain (25ms)
+	RebuildCommonClasses (29ms)
 	RebuildNativeTypeToScriptingClass (9ms)
-	initialDomainReloadingComplete (36ms)
-	LoadAllAssembliesAndSetupDomain (519ms)
-		LoadAssemblies (349ms)
+	initialDomainReloadingComplete (35ms)
+	LoadAllAssembliesAndSetupDomain (590ms)
+		LoadAssemblies (402ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (268ms)
-			TypeCache.Refresh (190ms)
-				TypeCache.ScanAssembly (172ms)
-			BuildScriptInfoCaches (65ms)
-			ResolveRequiredComponents (11ms)
-	FinalizeReload (1332ms)
+		AnalyzeDomain (295ms)
+			TypeCache.Refresh (209ms)
+				TypeCache.ScanAssembly (192ms)
+			BuildScriptInfoCaches (68ms)
+			ResolveRequiredComponents (14ms)
+	FinalizeReload (899ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1194ms)
+		SetupLoadedEditorAssemblies (776ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (14ms)
+			InitializePlatformSupportModulesInManaged (13ms)
 			SetLoadedEditorAssemblies (5ms)
 			BeforeProcessingInitializeOnLoad (78ms)
-			ProcessInitializeOnLoadAttributes (1027ms)
-			ProcessInitializeOnLoadMethodAttributes (65ms)
+			ProcessInitializeOnLoadAttributes (601ms)
+			ProcessInitializeOnLoadMethodAttributes (74ms)
 			AfterProcessingInitializeOnLoad (3ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
 		AwakeInstancesAfterBackupRestoration (4ms)
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.01 seconds
-Refreshing native plugins compatible for Editor in 4.52 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 141 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8524 unused Assets / (10.5 MB). Loaded Objects now: 9026.
-Memory consumption went from 224.6 MB to 214.1 MB.
-Total: 8.837700 ms (FindLiveObjects: 0.621300 ms CreateObjectMapping: 0.386200 ms MarkObjects: 4.020500 ms  DeleteObjects: 3.808500 ms)
-
-========================================================================
-Received Import Request.
-  Time since last request: 320992.336649 seconds.
-  path: Assets/Resources/Mapbox 1
-  artifactKey: Guid(3eec552cd7a736f4ba4f0f2c6771f9b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Mapbox 1 using Guid(3eec552cd7a736f4ba4f0f2c6771f9b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '0e435dd27740bcf7a0735151abd57fdf') in 0.0043427 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 13.729672 seconds.
-  path: Assets/Resources/New Location1.asset
-  artifactKey: Guid(205c412fadb55d74788983fedbfdd3e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/New Location1.asset using Guid(205c412fadb55d74788983fedbfdd3e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ec78f0b652733d83087159cca4b956ff') in 0.0179746 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.934336 seconds.
-  path: Assets/Resources/New Location2.asset
-  artifactKey: Guid(1802c22c373676243b07bd314f4bdc2d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/New Location2.asset using Guid(1802c22c373676243b07bd314f4bdc2d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2bfeb70c7ca690ffe394d2dcf9c76e2c') in 0.0026123 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.988812 seconds.
-  path: Assets/Resources/PerformanceTestRunSettings.json
-  artifactKey: Guid(717ff2e4df0dff7489f7b1c47e1aa925) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/PerformanceTestRunSettings.json using Guid(717ff2e4df0dff7489f7b1c47e1aa925) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '85c57f6e5eb204112018fc6eee29c74e') in 0.0021726 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.661755 seconds.
-  path: Assets/Resources/PerformanceTestRunInfo.json
-  artifactKey: Guid(efa3227d73f260a469e850a1dc7c1988) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/PerformanceTestRunInfo.json using Guid(efa3227d73f260a469e850a1dc7c1988) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '610079ed91bbdda3738232e3e939c5aa') in 0.0010054 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 16.793202 seconds.
-  path: Assets/Mapbox/Core/Plugins/Android/UniAndroidPermission
-  artifactKey: Guid(4aa6de0d65164fe48a9b01246c856fc8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Mapbox/Core/Plugins/Android/UniAndroidPermission using Guid(4aa6de0d65164fe48a9b01246c856fc8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'fe36771b5933fe5d7feddddcfeec640f') in 0.0004956 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 5.67 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8485 unused Assets / (10.9 MB). Loaded Objects now: 9024.
-Memory consumption went from 157.4 MB to 146.5 MB.
-Total: 9.675900 ms (FindLiveObjects: 0.703200 ms CreateObjectMapping: 0.367200 ms MarkObjects: 4.547000 ms  DeleteObjects: 4.056700 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory is not a mono symbol file
-Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  0.682 seconds
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 4.38 ms, found 6 plugins.
-Native extension for iOS target not found
-Native extension for Android target not found
-Native extension for WindowsStandalone target not found
-[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] Unable to send message (not connected to server process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] Unable to send message (not connected to server process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.TypeInitializationException: The type initializer for 'UnityEditor.XR.Interaction.Toolkit.Samples.ARStarterAssets.Editor.ARStarterAssetsSampleProjectValidation' threw an exception. ---> System.NullReferenceException: Object reference not set to an instance of an object
-  at Unity.XR.CoreUtils.Editor.PackageVersionUtility.UpdatePackageVersions () [0x00034] in .\Library\PackageCache\com.unity.xr.core-utils\Editor\ProjectValidation\PackageVersionUtility.cs:46 
-  at Unity.XR.CoreUtils.Editor.PackageVersionUtility.GetPackageVersion (System.String packageName) [0x00011] in .\Library\PackageCache\com.unity.xr.core-utils\Editor\ProjectValidation\PackageVersionUtility.cs:67 
-  at UnityEditor.XR.Interaction.Toolkit.Samples.ARStarterAssets.Editor.ARStarterAssetsSampleProjectValidation..cctor () [0x00032] in C:\GitHub\LUTE\Assets\LUTE\ThirdPartyAssets\XR\Samples\XR Interaction Toolkit\3.0.7\AR Starter Assets\Editor\Scripts\ARStarterAssetsSampleProjectValidation.cs:32 
-   --- End of inner exception stack trace ---
-  at (wrapper managed-to-native) System.Object.__icall_wrapper_mono_gc_wbarrier_generic_nostore_internal(intptr)
-  at (wrapper write-barrier) System.Object.wbarrier_conc(intptr)
-  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
-  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <ed969b0e627d471da4848289f9c322df>:0 
-   --- End of inner exception stack trace ---
-  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00083] in <ed969b0e627d471da4848289f9c322df>:0 
-  at System.Reflection.MethodBase.Invoke (System.Object obj, System.Object[] parameters) [0x00000] in <ed969b0e627d471da4848289f9c322df>:0 
-  at UnityEditor.EditorAssemblies.ProcessInitializeOnLoadMethodAttributes () [0x00056] in <20f98a04ac634cc8bf5f95425bb19bb9>:0 
-UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-Mono: successfully reloaded assembly
-[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] Unable to send message (not connected to server process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-- Finished resetting the current domain, in  0.971 seconds
-Domain Reload Profiling: 1652ms
-	BeginReloadAssembly (183ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (10ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (41ms)
-	RebuildCommonClasses (27ms)
-	RebuildNativeTypeToScriptingClass (9ms)
-	initialDomainReloadingComplete (23ms)
-	LoadAllAssembliesAndSetupDomain (440ms)
-		LoadAssemblies (354ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (180ms)
-			TypeCache.Refresh (7ms)
-				TypeCache.ScanAssembly (0ms)
-			BuildScriptInfoCaches (157ms)
-			ResolveRequiredComponents (12ms)
-	FinalizeReload (971ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (852ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (12ms)
-			SetLoadedEditorAssemblies (7ms)
-			BeforeProcessingInitializeOnLoad (69ms)
-			ProcessInitializeOnLoadAttributes (692ms)
-			ProcessInitializeOnLoadMethodAttributes (68ms)
-			AfterProcessingInitializeOnLoad (5ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (6ms)
-Refreshing native plugins compatible for Editor in 4.25 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 50 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8532 unused Assets / (10.1 MB). Loaded Objects now: 9033.
-Memory consumption went from 211.5 MB to 201.4 MB.
-Total: 7.941700 ms (FindLiveObjects: 0.572300 ms CreateObjectMapping: 0.351300 ms MarkObjects: 3.669400 ms  DeleteObjects: 3.347400 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time since last request: 532.371623 seconds.
-  path: Assets/Mapbox/Core/Plugins/Android/appcompat-v7-25.1.0.aar
-  artifactKey: Guid(73194dfc41e074142a2b6f12dbc17753) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Mapbox/Core/Plugins/Android/appcompat-v7-25.1.0.aar using Guid(73194dfc41e074142a2b6f12dbc17753) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter)Could not generate preview image
- -> (artifact id: '843598c1b5636232b0b3480989d4be02') in 0.0226189 seconds
-  ERROR: Import of 'Assets/Mapbox/Core/Plugins/Android/appcompat-v7-25.1.0.aar' had errors: Could not generate preview image
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 5.20 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (11.0 MB). Loaded Objects now: 9029.
-Memory consumption went from 167.0 MB to 156.0 MB.
-Total: 10.488900 ms (FindLiveObjects: 0.571600 ms CreateObjectMapping: 0.470200 ms MarkObjects: 5.429800 ms  DeleteObjects: 4.016400 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 4.74 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (10.7 MB). Loaded Objects now: 9029.
-Memory consumption went from 167.0 MB to 156.3 MB.
-Total: 8.844800 ms (FindLiveObjects: 0.559900 ms CreateObjectMapping: 0.370000 ms MarkObjects: 3.929200 ms  DeleteObjects: 3.984600 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time since last request: 4.526289 seconds.
-  path: Assets/Mapbox/Core/Plugins/Android/appcompat-v7-25.1.0.aar
-  artifactKey: Guid(73194dfc41e074142a2b6f12dbc17753) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Mapbox/Core/Plugins/Android/appcompat-v7-25.1.0.aar using Guid(73194dfc41e074142a2b6f12dbc17753) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter)Could not generate preview image
- -> (artifact id: 'a92924fbc7a73b0ef1a8756b008ed887') in 0.0100987 seconds
-  ERROR: Import of 'Assets/Mapbox/Core/Plugins/Android/appcompat-v7-25.1.0.aar' had errors: Could not generate preview image
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 9.152308 seconds.
-  path: Assets/Mapbox/Unity/Location/Plugins/Android/com.mapbox.android.unity-debug.aar
-  artifactKey: Guid(e76e76754c0e43349882cd6d722a69ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Mapbox/Unity/Location/Plugins/Android/com.mapbox.android.unity-debug.aar using Guid(e76e76754c0e43349882cd6d722a69ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter)Could not generate preview image
- -> (artifact id: 'a64e1f5e27495800c733c92488c0bed1') in 0.0161428 seconds
-  ERROR: Import of 'Assets/Mapbox/Unity/Location/Plugins/Android/com.mapbox.android.unity-debug.aar' had errors: Could not generate preview image
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 4.50 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (10.7 MB). Loaded Objects now: 9029.
-Memory consumption went from 167.0 MB to 156.3 MB.
-Total: 8.936900 ms (FindLiveObjects: 0.713400 ms CreateObjectMapping: 0.547800 ms MarkObjects: 3.976600 ms  DeleteObjects: 3.698000 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 4.81 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (10.2 MB). Loaded Objects now: 9029.
-Memory consumption went from 167.0 MB to 156.9 MB.
-Total: 9.357000 ms (FindLiveObjects: 0.594000 ms CreateObjectMapping: 0.441800 ms MarkObjects: 4.286400 ms  DeleteObjects: 4.033800 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time since last request: 7.394158 seconds.
-  path: Assets/Mapbox/Core/Plugins/Android/libtelemetry-full-release.aar
-  artifactKey: Guid(49ff07903ab144ea4b84e994f55f875b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Mapbox/Core/Plugins/Android/libtelemetry-full-release.aar using Guid(49ff07903ab144ea4b84e994f55f875b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter)Could not generate preview image
- -> (artifact id: '22ba994cfdb73d04d3d9845678d85459') in 0.0217291 seconds
-  ERROR: Import of 'Assets/Mapbox/Core/Plugins/Android/libtelemetry-full-release.aar' had errors: Could not generate preview image
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 4.85 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (10.3 MB). Loaded Objects now: 9029.
-Memory consumption went from 167.0 MB to 156.7 MB.
-Total: 8.925600 ms (FindLiveObjects: 0.571100 ms CreateObjectMapping: 0.401100 ms MarkObjects: 3.774900 ms  DeleteObjects: 4.177600 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 4.72 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (10.9 MB). Loaded Objects now: 9029.
-Memory consumption went from 167.0 MB to 156.1 MB.
-Total: 9.960600 ms (FindLiveObjects: 0.601500 ms CreateObjectMapping: 0.661600 ms MarkObjects: 4.603100 ms  DeleteObjects: 4.093100 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time since last request: 33.611731 seconds.
-  path: Assets/Mapbox/Core/Plugins/Android/support-compat-25.1.0.aar
-  artifactKey: Guid(e17a471b7620c4bfea1b492c6dc05b6a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Mapbox/Core/Plugins/Android/support-compat-25.1.0.aar using Guid(e17a471b7620c4bfea1b492c6dc05b6a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter)Could not generate preview image
- -> (artifact id: '0ee1144f6b27ca445ab97e57f7a2acac') in 0.0273019 seconds
-  ERROR: Import of 'Assets/Mapbox/Core/Plugins/Android/support-compat-25.1.0.aar' had errors: Could not generate preview image
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 4.60 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (10.7 MB). Loaded Objects now: 9029.
-Memory consumption went from 167.0 MB to 156.3 MB.
-Total: 9.192900 ms (FindLiveObjects: 0.548500 ms CreateObjectMapping: 0.357100 ms MarkObjects: 4.433500 ms  DeleteObjects: 3.852900 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 5.61 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (10.6 MB). Loaded Objects now: 9029.
-Memory consumption went from 167.0 MB to 156.4 MB.
-Total: 8.745400 ms (FindLiveObjects: 0.550700 ms CreateObjectMapping: 0.353700 ms MarkObjects: 3.884000 ms  DeleteObjects: 3.956000 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time since last request: 4.995313 seconds.
-  path: Assets/Mapbox/Core/Plugins/Android/support-core-ui-25.1.0.aar
-  artifactKey: Guid(039af650ac259437e8c7929c7ee6728f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Mapbox/Core/Plugins/Android/support-core-ui-25.1.0.aar using Guid(039af650ac259437e8c7929c7ee6728f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter)Could not generate preview image
- -> (artifact id: '4a51e91489e7c72caf6f73a62d1c9a66') in 0.0201682 seconds
-  ERROR: Import of 'Assets/Mapbox/Core/Plugins/Android/support-core-ui-25.1.0.aar' had errors: Could not generate preview image
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 4.89 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (11.4 MB). Loaded Objects now: 9029.
-Memory consumption went from 167.0 MB to 155.6 MB.
-Total: 10.286300 ms (FindLiveObjects: 0.568800 ms CreateObjectMapping: 0.376100 ms MarkObjects: 4.057100 ms  DeleteObjects: 5.283200 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 6.10 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (10.8 MB). Loaded Objects now: 9029.
-Memory consumption went from 167.1 MB to 156.2 MB.
-Total: 10.054800 ms (FindLiveObjects: 0.568900 ms CreateObjectMapping: 0.376900 ms MarkObjects: 4.117300 ms  DeleteObjects: 4.990900 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
 Refreshing native plugins compatible for Editor in 4.92 ms, found 6 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (10.7 MB). Loaded Objects now: 9029.
-Memory consumption went from 167.0 MB to 156.3 MB.
-Total: 8.884000 ms (FindLiveObjects: 0.578000 ms CreateObjectMapping: 0.350300 ms MarkObjects: 3.840900 ms  DeleteObjects: 4.113500 ms)
+Unloading 141 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 8534 unused Assets / (11.1 MB). Loaded Objects now: 9026.
+Memory consumption went from 219.1 MB to 208.0 MB.
+Total: 9.214000 ms (FindLiveObjects: 0.594600 ms CreateObjectMapping: 0.413900 ms MarkObjects: 4.175100 ms  DeleteObjects: 4.029100 ms)
 
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 5.04 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (10.7 MB). Loaded Objects now: 9029.
-Memory consumption went from 167.0 MB to 156.4 MB.
-Total: 8.922500 ms (FindLiveObjects: 0.540500 ms CreateObjectMapping: 0.356400 ms MarkObjects: 3.837000 ms  DeleteObjects: 4.187500 ms)
-
-Prepare: number of updated asset objects reloaded= 0
 ========================================================================
 Received Import Request.
-  Time since last request: 7.735857 seconds.
-  path: Assets/Mapbox/Core/Plugins/Android/support-core-utils-25.1.0.aar
-  artifactKey: Guid(f2bbfd04df8ed4471b7d29d26096ede5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Mapbox/Core/Plugins/Android/support-core-utils-25.1.0.aar using Guid(f2bbfd04df8ed4471b7d29d26096ede5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter)Could not generate preview image
- -> (artifact id: '2531917af2d991e735dc6702b2c5c123') in 0.0263964 seconds
-  ERROR: Import of 'Assets/Mapbox/Core/Plugins/Android/support-core-utils-25.1.0.aar' had errors: Could not generate preview image
+  Time since last request: 332858.512154 seconds.
+  path: Assets/LUTE_Starter Scenes/Scenes/Games/Demo/Demo.unity
+  artifactKey: Guid(ebd0ee8f77144eb40abb4a8ac59a1acf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/LUTE_Starter Scenes/Scenes/Games/Demo/Demo.unity using Guid(ebd0ee8f77144eb40abb4a8ac59a1acf) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '90d1a74d66680adcfa10881dfa97f2d0') in 0.0045558 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
 
 ========================================================================
 Received Import Request.
-  Time since last request: 3.231619 seconds.
-  path: Assets/Mapbox/Core/Plugins/Android/support-v4-25.1.0.aar
-  artifactKey: Guid(bbcd24fa0afca44758499ceab55cf537) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Mapbox/Core/Plugins/Android/support-v4-25.1.0.aar using Guid(bbcd24fa0afca44758499ceab55cf537) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter)Could not generate preview image
- -> (artifact id: '3b0de831c7892804ec940bd42bc8dc46') in 0.0140968 seconds
-  ERROR: Import of 'Assets/Mapbox/Core/Plugins/Android/support-v4-25.1.0.aar' had errors: Could not generate preview image
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+  Time since last request: 194.351196 seconds.
+  path: Assets/Mapbox/Examples/3_POIPlacement/Resources/ArtsPoiLabelPrefab.prefab
+  artifactKey: Guid(29d1abf5ba6514d81a7974353f130ca8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Mapbox/Examples/3_POIPlacement/Resources/ArtsPoiLabelPrefab.prefab using Guid(29d1abf5ba6514d81a7974353f130ca8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e4f964a9448ef4582e8c99719e2ba857') in 0.1335757 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 26
 
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 4.86 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (10.2 MB). Loaded Objects now: 9029.
-Memory consumption went from 167.0 MB to 156.8 MB.
-Total: 8.725700 ms (FindLiveObjects: 0.585800 ms CreateObjectMapping: 0.371800 ms MarkObjects: 3.793300 ms  DeleteObjects: 3.973900 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 5.77 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (11.5 MB). Loaded Objects now: 9029.
-Memory consumption went from 167.0 MB to 155.6 MB.
-Total: 9.505800 ms (FindLiveObjects: 0.565300 ms CreateObjectMapping: 0.362700 ms MarkObjects: 4.052500 ms  DeleteObjects: 4.523900 ms)
-
-Prepare: number of updated asset objects reloaded= 0
 ========================================================================
 Received Import Request.
-  Time since last request: 2.260083 seconds.
-  path: Assets/Mapbox/Core/Plugins/Android/support-v4-25.1.0.aar
-  artifactKey: Guid(bbcd24fa0afca44758499ceab55cf537) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Mapbox/Core/Plugins/Android/support-v4-25.1.0.aar using Guid(bbcd24fa0afca44758499ceab55cf537) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter)Could not generate preview image
- -> (artifact id: '4a3cae7db2fca76c3781e424c73af854') in 0.0068453 seconds
-  ERROR: Import of 'Assets/Mapbox/Core/Plugins/Android/support-v4-25.1.0.aar' had errors: Could not generate preview image
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+  Time since last request: 0.000029 seconds.
+  path: Assets/Mapbox/Examples/4_ReplaceFeatures/Prefabs/Building Pivot.prefab
+  artifactKey: Guid(c71927789464440f59ea08b68c2f1073) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Mapbox/Examples/4_ReplaceFeatures/Prefabs/Building Pivot.prefab using Guid(c71927789464440f59ea08b68c2f1073) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2dd44f81522adb2e3d22ae75a237af12') in 0.0539153 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
 
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 4.85 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (10.5 MB). Loaded Objects now: 9029.
-Memory consumption went from 167.0 MB to 156.5 MB.
-Total: 9.526800 ms (FindLiveObjects: 0.614600 ms CreateObjectMapping: 0.423900 ms MarkObjects: 4.494500 ms  DeleteObjects: 3.990100 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 5.21 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (10.5 MB). Loaded Objects now: 9029.
-Memory consumption went from 167.1 MB to 156.6 MB.
-Total: 8.552000 ms (FindLiveObjects: 0.603100 ms CreateObjectMapping: 0.362200 ms MarkObjects: 3.827400 ms  DeleteObjects: 3.758400 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 4.87 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (10.8 MB). Loaded Objects now: 9029.
-Memory consumption went from 167.1 MB to 156.3 MB.
-Total: 8.540000 ms (FindLiveObjects: 0.645400 ms CreateObjectMapping: 0.361800 ms MarkObjects: 3.701600 ms  DeleteObjects: 3.830200 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 4.68 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (10.8 MB). Loaded Objects now: 9029.
-Memory consumption went from 167.1 MB to 156.3 MB.
-Total: 8.768200 ms (FindLiveObjects: 0.544400 ms CreateObjectMapping: 0.366000 ms MarkObjects: 3.665000 ms  DeleteObjects: 4.190900 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 4.50 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (10.3 MB). Loaded Objects now: 9029.
-Memory consumption went from 167.0 MB to 156.8 MB.
-Total: 8.560700 ms (FindLiveObjects: 0.546700 ms CreateObjectMapping: 0.383700 ms MarkObjects: 4.077900 ms  DeleteObjects: 3.550100 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 4.89 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (10.5 MB). Loaded Objects now: 9029.
-Memory consumption went from 167.0 MB to 156.5 MB.
-Total: 8.331900 ms (FindLiveObjects: 0.615400 ms CreateObjectMapping: 0.351000 ms MarkObjects: 3.712800 ms  DeleteObjects: 3.651300 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 4.44 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (10.0 MB). Loaded Objects now: 9029.
-Memory consumption went from 167.0 MB to 157.0 MB.
-Total: 8.716200 ms (FindLiveObjects: 0.558900 ms CreateObjectMapping: 0.356400 ms MarkObjects: 4.214600 ms  DeleteObjects: 3.585400 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 4.54 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (10.9 MB). Loaded Objects now: 9029.
-Memory consumption went from 167.0 MB to 156.1 MB.
-Total: 9.101200 ms (FindLiveObjects: 0.570100 ms CreateObjectMapping: 0.348400 ms MarkObjects: 4.051800 ms  DeleteObjects: 4.129600 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory is not a mono symbol file
-Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  0.717 seconds
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 4.43 ms, found 6 plugins.
-Native extension for iOS target not found
-Native extension for Android target not found
-Native extension for WindowsStandalone target not found
-[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] Unable to send message (not connected to server process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] Unable to send message (not connected to server process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.TypeInitializationException: The type initializer for 'UnityEditor.XR.Interaction.Toolkit.Samples.ARStarterAssets.Editor.ARStarterAssetsSampleProjectValidation' threw an exception. ---> System.NullReferenceException: Object reference not set to an instance of an object
-  at Unity.XR.CoreUtils.Editor.PackageVersionUtility.UpdatePackageVersions () [0x00034] in .\Library\PackageCache\com.unity.xr.core-utils\Editor\ProjectValidation\PackageVersionUtility.cs:46 
-  at Unity.XR.CoreUtils.Editor.PackageVersionUtility.GetPackageVersion (System.String packageName) [0x00011] in .\Library\PackageCache\com.unity.xr.core-utils\Editor\ProjectValidation\PackageVersionUtility.cs:67 
-  at UnityEditor.XR.Interaction.Toolkit.Samples.ARStarterAssets.Editor.ARStarterAssetsSampleProjectValidation..cctor () [0x00032] in C:\GitHub\LUTE\Assets\LUTE\ThirdPartyAssets\XR\Samples\XR Interaction Toolkit\3.0.7\AR Starter Assets\Editor\Scripts\ARStarterAssetsSampleProjectValidation.cs:32 
-   --- End of inner exception stack trace ---
-  at (wrapper managed-to-native) System.Object.__icall_wrapper_mono_gc_wbarrier_generic_nostore_internal(intptr)
-  at (wrapper write-barrier) System.Object.wbarrier_conc(intptr)
-  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
-  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <ed969b0e627d471da4848289f9c322df>:0 
-   --- End of inner exception stack trace ---
-  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00083] in <ed969b0e627d471da4848289f9c322df>:0 
-  at System.Reflection.MethodBase.Invoke (System.Object obj, System.Object[] parameters) [0x00000] in <ed969b0e627d471da4848289f9c322df>:0 
-  at UnityEditor.EditorAssemblies.ProcessInitializeOnLoadMethodAttributes () [0x00056] in <20f98a04ac634cc8bf5f95425bb19bb9>:0 
-UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadMethodAttributes ()
-
-Mono: successfully reloaded assembly
-[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] Unable to send message (not connected to server process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-- Finished resetting the current domain, in  0.732 seconds
-Domain Reload Profiling: 1451ms
-	BeginReloadAssembly (186ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (14ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (42ms)
-	RebuildCommonClasses (32ms)
-	RebuildNativeTypeToScriptingClass (11ms)
-	initialDomainReloadingComplete (23ms)
-	LoadAllAssembliesAndSetupDomain (466ms)
-		LoadAssemblies (356ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (203ms)
-			TypeCache.Refresh (7ms)
-				TypeCache.ScanAssembly (0ms)
-			BuildScriptInfoCaches (181ms)
-			ResolveRequiredComponents (12ms)
-	FinalizeReload (733ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (601ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (12ms)
-			SetLoadedEditorAssemblies (6ms)
-			BeforeProcessingInitializeOnLoad (73ms)
-			ProcessInitializeOnLoadAttributes (453ms)
-			ProcessInitializeOnLoadMethodAttributes (54ms)
-			AfterProcessingInitializeOnLoad (3ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (4ms)
-Refreshing native plugins compatible for Editor in 4.23 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 50 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8527 unused Assets / (10.1 MB). Loaded Objects now: 9041.
-Memory consumption went from 213.6 MB to 203.5 MB.
-Total: 7.499800 ms (FindLiveObjects: 0.549400 ms CreateObjectMapping: 0.334200 ms MarkObjects: 3.481000 ms  DeleteObjects: 3.133600 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 4.88 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 46 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8484 unused Assets / (10.5 MB). Loaded Objects now: 9037.
-Memory consumption went from 169.8 MB to 159.4 MB.
-Total: 9.243700 ms (FindLiveObjects: 0.651000 ms CreateObjectMapping: 0.532600 ms MarkObjects: 4.365800 ms  DeleteObjects: 3.693200 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 5.28 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 46 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8484 unused Assets / (10.6 MB). Loaded Objects now: 9037.
-Memory consumption went from 168.5 MB to 157.9 MB.
-Total: 8.585500 ms (FindLiveObjects: 0.644300 ms CreateObjectMapping: 0.367800 ms MarkObjects: 3.778200 ms  DeleteObjects: 3.794000 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 5.00 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 46 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8489 unused Assets / (10.3 MB). Loaded Objects now: 9032.
-Memory consumption went from 168.5 MB to 158.2 MB.
-Total: 9.814900 ms (FindLiveObjects: 0.567200 ms CreateObjectMapping: 0.340000 ms MarkObjects: 4.705600 ms  DeleteObjects: 4.201400 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 4.95 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (10.5 MB). Loaded Objects now: 9032.
-Memory consumption went from 169.0 MB to 158.5 MB.
-Total: 8.376000 ms (FindLiveObjects: 0.570700 ms CreateObjectMapping: 0.374900 ms MarkObjects: 3.765100 ms  DeleteObjects: 3.664400 ms)
-
-Prepare: number of updated asset objects reloaded= 0
 ========================================================================
 Received Import Request.
-  Time since last request: 409.063050 seconds.
-  path: Assets/Mapbox/Core/Plugins/Android/support-compat-25.1.0.aar
-  artifactKey: Guid(e17a471b7620c4bfea1b492c6dc05b6a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Mapbox/Core/Plugins/Android/support-compat-25.1.0.aar using Guid(e17a471b7620c4bfea1b492c6dc05b6a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter)Could not generate preview image
- -> (artifact id: '0d99f9b7ece444e7db612dd86ba977ea') in 0.0606103 seconds
-  ERROR: Import of 'Assets/Mapbox/Core/Plugins/Android/support-compat-25.1.0.aar' had errors: Could not generate preview image
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+  Time since last request: 0.000036 seconds.
+  path: Assets/Mapbox/Examples/Prefabs/CentreMarkerTracker.prefab
+  artifactKey: Guid(59d7bac69c683f84b93682401b528331) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Mapbox/Examples/Prefabs/CentreMarkerTracker.prefab using Guid(59d7bac69c683f84b93682401b528331) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '68fc6a1dcb0dba16676a511afa55a384') in 0.0225272 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 17
 
 ========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 4.12 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (10.1 MB). Loaded Objects now: 9032.
-Memory consumption went from 169.0 MB to 158.9 MB.
-Total: 8.143700 ms (FindLiveObjects: 0.530000 ms CreateObjectMapping: 0.386400 ms MarkObjects: 3.921900 ms  DeleteObjects: 3.304100 ms)
+Received Import Request.
+  Time since last request: 0.040332 seconds.
+  path: Assets/LUTE/Resources/Prefabs/CustomMarkerPrefab.prefab
+  artifactKey: Guid(94b683dc45eda974897842ef5fcc2301) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/LUTE/Resources/Prefabs/CustomMarkerPrefab.prefab using Guid(94b683dc45eda974897842ef5fcc2301) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '34ba3c9b7857838b3ec225298f6f76b1') in 0.0321036 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 35
 
-Prepare: number of updated asset objects reloaded= 0
 ========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 4.73 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (10.2 MB). Loaded Objects now: 9032.
-Memory consumption went from 169.0 MB to 158.8 MB.
-Total: 8.041100 ms (FindLiveObjects: 0.596800 ms CreateObjectMapping: 0.421100 ms MarkObjects: 3.709800 ms  DeleteObjects: 3.312600 ms)
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Mapbox/Examples/Prefabs/CustomMarkerPrefab.prefab
+  artifactKey: Guid(9b5b1b761a8994c07affd0a05396633b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Mapbox/Examples/Prefabs/CustomMarkerPrefab.prefab using Guid(9b5b1b761a8994c07affd0a05396633b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '44ec3baf40ecd190ce1bebceacc6e0c9') in 0.0266914 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 31
 
-Prepare: number of updated asset objects reloaded= 0
 ========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 5.17 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (10.6 MB). Loaded Objects now: 9032.
-Memory consumption went from 169.0 MB to 158.4 MB.
-Total: 9.334900 ms (FindLiveObjects: 0.598100 ms CreateObjectMapping: 0.391300 ms MarkObjects: 4.215600 ms  DeleteObjects: 4.128600 ms)
+Received Import Request.
+  Time since last request: 0.130434 seconds.
+  path: Assets/Mapbox/Examples/3_POIPlacement/Resources/DefaultPoiLabelPrefab.prefab
+  artifactKey: Guid(d748e6a0b26334f4d933c1438339484d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Mapbox/Examples/3_POIPlacement/Resources/DefaultPoiLabelPrefab.prefab using Guid(d748e6a0b26334f4d933c1438339484d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4c48681c958ff6bffba8fd748fe87424') in 0.0302956 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 26
 
-Prepare: number of updated asset objects reloaded= 0
 ========================================================================
-Received Prepare
-Script 'VideoPlayer' has the same name as built-in Unity component.
-AddComponent and GetComponent will not work with this script.
-Refreshing native plugins compatible for Editor in 5.18 ms, found 6 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 48 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8486 unused Assets / (10.4 MB). Loaded Objects now: 9032.
-Memory consumption went from 169.0 MB to 158.5 MB.
-Total: 9.211700 ms (FindLiveObjects: 0.580900 ms CreateObjectMapping: 0.374900 ms MarkObjects: 4.035900 ms  DeleteObjects: 4.218600 ms)
+Received Import Request.
+  Time since last request: 0.302649 seconds.
+  path: Assets/LUTE/ThirdPartyAssets/LeanTween/Examples/Material/AlphaReadyMaterial.mat
+  artifactKey: Guid(61731bf38a6fa4d66b536bc03fc8eb3f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/LUTE/ThirdPartyAssets/LeanTween/Examples/Material/AlphaReadyMaterial.mat using Guid(61731bf38a6fa4d66b536bc03fc8eb3f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7fa4a195c95da61b5a620a9e48335c35') in 0.0426107 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
 
-Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 205.103783 seconds.
+  path: Assets/Resources/Mapbox/MapboxConfiguration.txt
+  artifactKey: Guid(51880e57d0e8c0a418b9ea9e0a7a34eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Mapbox/MapboxConfiguration.txt using Guid(51880e57d0e8c0a418b9ea9e0a7a34eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ddf90776fcbed1b1719031939dbbd14a') in 0.0017904 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
