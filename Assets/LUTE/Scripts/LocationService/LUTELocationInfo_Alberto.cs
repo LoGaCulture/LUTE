@@ -5,7 +5,7 @@ using UnityEngine;
 namespace LoGaCulture.LUTE
 {
     [Serializable]
-    [CreateAssetMenu(menuName = "LUTE/Location Information_Alberto")]
+    //[CreateAssetMenu(menuName = "LUTE/Location Information_Alberto")]
     public class LUTELocationInfo_Alberto : LUTELocationInfo
     {
         [Serializable]

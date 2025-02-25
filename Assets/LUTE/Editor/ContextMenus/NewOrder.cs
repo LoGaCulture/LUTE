@@ -10,7 +10,7 @@ public class NewOrder : EditorWindow
     private static string orderCategory = "";
     private static string orderDescription = "";
 
-    [UnityEditor.MenuItem("Assets/Create/LUTE/Orders/Create New Order")]
+    [UnityEditor.MenuItem("LUTE/Utilities/Orders/Create New Order")]
     public static void NewOrderClass()
     {
         //rather than just create a new order, we create a new window with a text field to allow the user to categorise, name, and describe the new order

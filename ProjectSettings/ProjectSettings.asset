@@ -42,6 +42,8 @@ PlayerSettings:
   m_SplashScreenLogos:
   - logo: {fileID: 21300000, guid: f8cbee2d5a0500f4681c5505739bdb56, type: 3}
     duration: 3
+  - logo: {fileID: -1914962198514451326, guid: d240463b6447600449f264273ccfa204, type: 3}
+    duration: 2
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1920
@@ -165,7 +167,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   androidMinAspectRatio: 1
   applicationIdentifier:
-    Android: com.BULoga.Games
+    Android: BULogaCulture.LUTE.Games
     Standalone: com.DefaultCompany.2DProject
     iPhone: LUTEiOSGame
   buildNumber:

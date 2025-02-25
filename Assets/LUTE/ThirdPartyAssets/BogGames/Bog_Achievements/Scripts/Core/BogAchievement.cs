@@ -12,7 +12,6 @@ namespace BogGames.Tools.Achievements
     public enum AchievementType { Simple, Progressive }
 
     [Serializable]
-    [CreateAssetMenu(fileName = "NewAchievement", menuName = "LUTE/Achievement")] // Currently using LUTE but eventually this should be Bog/Achievement
     public class BogAchievement : ScriptableObject
     {
         [Header("Identification")]

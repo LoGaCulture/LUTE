@@ -6,7 +6,7 @@ namespace LoGaCulture.LUTE
     /// <summary>
     /// Inherited class from BogAchievementList that utilises the save and singleton management system to load and reset achievements.
     /// </summary>
-    [CreateAssetMenu(fileName = "AchievementList", menuName = "LUTE/Achievement List")]
+    [CreateAssetMenu(fileName = "AchievementList", menuName = "LUTE/Achievements/Achievement List")]
     public class LUTEAchievementList : BogAchievementList
     {
         public override void ResetAchievements()

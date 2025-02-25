@@ -62,7 +62,7 @@ public static class LogaConstants
     /// <summary>
     /// Radius to check locations in meters.
     /// </summary>
-    public const float DefaultRadius = 10.0f;
+    public const float DefaultRadius = 5.0f;
 
     /// <summary>
     /// Whether to use logs during runtime.
