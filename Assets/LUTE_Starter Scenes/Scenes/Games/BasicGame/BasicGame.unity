@@ -159,6 +159,38 @@ PrefabInstance:
       propertyPath: '_vectorData._layerProperty.vectorSubLayers.Array.data[0].materialOptions.materials.Array.data[1].Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 1957375172}
+    - target: {fileID: 332186485024053479, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      propertyPath: requiresLocation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 332186485024053479, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      propertyPath: overrideLocationDisplayList
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 348119232951787683, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      propertyPath: nodeRect.width
+      value: 127.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 830664824052957531, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      propertyPath: nodeRect.width
+      value: 147.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2093784469197862826, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2145559187411178307, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      propertyPath: orthographic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2253455264506576749, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2441088386621236996, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      propertyPath: updateLocationStatusToComplete
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3628203108739657480, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -182,6 +214,14 @@ PrefabInstance:
     - target: {fileID: 3628203108739657480, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4303630939233821233, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      propertyPath: nodeRect.width
+      value: 78.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 4657257208514892370, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      propertyPath: nodeRect.width
+      value: 115.56
       objectReference: {fileID: 0}
     - target: {fileID: 5375476576259629837, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
       propertyPath: m_LocalPosition.x
@@ -227,15 +267,150 @@ PrefabInstance:
       propertyPath: spriteRenderer
       value: 
       objectReference: {fileID: 610400270}
+    - target: {fileID: 8743389473436946330, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      propertyPath: demoMapMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8743389473436946330, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      propertyPath: scrollPos.x
+      value: -25209.725
+      objectReference: {fileID: 0}
+    - target: {fileID: 8743389473436946330, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      propertyPath: scrollPos.y
+      value: -24705.637
+      objectReference: {fileID: 0}
+    - target: {fileID: 8743389473436946330, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      propertyPath: nodeViewHeight
+      value: 407
+      objectReference: {fileID: 0}
+    - target: {fileID: 8743389473436946330, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      propertyPath: selectedNodes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8743389473436946330, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      propertyPath: selectedOrders.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8743389473436946330, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      propertyPath: defaultLocationDisplayList
+      value: 
+      objectReference: {fileID: 11400000, guid: db23122809bb4b841a32f68f725e5941, type: 2}
+    - target: {fileID: 8743389473436946330, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      propertyPath: 'selectedNodes.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1396768955}
+    - target: {fileID: 8743389473436946330, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      propertyPath: 'selectedOrders.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1396768956}
     - target: {fileID: 8911882701663352154, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
       propertyPath: m_Name
       value: LUTE Prefab (Simple)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9173212861755980778, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      propertyPath: nodeRect.width
+      value: 111.81
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1772240503842073782, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+    - {fileID: 257780257253925842, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1159015562283511075, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1396768953}
+    - targetCorrespondingSourceObject: {fileID: 1159015562283511075, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1396768954}
+    - targetCorrespondingSourceObject: {fileID: 1159015562283511075, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1396768955}
+    - targetCorrespondingSourceObject: {fileID: 1159015562283511075, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1396768956}
+    - targetCorrespondingSourceObject: {fileID: 3527887650819194427, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 12574460}
+    - targetCorrespondingSourceObject: {fileID: 3527887650819194427, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 12574465}
   m_SourcePrefab: {fileID: 100100000, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+--- !u!1 &12574458 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3527887650819194427, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+  m_PrefabInstance: {fileID: 12574457}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &12574459 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4233611521000610624, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+  m_PrefabInstance: {fileID: 12574457}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &12574460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12574458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69a38523d46cfa54ab0114da5684aebc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTracker: {fileID: 12574459}
+  markerPrefab: {fileID: 4158092623677246474, guid: 94b683dc45eda974897842ef5fcc2301, type: 3}
+  markerScale: 4
+  map: {fileID: 12574461}
+  engine: {fileID: 1396768923}
+  mapMovement: {fileID: 12574465}
+  defaultLocationDisplayList: {fileID: 11400000, guid: db23122809bb4b841a32f68f725e5941, type: 2}
+--- !u!114 &12574461 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 78200668557137000, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+  m_PrefabInstance: {fileID: 12574457}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12574458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd961b1c9541a4cee99686069ecce852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &12574465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12574458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3463388f83cd9c844ada693ad0dee6eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dragStartedOnUI: 0
+  allowPan: 1
+  panSpeed: 1
+  keysSensitivity: 2
+  allowZoom: 1
+  zoomSpeed: 0.25
+  minZoomLevel: 0
+  maxZoomLevel: 21
+  allowRotate: 1
+  gameCamera: {fileID: 128702644}
+  editorCamera: {fileID: 1003746842}
+  map: {fileID: 12574461}
+  useDegree: 0
+--- !u!20 &128702644 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 6004939561922723501, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+  m_PrefabInstance: {fileID: 12574457}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &416912521 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1159015562283511075, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+  m_PrefabInstance: {fileID: 12574457}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &610400269
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,6 +499,11 @@ Transform:
   - {fileID: 1014479711}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &1003746842 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 7056499817285349525, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+  m_PrefabInstance: {fileID: 12574457}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1014479710
 GameObject:
   m_ObjectHideFlags: 0
@@ -461,12 +641,132 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8743389473436946330, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
   m_PrefabInstance: {fileID: 12574457}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 416912521}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3ec3624f2f55d641b333d9cdccf06a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1396768926 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6363775969722646444, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+  m_PrefabInstance: {fileID: 12574457}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416912521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f6b6fee47fe44e48b3fa567bf2412cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1396768953
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416912521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc9f689a21732a34489f55c1ed82a919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeRect:
+    serializedVersion: 2
+    x: 26432.725
+    y: 24847.637
+    width: 193.92
+    height: 40
+  nodeName: Override Location Marker
+  nodeDescription: Basic building block of a narrative engine
+  groupDescription: A series of nodes that can be executed as a group
+  itemId: 0
+  orderList:
+  - {fileID: 1396768954}
+  eventHandler: {fileID: 0}
+  isGrouped: 0
+  groupIndex: -1
+  repeatable: 1
+  nodeLocation: {fileID: 0}
+  tint: {r: 1, g: 0.8980392, b: 0.8509804, a: 1}
+  useCustomTint: 1
+  hoverStartTime: 0
+  targetUnlockNode: {fileID: 0}
+  targetKeyNode: {fileID: 0}
+  showDesc: 0
+  saveable: 0
+  updateLocationStatusToComplete: 1
+  NodeComplete: 0
+--- !u!114 &1396768954
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416912521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 125d74a5559eabd4b8b14360277e4dbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  location:
+    locationRef: {fileID: 1396768926}
+    locationVal: {fileID: 0}
+  status: 3
+  customLabel: Rabbit
+  forcePermanentChange: 1
+--- !u!114 &1396768955
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416912521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc9f689a21732a34489f55c1ed82a919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeRect:
+    serializedVersion: 2
+    x: 26447.725
+    y: 24890.637
+    width: 177.36
+    height: 40
+  nodeName: Reset Location Marker
+  nodeDescription: Basic building block of a narrative engine
+  groupDescription: A series of nodes that can be executed as a group
+  itemId: 0
+  orderList:
+  - {fileID: 1396768956}
+  eventHandler: {fileID: 0}
+  isGrouped: 0
+  groupIndex: -1
+  repeatable: 1
+  nodeLocation: {fileID: 0}
+  tint: {r: 1, g: 0.8980392, b: 0.8509804, a: 1}
+  useCustomTint: 1
+  hoverStartTime: 0
+  targetUnlockNode: {fileID: 0}
+  targetKeyNode: {fileID: 0}
+  showDesc: 0
+  saveable: 0
+  updateLocationStatusToComplete: 1
+  NodeComplete: 0
+--- !u!114 &1396768956
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416912521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 165ececd3809bd147bd829c6373527fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  location:
+    locationRef: {fileID: 1396768926}
+    locationVal: {fileID: 0}
 --- !u!21 &1521803160
 Material:
   serializedVersion: 8

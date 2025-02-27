@@ -14,9 +14,9 @@ public class ToggleMap : Order
     public override void OnEnter()
     {
         var engine = GetEngine();
-        var map = engine.GetMap();
-        if (map != null)
-            map.ToggleMap();
+        var mapManager = engine.GetMapManager();
+        if (mapManager != null)
+            mapManager.ToggleMap();
 
         Continue();
     }

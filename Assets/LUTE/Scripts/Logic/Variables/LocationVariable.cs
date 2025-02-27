@@ -27,7 +27,7 @@ public class LocationVariable : BaseVariable<LUTELocationInfo>
     {
         // If location is disabled then we are likely in a scenario where the location is not available thus we should return true
         // Any other logic should be handled by the class that has called this method
-        if (Value.locationDisabled)
+        if (Value.LocationDisabled)
         {
             LocationServiceSignals.DoLocationComplete(this);
             return true;
@@ -58,8 +58,8 @@ public class LocationVariable : BaseVariable<LUTELocationInfo>
     private bool IsWithinRadius()
     {
         var engine = GetEngine();
-        var map = engine.GetMap();
-        var tracker = map.TrackerPos();
+        var mapManager = engine.GetMapManager();
+        var tracker = mapManager.TrackerPos();
         var trackerPos = tracker;
 
         if (LocationProvider.CurrentLocation.LatitudeLongitude == null)

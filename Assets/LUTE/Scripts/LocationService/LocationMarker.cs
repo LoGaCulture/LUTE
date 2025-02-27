@@ -1,76 +1,122 @@
+using Mapbox.Unity.Map;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace LoGaCulture.LUTE
 {
+    /// <summary>
+    /// Class that represents a location marker object on the map.
+    /// These are created elsewhere in LUTE and then accessed using the LUTEMapManager/Spawner.
+    /// Handles the rendering of a map pin and utilises click interfaces to trigger events when the marker is pressed.
+    /// In this scenario the marker updates the visuals based on the location status which is defined in the displaylist on the locationinfo/variable.
+    /// If the display options are missing then we should somehow find the default list of options.
+    /// </summary>
     public class LocationMarker : MonoBehaviour, IPointerClickHandler
     {
-        [Tooltip("The camera that will be used to render the marker canvas.")]
         private Camera markerCamera;
-        [Tooltip("The canvas that will be used to render the marker.")]
         private Canvas markerCanvas;
-        private bool showName = true;
-        private BasicFlowEngine engine;
-        public LUTELocationInfo locationInfo;
+        private BasicFlowEngine engine; // Used to access Nodes and other variables.
+        private AbstractMap map; // Used to access the map and its settings.
+        //private LUTELocationInfo locationInfo; // Used to define visuals and update location graphics.
+        private LocationVariable locVar; // The related variable with the corresponding info ID
+        private LocationStatus priorStatus = LocationStatus.Unvisited;
+        private bool preventUpdatingVisuals = false; // When a status gets updated the user has an option to ensure that the other settings will never change after the fact
 
-        [Tooltip("The image that will be used to render the marker.")]
-        [SerializeField] protected SpriteRenderer spriteRenderer;
-        [Tooltip("The image that will be used to render the marker radius.")]
-        [SerializeField] protected SpriteRenderer radiusSpriteRenderer;
+        [Tooltip("The location pin sprite renderer")]
+        [SerializeField] protected SpriteRenderer markerSpriteRenderer;
+        [Tooltip("The radius sprite renderer")]
+        [SerializeField] protected SpriteRenderer radiusSpriteRenderer; // Ideally a white circle so we can change colour easily
         [Tooltip("The text mesh that will be used to render the marker label")]
-        [SerializeField] protected TextMesh textMesh;
+        [SerializeField] protected TextMesh markerTextMesh;
+        [Tooltip("Whether this marker should change its visuals independently of any related Nodes or objects that may also update the visuals")]
+        [SerializeField] protected bool updateVisuals;
+        [Tooltip("Whether this location marker can be interacted with without location being satisfied")]
+        [SerializeField] protected bool allowClickWithoutLocation;
+        [Tooltip("Whether this location marker can be interacted with on the map")]
+        [SerializeField] protected bool interactable;
 
-        public TextMesh TextMesh { get => textMesh; set => textMesh = value; }
-        public SpriteRenderer RadiusRenderer { get => radiusSpriteRenderer; set => radiusSpriteRenderer = value; }
-        public GameObject RadiusObject { get; set; }
+        public LocationVariable LocationVariable { get => locVar; }
+        public SpriteRenderer MarkerSpriteRenderer { get => markerSpriteRenderer; }
+        public SpriteRenderer RadiusRenderer { get => radiusSpriteRenderer; }
+        public TextMesh MarkerTextMesh { get => markerTextMesh; }
 
-        private SpriteRenderer markerRadius;
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (!locationInfo.Interactable)
+            if (!interactable)
                 return;
 
-            var locVar = engine.GetComponents<LocationVariable>().FirstOrDefault(x => x.Value.infoID == locationInfo.infoID);
+            // Ensure that there is a valid location variable that is associated with this location
 
-            if (engine != null && !string.IsNullOrEmpty(locationInfo.ExecuteNode))
+            if (locVar == null)
             {
-                // First we must ensure that the player is a location
+                return;
+            }
+
+            // In all cases we send a signal that the location has been clicked (if we found a matching location variable and the location marker can be interacted with)
+            LocationServiceSignals.DoLocationClicked(locVar);
+
+            if (!locVar.Value.AllowNodeControls)
+            {
+                return;
+            }
+
+            // Ensure that we have a reference to the engine and information on the Node to execute if we are attempting to execute a Node when clicked
+            if (engine == null || locVar.Value.ExecuteNode == null)
+            {
+                return;
+            }
+
+            // If we do not require a location to be met then we can execute the Node on click
+            if (allowClickWithoutLocation)
+            {
+                engine.ExecuteNode(locVar.Value.ExecuteNode);
+            }
+            else
+            {
+                // Ensure that the location in question has been met before we execute the Node
                 if (locVar.Evaluate(ComparisonOperator.Equals, null))
                 {
-                    // We are at the right location so we can execute the node
-                    if (locationInfo._LocationStatus != LUTELocationInfo.LocationStatus.Completed)
-                    {
-                        engine.ExecuteNode(locationInfo.ExecuteNode);
-                    }
+                    // Even if the location has been completed we can still execute the Node - multiple executions is controlled by the Node itself not here
+                    engine.ExecuteNode(locVar.Value.ExecuteNode);
                 }
             }
+        }
 
-            if (locationInfo.AllowClickWithoutLocation && !string.IsNullOrEmpty(locationInfo.ExecuteNode))
+        // Sets up the canvas to use the marker camera to render it
+        public void SetCanvasCam(Camera cam)
+        {
+            markerCamera = cam;
+            if (markerCanvas == null)
+                markerCanvas = GetComponentInChildren<Canvas>();
+            if (markerCanvas != null)
+                markerCanvas.worldCamera = cam;
+        }
+
+        public void SetInfo(LocationVariable locVar, BasicFlowEngine engine)
+        {
+            if (locVar == null || engine == null)
+                return;
+            this.locVar = locVar;
+            this.engine = engine;
+            this.map = engine.GetAbstractMap();
+        }
+
+        public void HideMarker()
+        {
+            if (this.gameObject.activeSelf)
             {
-                if (locVar == null)
-                    return;
-
-                // We can click on the location without requiring the player to be at the location
-                // This will trigger the execute node if it is set
-                engine.ExecuteNode(locationInfo.ExecuteNode);
-
-
-                /// Old code used for alberto demo - must ensure we reinstate at some point ///
-                // If the location is completed or we click without being at the location
-                //if (locationInfo._LocationStatus == LUTELocationInfo.LocationStatus.Completed || !locVar.Evaluate(ComparisonOperator.Equals, null))
-                //{
-                //    LocationInfoPanel newPanel = LocationInfoPanel.GetLocationInfoPanel();
-                //    if (newPanel != null)
-                //    {
-                //        newPanel.SetLocationInfo(locationInfo);
-                //        newPanel.ToggleMenu();
-                //    }
-                //}
+                this.gameObject.SetActive(false);
             }
+        }
 
-            LocationServiceSignals.DoLocationClicked(locVar);
+        public void ShowMarker()
+        {
+            if (!this.gameObject.activeSelf)
+            {
+                this.gameObject.SetActive(true);
+            }
         }
 
         protected void OnEnable()
@@ -87,155 +133,203 @@ namespace LoGaCulture.LUTE
 
         protected void Start()
         {
-            markerCanvas = GetComponentInChildren<Canvas>();
-
-            markerRadius = RadiusObject.GetComponent<SpriteRenderer>();
-            markerRadius.color = locationInfo.defaultRadiusColour;
+            locVar = engine.GetComponents<LocationVariable>().FirstOrDefault(x => x.Value.InfoID == locVar.Value.InfoID);
         }
 
         protected void Update()
         {
+            // Ensure that location marker always faces the rendering camera
             if (markerCamera != null)
             {
                 transform.LookAt(transform.position + markerCamera.transform.rotation * Vector3.forward, markerCamera.transform.rotation * Vector3.up);
             }
 
-            if (engine != null)
+            if (locVar.Value == null)
             {
-                var node = engine.FindNode(locationInfo.NodeComplete);
-                if (node != null)
-                {
-                    if (node.NodeComplete)
-                    {
-                        locationInfo._LocationStatus = LUTELocationInfo.LocationStatus.Completed;
-                    }
-                }
-                if (!string.IsNullOrEmpty(locationInfo.ExecuteNode) || locationInfo.IndependentMarkerUpdating)
-                {
-                    var locVar = engine.GetComponents<LocationVariable>().FirstOrDefault(x => x.Value.infoID == locationInfo.infoID);
-                    if (locVar.Evaluate(ComparisonOperator.Equals, null))
-                    {
-                        OnLocationComplete(locVar);
-                    }
-                }
+                return;
             }
 
-            //switch (locationInfo._LocationStatus)
-            //{
-            //    case LUTELocationInfo.LocationStatus.Unvisited:
-            //        SetMarkerSprite(locationInfo.Sprite);
-            //        SetRadiusColour(locationInfo.defaultRadiusColour);
-            //        break;
-            //    case LUTELocationInfo.LocationStatus.Visited:
-            //        SetMarkerSprite(locationInfo.InProgressSprite);
-            //        SetRadiusColour(locationInfo.visitedRadiusColour);
-            //        break;
-            //    case LUTELocationInfo.LocationStatus.Completed:
-            //        SetMarkerSprite(locationInfo.CompletedSprite);
-            //        SetRadiusColour(locationInfo.completedRadiusColour);
-            //        break;
-            //}
+            if (locVar.Value.StatusDisplayOptionsList == null)
+            {
+                locVar.Value.StatusDisplayOptionsList = engine.GetMapManager().DefaultLocationDisplayList;
+            }
+
+            // Constantly check the location status and update the visuals if required.
+            locVar.Evaluate(ComparisonOperator.Equals, null);
+
+            if (!updateVisuals)
+            {
+                return;
+            }
+
+            // Switch on the location status then find the display options for that status and update the visuals
+            switch (locVar.Value.LocationStatus)
+            {
+                case LocationStatus.Unvisited:
+                    LUTELocationDisplayOptions displayOptionsUnvisisted = locVar.Value.StatusDisplayOptionsList.list.FirstOrDefault(x => x.status == LocationStatus.Unvisited).locationDisplayOptions;
+                    if (displayOptionsUnvisisted != null)
+                    {
+                        UpdateVisuals(displayOptionsUnvisisted);
+                    }
+                    break;
+                case LocationStatus.Visited:
+                    LUTELocationDisplayOptions displayOptionsVisisted = locVar.Value.StatusDisplayOptionsList.list.FirstOrDefault(x => x.status == LocationStatus.Visited).locationDisplayOptions;
+                    if (displayOptionsVisisted != null)
+                    {
+                        UpdateVisuals(displayOptionsVisisted);
+                    }
+                    break;
+                case LocationStatus.Completed:
+                    LUTELocationDisplayOptions displayOptionsCompleted = locVar.Value.StatusDisplayOptionsList.list.FirstOrDefault(x => x.status == LocationStatus.Completed).locationDisplayOptions;
+                    if (displayOptionsCompleted != null)
+                    {
+                        UpdateVisuals(displayOptionsCompleted);
+                    }
+                    break;
+                case LocationStatus.Custom:
+                    foreach (var display in locVar.Value.StatusDisplayOptionsList.list)
+                    {
+                        if (display.status == LocationStatus.Custom && display.CustomStatusLabel == locVar.Value.CustomStatusLabel)
+                        {
+                            LUTELocationDisplayOptions displayOptionsCustom = display.locationDisplayOptions;
+                            if (displayOptionsCustom != null)
+                            {
+                                UpdateVisuals(displayOptionsCustom, display);
+                            }
+                            break;
+                        }
+                    }
+                    break;
+                default:
+                    break;
+
+                    // Feel free to add any other status types here
+                    // Just ensure that the list you have reference to includes the status in the List
+            }
+        }
+
+        private void UpdateVisuals(LUTELocationDisplayOptions displayOptions, LUTELocationStatusDisplayList.LUTELocationStatusDisplay displayOption = null)
+        {
+            if (displayOptions == null)
+                return;
+
+            if (locVar.Value.ForcePermanentChange)
+            {
+                preventUpdatingVisuals = true;
+            }
+            else
+            {
+                preventUpdatingVisuals = false;
+            }
+
+            SetMarkerPosition();
+
+            if (preventUpdatingVisuals && displayOption == null)
+            {
+                return;
+            }
+
+            ApplyVisuals(displayOptions);
+        }
+
+        private void ApplyVisuals(LUTELocationDisplayOptions displayOptions)
+        {
+            SetMarkerText(locVar.Value.LocationName, displayOptions.ShowName, displayOptions.NameLabelColor);
+            SetMarkerSprite(displayOptions.MarkerSprite, displayOptions.ShowSprite);
+            SetMarkerPosition();
+            UpdateRadius(displayOptions.RadiusColour, displayOptions.ShowRadius);
+        }
+
+
+        private void SetMarkerText(string text, bool showText, Color textColour)
+        {
+            if (markerTextMesh == null)
+                markerTextMesh = GetComponentInChildren<TextMesh>();
+            if (markerTextMesh)
+            {
+                if (showText)
+                {
+                    markerTextMesh.color = textColour;
+                    markerTextMesh.text = text;
+                }
+                else
+                    markerTextMesh.text = "";
+            }
+        }
+
+        private void SetMarkerSprite(Sprite sprite, bool showSprite)
+        {
+            if (markerSpriteRenderer == null)
+                markerSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+            if (markerSpriteRenderer)
+                markerSpriteRenderer.sprite = showSprite ? sprite : null;
+
+            if (map == null)
+                return;
+
+            // Update scale and enabled state based on zoom factor
+        }
+
+        private void SetMarkerPosition()
+        {
+            // Update position so the marker does not move with the map
+            transform.localPosition = map.GeoToWorldPosition(locVar.Value.LatLongString(), true);
+        }
+
+        private void UpdateRadius(Color color, bool showRadius)
+        {
+            if (radiusSpriteRenderer == null)
+                return;
+            if (radiusSpriteRenderer)
+                radiusSpriteRenderer.color = color;
+            radiusSpriteRenderer.enabled = showRadius;
+
+            // Update scale and enabled state based on zoom factor
+            // Radius needs to be accurate to the meters we have set
         }
 
         private void OnLocationComplete(LocationVariable location)
         {
-            if (location == null || locationInfo == null)
+            if (locVar.Value == null)
                 return;
 
-            if (location.Value.infoID == locationInfo.infoID)
+            if (location.Value.LocationStatus != LocationStatus.Completed)
             {
-                if (locationInfo._LocationStatus != LUTELocationInfo.LocationStatus.Completed)
+                locVar.Value.LocationStatus = LocationStatus.Visited;
+                if (locVar.Value.SaveInfo)
                 {
-                    locationInfo._LocationStatus = LUTELocationInfo.LocationStatus.Visited;
-                }
-                // Everytime we visit a location we should save the state of the location
-                if (locationInfo.SaveInfo)
-                {
-                    var locVar = engine.GetComponents<LocationVariable>().FirstOrDefault(x => x.Value.infoID == locationInfo.infoID);
-                    if (locVar != null)
-                    {
-                        if (locVar.Value._LocationStatus != locationInfo._LocationStatus)
-                        {
-                            locVar.Value._LocationStatus = locationInfo._LocationStatus;
-
-                            var saveManager = LogaManager.Instance.SaveManager;
-                            saveManager.AddSavePoint("ObjectInfo" + locationInfo.Name, "A list of location info to be stored " + System.DateTime.UtcNow.ToString("HH:mm dd MMMM, yyyy"), false);
-                        }
-                    }
+                    SaveLocationInfo();
                 }
             }
+            else
+                return;
         }
 
         private void OnNodeEnd(Node node)
         {
-            if (locationInfo == null || string.IsNullOrEmpty(locationInfo.NodeComplete))
+            if (locVar.Value == null || node == null)
                 return;
 
-            if (locationInfo.NodeComplete == node._NodeName)
+            if (node.CanUpdateLocationToComplete(locVar))
             {
-                locationInfo._LocationStatus = LUTELocationInfo.LocationStatus.Completed;
+                locVar.Value.LocationStatus = LocationStatus.Completed;
+                if (locVar.Value.SaveInfo)
+                {
+                    SaveLocationInfo();
+                }
             }
         }
 
-        // Sets up the canvas to use the marker camera to render it
-        public void SetCanvasCam(Camera cam)
+        private void SaveLocationInfo()
         {
-            markerCamera = cam;
-            if (markerCanvas == null)
-                markerCanvas = GetComponentInChildren<Canvas>();
-            if (markerCanvas != null)
-                markerCanvas.worldCamera = cam;
-        }
+            if (locVar.Value.LocationStatus != locVar.Value.LocationStatus)
+            {
+                locVar.Value.LocationStatus = locVar.Value.LocationStatus;
 
-        public void SetInfo(LUTELocationInfo info)
-        {
-            if (info == null)
-                return;
-            locationInfo = info;
-        }
-
-        public void SetEngine(BasicFlowEngine _engine)
-        {
-            if (_engine == null)
-                return;
-            engine = _engine;
-        }
-
-        public void SetMarkerText(string text)
-        {
-            if (textMesh == null)
-                textMesh = GetComponentInChildren<TextMesh>();
-            textMesh.text = text;
-        }
-
-        public void SetMarkerName(bool _showName)
-        {
-            showName = _showName;
-            if (textMesh == null)
-                textMesh = GetComponentInChildren<TextMesh>();
-            textMesh.text = showName ? textMesh.text : "";
-        }
-
-        public void SetMarkerColor(Color color)
-        {
-            if (textMesh == null)
-                textMesh = GetComponentInChildren<TextMesh>();
-            textMesh.color = color;
-        }
-
-        public void SetMarkerSprite(Sprite sprite)
-        {
-            if (spriteRenderer == null)
-                spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-
-            spriteRenderer.sprite = sprite;
-        }
-
-        public void SetRadiusColour(Color color)
-        {
-            if (markerRadius == null)
-                markerRadius = RadiusObject.GetComponent<SpriteRenderer>();
-            markerRadius.color = color;
+                var saveManager = LogaManager.Instance.SaveManager;
+                saveManager.AddSavePoint("ObjectInfo" + locVar.Value.LocationName, "A list of location info to be stored " + System.DateTime.UtcNow.ToString("HH:mm dd MMMM, yyyy"), false);
+            }
         }
     }
 }

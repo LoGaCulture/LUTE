@@ -280,12 +280,12 @@ namespace LoGaCulture.LUTE
                     var engine = failureMethod.GetEngine();
                     if (engine != null)
                     {
-                        var map = engine.GetMap();
-                        if (map != null)
+                        var mapManager = engine.GetMapManager();
+                        if (mapManager != null)
                         {
-                            map.HideLocationMarker(failureMethod.QueriedLocation);
+                            mapManager.HideLocationMarker(failureMethod.QueriedLocation);
                             bool updateText = failureMethod.UpdateLocationText;
-                            map.ShowLocationMarker(backupLocation, updateText, failureMethod.QueriedLocation.Key);
+                            mapManager.ShowLocationMarker(backupLocation);
                         }
                     }
 
@@ -337,14 +337,14 @@ namespace LoGaCulture.LUTE
         private FailureHandlingOutcome Execute_Anyway(FailureMethod failureMethod)
         {
             // If location cannot be accessed then we create a menu of failed nodes for the player to execute
-            failureMethod.QueriedLocation.Value.locationDisabled = true;
+            failureMethod.QueriedLocation.Value.LocationDisabled = true;
             var engine = failureMethod.GetEngine();
             if (engine != null)
             {
-                var map = engine.GetMap();
-                if (map != null)
+                var mapManager = engine.GetMapManager();
+                if (mapManager != null)
                 {
-                    map.HideLocationMarker(failureMethod.QueriedLocation);
+                    mapManager.HideLocationMarker(failureMethod.QueriedLocation);
                 }
 
                 var nodes = engine.GetComponents<Node>();
@@ -404,8 +404,8 @@ namespace LoGaCulture.LUTE
             var engine = failureMethod.GetEngine();
             if (engine != null)
             {
-                var map = engine.GetMap();
-                if (map != null)
+                var mapManager = engine.GetMapManager();
+                if (mapManager != null)
                 {
                     LocationVariable nearestLocation = null;
                     var allLocations = engine.GetComponents<LocationVariable>();
@@ -430,9 +430,9 @@ namespace LoGaCulture.LUTE
                     }
                     if (nearestLocation != null)
                     {
-                        map.HideLocationMarker(failureMethod.QueriedLocation);
+                        mapManager.HideLocationMarker(failureMethod.QueriedLocation);
                         bool updateText = failureMethod.UpdateLocationText;
-                        map.ShowLocationMarker(nearestLocation, updateText, failureMethod.QueriedLocation.Key);
+                        mapManager.ShowLocationMarker(nearestLocation);
                         failureMethod.QueriedLocation.Apply(SetOperator.Assign, nearestLocation);
                         failureMethod.IsHandled = true;
                         string message = $"Location {failureMethod.QueriedLocation.Key} is inaccessible. The nearest location has been selected instead. Please head to: {nearestLocation.Key}";
@@ -474,10 +474,10 @@ namespace LoGaCulture.LUTE
             var engine = failureMethod.GetEngine();
             if (engine != null)
             {
-                var map = engine.GetMap();
-                if (map != null)
+                var mapManager = engine.GetMapManager();
+                if (mapManager != null)
                 {
-                    map.HideLocationMarker(failureMethod.QueriedLocation);
+                    mapManager.HideLocationMarker(failureMethod.QueriedLocation);
                 }
 
                 var nodes = engine.GetComponents<Node>();

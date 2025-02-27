@@ -1,4 +1,4 @@
-using Mapbox.Examples;
+using LoGaCulture.LUTE;
 using UnityEngine;
 
 [OrderInfo("Map",
@@ -10,7 +10,7 @@ public class HideLocationMarkers : Order
     [Tooltip("The locations of the markers to hide.")]
     [SerializeField] protected LocationData[] locations;
 
-    private SpawnOnMap map;
+    private LUTEMapManager mapManager;
 
     public override void OnEnter()
     {
@@ -22,9 +22,9 @@ public class HideLocationMarkers : Order
             return;
         }
 
-        map = engine.GetMap();
+        mapManager = engine.GetMapManager();
 
-        if (map == null)
+        if (mapManager == null)
         {
             Continue();
             return;
@@ -47,7 +47,7 @@ public class HideLocationMarkers : Order
         foreach (LocationData location in locations)
         {
             if (location.locationRef != null)
-                map.HideLocationMarker(location.locationRef);
+                mapManager.HideLocationMarker(location.locationRef);
         }
     }
 

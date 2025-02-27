@@ -13,26 +13,14 @@ MonoBehaviour:
   m_Name: CentralAvebury
   m_EditorClassIdentifier: 
   infoID: 1479e2c3-7de5-4396-b0a9-d24189958481
-  Position: 51.42856861319775, -1.8542802086417438
-  Name: Central Avebury
-  Sprite: {fileID: 21300000, guid: 38d01da203407b74cad749c1d8681580, type: 3}
-  InProgressSprite: {fileID: 21300000, guid: 1c632f4cb235bf247898c559eddf4f66, type: 3}
-  CompletedSprite: {fileID: 21300000, guid: 7f1f9d40832d0e349a4a04c4c59cc880, type: 3}
-  Color: {r: 1, g: 1, b: 1, a: 1}
-  ShowName: 0
-  showRadius: 1
-  defaultRadiusColour: {r: 0.7372549, g: 0.47058824, b: 0.23921569, a: 0.5882353}
-  visitedRadiusColour: {r: 0.96862745, g: 0.8862745, b: 0.14509805, a: 0.5882353}
-  completedRadiusColour: {r: 0.18513432, g: 0.745283, b: 0, a: 0.5882353}
+  locationName: Central Avebury
+  position: 51.42859096168201, -1.8542046193984758
+  locationStatus: 0
+  saveInfo: 0
+  statusDisplayOptionsList: {fileID: 11400000, guid: db23122809bb4b841a32f68f725e5941, type: 2}
   locationDisabled: 0
   radiusIncrease: 0
-  interactable: 1
-  saveInfo: 1
-  indepedentMarkerUpdating: 1
-  allowClickWithoutLocation: 0
-  locationStatus: 1
-  infoImage: {fileID: 0}
-  displayName: 
-  description: 
-  nodeComplete: Location Example
-  executeNode: 
+  radiusDecrease: 0
+  forcePermanentChange: 0
+  allowNodeControls: 0
+  executeNode: {fileID: 0}

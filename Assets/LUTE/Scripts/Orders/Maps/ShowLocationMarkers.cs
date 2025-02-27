@@ -1,4 +1,4 @@
-using Mapbox.Examples;
+using LoGaCulture.LUTE;
 using UnityEngine;
 
 [OrderInfo("Map",
@@ -10,7 +10,7 @@ public class ShowLocationMarkers : Order
     [Tooltip("The locations of the markers to reveal.")]
     [SerializeField] protected LocationData[] locations;
 
-    private SpawnOnMap map;
+    private LUTEMapManager mapManager;
     public override void OnEnter()
     {
         var engine = GetEngine();
@@ -21,9 +21,9 @@ public class ShowLocationMarkers : Order
             return;
         }
 
-        map = engine.GetMap();
+        mapManager = engine.GetMapManager();
 
-        if (map == null)
+        if (mapManager == null)
         {
             Continue();
             return;
@@ -46,7 +46,7 @@ public class ShowLocationMarkers : Order
         foreach (LocationData location in locations)
         {
             if (location.locationRef != null)
-                map.ShowLocationMarker(location.locationRef);
+                mapManager.ShowLocationMarker(location.locationRef);
         }
     }
 

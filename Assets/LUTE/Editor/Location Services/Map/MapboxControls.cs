@@ -46,7 +46,7 @@ public class MapboxControls : EventWindow
     private static Camera mapCam;
     private static CameraBillboard cameraBillboard;
     private static AbstractMap abstractMap;
-    private static SpawnOnMap spawnOnMap;
+    private static LUTEMapManager spawnOnMap;
 
     static MapboxControls()
     {
@@ -56,8 +56,8 @@ public class MapboxControls : EventWindow
     static void Update()
     {
         // Update the spawn on map trackers
-        if (spawnOnMap != null)
-            spawnOnMap.UpdateMarkers();
+        //if (spawnOnMap != null)
+        //    spawnOnMap.UpdateMarkers();
     }
     public static void ShowWindow()
     {
@@ -84,8 +84,8 @@ public class MapboxControls : EventWindow
             return;
         }
         map = abstractMap.gameObject.GetComponent<QuadTreeCameraMovement>();
-        spawnOnMap = abstractMap.gameObject.GetComponent<SpawnOnMap>(); // ensure that quadtreemovement requires spawn on map
-        cameraBillboard = spawnOnMap.tracker?.GetComponent<CameraBillboard>(); //ensure that tracker is set elsewhere
+        spawnOnMap = abstractMap.gameObject.GetComponent<LUTEMapManager>(); // ensure that quadtreemovement requires spawn on map
+        cameraBillboard = spawnOnMap.transform?.GetComponent<CameraBillboard>(); //ensure that tracker is set elsewhere - this is NOW WRONG
 
         //create a camera if none exists - ensure you set a tag and culling mask to only map
         //first ensure that there is a tag called map otherwise create one
@@ -114,10 +114,10 @@ public class MapboxControls : EventWindow
         if (cameraBillboard != null && mapCam != null && cameraBillboard.GetCurrentCam() != mapCam)
             cameraBillboard.SetCanvasCam(mapCam);
 
-        map._referenceCamera = mapCam;
+        map._referenceCamera = mapCam; // This should probably be done on the movement script as we already have ref to tool cam
 
-        spawnOnMap.ProcessLocationInfo();
-        spawnOnMap.CreateMarkers();
+        spawnOnMap.ProcessLocations();
+        //spawnOnMap.CreateMarkers();
     }
 
     private void OnDisable()
@@ -134,7 +134,7 @@ public class MapboxControls : EventWindow
         }
 
         map._dragStartedOnUI = false;
-        spawnOnMap.ClearLocations();
+        //spawnOnMap.ClearLocations();
     }
 
     private void OnGUI()
@@ -297,8 +297,8 @@ public class MapboxControls : EventWindow
         string name = count > 0 ? currentLocationName + count : currentLocationName;
         AssetDatabase.CreateAsset(newLocationInfo, "Assets/Resources/" + name + ".asset");
         var locString = Conversions.StringToLatLon(currentLocationString);
-        newLocationInfo.Position = currentLocationString;
-        newLocationInfo.Name = currentLocationName;
+        //newLocationInfo.Position = currentLocationString;
+        //newLocationInfo.Name = currentLocationName;
         if (currentLocationSprite == null)
         {
             var texture = LogaEditorResources.Default100;
@@ -308,9 +308,9 @@ public class MapboxControls : EventWindow
                new Vector2(0.5f, 0.5f)
            );
         }
-        newLocationInfo.Sprite = currentLocationSprite;
-        newLocationInfo.Color = locationColor;
-        newLocationInfo.ShowName = currentLocationNameBool;
+        //newLocationInfo.Sprite = currentLocationSprite;
+        //newLocationInfo.Color = locationColor;
+        //newLocationInfo.ShowName = currentLocationNameBool;
 
         AssetDatabase.SaveAssets();
 
@@ -325,8 +325,8 @@ public class MapboxControls : EventWindow
         currentLocationSprite = null;
         showLocationPopup = false;
 
-        spawnOnMap.ProcessLocationInfo();
-        spawnOnMap.CreateMarkers();
+        spawnOnMap.ProcessLocations();
+        //spawnOnMap.CreateMarkers();
     }
 
     protected override void OnMouseDown(Event e)

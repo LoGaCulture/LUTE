@@ -1,5 +1,6 @@
 using LoGaCulture.LUTE;
 using Mapbox.Examples;
+using Mapbox.Unity.Map;
 using MoreMountains.Tools;
 using System;
 using System.Collections.Generic;
@@ -636,7 +637,7 @@ public class BasicFlowEngine : MonoBehaviour, ISubstitutionHandler
             if (variables[i].GetType() == typeof(LocationVariable))
             {
                 var locVar = variables[i] as LocationVariable;
-                if (locVar != null && locVar.Value.infoID == locationData.Value.infoID)
+                if (locVar != null && locVar.Value.InfoID == locationData.Value.InfoID)
                 {
                     return locVar;
                 }
@@ -890,13 +891,13 @@ public class BasicFlowEngine : MonoBehaviour, ISubstitutionHandler
         }
     }
 
-    public virtual void SetLocationInfo(string infoID, LUTELocationInfo.LocationStatus status)
+    public virtual void SetLocationInfo(string infoID, LoGaCulture.LUTE.LocationStatus status)
     {
         foreach (var item in GetComponents<LocationVariable>())
         {
-            if (item.Value.infoID == infoID)
+            if (item.Value.InfoID == infoID)
             {
-                item.Value._LocationStatus = status;
+                item.Value.LocationStatus = status;
             }
         }
     }
@@ -1224,12 +1225,46 @@ public class BasicFlowEngine : MonoBehaviour, ISubstitutionHandler
         selectedNodes.Clear();
     }
 
-    public virtual SpawnOnMap GetMap()
+    public virtual SpawnOnMap GetMap() // should be deleted once all refs are removed
     {
         var map = GetComponentInChildren<SpawnOnMap>();
         if (map == null)
         {
             map = FindObjectOfType<SpawnOnMap>();
+            if (map == null)
+            {
+                Debug.LogError("No map found in scene or in children");
+                return null;
+            }
+        }
+        return map;
+    }
+
+    public virtual LUTEMapManager GetMapManager()
+    {
+        var mapManager = GetComponentInChildren<LUTEMapManager>();
+        if (mapManager == null)
+        {
+            mapManager = GetComponent<LUTEMapManager>();
+        }
+        if (mapManager == null)
+        {
+            mapManager = FindFirstObjectByType<LUTEMapManager>();
+        }
+        if (mapManager == null)
+        {
+            Debug.LogError("No map manager found in scene or related to engine object");
+            return null;
+        }
+        return mapManager;
+    }
+
+    public virtual AbstractMap GetAbstractMap()
+    {
+        var map = GetComponentInChildren<AbstractMap>();
+        if (map == null)
+        {
+            map = FindFirstObjectByType<AbstractMap>();
             if (map == null)
             {
                 Debug.LogError("No map found in scene or in children");

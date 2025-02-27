@@ -128,11 +128,11 @@ public class ObjectInfoVar
 public class LocationInfoVar
 {
     [SerializeField] protected string locationID;
-    [SerializeField] protected LUTELocationInfo.LocationStatus locationStatus;
+    [SerializeField] protected LocationStatus locationStatus;
     [SerializeField] protected string locationName;
 
     public string LocationID { get { return locationID; } set { locationID = value; } }
-    public LUTELocationInfo.LocationStatus LocationStatus { get { return locationStatus; } set { locationStatus = value; } }
+    public LocationStatus LocationStatus { get { return locationStatus; } set { locationStatus = value; } }
     public string LocationName { get { return locationName; } set { locationName = value; } }
 }
 
@@ -287,9 +287,9 @@ public class EngineData
             foreach (var item in engine.GetComponents<LocationVariable>())
             {
                 var d = new LocationInfoVar();
-                d.LocationID = item.Value.infoID;
-                d.LocationStatus = item.Value._LocationStatus;
-                d.LocationName = item.Value.Name;
+                d.LocationID = item.Value.InfoID;
+                d.LocationStatus = item.Value.LocationStatus;
+                d.LocationName = item.Value.LocationName;
                 engineData.LocationInfoVars.Add(d);
             }
         }

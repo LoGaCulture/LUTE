@@ -14,8 +14,8 @@ public class MapMenu : GenericButton
             Continue();
             return;
         }
-        var map = engine.GetMap();
-        if (map == null)
+        var mapManager = engine.GetMapManager();
+        if (mapManager == null)
         {
             Continue();
             return;
@@ -25,7 +25,7 @@ public class MapMenu : GenericButton
 
         UnityEngine.Events.UnityAction action = () =>
     {
-        map.ToggleMap();
+        mapManager.ToggleMap();
     };
 
         SetAction(popupIcon, action);

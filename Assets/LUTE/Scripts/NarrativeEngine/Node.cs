@@ -4,6 +4,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Attribute class for Node properties - used to display Nodes in the inspector without the need for a custom editor
+public sealed class NodePropertyAttribute : PropertyAttribute
+{
+    public NodePropertyAttribute(string defaultText)
+    {
+        this.defaultText = defaultText;
+    }
+
+    public string defaultText = "<None>";
+}
+
 public enum ExecutionState
 {
     /// <summary> No order executing </summary>
@@ -46,6 +57,8 @@ public class Node : MonoBehaviour
     [SerializeField] protected bool showDesc;
     [Tooltip("If true, the node will be saved when completed (persistent). Useful for ensuring location nodes are save upon completition")]
     [SerializeField] protected bool saveable = false;
+    [Tooltip("Whether the location (whether this is in an EventHandler or condition on this Node) will update to complete when this Node completes")]
+    [SerializeField] protected bool updateLocationStatusToComplete = true;
 
     protected int jumpToOrderIndex = -1;
     protected ExecutionState executionState;
@@ -93,6 +106,7 @@ public class Node : MonoBehaviour
     public virtual bool ShowDesc { get { return showDesc; } set { showDesc = value; } }
     public virtual bool Saveable { get { return saveable; } set { saveable = value; } }
     public bool ShouldCancel { get; set; }
+    public virtual bool UpdateLocationStatusToComplete { get { return updateLocationStatusToComplete; } }
 
     protected virtual void Awake()
     {
@@ -471,6 +485,138 @@ public class Node : MonoBehaviour
                 }
             }
         }
+    }
+
+    // Find all locations in any possible case on the Node.
+    // You can override this method if you wish to find locations given a specific condition.
+    public virtual void GetAllLocations(ref List<LocationVariable> nodeLocations)
+    {
+        if (eventHandler != null && eventHandler.GetType() == typeof(LocationClickEventHandler))
+        {
+            var locationClickEventHandler = eventHandler as LocationClickEventHandler;
+            if (locationClickEventHandler.Location.Value != null)
+            {
+                if (!nodeLocations.Contains(locationClickEventHandler.Location.locationRef))
+                    nodeLocations.Add(locationClickEventHandler.Location.locationRef);
+            }
+        }
+
+        if (eventHandler != null && eventHandler.GetType() == typeof(ConditionalEventHandler))
+        {
+            var conditionalEventHandler = eventHandler as ConditionalEventHandler;
+            foreach (var condition in conditionalEventHandler.Conditions)
+            {
+                var i = condition as If;
+                foreach (var handlerExpression in i.conditions)
+                {
+                    if (handlerExpression.AnyVariable.variable != null)
+                    {
+                        var locationVar = handlerExpression.AnyVariable.variable as LocationVariable;
+                        if (!nodeLocations.Contains(locationVar))
+                            nodeLocations.Add(locationVar);
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < orderList.Count; i++)
+        {
+            var order = orderList[i];
+            if (order != null)
+            {
+                if (order.GetType() == typeof(If))
+                {
+                    var ifNode = order as If;
+                    List<ConditionExpression> conditions = new List<ConditionExpression>();
+                    ifNode.GetConditions(ref conditions);
+                    foreach (var condition in ifNode.conditions)
+                    {
+                        if (condition.AnyVariable.variable != null)
+                        {
+                            var locationVar = condition.AnyVariable.variable as LocationVariable;
+                            if (!nodeLocations.Contains(locationVar))
+                                nodeLocations.Add(locationVar);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // If we find a location variable that matches and we can update it to complete then we return true
+    // Used to update visuals of a LocationMarker
+    public virtual bool CanUpdateLocationToComplete(LocationVariable locationVariable)
+    {
+        // This node prevents the location from updating to complete
+        if (!updateLocationStatusToComplete)
+            return false;
+
+        bool canUpdate = false;
+
+        // We look for the location eventhandler first as it is most logical
+        if (eventHandler != null && eventHandler.GetType() == typeof(LocationClickEventHandler))
+        {
+            var locationClickEventHandler = eventHandler as LocationClickEventHandler;
+            if (locationClickEventHandler.Location.locationRef != null && locationClickEventHandler.Location.locationRef == locationVariable)
+            {
+                // If we find an event handler with a matching location variable and we are allowed to update this location info then we do so
+                canUpdate = true;
+            }
+        }
+
+        // If the location event handler has no matching location, check the conditional list event handler
+        if (!canUpdate)
+        {
+            if (eventHandler != null && eventHandler.GetType() == typeof(ConditionalEventHandler))
+            {
+                var conditionalEventHandler = eventHandler as ConditionalEventHandler;
+                foreach (var condition in conditionalEventHandler.Conditions)
+                {
+                    var i = condition as If;
+                    foreach (var handlerExpression in i.conditions)
+                    {
+                        if (handlerExpression.AnyVariable.variable != null && handlerExpression.AnyVariable.variable.GetType() == typeof(LocationVariable))
+                        {
+                            var locationVar = handlerExpression.AnyVariable.variable as LocationVariable;
+                            if (locationVar == locationVariable)
+                            {
+                                canUpdate = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // If we still cannot update (i.e., not matching event handlers, then check the orders)
+        if (!canUpdate)
+        {
+            for (int i = 0; i < orderList.Count; i++)
+            {
+                var order = orderList[i];
+                if (order != null)
+                {
+                    if (order.GetType() == typeof(If))
+                    {
+                        var ifNode = order as If;
+                        List<ConditionExpression> conditions = new List<ConditionExpression>();
+                        ifNode.GetConditions(ref conditions);
+                        foreach (var condition in ifNode.conditions)
+                        {
+                            if (condition.AnyVariable.variable != null && condition.AnyVariable.variable.GetType() == typeof(LocationVariable))
+                            {
+                                var locationVar = condition.AnyVariable.variable as LocationVariable;
+                                if (locationVar == locationVariable)
+                                {
+                                    canUpdate = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return canUpdate;
     }
 
     public virtual Node GetUnlockNode()

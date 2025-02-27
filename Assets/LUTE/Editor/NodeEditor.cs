@@ -8,6 +8,30 @@ using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
+[CustomPropertyDrawer(typeof(NodePropertyAttribute))]
+public class NodeDrawer : PropertyDrawer
+{
+    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    {
+        NodePropertyAttribute nodeProperty = attribute as NodePropertyAttribute;
+        if (nodeProperty == null) return;
+
+        EditorGUI.BeginProperty(position, label, property);
+
+        // Call your NodeField
+        NodeEditor.NodeField(property, label, new GUIContent(nodeProperty.defaultText), GraphWindow.GetEngine(), null);
+
+        // Apply changes and handle ScriptableObjects specially
+        property.serializedObject.ApplyModifiedProperties();
+        if (property.serializedObject.targetObject is ScriptableObject)
+        {
+            EditorUtility.SetDirty(property.serializedObject.targetObject);
+        }
+
+        EditorGUI.EndProperty();
+    }
+}
+
 [CustomEditor(typeof(Node))]
 public class NodeEditor : Editor
 {
@@ -54,6 +78,7 @@ public class NodeEditor : Editor
         serializedObject.Update();
         SerializedProperty descriptionProp = serializedObject.FindProperty("nodeDescription");
         SerializedProperty nodeNameProperty = serializedObject.FindProperty("nodeName");
+
         EditorGUILayout.LabelField(nodeNameProperty.stringValue, EditorStyles.boldLabel);
         EditorGUILayout.LabelField(descriptionProp.stringValue);
         SerializedProperty allowMultipleExecutes = serializedObject.FindProperty("CanExecuteAgain");
@@ -148,6 +173,9 @@ public class NodeEditor : Editor
         }
 
         EditorGUILayout.EndHorizontal();
+
+        SerializedProperty updateLocationStatusProperty = serializedObject.FindProperty("updateLocationStatusToComplete");
+        EditorGUILayout.PropertyField(updateLocationStatusProperty);
 
         EditorGUILayout.BeginHorizontal();
         SerializedProperty descProp = serializedObject.FindProperty("nodeDescription");

@@ -8,6 +8,8 @@ namespace LoGaCulture.LUTE
     {
         protected SerializedProperty locationProp;
         protected SerializedProperty statusProp;
+        protected SerializedProperty labelProp;
+        protected SerializedProperty forcePermanentChangeProp;
 
         private int locationVarIndex = 0;
 
@@ -16,6 +18,8 @@ namespace LoGaCulture.LUTE
             base.OnEnable();
             locationProp = serializedObject.FindProperty("location");
             statusProp = serializedObject.FindProperty("status");
+            labelProp = serializedObject.FindProperty("customLabel");
+            forcePermanentChangeProp = serializedObject.FindProperty("forcePermanentChange");
         }
 
         public override void OnInspectorGUI()
@@ -27,24 +31,15 @@ namespace LoGaCulture.LUTE
         {
             serializedObject.Update();
 
-            //UpdateLocationInfo t = target as UpdateLocationInfo;
-            //var engine = (BasicFlowEngine)t.GetEngine();
-
-            //var locationVars = engine.GetComponents<LocationVariable>();
-            //for (int i = 0; i < locationVars.Length; i++)
-            //{
-            //    if (locationVars[i] == locationProp.objectReferenceValue as LocationVariable)
-            //    {
-            //        locationVarIndex = i;
-            //    }
-            //}
-
-            //locationVarIndex = EditorGUILayout.Popup("Location", locationVarIndex, locationVars.Select(x => x.Key).ToArray());
-            //if (locationVars.Length > 0)
-            //    locationProp.objectReferenceValue = locationVars[locationVarIndex];
-
             EditorGUILayout.PropertyField(locationProp);
             EditorGUILayout.PropertyField(statusProp);
+
+            LocationStatus locationStatus = (LocationStatus)statusProp.enumValueIndex;
+            if (locationStatus == LocationStatus.Custom)
+            {
+                EditorGUILayout.PropertyField(labelProp);
+                EditorGUILayout.PropertyField(forcePermanentChangeProp);
+            }
 
             serializedObject.ApplyModifiedProperties();
         }

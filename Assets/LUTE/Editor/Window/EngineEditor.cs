@@ -17,6 +17,7 @@ public class EngineEditor : Editor
     protected SerializedProperty annotationBoolProp;
     protected SerializedProperty labelTintProp;
     protected SerializedProperty optionSettingsProp;
+    protected SerializedProperty defaultLocationDisplayListProp;
 
     protected virtual void OnEnable()
     {

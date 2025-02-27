@@ -56,13 +56,13 @@ namespace LoGaCulture.LUTE
                 Continue();
                 return;
             }
-            var map = engine.GetMap();
-            if (map == null)
+            var mapManager = engine.GetMapManager();
+            if (mapManager == null)
             {
                 Continue();
                 return;
             }
-            var tracker = map.TrackerPos();
+            var tracker = mapManager.TrackerPos();
             if (tracker == null)
             {
                 Continue();

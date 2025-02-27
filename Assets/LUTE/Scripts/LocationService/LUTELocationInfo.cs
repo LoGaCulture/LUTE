@@ -4,160 +4,137 @@ using UnityEngine;
 
 namespace LoGaCulture.LUTE
 {
+    /// <summary>
+    /// The status of a location.
+    /// This is used to determine how the location should be displayed on the map within the scope of specific classes.
+    /// </summary>
     [Serializable]
-    [CreateAssetMenu(menuName = "LUTE/Locations/Location Information")]
+    public enum LocationStatus
+    {
+        Unvisited,
+        Visited,
+        Completed, // If there is a Node that uses this location, completed status is typically set when that Node is fully complete.
+        Custom // Custom status for special cases
+    }
+
+    /// <summary>
+    /// A class to store information about a location on the map.
+    /// One could inherit this class for special cases.
+    /// Typically the class is used to store information about a locations as scriptable objects which are then used in LocationVariables.
+    /// </summary>
+    [CreateAssetMenu(menuName = "LUTE/Location/Location Information")]
+    [Serializable]
     public class LUTELocationInfo : ScriptableObject
     {
-        [Serializable]
-        public enum LocationStatus
-        {
-            Unvisited,
-            Visited,
-            Completed
-        }
-
-        public string infoID; // Unique ID for the location
+        [Tooltip("The ID of the location to be used in conditions and other checks.")]
+        [SerializeField] private string infoID; // Unique ID for the location - this is sometimes created within editor code (such as when adding a new location to an editor map or in cases where this scriptable object is created not through context menus).
+        [Tooltip("The name of the location.")]
+        [SerializeField] private string locationName;
 
         [Header("Location Info")]
         [Tooltip("The coordinates of the location in the format 'latitude, longitude'")]
-        public string Position;
-
-        [Header("Location Display")]
-        [Tooltip("The name of the location")]
-        public string Name;
-        [Tooltip("The sprite to display at the location when not visited")]
-        public Sprite Sprite;
-        [Tooltip("The sprite to display at the location when visited but not complete")]
-        public Sprite InProgressSprite;
-        [Tooltip("The sprite to display at the location when visited and complete")]
-        public Sprite CompletedSprite;
-        [Tooltip("The colour of the name label")]
-        public Color Color = Color.white;
-        [Tooltip("Whether the name should be shown or not on the location marker")]
-        public bool ShowName;
-        [Tooltip("Whether the radius of the location should be shown or not")]
-        public bool showRadius;
-        [Tooltip("The colour of the radius of the location")]
-        public Color defaultRadiusColour = LogaConstants.defaultRadiusColour;
-        [Tooltip("The colour of the radius of the location when visited")]
-        public Color visitedRadiusColour = LogaConstants.defaultRadiusColour;
-        [Tooltip("The colour of the radius of the location when completed")]
-        public Color completedRadiusColour = LogaConstants.defaultRadiusColour;
+        [SerializeField] private string position;
+        [SerializeField] private LocationStatus locationStatus = LocationStatus.Unvisited;
+        [Tooltip("Whether the location information should be saved or not")]
+        [SerializeField] private bool saveInfo = true;
+        // The display options
+        // Used to choose specific display options for this marker based on a specific location status
+        [Tooltip("Different display options to use in different status scenarios - you should create a new list if you desire to overwrite this one.")]
+        [SerializeField] private LUTELocationStatusDisplayList statusDisplayOptionsList;
 
         [Header("Location Settings")]
         [Tooltip("Whether or not this location can be used (can be set with location failure handling)")]
-        public bool locationDisabled = false;
+        [SerializeField] private bool locationDisabled = false;
+        [Tooltip("The amount to increase the default radius of the location by ")]
+        [SerializeField] private float radiusIncrease = 0.0f;
+        [Tooltip("The amount to decrease the default radius of the location by ")]
+        [SerializeField] private float radiusDecrease = 0.0f;
+        [SerializeField] private bool forcePermanentChange;
 
-        [Tooltip("The amount to increase the radius of the location by ")]
-        [SerializeField] protected float radiusIncrease = 0.0f;
-        [Tooltip("Whether the location can be interacted with or not (using mouse, touch etc. input)")]
-        [SerializeField] protected bool interactable = true;
-        [Tooltip("Whether the location info should be saved or not")]
-        [SerializeField] protected bool saveInfo = true;
-        [Tooltip("Whether the marker should update independently of any related nodes")]
-        [SerializeField] protected bool indepedentMarkerUpdating;
-        [Tooltip("Whether the location can be clicked without a location evaluated fully by player")]
-        [SerializeField] protected bool allowClickWithoutLocation;
-        [SerializeField] protected LocationStatus locationStatus = LocationStatus.Unvisited;
-
-        [Header("Location Info Panel")]
-        [Tooltip("The sprite to display on the locatio info panel")]
-        [SerializeField] protected Sprite infoImage;
-        [Tooltip("The display name of the location to display on a location info panel")]
-        [SerializeField] protected string displayName;
-        [Tooltip("The description of the location to display on a location info panel")]
-        [SerializeField] protected string description;
-
-        [Header("Node Location Settings")]
-        [Tooltip("The node that will trigger this location to be completed once the node itself completes.")]
-        [SerializeField] protected string nodeComplete;
+        // These settings are to be used in conjunction with Nodes - the typical pattern of design is to force Nodes to trigger Locations but we allow this both ways because we are flexible and all about that OO design.
+        [Header("Node Settings")]
+        [Tooltip("Allow the location marker to execute Nodes")] // Allow this behaviour to encourage OO design but ensure that there is this switch to prohibit it where necessary.
+        [SerializeField] private bool allowNodeControls = false; // Default to false as we only really execute Nodes using locations on eventhandlers or in conditions using the Update method.
         [Tooltip("The node to execute when marker is clicked")]
-        [SerializeField] protected string executeNode;
+        [HideInInspector]
+        [SerializeField] private Node executeNode;
 
+        private string customStatusLabel; // To be used in conjunction with the custom status
 
+        public string InfoID
+        {
+            get { return infoID; }
+            set { infoID = value; }
+        }
 
-        public LocationStatus _LocationStatus
+        public string LocationName
+        {
+            get { return locationName; }
+            set { locationName = value; }
+        }
+
+        public string Position
+        {
+            get { return position; }
+        }
+
+        public LocationStatus LocationStatus
         {
             get { return locationStatus; }
             set { locationStatus = value; }
         }
-        public float RadiusIncrease
-        {
-            get { return radiusIncrease; }
-            set { radiusIncrease = value; }
-        }
-        public string NodeComplete
-        {
-            get { return nodeComplete; }
-            set { nodeComplete = value; }
-        }
-        public string ExecuteNode
-        {
-            get { return executeNode; }
-            set { executeNode = value; }
-        }
-        public bool Interactable
-        {
-            get { return interactable; }
-            set { interactable = value; }
-        }
+
         public bool SaveInfo
         {
             get { return saveInfo; }
             set { saveInfo = value; }
         }
 
-        public bool IndependentMarkerUpdating
+        public bool AllowNodeControls
         {
-            get { return indepedentMarkerUpdating; }
-            set { indepedentMarkerUpdating = value; }
-        }
-        public bool AllowClickWithoutLocation
-        {
-            get { return allowClickWithoutLocation; }
-            set { allowClickWithoutLocation = value; }
+            get { return allowNodeControls; }
+            set { allowNodeControls = value; }
         }
 
-        public Sprite LocationImage
+        public Node ExecuteNode
         {
-            get { return infoImage; }
-            set { infoImage = value; }
+            get { return executeNode; }
+            set { executeNode = value; }
         }
 
-        public string Description
+        public bool LocationDisabled
         {
-            get { return description; }
-            set { description = value; }
+            get { return locationDisabled; }
+            set { locationDisabled = value; }
         }
 
-        public string DisplayName
+        public float RadiusIncrease
         {
-            get { return displayName; }
-            set { displayName = value; }
+            get { return radiusIncrease; }
+            set { radiusIncrease = value; }
         }
 
-        protected virtual void Awake()
+        public LUTELocationStatusDisplayList StatusDisplayOptionsList
         {
-            infoID = GetInfoID();
+            get { return statusDisplayOptionsList; }
+            set { statusDisplayOptionsList = value; }
         }
 
-        protected virtual void OnEnable()
+        public string CustomStatusLabel
         {
-            infoID = GetInfoID();
+            get { return customStatusLabel; }
+            set { customStatusLabel = value; }
         }
 
-        private string GetInfoID()
+        public bool ForcePermanentChange
         {
-            if (string.IsNullOrEmpty(infoID))
-            {
-                infoID = Guid.NewGuid().ToString();
-            }
-            return infoID;
+            get { return forcePermanentChange; }
+            set { forcePermanentChange = value; }
         }
 
         public virtual Vector2d LatLongString()
         {
-            return Mapbox.Unity.Utilities.Conversions.StringToLatLon(Position);
+            return Mapbox.Unity.Utilities.Conversions.StringToLatLon(position);
         }
     }
 }

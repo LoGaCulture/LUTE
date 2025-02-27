@@ -31,14 +31,14 @@ public class HideLocationMarker : Order
             return;
         }
 
-        var map = engine.GetMap();
+        var mapManager = engine.GetMapManager();
 
-        if (map == null)
+        if (mapManager == null)
         {
             Continue();
             return;
         }
-        map.HideLocationMarker(location.locationRef);
+        mapManager.HideLocationMarker(location.locationRef);
     }
 
     public override string GetSummary()

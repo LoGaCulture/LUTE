@@ -10,6 +10,12 @@ public class ShowLocationMarker : Order
     [SerializeField] protected LocationData location;
     public override void OnEnter()
     {
+        if (location.locationRef == null)
+        {
+            Continue();
+            return;
+        }
+
         var engine = GetEngine();
 
         if (engine == null)
@@ -18,21 +24,15 @@ public class ShowLocationMarker : Order
             return;
         }
 
-        var map = engine.GetMap();
+        var mapManager = engine.GetMapManager();
 
-        if (map == null)
+        if (mapManager == null)
         {
             Continue();
             return;
         }
 
-        if (location.locationRef == null)
-        {
-            Continue();
-            return;
-        }
-
-        map.ShowLocationMarker(location.locationRef);
+        mapManager.ShowLocationMarker(location.locationRef);
         Continue();
     }
 

@@ -50,10 +50,13 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 99dec03033cf89c4b936367ceee96b05, type: 3}
+  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -160,11 +163,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a72ba2d9b50395b47afd252117aa0f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  locationInfo: {fileID: 0}
-  spriteRenderer: {fileID: 6408619797996679676}
+  markerSpriteRenderer: {fileID: 0}
   radiusSpriteRenderer: {fileID: 2000574321296996605}
-  textMesh: {fileID: 6067892912135492101}
-  completeFeedback: {fileID: 0}
+  markerTextMesh: {fileID: 0}
+  updateVisuals: 1
+  allowClickWithoutLocation: 0
+  interactable: 1
 --- !u!65 &6929094769558939847
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -268,11 +272,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3571988963961220382, guid: 9b5cceeaef4cbf5428e63d32049ddb46, type: 3}
   m_PrefabInstance: {fileID: 3119536259646828260}
   m_PrefabAsset: {fileID: 0}
---- !u!212 &6408619797996679676 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 8333115561107234584, guid: 9b5cceeaef4cbf5428e63d32049ddb46, type: 3}
-  m_PrefabInstance: {fileID: 3119536259646828260}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4832860845772950187
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -373,6 +372,10 @@ PrefabInstance:
       propertyPath: m_DrawMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8333115561107234584, guid: 9b5cceeaef4cbf5428e63d32049ddb46, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8559514904495585917, guid: 9b5cceeaef4cbf5428e63d32049ddb46, type: 3}
       propertyPath: m_Name
       value: LocLabel
@@ -449,7 +452,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5790737691150376730, guid: d6ed17cc88af03542adfd3f2762a73e0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
