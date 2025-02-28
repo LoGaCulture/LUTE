@@ -52,6 +52,9 @@ namespace LoGaCulture.LUTE
         private float rotationZ = 0.0f; // Vertical rotation input
         private Vector3 defaultRotation;
 
+        public float MinMapZoom => minZoomLevel;
+        public float MaxMapZoom => maxZoomLevel;
+
         public static MapCameraMovement Instance { get; private set; } // Static reference to this class
 
         public virtual Camera ReferenceCamera

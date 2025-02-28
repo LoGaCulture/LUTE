@@ -29,6 +29,7 @@ namespace LoGaCulture.LUTE
 
         private List<LocationMarker> spawnedLocationMarkers = new List<LocationMarker>();
 
+        public float MarkerScale => markerScale;
         public LUTELocationStatusDisplayList DefaultLocationDisplayList
         {
             get { return defaultLocationDisplayList; }
@@ -39,6 +40,8 @@ namespace LoGaCulture.LUTE
         }
 
         public List<LocationMarker> GetSpawnedLocationMarkers() => spawnedLocationMarkers;
+
+        public MapCameraMovement MapCameraMovement => mapMovement;
 
         // Populated list of all the locations found during runtime.
         // Either found in an EventHandler or condition order.

@@ -1,9 +1,8 @@
-using UnityEngine;
-using UnityEditor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System;
-using System.Reflection;
+using UnityEditor;
+using UnityEngine;
 
 public class GroupInspector : ScriptableObject
 {
@@ -123,18 +122,18 @@ public class GroupInspectorEditor : Editor
         GUILayout.Space(20);
 
         for (int i = 0; i < inspectorWindow.groupedNodes.Count; i++)
+        {
+            Node node = inspectorWindow.groupedNodes[i];
+
+            if (node == null)
             {
-                Node node = inspectorWindow.groupedNodes[i];
+                continue;
+            }
 
-                if (node == null)
-                {
-                    continue;
-                }
-
-                if (engine == null)
-                {
-                    continue;
-                }
+            if (engine == null)
+            {
+                continue;
+            }
 
             if (inspectorWindow.group.UpdateGroupNodes)
             {
@@ -175,50 +174,50 @@ public class GroupInspectorEditor : Editor
                     node.TargetKeyNode = null;
                 }
 
-                if (inspectorWindow.group.NodeLocation != null)
-                {
-                    node.NodeLocation = inspectorWindow.group.NodeLocation;
-                }
-                else
-                {
-                    node.NodeLocation = null;
-                }
+                //if (inspectorWindow.group.NodeLocation != null)
+                //{
+                //    node.NodeLocation = inspectorWindow.group.NodeLocation;
+                //}
+                //else
+                //{
+                //    node.NodeLocation = null;
+                //}
 
                 node.CanExecuteAgain = inspectorWindow.group.CanExecuteAgain;
             }
 
-                if (nodeEditor == null || !node.Equals(nodeEditor.target))
-                {
-                    DestroyImmediate(nodeEditor);
-                    nodeEditor = Editor.CreateEditor(node, typeof(NodeEditor)) as NodeEditor;
-                }
-                nodeEditor.DrawNodeName(engine);
-                // nodeEditor.DrawGroupUI(engine);
+            if (nodeEditor == null || !node.Equals(nodeEditor.target))
+            {
+                DestroyImmediate(nodeEditor);
+                nodeEditor = Editor.CreateEditor(node, typeof(NodeEditor)) as NodeEditor;
+            }
+            nodeEditor.DrawNodeName(engine);
+            // nodeEditor.DrawGroupUI(engine);
 
-                GUILayout.BeginHorizontal();
+            GUILayout.BeginHorizontal();
 
-                if (GUILayout.Button("Remove from group"))
-                {
-                    inspectorWindow.graphWindow.UngroupNode(node);
-                }
-                if (GUILayout.Button("Delete node"))
-                {
-                    //create a new list to hold the node
-                    List<Node> nodesToDelete = new List<Node>
+            if (GUILayout.Button("Remove from group"))
+            {
+                inspectorWindow.graphWindow.UngroupNode(node);
+            }
+            if (GUILayout.Button("Delete node"))
+            {
+                //create a new list to hold the node
+                List<Node> nodesToDelete = new List<Node>
                 {
                     node
                 };
-                    inspectorWindow.graphWindow.AddToDeleteList(nodesToDelete);
-                }
-                if (GUILayout.Button("Select node"))
-                {
-                    GraphWindow.SetNodeForInspector(node);
-                }
+                inspectorWindow.graphWindow.AddToDeleteList(nodesToDelete);
+            }
+            if (GUILayout.Button("Select node"))
+            {
+                GraphWindow.SetNodeForInspector(node);
+            }
 
-                GUILayout.EndHorizontal();
+            GUILayout.EndHorizontal();
 
-                //draw a line
-                EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+            //draw a line
+            EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
         }
         serializedObject.ApplyModifiedProperties();
     }

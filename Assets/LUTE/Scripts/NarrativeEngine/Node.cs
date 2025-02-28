@@ -45,7 +45,7 @@ public class Node : MonoBehaviour
     [SerializeField] protected int groupIndex = -1;
     [Tooltip("If true, allows this node to be repeated otherwise any return calls to this node will not execute it")]
     [SerializeField] protected bool repeatable = false;
-    [SerializeField] protected LocationVariable nodeLocation;
+    //[SerializeField] protected LocationVariable nodeLocation;
     [SerializeField] protected Color tint = Color.white;
     [SerializeField] protected bool useCustomTint = false;
     [SerializeField] protected float hoverStartTime = 0.0f;
@@ -88,7 +88,7 @@ public class Node : MonoBehaviour
     public int PrevActiveOrderIndex { get { return prevActiveOrderIndex; } }
     /// An optional Event Handler which can execute the node when an event occurs.
     public virtual EventHandler _EventHandler { get { return eventHandler; } set { eventHandler = value; } }
-    public virtual LocationVariable NodeLocation { get { return nodeLocation; } set { nodeLocation = value; } }
+    //public virtual LocationVariable NodeLocation { get { return nodeLocation; } set { nodeLocation = value; } }
     public virtual Node TargetUnlockNode { get { return targetUnlockNode; } set { targetUnlockNode = value; } }
     public virtual Node TargetKeyNode { get { return targetKeyNode; } set { targetKeyNode = value; } }
     public bool IsSelected { get; set; }    //local cache of selectedness
@@ -181,11 +181,11 @@ public class Node : MonoBehaviour
         ShouldCancel = false;
 
         // Wait until the node location is true (if it is set)
-        while (NodeLocation != null && !NodeLocation.Evaluate(ComparisonOperator.Equals, null))
-        {
-            //set bool here to prevent node from executing
-            yield return null;
-        }
+        //while (NodeLocation != null && !NodeLocation.Evaluate(ComparisonOperator.Equals, null))
+        //{
+        //    //set bool here to prevent node from executing
+        //    yield return null;
+        //}
 
         // Wait until the target unlock node is complete (if it is set)
         while (targetKeyNode != null && targetKeyNode.NodeComplete == false && targetKeyNode is not Group)

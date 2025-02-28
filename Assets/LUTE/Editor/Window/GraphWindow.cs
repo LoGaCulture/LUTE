@@ -154,14 +154,14 @@ public class GraphWindow : EventWindow
 
 
                 //If node uses a location then find the new reference location and set it to this
-                if (_node.NodeLocation != null)
-                {
-                    var newLocVar = engine.GetVariable(_node.NodeLocation.Key);
-                    if (newLocVar != null)
-                    {
-                        newNode.NodeLocation = (LocationVariable)newLocVar as LocationVariable;
-                    }
-                }
+                //if (_node.NodeLocation != null)
+                //{
+                //    var newLocVar = engine.GetVariable(_node.NodeLocation.Key);
+                //    if (newLocVar != null)
+                //    {
+                //        newNode.NodeLocation = (LocationVariable)newLocVar as LocationVariable;
+                //    }
+                //}
 
                 GraphWindow.priorNodes.Add(_node);
                 GraphWindow.newNodes.Add(newNode);
@@ -1010,20 +1010,20 @@ public class GraphWindow : EventWindow
             locationFound = handler.Location.locationRef != null;
         }
 
-        if (groupNode.NodeLocation != null || locationOrders.Count > 0 || locationFound)
-        {
-            // Draw a small icon to show that the node has a location in the top right corner of the node
-            Rect rect = new Rect(groupNode._NodeRect);
-            rect.height = 28;
-            rect.width = 28;
-            rect.x += storyEngine.ScrollPos.x - 30;
-            rect.y += storyEngine.ScrollPos.y - rect.height + 55;
+        //if (groupNode.NodeLocation != null || locationOrders.Count > 0 || locationFound)
+        //{
+        //    // Draw a small icon to show that the node has a location in the top right corner of the node
+        //    Rect rect = new Rect(groupNode._NodeRect);
+        //    rect.height = 28;
+        //    rect.width = 28;
+        //    rect.x += storyEngine.ScrollPos.x - 30;
+        //    rect.y += storyEngine.ScrollPos.y - rect.height + 55;
 
-            if (LogaEditorResources.MapIcon != null)
-            {
-                GUI.DrawTexture(rect, LogaEditorResources.MapIcon);
-            }
-        }
+        //    if (LogaEditorResources.MapIcon != null)
+        //    {
+        //        GUI.DrawTexture(rect, LogaEditorResources.MapIcon);
+        //    }
+        //}
 
         List<Order> conditions = new List<Order>();
         groupNode.GetConditionOrders(ref conditions);
@@ -1230,7 +1230,7 @@ public class GraphWindow : EventWindow
         );
         var node = AddNode(newNodePosition);
         UpdateNodes();
-        node.NodeLocation = locationVariable;
+        //node.NodeLocation = locationVariable;
         return node;
     }
     protected Node AddNode(Vector2 position)
@@ -1583,11 +1583,12 @@ public class GraphWindow : EventWindow
         bool locationFound = false;
 
         // Determine location on node or any order
-        if (node.NodeLocation != null)
-        {
-            locationFound = true;
-        }
-        else if (node._EventHandler != null && node._EventHandler.GetType() == typeof(LocationClickEventHandler))
+        //if (node.NodeLocation != null)
+        //{
+        //    locationFound = true;
+        //}
+        //else 
+        if (node._EventHandler != null && node._EventHandler.GetType() == typeof(LocationClickEventHandler))
         {
             var handler = node._EventHandler as LocationClickEventHandler;
             locationFound = handler.Location.locationRef != null;
@@ -3604,12 +3605,12 @@ public class GraphWindow : EventWindow
             nodeRect.y -= yOffset;
             node._NodeRect = nodeRect;
 
-            if (node.NodeLocation != null)
-            {
-                var newLocVar = engine.AddVariable(node.NodeLocation.GetType(), node.NodeLocation.Key);
-                newLocVar.Apply(SetOperator.Assign, node.NodeLocation);
-                newLocVar.Scope = VariableScope.Global;
-            }
+            //if (node.NodeLocation != null)
+            //{
+            //    var newLocVar = engine.AddVariable(node.NodeLocation.GetType(), node.NodeLocation.Key);
+            //    newLocVar.Apply(SetOperator.Assign, node.NodeLocation);
+            //    newLocVar.Scope = VariableScope.Global;
+            //}
             var nodeOrders = new List<Order>();
             node.GetConditionOrders(ref nodeOrders);
             if (nodeOrders.Count > 0)
@@ -3673,20 +3674,20 @@ public class GraphWindow : EventWindow
                             originalGroup = _group;
                         }
                     }
-                    if (originalGroup.NodeLocation != null)
-                    {
-                        //Find the original node location in the new engine
-                        var originalLoc = engine.GetVariable(originalGroup.NodeLocation.Key);
-                        Variable newVar = originalLoc;
-                        if (originalLoc == null)
-                        {
-                            newVar = engine.AddVariable(originalGroup.NodeLocation.GetType(), originalGroup.NodeLocation.Key);
-                            //ensure we set the value of the new var to the original
-                            newVar.Apply(SetOperator.Assign, originalGroup.NodeLocation);
-                            newVar.Scope = VariableScope.Global;
-                        }
-                        g.NodeLocation = (LocationVariable)newVar as LocationVariable;
-                    }
+                    //if (originalGroup.NodeLocation != null)
+                    //{
+                    //    //Find the original node location in the new engine
+                    //    var originalLoc = engine.GetVariable(originalGroup.NodeLocation.Key);
+                    //    Variable newVar = originalLoc;
+                    //    if (originalLoc == null)
+                    //    {
+                    //        newVar = engine.AddVariable(originalGroup.NodeLocation.GetType(), originalGroup.NodeLocation.Key);
+                    //        //ensure we set the value of the new var to the original
+                    //        newVar.Apply(SetOperator.Assign, originalGroup.NodeLocation);
+                    //        newVar.Scope = VariableScope.Global;
+                    //    }
+                    //    g.NodeLocation = (LocationVariable)newVar as LocationVariable;
+                    //}
                     //Find the original target node in the new engine
                     if (originalGroup.TargetUnlockNode != null)
                     {

@@ -31,8 +31,8 @@ namespace LoGaCulture.LUTE
             if (node == null)
                 Continue();
 
-            if (resetLocation)
-                node.NodeLocation = null;
+            //if (resetLocation)
+            //    node.NodeLocation = null;
             node.Stop();
             node.ShouldCancel = true;
 

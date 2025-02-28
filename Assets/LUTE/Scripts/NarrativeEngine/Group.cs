@@ -97,10 +97,10 @@ public class Group : Node
             node.GroupIndex = -1;
 
             //remove any locations that are shared with this group and the node
-            if (NodeLocation != null && NodeLocation == node.NodeLocation)
-            {
-                node.NodeLocation = null;
-            }
+            //if (NodeLocation != null && NodeLocation == node.NodeLocation)
+            //{
+            //    node.NodeLocation = null;
+            //}
 
             //remove any unlocking or locking nodes that are shared
             if (TargetUnlockNode != null && node.TargetUnlockNode == TargetUnlockNode)

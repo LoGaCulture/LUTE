@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   infoID: 1479e2c3-7de5-4396-b0a9-d24189958481
   locationName: Central Avebury
-  position: 51.42859096168201, -1.8542046193984758
+  position: 51.42887305245766, -1.8524477998629703
   locationStatus: 0
   saveInfo: 0
   statusDisplayOptionsList: {fileID: 11400000, guid: db23122809bb4b841a32f68f725e5941, type: 2}

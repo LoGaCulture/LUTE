@@ -114,6 +114,12 @@ namespace LoGaCulture.LUTE
             set { radiusIncrease = value; }
         }
 
+        public float RadiusDecrease
+        {
+            get { return radiusDecrease; }
+            set { radiusDecrease = value; }
+        }
+
         public LUTELocationStatusDisplayList StatusDisplayOptionsList
         {
             get { return statusDisplayOptionsList; }

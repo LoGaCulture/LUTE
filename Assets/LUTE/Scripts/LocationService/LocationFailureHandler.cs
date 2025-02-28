@@ -99,12 +99,12 @@ namespace LoGaCulture.LUTE
                 {
                     foreach (var node in nodes)
                     {
-                        if (node != null && node.NodeLocation != null)
-                        {
-                            // Found a node location so we can set this up
-                            AddNodeLocation(node.NodeLocation);
-                        }
-                        else
+                        //if (node != null && node.NodeLocation != null)
+                        //{
+                        //    // Found a node location so we can set this up
+                        //    AddNodeLocation(node.NodeLocation);
+                        //}
+                        //else
                         {
                             // Node is not null but has no location - check to see if any orders on this node use a location
                             var orders = node.OrderList;
@@ -354,10 +354,10 @@ namespace LoGaCulture.LUTE
                 {
                     bool nodeAffected = false;
 
-                    if (node.NodeLocation != null && Equals(node.NodeLocation.Value, failureMethod.QueriedLocation.Value))
-                    {
-                        nodeAffected = true;
-                    }
+                    //if (node.NodeLocation != null && Equals(node.NodeLocation.Value, failureMethod.QueriedLocation.Value))
+                    //{
+                    //    nodeAffected = true;
+                    //}
 
                     if (!nodeAffected)
                     {
@@ -378,7 +378,7 @@ namespace LoGaCulture.LUTE
                 string failedNodes = string.Empty;
                 foreach (var affectedNode in affectedNodes)
                 {
-                    affectedNode.NodeLocation = null;
+                    //affectedNode.NodeLocation = null;
                     affectedNode.Stop();
                     affectedNode.ShouldCancel = true;
                     LocationServiceSignals.DoLocationFailed(failureMethod, affectedNode);
@@ -484,12 +484,12 @@ namespace LoGaCulture.LUTE
                 foreach (var node in nodes)
                 {
                     // If the node uses the same location as the failure method then it cannot execute
-                    if (node.NodeLocation != null && Equals(node.NodeLocation.Value, failureMethod.QueriedLocation.Value))
-                    {
-                        node.NodeComplete = true;
-                        node.CanExecuteAgain = false;
-                        failureMethod.IsHandled = true;
-                    }
+                    //if (node.NodeLocation != null && Equals(node.NodeLocation.Value, failureMethod.QueriedLocation.Value))
+                    //{
+                    //    node.NodeComplete = true;
+                    //    node.CanExecuteAgain = false;
+                    //    failureMethod.IsHandled = true;
+                    //}
                     foreach (var order in node.OrderList)
                     {
                         // If the order uses the same location as the failure method then the parent node cannot execute

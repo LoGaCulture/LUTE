@@ -23,6 +23,7 @@ namespace LoGaCulture.LUTE
         private LocationVariable locVar; // The related variable with the corresponding info ID
         private LocationStatus priorStatus = LocationStatus.Unvisited;
         private bool preventUpdatingVisuals = false; // When a status gets updated the user has an option to ensure that the other settings will never change after the fact
+        private BoxCollider2D markerCollider2D; // Used to detect clicks on the marker
 
         [Tooltip("The location pin sprite renderer")]
         [SerializeField] protected SpriteRenderer markerSpriteRenderer;
@@ -36,6 +37,12 @@ namespace LoGaCulture.LUTE
         [SerializeField] protected bool allowClickWithoutLocation;
         [Tooltip("Whether this location marker can be interacted with on the map")]
         [SerializeField] protected bool interactable;
+        [Tooltip("The child that owns the visualiation objects of this marker - can be found automatically if not provided.")]
+        [SerializeField] protected Transform visualisationObject;
+        [Tooltip("The threshold to stop scaling this marker at.")]
+        [SerializeField] protected float maxScaleThreshold = 17.0f;
+        [Tooltip("Once the zoom factor reaches this level, this marker will be hidden.")]
+        [SerializeField] protected float hideMarkerThreshold = 14.0f;
 
         public LocationVariable LocationVariable { get => locVar; }
         public SpriteRenderer MarkerSpriteRenderer { get => markerSpriteRenderer; }
@@ -110,18 +117,16 @@ namespace LoGaCulture.LUTE
 
         public void HideMarker()
         {
-            if (this.gameObject.activeSelf)
-            {
-                this.gameObject.SetActive(false);
-            }
+            if (markerCollider2D)
+                markerCollider2D.enabled = false;
+            visualisationObject?.gameObject.SetActive(false);
         }
 
         public void ShowMarker()
         {
-            if (!this.gameObject.activeSelf)
-            {
-                this.gameObject.SetActive(true);
-            }
+            if (markerCollider2D)
+                markerCollider2D.enabled = true;
+            visualisationObject?.gameObject.SetActive(true);
         }
 
         protected void OnEnable()
@@ -144,6 +149,16 @@ namespace LoGaCulture.LUTE
 
         protected void Start()
         {
+            if (markerCollider2D == null)
+            {
+                markerCollider2D = GetComponent<BoxCollider2D>();
+            }
+
+            if (visualisationObject == null)
+            {
+                visualisationObject = transform.GetChild(0); // On the default location marker prefab we only have one child which is used to hold the visualisation objects; users can override this using the serialised field
+            }
+
             locVar = engine.GetComponents<LocationVariable>().FirstOrDefault(x => x.Value.InfoID == locVar.Value.InfoID);
         }
 
@@ -240,7 +255,7 @@ namespace LoGaCulture.LUTE
                 preventUpdatingVisuals = false;
             }
 
-            SetMarkerPosition();
+            SetMarkerPositionAndScale();
 
             if (preventUpdatingVisuals && displayOption == null)
             {
@@ -254,7 +269,7 @@ namespace LoGaCulture.LUTE
         {
             SetMarkerText(locVar.Value.LocationName, displayOptions.ShowName, displayOptions.NameLabelColor);
             SetMarkerSprite(displayOptions.MarkerSprite, displayOptions.ShowSprite);
-            SetMarkerPosition();
+            SetMarkerPositionAndScale();
             UpdateRadius(displayOptions.RadiusColour, displayOptions.ShowRadius);
         }
 
@@ -300,22 +315,83 @@ namespace LoGaCulture.LUTE
             // Update scale and enabled state based on zoom factor
         }
 
-        private void SetMarkerPosition()
+        private void SetMarkerPositionAndScale()
         {
             // Update position so the marker does not move with the map
             transform.localPosition = map.GeoToWorldPosition(locVar.Value.LatLongString(), true);
+
+            // Get the current zoom level
+            float zoom = map.Zoom;
+
+            if (zoom <= hideMarkerThreshold)
+            {
+                HideMarker();
+            }
+            else
+            {
+                ShowMarker();
+            }
+
+            // If zoom is below the threshold stop scaling and retain the default scale
+            // Mimics most map applications where the markers scale with the map to a certain extent before fading out
+            float newScale = engine.GetMapManager().MarkerScale;
+
+            if (zoom > maxScaleThreshold)
+            {
+                // Calculate zoom factor only for zoom values above maxScaleThreshold
+                float maxZoom = engine.GetMapManager().MapCameraMovement.MaxMapZoom;
+                float zoomFactor = Mathf.InverseLerp(maxZoom, maxScaleThreshold, zoom);
+                newScale = Mathf.Lerp(engine.GetMapManager().MarkerScale, engine.GetMapManager().MarkerScale + 0.075f, zoomFactor);
+            }
+
+            // Apply the new scale
+            transform.localScale = new Vector3(newScale, newScale, newScale);
         }
 
         private void UpdateRadius(Color color, bool showRadius)
         {
             if (radiusSpriteRenderer == null)
                 return;
+
             if (radiusSpriteRenderer)
                 radiusSpriteRenderer.color = color;
+
             radiusSpriteRenderer.enabled = showRadius;
 
-            // Update scale and enabled state based on zoom factor
-            // Radius needs to be accurate to the meters we have set
+            // Get the sprite's world size
+            float ppu = radiusSpriteRenderer.sprite.pixelsPerUnit; // Pixels Per Unit
+            float spriteSize = radiusSpriteRenderer.sprite.bounds.size.x; // World size of sprite
+
+            // Convert desired radius to diameter (no change for now)
+            float desiredDiameter = LogaConstants.DefaultRadius * 1.05f;
+
+            if (locVar.Value.RadiusIncrease > 0)
+            {
+                desiredDiameter += locVar.Value.RadiusIncrease;
+            }
+            if (locVar.Value.RadiusDecrease > 0)
+            {
+                desiredDiameter -= locVar.Value.RadiusDecrease;
+            }
+
+            // Calculate the base scale for the sprite based on the desired diameter and sprite's world size
+            float scale = desiredDiameter / spriteSize;
+
+            // Apply the calculated scale to the sprite (no adjustments for parent scale or zoom)
+            radiusSpriteRenderer.transform.localScale = new Vector3(scale, scale, 1f);
+
+            Vector3 inverseParentScale = new Vector3(
+            1f / transform.lossyScale.x,
+            1f / transform.lossyScale.y,
+            1f / transform.lossyScale.z
+            );
+
+            // Apply the inverse scale to counteract the parent's scaling
+            radiusSpriteRenderer.transform.localScale = new Vector3(
+                radiusSpriteRenderer.transform.localScale.x * inverseParentScale.x,
+                radiusSpriteRenderer.transform.localScale.y * inverseParentScale.y,
+                radiusSpriteRenderer.transform.localScale.z * inverseParentScale.z
+            );
         }
 
         private void OnLocationComplete(LocationVariable location)

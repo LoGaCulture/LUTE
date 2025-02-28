@@ -70,7 +70,9 @@ public class LocationVariable : BaseVariable<LUTELocationInfo>
         Vector2d vecVal = Value.LatLongString();
         var deviceLoc = engine.DemoMapMode ? trackerPos : LocationProvider.CurrentLocation.LatitudeLongitude;
 
-        var radiusInMeters = (LogaConstants.DefaultRadius * 3f) + Value.RadiusIncrease;
+        var radiusInMeters = (LogaConstants.DefaultRadius * 2.5f);
+        radiusInMeters += Value.RadiusIncrease;
+        radiusInMeters -= Value.RadiusDecrease;
 
         // Use double for more precision
         double r = 6371000.0; // Earth radius in meters
