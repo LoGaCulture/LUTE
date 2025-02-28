@@ -24,6 +24,8 @@ namespace LoGaCulture.LUTE
         [Tooltip("Reference to the map movement - tries to find it automatically.")]
         [SerializeField] protected MapCameraMovement mapMovement;
         [SerializeField] protected LUTELocationStatusDisplayList defaultLocationDisplayList;
+        [Tooltip("A default sprite used if display options are missing for any given location marker")]
+        [SerializeField] protected Sprite missingLocationMarkerSprite;
 
         private List<LocationMarker> spawnedLocationMarkers = new List<LocationMarker>();
 
@@ -31,6 +33,12 @@ namespace LoGaCulture.LUTE
         {
             get { return defaultLocationDisplayList; }
         }
+        public Sprite MissingLocationMarkerSprite
+        {
+            get { return missingLocationMarkerSprite; }
+        }
+
+        public List<LocationMarker> GetSpawnedLocationMarkers() => spawnedLocationMarkers;
 
         // Populated list of all the locations found during runtime.
         // Either found in an EventHandler or condition order.
@@ -43,6 +51,17 @@ namespace LoGaCulture.LUTE
             foreach (Node node in allNodes)
             {
                 node.GetAllLocations(ref allLocationsAtRuntime);
+            }
+        }
+
+        // During runtime we only find locations related to Nodes 
+        // In editor mode, we want to see all location variables that are available.
+        public virtual void ProcessLocationsEditor()
+        {
+            var allNodes = engine.Variables.FindAll(x => x is LocationVariable);
+            foreach (LocationVariable location in allNodes)
+            {
+                allLocationsAtRuntime.Add(location);
             }
         }
 
@@ -140,6 +159,17 @@ namespace LoGaCulture.LUTE
                 spawnedLocationMarkers.Remove(locationMarker);
                 DestroyImmediate(locationMarker.gameObject);
             }
+        }
+
+        public virtual void ClearAllMarkers()
+        {
+            foreach (var marker in spawnedLocationMarkers)
+            {
+                marker.ForceUpdateInEditor = false;
+                DestroyImmediate(marker.gameObject);
+            }
+            spawnedLocationMarkers.Clear();
+            allLocationsAtRuntime.Clear();
         }
 
         protected virtual void Awake()

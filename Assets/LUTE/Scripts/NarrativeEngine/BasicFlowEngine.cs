@@ -1230,7 +1230,7 @@ public class BasicFlowEngine : MonoBehaviour, ISubstitutionHandler
         var map = GetComponentInChildren<SpawnOnMap>();
         if (map == null)
         {
-            map = FindObjectOfType<SpawnOnMap>();
+            map = FindFirstObjectByType<SpawnOnMap>();
             if (map == null)
             {
                 Debug.LogError("No map found in scene or in children");

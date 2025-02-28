@@ -1,8 +1,5 @@
 using LoGaCulture.LUTE;
-using Mapbox.Examples;
-using Mapbox.Unity.Location;
 using Mapbox.Unity.Map;
-using Mapbox.Unity.Utilities;
 using System;
 using System.Linq;
 using UnityEditor;
@@ -23,118 +20,106 @@ public class MapboxControls : EventWindow
     private bool showLocationPopup = false;
     private Rect locationPopupRect;
     private GUIStyle currentStyle;
+    private GUIStyle addButtonStyle;
     private RenderTexture mapTexture;
-
     //pan keyboard
     private float xMove = 0;
-    //Returns true if any key was pressed.
     private float zMove = 0;
 
     protected static MapboxControls window;
-    protected static QuadTreeCameraMovement map;
+    protected static MapCameraMovement mapMovement;
     protected static int forceRepaintCount = 0;
-    protected static float spawnScale = 10;
+    protected static float spawnScale = 1.0f;
     protected bool camRendered = false;
     protected Event e;
 
     private static string currentLocationName = "New Location";
-    private static Sprite currentLocationSprite = null;
     private static string currentLocationString;
-    private static Color locationColor = Color.white;
-    private static bool currentLocationNameBool = true;
-
-    private static Camera mapCam;
-    private static CameraBillboard cameraBillboard;
+    private static Camera mapCamera;
     private static AbstractMap abstractMap;
-    private static LUTEMapManager spawnOnMap;
+    private static LUTEMapManager mapManager;
 
     static MapboxControls()
     {
         EditorApplication.update += Update;
     }
 
-    static void Update()
+    private static void Update()
     {
-        // Update the spawn on map trackers
-        //if (spawnOnMap != null)
-        //    spawnOnMap.UpdateMarkers();
+        if (window == null)
+            return;
+
+        var allMarkers = mapManager.GetSpawnedLocationMarkers();
+        if (allMarkers.Count <= 0)
+            return;
+
+        foreach (var marker in allMarkers)
+        {
+            if (marker == null)
+                continue;
+
+            marker.ForceUpdateInEditor = true;
+        }
     }
+
     public static void ShowWindow()
     {
-        window = (MapboxControls)GetWindow(typeof(MapboxControls), false, "Map");
+        window = (MapboxControls)GetWindow(typeof(MapboxControls), false, "LUTE Map");
     }
 
     public static void RemoveLocation(LocationVariable location)
     {
-        spawnOnMap?.RemoveLocationMarker(location);
+        mapManager?.RemoveLocationMarker(location);
     }
 
     private void OnEnable()
     {
-        if (LocationProviderFactory.Instance != null)
+        var engine = GraphWindow.GetEngine();
+
+        if (engine == null)
         {
-            abstractMap = LocationProviderFactory.Instance.mapManager;
+            return;
         }
-        if (abstractMap == null)
-        {
-            abstractMap = FindObjectOfType<AbstractMap>();
-        }
+
+        abstractMap = engine.GetAbstractMap();
+
         if (abstractMap == null)
         {
             return;
         }
-        map = abstractMap.gameObject.GetComponent<QuadTreeCameraMovement>();
-        spawnOnMap = abstractMap.gameObject.GetComponent<LUTEMapManager>(); // ensure that quadtreemovement requires spawn on map
-        cameraBillboard = spawnOnMap.transform?.GetComponent<CameraBillboard>(); //ensure that tracker is set elsewhere - this is NOW WRONG
 
-        //create a camera if none exists - ensure you set a tag and culling mask to only map
-        //first ensure that there is a tag called map otherwise create one
+        mapMovement = abstractMap.gameObject.GetComponent<MapCameraMovement>();
+        mapManager = engine.GetMapManager();
+
+        // Create a camera if none exists - ensure you set a tag and culling mask to only map
+        // First ensure that there is a tag to assign to the map otherwise create one
         if (!InternalEditorUtility.tags.Contains("ToolCam"))
         {
             InternalEditorUtility.AddTag("ToolCam");
         }
 
-        mapCam = GameObject.FindGameObjectWithTag("ToolCam")?.GetComponent<Camera>();
-        if (mapCam == null)
+        mapCamera = mapMovement.ReferenceCamera;
+        if (mapCamera == null)
         {
-            mapCam = new GameObject("MapCameraTool").AddComponent<Camera>();
-            mapCam.tag = "ToolCam";
-            mapCam.cullingMask = 1 << LayerMask.NameToLayer("ToolCam");
-            mapCam.fieldOfView = 26.99147f;
-            mapCam.transform.position = new Vector3(mapCam.transform.position.x, 200, mapCam.transform.position.z);
-            mapCam.transform.rotation = Quaternion.Euler(90, 0, 0);
+            Debug.LogError("No camera found to render the map! Please ensure this is setup ");
         }
 
-        //get the abstract map component and enable editor preview if it is not already enabled
-        if (abstractMap != null)
-        {
-            abstractMap.IsEditorPreviewEnabled = true;
-            abstractMap.ResetMap();
-        }
-        if (cameraBillboard != null && mapCam != null && cameraBillboard.GetCurrentCam() != mapCam)
-            cameraBillboard.SetCanvasCam(mapCam);
+        // We use the editor preview of the abstractmap class to render the map in editor mode
+        abstractMap.IsEditorPreviewEnabled = true;
+        abstractMap.ResetMap();
 
-        map._referenceCamera = mapCam; // This should probably be done on the movement script as we already have ref to tool cam
-
-        spawnOnMap.ProcessLocations();
-        //spawnOnMap.CreateMarkers();
+        // Finally we process the locations to ensure they are displayed on the map
+        mapManager.ProcessLocationsEditor();
+        mapManager.SpawnMarkers();
     }
 
     private void OnDisable()
     {
-        if (map != null)
-        {
-            if (abstractMap != null && abstractMap.IsEditorPreviewEnabled)
-                abstractMap.DisableEditorPreview();
-        }
+        if (abstractMap != null && abstractMap.IsEditorPreviewEnabled)
+            abstractMap.DisableEditorPreview();
 
-        if (spawnOnMap == null || map == null)
-        {
-            return;
-        }
-
-        map._dragStartedOnUI = false;
-        //spawnOnMap.ClearLocations();
+        mapMovement.dragStartedOnUI = false;
+        mapManager.ClearAllMarkers();
     }
 
     private void OnGUI()
@@ -159,12 +144,12 @@ public class MapboxControls : EventWindow
             mapTexture.Create(); // Recreate the texture with updated dimensions
         }
 
-        // When you're ready to render, ensure the camera is set up correctly
-        mapCam.targetTexture = mapTexture; // Set the target texture on the camera
-        mapCam.Render();
+        // When ready to render, ensure the camera is set up correctly
+        mapCamera.targetTexture = mapTexture; // Set the target texture on the camera
+        mapCamera.Render();
 
-        // Draw the cam texture to the window
-        GUI.DrawTexture(new Rect(0, 0, position.width, position.height), mapCam.targetTexture);
+        // Draw the camera texture to the window
+        GUI.DrawTexture(new Rect(0, 0, position.width, position.height), mapCamera.targetTexture);
 
         BeginWindows();
         if (showLocationPopup)
@@ -174,8 +159,8 @@ public class MapboxControls : EventWindow
 
             currentStyle.padding.top = -20;
 
-            locationPopupRect = GUI.Window(0, new Rect(rightClickPos.x, rightClickPos.y, windowWidth, 150),
-                DrawLocationWindow, "New Location", currentStyle);
+            locationPopupRect = GUI.Window(0, new Rect(rightClickPos.x, rightClickPos.y, windowWidth, 80),
+                DrawLocationWindow, "Adding New Location", currentStyle);
         }
         EndWindows();
 
@@ -191,17 +176,17 @@ public class MapboxControls : EventWindow
             forceRepaintCount = 1;
         }
 
-        map.PanMapUsingKeyBoard(xMove, zMove);
-        map.PanMapUsingTouchOrMouseEditor(e);
+        mapMovement.PanMapUsingKeyBoard(xMove, zMove);
+        mapMovement.PanMapUsingTouchOrMouseEditor(e);
 
         wantsMouseEnterLeaveWindow = true;
 
         if (e.type == EventType.MouseLeaveWindow)
         {
-            map._dragStartedOnUI = false;
+            mapMovement.dragStartedOnUI = false;
         }
 
-        if (map._dragStartedOnUI)
+        if (mapMovement.dragStartedOnUI)
             forceRepaintCount = 1;
 
         if (forceRepaintCount > 0)
@@ -222,18 +207,46 @@ public class MapboxControls : EventWindow
             {
                 normal = new GUIStyleState
                 {
-                    background = EditorGUIUtility.Load("builtin skins/darkskin/images/projectbrowsericonareabg.png") as Texture2D,
-                    textColor = Color.white,
+                    background = MakeTex(2, 2, new Color(0.2f, 0.2f, 0.2f, 0.8f)), // Subtle dark transparent bg
+                    textColor = Color.black,
                 },
                 fontStyle = FontStyle.Bold,
                 alignment = TextAnchor.UpperCenter,
+                padding = new RectOffset(5, 5, 5, 5), // Reduce padding
+                margin = new RectOffset(2, 2, 2, 2) // Reduce margins
+            };
+        }
+
+        if (addButtonStyle == null)
+        {
+            addButtonStyle = new GUIStyle(GUI.skin.button)
+            {
+                fontStyle = FontStyle.Bold,
+                fontSize = 14, // Larger text
+                alignment = TextAnchor.MiddleCenter,
+                normal = { textColor = Color.white, background = MakeTex(2, 2, new Color(0.1f, 0.6f, 0.1f, 1f)) }, // Green background
+                hover = { textColor = Color.white, background = MakeTex(2, 2, new Color(0.2f, 0.8f, 0.2f, 1f)) }, // Brighter on hover
+                active = { textColor = Color.white, background = MakeTex(2, 2, new Color(0.05f, 0.5f, 0.05f, 1f)) }, // Darker on click
+                padding = new RectOffset(10, 10, 5, 5), // Extra padding
             };
         }
     }
 
+    private Texture2D MakeTex(int width, int height, Color col)
+    {
+        Color[] pix = new Color[width * height];
+        for (int i = 0; i < pix.Length; i++)
+            pix[i] = col;
+
+        Texture2D result = new Texture2D(width, height);
+        result.SetPixels(pix);
+        result.Apply();
+        return result;
+    }
+
     private void DrawLocationWindow(int id)
     {
-
+        InitStyles();
         // Create a GUI box allowing a custom name and showing current location
         GUILayout.BeginVertical();
         GUILayout.Space(5);
@@ -243,24 +256,24 @@ public class MapboxControls : EventWindow
         GUILayout.EndHorizontal();
         GUILayout.Space(5);
         GUILayout.BeginHorizontal();
-        GUILayout.Label("Show Name: ");
-        currentLocationNameBool = EditorGUILayout.Toggle(currentLocationNameBool);
-        GUILayout.EndHorizontal();
-        GUILayout.Space(5);
-        GUILayout.BeginHorizontal();
-        GUILayout.Label("Icon: ");
-        currentLocationSprite = EditorGUILayout.ObjectField(currentLocationSprite, typeof(Sprite), true) as Sprite;
-        GUILayout.EndHorizontal();
-        GUILayout.Space(5);
-        GUILayout.BeginHorizontal();
         GUILayout.Label("Location: ");
         GUILayout.Label(currentLocationString);
         GUILayout.EndHorizontal();
 
-        if (GUILayout.Button("Add", EditorStyles.toolbarButton))
+        GUILayout.FlexibleSpace(); // Push content down
+
+        GUILayout.BeginHorizontal();
         {
-            AddNewLocation();
+            GUILayout.FlexibleSpace(); // Push content to the right
+            if (GUILayout.Button("+ Add", addButtonStyle, GUILayout.Height(30), GUILayout.Width(100)))
+            {
+                AddNewLocation();
+            }
+            GUILayout.FlexibleSpace(); // Push content to the left
         }
+        GUILayout.EndHorizontal();
+
+        GUILayout.FlexibleSpace(); // Push content up
         GUILayout.EndVertical();
     }
 
@@ -293,40 +306,72 @@ public class MapboxControls : EventWindow
     private void AddNewLocation()
     {
         LUTELocationInfo newLocationInfo = ScriptableObject.CreateInstance<LUTELocationInfo>();
-        int count = engine.GetComponents<LocationVariable>().Length;
-        string name = count > 0 ? currentLocationName + count : currentLocationName;
-        AssetDatabase.CreateAsset(newLocationInfo, "Assets/Resources/" + name + ".asset");
-        var locString = Conversions.StringToLatLon(currentLocationString);
-        //newLocationInfo.Position = currentLocationString;
-        //newLocationInfo.Name = currentLocationName;
-        if (currentLocationSprite == null)
-        {
-            var texture = LogaEditorResources.Default100;
-            currentLocationSprite = Sprite.Create(
-               texture,
-               new Rect(0, 0, texture.width, texture.height),
-               new Vector2(0.5f, 0.5f)
-           );
-        }
-        //newLocationInfo.Sprite = currentLocationSprite;
-        //newLocationInfo.Color = locationColor;
-        //newLocationInfo.ShowName = currentLocationNameBool;
+
+
+        string name = GetUniqueLocationName(currentLocationName);
+
+        AssetDatabase.CreateAsset(newLocationInfo, "Assets/LUTE/Resources/LocationServices/" + name + ".asset");
+
+        newLocationInfo.SetNewPosition(currentLocationString);
+        newLocationInfo.LocationName = name;
+        newLocationInfo.InfoID = name + "_ID";
 
         AssetDatabase.SaveAssets();
 
-        //EditorUtility.FocusProjectWindow();
-        //Selection.activeObject = newLocationInfo;
+        EditorUtility.FocusProjectWindow();
+        Selection.activeObject = newLocationInfo;
 
         LocationVariable locVar = new LocationVariable();
         LocationVariable newVar = VariableSelectPopupWindowContent.AddVariable(locVar.GetType(), currentLocationName, newLocationInfo) as LocationVariable;
-        currentLocationName = "New Location";
-        locationColor = Color.white;
-        currentLocationNameBool = true;
-        currentLocationSprite = null;
-        showLocationPopup = false;
 
-        spawnOnMap.ProcessLocations();
-        //spawnOnMap.CreateMarkers();
+        currentLocationName = "New Location";
+        currentLocationString = "";
+
+        mapManager.ClearAllMarkers();
+        mapManager.ProcessLocationsEditor();
+        mapManager.SpawnMarkers();
+
+        showLocationPopup = false;
+    }
+
+    // Returns a new node key that is guaranteed not to clash with any existing Node in the Engine.
+    public virtual string GetUniqueLocationName(string originalKey, LocationVariable ignoreVar = null)
+    {
+        int suffix = 0;
+        string baseKey = originalKey.Trim();
+
+        // No empty keys allowed
+        if (baseKey.Length == 0)
+        {
+            return "Empty Location Name";
+        }
+
+        var locations = engine.Variables.FindAll(x => x is LocationVariable);
+
+        string key = baseKey;
+        while (true)
+        {
+            bool collision = false;
+            for (int i = 0; i < locations.Count; i++)
+            {
+                var loc = locations[i] as LocationVariable;
+                if (loc == ignoreVar || loc.Value.LocationName == null)
+                {
+                    continue;
+                }
+                if (loc.Value.LocationName.Equals(key, StringComparison.CurrentCultureIgnoreCase))
+                {
+                    collision = true;
+                    suffix++;
+                    key = baseKey + " " + suffix;
+                }
+            }
+
+            if (!collision)
+            {
+                return key;
+            }
+        }
     }
 
     protected override void OnMouseDown(Event e)
@@ -335,7 +380,8 @@ public class MapboxControls : EventWindow
         {
             case MouseButton.Left:
                 {
-                    map._dragStartedOnUI = true;
+                    mapMovement.dragStartedOnUI = true;
+                    showLocationPopup = false;
                     e.Use();
                     break;
                 }
@@ -348,8 +394,8 @@ public class MapboxControls : EventWindow
         {
             case MouseButton.Left:
                 {
-                    Selection.activeObject = engine.GetMap();
-                    map._dragStartedOnUI = false;
+                    Selection.activeObject = engine.GetAbstractMap();
+                    mapMovement.dragStartedOnUI = false;
                     e.Use();
                     break;
                 }
@@ -358,7 +404,7 @@ public class MapboxControls : EventWindow
                     var mousePosScreen = e.mousePosition;
                     //assign distance of camera to ground plane to z, otherwise ScreenToWorldPoint() will always return the position of the camera
                     //http://answers.unity3d.com/answers/599100/view.html
-                    var cam = mapCam;
+                    var cam = mapCamera;
 
                     var centreY = Screen.height / 2;
                     var y = centreY - (mousePosScreen.y - centreY);
@@ -384,7 +430,7 @@ public class MapboxControls : EventWindow
 
     protected override void OnScrollWheel(Event e)
     {
-        map.ZoomMapUsingTouchOrMouse(-e.delta.y / 2);
+        mapMovement.ZoomMapUsingTouchOrMouse(-e.delta.y / 2);
         e.delta = Vector2.zero;
         forceRepaintCount = 1;
     }

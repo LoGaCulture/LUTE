@@ -136,5 +136,12 @@ namespace LoGaCulture.LUTE
         {
             return Mapbox.Unity.Utilities.Conversions.StringToLatLon(position);
         }
+
+        public virtual void SetNewPosition(string newPosition)
+        {
+            if (string.IsNullOrEmpty(newPosition))
+                return;
+            position = newPosition;
+        }
     }
 }

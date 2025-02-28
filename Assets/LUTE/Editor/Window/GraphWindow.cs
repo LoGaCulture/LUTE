@@ -684,7 +684,7 @@ public class GraphWindow : EventWindow
             {
                 MapboxControls.engine = storyEngine;
                 MapboxControls.ShowWindow();
-                Selection.activeObject = storyEngine.GetMap();
+                Selection.activeObject = storyEngine.GetAbstractMap();
             }
 
             //string annotationButton = storyEngine.ShowAnnotations ? "Hide Annotations" : "Show Annotations";

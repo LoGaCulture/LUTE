@@ -12,6 +12,7 @@ namespace LoGaCulture.LUTE
     /// In this scenario the marker updates the visuals based on the location status which is defined in the displaylist on the locationinfo/variable.
     /// If the display options are missing then we should somehow find the default list of options.
     /// </summary>
+    [ExecuteInEditMode]
     public class LocationMarker : MonoBehaviour, IPointerClickHandler
     {
         private Camera markerCamera;
@@ -40,10 +41,14 @@ namespace LoGaCulture.LUTE
         public SpriteRenderer MarkerSpriteRenderer { get => markerSpriteRenderer; }
         public SpriteRenderer RadiusRenderer { get => radiusSpriteRenderer; }
         public TextMesh MarkerTextMesh { get => markerTextMesh; }
+        public bool ForceUpdateInEditor { get; set; }
 
 
         public void OnPointerClick(PointerEventData eventData)
         {
+            if (!Application.isPlaying)
+                return;
+
             if (!interactable)
                 return;
 
@@ -121,12 +126,18 @@ namespace LoGaCulture.LUTE
 
         protected void OnEnable()
         {
+            if (!Application.isPlaying)
+                return;
+
             LocationServiceSignals.OnLocationComplete += OnLocationComplete;
             NodeSignals.OnNodeEnd += OnNodeEnd;
         }
 
         protected void OnDestroy()
         {
+            if (!Application.isPlaying)
+                return;
+
             LocationServiceSignals.OnLocationComplete -= OnLocationComplete;
             NodeSignals.OnNodeEnd -= OnNodeEnd;
         }
@@ -138,6 +149,12 @@ namespace LoGaCulture.LUTE
 
         protected void Update()
         {
+            // We can update if the game is playing or we are forcing the update in the editor
+            if (!Application.isPlaying && !ForceUpdateInEditor)
+            {
+                return;
+            }
+
             // Ensure that location marker always faces the rendering camera
             if (markerCamera != null)
             {
@@ -154,8 +171,9 @@ namespace LoGaCulture.LUTE
                 locVar.Value.StatusDisplayOptionsList = engine.GetMapManager().DefaultLocationDisplayList;
             }
 
-            // Constantly check the location status and update the visuals if required.
-            locVar.Evaluate(ComparisonOperator.Equals, null);
+            // Constantly check the location status and update the visuals if required. Only do so if we are in runtime.
+            if (Application.isPlaying)
+                locVar.Evaluate(ComparisonOperator.Equals, null);
 
             if (!updateVisuals)
             {
@@ -240,7 +258,6 @@ namespace LoGaCulture.LUTE
             UpdateRadius(displayOptions.RadiusColour, displayOptions.ShowRadius);
         }
 
-
         private void SetMarkerText(string text, bool showText, Color textColour)
         {
             if (markerTextMesh == null)
@@ -261,6 +278,18 @@ namespace LoGaCulture.LUTE
         {
             if (markerSpriteRenderer == null)
                 markerSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+            if (sprite == null)
+            {
+                // There are instances where this method may be called by the display options could be empty
+                // In this case we show a simple location marker which represents this missing display option; this default sprite is defined on the map manager
+                var mapManager = engine.GetMapManager();
+                if (mapManager == null)
+                {
+                    return;
+                }
+                sprite = mapManager.MissingLocationMarkerSprite;
+            }
 
             if (markerSpriteRenderer)
                 markerSpriteRenderer.sprite = showSprite ? sprite : null;
