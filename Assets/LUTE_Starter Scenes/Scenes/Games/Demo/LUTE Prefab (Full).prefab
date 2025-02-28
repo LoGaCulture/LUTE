@@ -5073,9 +5073,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3659957821006464733}
   - component: {fileID: 9196987336573309532}
-  - component: {fileID: 2654978998385147197}
-  - component: {fileID: 8758248570845398259}
   - component: {fileID: 6982021522239365409}
+  - component: {fileID: 8858159516611364422}
+  - component: {fileID: 2676246262292071784}
   m_Layer: 3
   m_Name: Map
   m_TagString: Untagged
@@ -5583,50 +5583,6 @@ MonoBehaviour:
   _tileProvider: {fileID: 0}
   _previewOptions:
     isPreviewEnabled: 0
---- !u!114 &2654978998385147197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4264425839280049229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c699b8e1864b4b248acb7a04ede9480, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _panSpeed: 1
-  _zoomSpeed: 0.75
-  _referenceCamera: {fileID: 4761921789135591222}
-  _referenceCameraGame: {fileID: 4743639310958082699}
-  _mapManager: {fileID: 9196987336573309532}
-  _useDegreeMethod: 0
-  allowPanning: 1
-  allowZooming: 1
-  allowTilting: 0
-  minZoomLevel: 0
-  maxZoomLevel: 21
-  sensitivityZ: 2
-  _dragStartedOnUI: 0
---- !u!114 &8758248570845398259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4264425839280049229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcf32ea2cc0514b569329f6b6b68f9b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tracker: {fileID: 6431943520467199244}
-  _map: {fileID: 9196987336573309532}
-  engine: {fileID: 259267083496140413}
-  _directionPrefab: {fileID: 0}
-  _radiusCirclePrefab: {fileID: 5790737691150376730, guid: d6ed17cc88af03542adfd3f2762a73e0, type: 3}
-  _markerPrefab: {fileID: 4158092623677246474, guid: 94b683dc45eda974897842ef5fcc2301, type: 3}
-  _spawnScale: 4
 --- !u!114 &6982021522239365409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5640,6 +5596,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _map: {fileID: 9196987336573309532}
+--- !u!114 &8858159516611364422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4264425839280049229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69a38523d46cfa54ab0114da5684aebc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTracker: {fileID: 6431943520467199244}
+  markerPrefab: {fileID: 4158092623677246474, guid: 94b683dc45eda974897842ef5fcc2301, type: 3}
+  markerScale: 1.5
+  map: {fileID: 9196987336573309532}
+  engine: {fileID: 259267083496140413}
+  mapMovement: {fileID: 2676246262292071784}
+  defaultLocationDisplayList: {fileID: 11400000, guid: db23122809bb4b841a32f68f725e5941, type: 2}
+  missingLocationMarkerSprite: {fileID: 21300000, guid: 97260905ca7ad1b43a8afa4d11b15624, type: 3}
+--- !u!114 &2676246262292071784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4264425839280049229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3463388f83cd9c844ada693ad0dee6eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dragStartedOnUI: 0
+  allowPan: 1
+  panSpeed: 1
+  keysSensitivity: 2
+  allowZoom: 1
+  zoomSpeed: 0.7
+  minZoomLevel: 0
+  maxZoomLevel: 21
+  allowRotate: 1
+  gameCamera: {fileID: 4743639310958082699}
+  editorCamera: {fileID: 4761921789135591222}
+  map: {fileID: 9196987336573309532}
+  useDegree: 0
 --- !u!1 &4308549559390840594
 GameObject:
   m_ObjectHideFlags: 0
@@ -12324,7 +12325,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 0.5902061, g: 1, b: 0.5424528, a: 1}
   useCustomTint: 1
   hoverStartTime: 0
@@ -12332,6 +12332,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &500084417248727041
 MonoBehaviour:
@@ -12366,7 +12367,6 @@ MonoBehaviour:
   isGrouped: 1
   groupIndex: 0
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -12374,6 +12374,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &491454960197904109
 MonoBehaviour:
@@ -12403,7 +12404,6 @@ MonoBehaviour:
   isGrouped: 1
   groupIndex: 0
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -12411,6 +12411,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &4593121287059275042
 MonoBehaviour:
@@ -12454,7 +12455,6 @@ MonoBehaviour:
   isGrouped: 1
   groupIndex: 0
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -12462,6 +12462,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &5716373193295711492
 MonoBehaviour:
@@ -12506,7 +12507,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 1
   hoverStartTime: 0
@@ -12514,6 +12514,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &8496318919213552222
 MonoBehaviour:
@@ -12543,7 +12544,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 0.3254717, b: 0.3254717, a: 1}
   useCustomTint: 1
   hoverStartTime: 0
@@ -12551,6 +12551,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &6278678716252783838
 MonoBehaviour:
@@ -12645,7 +12646,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 1
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -12653,6 +12653,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &5728510759167892264
 MonoBehaviour:
@@ -12841,7 +12842,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 0.9219107, g: 0.5613208, b: 1, a: 1}
   useCustomTint: 1
   hoverStartTime: 0
@@ -12849,6 +12849,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &1026563558250000694
 MonoBehaviour:
@@ -12897,7 +12898,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 0.93650883, g: 1, b: 0.8254717, a: 0.29803923}
   useCustomTint: 1
   hoverStartTime: 0
@@ -12905,6 +12905,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
   groupedNodes:
   - {fileID: 500084417248727041}
@@ -13039,7 +13040,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -13047,6 +13047,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &7557467208615972617
 MonoBehaviour:
@@ -13089,7 +13090,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 1
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -13097,6 +13097,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &8719297578147245405
 MonoBehaviour:
@@ -13154,7 +13155,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -13162,6 +13162,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &3253418097520771425
 MonoBehaviour:
@@ -13248,7 +13249,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -13256,6 +13256,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &1856871636446126757
 MonoBehaviour:

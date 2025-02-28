@@ -216,6 +216,10 @@ GameObject:
   - component: {fileID: 269228141701845757}
   - component: {fileID: 7748218273305830627}
   - component: {fileID: 6783852971016887766}
+  - component: {fileID: 1350923007532579518}
+  - component: {fileID: 409185329649348036}
+  - component: {fileID: 4958521245205742243}
+  - component: {fileID: 9173266300743798265}
   m_Layer: 0
   m_Name: Flow Engine
   m_TagString: Untagged
@@ -256,9 +260,11 @@ MonoBehaviour:
   description: A game about Avebury!
   hideComponents: 1
   localizationId: 
-  selectedOrders: []
-  selectedNodes: []
-  nodeViewHeight: 571
+  selectedOrders:
+  - {fileID: 409185329649348036}
+  selectedNodes:
+  - {fileID: 1350923007532579518}
+  nodeViewHeight: 200
   hideOrders: []
   variables:
   - {fileID: 6363775969722646444}
@@ -266,15 +272,15 @@ MonoBehaviour:
   variablesExpanded: 1
   variablesScrollPos: {x: 0, y: 0}
   mapLocations: []
-  demoMapMode: 0
+  demoMapMode: 1
   mapSprites: []
   colourOrders: 1
   showLineNumbers: 1
   showHandlerInfoOnGraph: 1
   showAnnotations: 1
   labelTint: {r: 1, g: 0.8980392, b: 0.8509804, a: 1}
-  zoom: 1
-  scrollPos: {x: -25207.725, y: -24709.637}
+  zoom: 0.97
+  scrollPos: {x: -25177.807, y: -24697.658}
   version: 1
   sidesOfDie: 6
   postcards: []
@@ -309,7 +315,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 25942.725
     y: 24868.137
-    width: 77.62
+    width: 78.03
     height: 40
   nodeName: Start
   nodeDescription: Example
@@ -323,7 +329,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -331,6 +336,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &4806665123537749153
 MonoBehaviour:
@@ -445,7 +451,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 1
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -453,6 +458,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &4780102058866328054
 MonoBehaviour:
@@ -533,7 +539,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 25924.725
     y: 24985.637
-    width: 111.880005
+    width: 111.81
     height: 40
   nodeName: FadeSprite
   nodeDescription: Basic building block of a narrative engine
@@ -545,7 +551,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -553,6 +558,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &7208605965385644007
 MonoBehaviour:
@@ -625,12 +631,7 @@ MonoBehaviour:
   requiresPress: 1
   autoTrigger: 0
   requiresLocation: 1
-  triggerWhenAtLocation: 1
-  updateLocationMarkerOnComplete: 1
-  unvisitedSprite: {fileID: 21300000, guid: 89eb6064471d67f44919684e051b507c, type: 3}
-  visitedSprite: {fileID: 21300000, guid: 3b2147c1716bc544a819d9fe29bd81f0, type: 3}
-  completedSprite: {fileID: 21300000, guid: 38eaf4005975a7945bef1ddb4fb84d2e, type: 3}
-  overrideDefaultLocationSprites: 1
+  overrideLocationDisplayList: {fileID: 0}
 --- !u!114 &830664824052957531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -647,7 +648,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 25758.725
     y: 24865.637
-    width: 147.45999
+    width: 147.35
     height: 40
   nodeName: LevelSelectMenu
   nodeDescription: Basic building block of a narrative engine
@@ -663,7 +664,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -671,6 +671,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &4657257208514892370
 MonoBehaviour:
@@ -688,7 +689,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 25773.725
     y: 24951.637
-    width: 115.8
+    width: 115.56
     height: 40
   nodeName: LevelSelect
   nodeDescription: Basic building block of a narrative engine
@@ -700,7 +701,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -708,6 +708,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &3924388599830227247
 MonoBehaviour:
@@ -842,7 +843,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 25563.725
     y: 24865.637
-    width: 127.61
+    width: 127.55
     height: 40
   nodeName: Reload Scene
   nodeDescription: Reloads the current scene
@@ -854,7 +855,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 0.8584906, g: 0.2956123, b: 0.2956123, a: 1}
   useCustomTint: 1
   hoverStartTime: 0
@@ -862,6 +862,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &967259114162783529
 MonoBehaviour:
@@ -926,7 +927,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 0.8584906, g: 0.2956123, b: 0.2956123, a: 1}
   useCustomTint: 1
   hoverStartTime: 0
@@ -934,6 +934,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &6783852971016887766
 MonoBehaviour:
@@ -947,6 +948,113 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cc5b8c3d476afe49927c5c5189fa3d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1350923007532579518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159015562283511075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc9f689a21732a34489f55c1ed82a919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeRect:
+    serializedVersion: 2
+    x: 26432.725
+    y: 24847.637
+    width: 193.92
+    height: 40
+  nodeName: Override Location Marker
+  nodeDescription: Basic building block of a narrative engine
+  groupDescription: A series of nodes that can be executed as a group
+  itemId: 0
+  orderList:
+  - {fileID: 409185329649348036}
+  eventHandler: {fileID: 0}
+  isGrouped: 0
+  groupIndex: -1
+  repeatable: 1
+  tint: {r: 1, g: 0.8980392, b: 0.8509804, a: 1}
+  useCustomTint: 1
+  hoverStartTime: 0
+  targetUnlockNode: {fileID: 0}
+  targetKeyNode: {fileID: 0}
+  showDesc: 0
+  saveable: 0
+  updateLocationStatusToComplete: 1
+  NodeComplete: 0
+--- !u!114 &409185329649348036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159015562283511075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 125d74a5559eabd4b8b14360277e4dbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  location:
+    locationRef: {fileID: 6363775969722646444}
+    locationVal: {fileID: 0}
+  status: 3
+  customLabel: Rabbit
+  forcePermanentChange: 1
+--- !u!114 &4958521245205742243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159015562283511075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc9f689a21732a34489f55c1ed82a919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeRect:
+    serializedVersion: 2
+    x: 26447.63
+    y: 24892.918
+    width: 177.36
+    height: 40
+  nodeName: Reset Location Marker
+  nodeDescription: Basic building block of a narrative engine
+  groupDescription: A series of nodes that can be executed as a group
+  itemId: 0
+  orderList:
+  - {fileID: 9173266300743798265}
+  eventHandler: {fileID: 0}
+  isGrouped: 0
+  groupIndex: -1
+  repeatable: 1
+  tint: {r: 1, g: 0.8980392, b: 0.8509804, a: 1}
+  useCustomTint: 1
+  hoverStartTime: 0
+  targetUnlockNode: {fileID: 0}
+  targetKeyNode: {fileID: 0}
+  showDesc: 0
+  saveable: 0
+  updateLocationStatusToComplete: 1
+  NodeComplete: 0
+--- !u!114 &9173266300743798265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159015562283511075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 165ececd3809bd147bd829c6373527fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  location:
+    locationRef: {fileID: 6363775969722646444}
+    locationVal: {fileID: 0}
 --- !u!1 &2093784469197862826
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,7 +1072,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &544091849192567883
 Transform:
   m_ObjectHideFlags: 0
@@ -1015,7 +1123,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: 0
   m_CullingMask:
@@ -1789,9 +1897,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3628203108739657480}
   - component: {fileID: 78200668557137000}
-  - component: {fileID: 257780257253925842}
-  - component: {fileID: 1772240503842073782}
   - component: {fileID: 2706698123540339913}
+  - component: {fileID: 8094764944972154663}
+  - component: {fileID: 5578865515465083505}
   m_Layer: 3
   m_Name: Map
   m_TagString: Untagged
@@ -1807,7 +1915,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3527887650819194427}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.34608158, y: 0.43063557, z: -0.006135093}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1851,18 +1959,18 @@ MonoBehaviour:
       snapMapToZero: 0
     scalingOptions:
       scalingType: 1
-      unityTileSize: 100
+      unityTileSize: 50
     loadingTexture: {fileID: 2800000, guid: e2896a92727704803a9c422b043eae89, type: 3}
     tileMaterial: {fileID: 2100000, guid: b9f23e9bce724fa4daac57ecded470b8, type: 2}
   _initializeOnStart: 1
   _imagery:
     _layerProperty:
-      sourceType: 4
+      sourceType: 6
       sourceOptions:
         isActive: 1
         layerSource:
           Name: Streets
-          Id: mapbox.satellite
+          Id: mapbox://styles/jbog/cm7kjry5l00so01r3cxinhemb
           Modified: 
           UserName: 
       rasterOptions:
@@ -1942,7 +2050,7 @@ MonoBehaviour:
         UserName: 
       performanceOptions:
         isEnabled: 1
-        entityPerCoroutine: 20
+        entityPerCoroutine: 500
       vectorSubLayers:
       - coreOptions:
           sourceId: 
@@ -2299,50 +2407,6 @@ MonoBehaviour:
   _tileProvider: {fileID: 0}
   _previewOptions:
     isPreviewEnabled: 0
---- !u!114 &257780257253925842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3527887650819194427}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c699b8e1864b4b248acb7a04ede9480, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _panSpeed: 1
-  _zoomSpeed: 0.75
-  _referenceCamera: {fileID: 7056499817285349525}
-  _referenceCameraGame: {fileID: 6004939561922723501}
-  _mapManager: {fileID: 78200668557137000}
-  _useDegreeMethod: 0
-  allowPanning: 1
-  allowZooming: 1
-  allowTilting: 0
-  minZoomLevel: 0
-  maxZoomLevel: 21
-  sensitivityZ: 2
-  _dragStartedOnUI: 0
---- !u!114 &1772240503842073782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3527887650819194427}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcf32ea2cc0514b569329f6b6b68f9b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tracker: {fileID: 4233611521000610624}
-  _map: {fileID: 78200668557137000}
-  engine: {fileID: 8743389473436946330}
-  _directionPrefab: {fileID: 0}
-  _radiusCirclePrefab: {fileID: 5790737691150376730, guid: d6ed17cc88af03542adfd3f2762a73e0, type: 3}
-  _markerPrefab: {fileID: 4158092623677246474, guid: 94b683dc45eda974897842ef5fcc2301, type: 3}
-  _spawnScale: 4
 --- !u!114 &2706698123540339913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2356,6 +2420,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _map: {fileID: 78200668557137000}
+--- !u!114 &8094764944972154663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3527887650819194427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69a38523d46cfa54ab0114da5684aebc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTracker: {fileID: 4233611521000610624}
+  markerPrefab: {fileID: 4158092623677246474, guid: 94b683dc45eda974897842ef5fcc2301, type: 3}
+  markerScale: 1.5
+  map: {fileID: 78200668557137000}
+  engine: {fileID: 8743389473436946330}
+  mapMovement: {fileID: 5578865515465083505}
+  defaultLocationDisplayList: {fileID: 11400000, guid: db23122809bb4b841a32f68f725e5941, type: 2}
+  missingLocationMarkerSprite: {fileID: 21300000, guid: 97260905ca7ad1b43a8afa4d11b15624, type: 3}
+--- !u!114 &5578865515465083505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3527887650819194427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3463388f83cd9c844ada693ad0dee6eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dragStartedOnUI: 0
+  allowPan: 1
+  panSpeed: 1
+  keysSensitivity: 2
+  allowZoom: 1
+  zoomSpeed: 0.7
+  minZoomLevel: 0
+  maxZoomLevel: 21
+  allowRotate: 1
+  gameCamera: {fileID: 6004939561922723501}
+  editorCamera: {fileID: 7056499817285349525}
+  map: {fileID: 78200668557137000}
+  useDegree: 0
 --- !u!1 &3606254660705393833
 GameObject:
   m_ObjectHideFlags: 0

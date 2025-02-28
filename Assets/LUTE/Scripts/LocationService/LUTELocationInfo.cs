@@ -55,9 +55,8 @@ namespace LoGaCulture.LUTE
         [Header("Node Settings")]
         [Tooltip("Allow the location marker to execute Nodes")] // Allow this behaviour to encourage OO design but ensure that there is this switch to prohibit it where necessary.
         [SerializeField] private bool allowNodeControls = false; // Default to false as we only really execute Nodes using locations on eventhandlers or in conditions using the Update method.
-        [Tooltip("The node to execute when marker is clicked")]
-        [HideInInspector]
-        [SerializeField] private Node executeNode;
+        [Tooltip("The node to execute when marker is clicked. Ensure naming is exact!")]
+        [SerializeField] private string executeNode;
 
         private string customStatusLabel; // To be used in conjunction with the custom status
 
@@ -96,7 +95,7 @@ namespace LoGaCulture.LUTE
             set { allowNodeControls = value; }
         }
 
-        public Node ExecuteNode
+        public string ExecuteNode
         {
             get { return executeNode; }
             set { executeNode = value; }

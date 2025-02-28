@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace LoGaCulture.LUTE
 {
-    [CustomEditor(typeof(LUTELocationInfo))]
+    //[CustomEditor(typeof(LUTELocationInfo))]
     public class LUTELocationInfoEditor : Editor
     {
         SerializedProperty executeNodeProp;

@@ -1709,7 +1709,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 25214.475
     y: 24874.137
-    width: 77.62
+    width: 78.03
     height: 40
   nodeName: Start
   nodeDescription: Basic building block of a narrative engine
@@ -1727,7 +1727,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -1735,6 +1734,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &1492735607
 MonoBehaviour:
@@ -2083,7 +2083,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 25333.475
     y: 24941.137
-    width: 99.229996
+    width: 98.34
     height: 40
   nodeName: Troll Lair
   nodeDescription: Basic building block of a narrative engine
@@ -2100,7 +2100,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -2108,6 +2107,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &1492735616
 MonoBehaviour:
@@ -2410,7 +2410,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 25457.475
     y: 24873.137
-    width: 86.84
+    width: 86.43
     height: 40
   nodeName: Attack
   nodeDescription: Basic building block of a narrative engine
@@ -2427,7 +2427,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -2435,6 +2434,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &1492735622
 MonoBehaviour:
@@ -2533,7 +2533,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -2541,6 +2540,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &1492735626
 MonoBehaviour:
@@ -2735,7 +2735,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -2743,6 +2742,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &1492735632
 MonoBehaviour:
@@ -3073,7 +3073,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 24968.475
     y: 24942.137
-    width: 112.65
+    width: 113.06
     height: 40
   nodeName: Start Menu
   nodeDescription: Basic building block of a narrative engine
@@ -3091,7 +3091,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -3099,6 +3098,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &1492735642
 MonoBehaviour:
@@ -3116,7 +3116,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 25190.475
     y: 25028.137
-    width: 113.64
+    width: 113.57
     height: 40
   nodeName: LoadLatest
   nodeDescription: Basic building block of a narrative engine
@@ -3129,7 +3129,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -3137,6 +3136,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &1492735643
 MonoBehaviour:
@@ -3212,7 +3212,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -3220,6 +3219,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &1492735646
 MonoBehaviour:
@@ -3237,7 +3237,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 24962.475
     y: 25089.137
-    width: 111.08
+    width: 111.630005
     height: 40
   nodeName: StartMusic
   nodeDescription: Basic building block of a narrative engine
@@ -3249,7 +3249,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -3257,6 +3256,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &1492735649
 MonoBehaviour:
@@ -3504,7 +3504,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -3512,6 +3511,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &1492735666
 MonoBehaviour:
@@ -3586,7 +3586,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 24792.225
     y: 25029.637
-    width: 115.8
+    width: 115.56
     height: 40
   nodeName: LevelSelect
   nodeDescription: Basic building block of a narrative engine
@@ -3599,7 +3599,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -3607,6 +3606,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &1492735671
 MonoBehaviour:
@@ -3945,7 +3945,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 24768.225
     y: 24875.637
-    width: 155.88
+    width: 155.78
     height: 40
   nodeName: AchievementMenu
   nodeDescription: Shows an icon that will reveal achievement menu
@@ -3957,7 +3957,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -3965,6 +3964,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &1492735685
 MonoBehaviour:
@@ -4029,7 +4029,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 24644.225
     y: 24938.637
-    width: 126.26
+    width: 126.6
     height: 40
   nodeName: RestartScene
   nodeDescription: Restarts the scene
@@ -4042,7 +4042,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -4050,6 +4049,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &1492735689
 MonoBehaviour:
@@ -4149,7 +4149,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 0.21226418, b: 0.21226418, a: 0.85882354}
   useCustomTint: 1
   hoverStartTime: 0
@@ -4157,6 +4156,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &1492735694
 MonoBehaviour:
