@@ -260,10 +260,8 @@ MonoBehaviour:
   description: A game about Avebury!
   hideComponents: 1
   localizationId: 
-  selectedOrders:
-  - {fileID: 409185329649348036}
-  selectedNodes:
-  - {fileID: 1350923007532579518}
+  selectedOrders: []
+  selectedNodes: []
   nodeViewHeight: 200
   hideOrders: []
   variables:
@@ -1274,7 +1272,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 1073741943
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
