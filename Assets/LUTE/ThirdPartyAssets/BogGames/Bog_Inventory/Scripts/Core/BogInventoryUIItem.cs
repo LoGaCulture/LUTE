@@ -8,25 +8,37 @@ namespace BogGames.Tools.Inventory
     /// A class that stores the data for a single item in the inventory.
     /// This is used exclusively for drawing UI rather than actual inventory item logic.
     /// </summary>
-    public class BogInventoryUIItem : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
+    public class BogInventoryUIItem : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
     {
         private BogInventoryItem Item;
         private bool IsHeld;
-        private BogInventoryPopupMenu popupMenuInstance;
+        private static BogInventoryPopupMenu popupMenuInstance;
         private BogInventoryBase Inventory;
         private int ItemIndex;
         private float HoldTimer;
 
-        private static BogInventoryUIItem SelectedItemForMove = null;
+        private static BogInventoryUIItem SelectedItemForMove = null; // Keep a static reference so we do not need to pass the item around and have multiple popup windows occur
 
+        [Tooltip("The image that will be rendered as the inventory item.")]
         [SerializeField] protected Image ItemIcon;
+        [Tooltip("The image that will be rendered as the selection indicator.")]
         [SerializeField] protected Image SelectionIndicator;
+        [Tooltip("The image that will be rendered as the hover indicator.")]
+        [SerializeField] protected Image HoverIndicator;
+        [Tooltip("The image that will be rendered as the moving indicator.")]
+        [SerializeField] protected Image MoveIndicator;
+        [Tooltip("The time required to hold the item before the popup menu appears.")]
         [SerializeField] protected float HoldTime;
+        [Tooltip("The popup menu prefab that will be used to display the item options.")]
         [SerializeField] protected BogInventoryPopupMenu popupMenuPrefab;
 
         public void SelectForMove()
         {
             SelectedItemForMove = this;
+            if (MoveIndicator != null)
+            {
+                MoveIndicator.enabled = true;
+            }
         }
 
         public void SetInventory(BogInventoryBase inventory)
@@ -34,11 +46,26 @@ namespace BogGames.Tools.Inventory
             Inventory = inventory;
         }
 
+        /// <summary>
+        /// Simple helper class to destroy the popup menu.
+        /// </summary>
+        public void DestroyPopupMenu()
+        {
+            if (popupMenuInstance != null)
+            {
+                Destroy(popupMenuInstance.gameObject);
+            }
+        }
+
         public virtual void SetItem(BogInventoryItem newItem, int index)
         {
-            Item = newItem;
+            if (newItem != null)
+            {
+                Item = newItem;
+                ItemIcon.sprite = Item.UnlockedIcon;
+            }
+
             ItemIndex = index;
-            ItemIcon.sprite = Item.UnlockedIcon;
             SetSelected(false);
         }
 
@@ -52,6 +79,9 @@ namespace BogGames.Tools.Inventory
 
         public virtual void OnPointerClick(PointerEventData eventData)
         {
+            // If the menu is open this may get in the way so we just simply close if a click is recieved on any item
+            DestroyPopupMenu();
+
             if (SelectedItemForMove != null && SelectedItemForMove != this)
             {
                 Inventory.MoveItem(SelectedItemForMove.ItemIndex, ItemIndex);
@@ -76,6 +106,21 @@ namespace BogGames.Tools.Inventory
             IsHeld = false;
         }
 
+        public virtual void OnPointerEnter(PointerEventData eventData)
+        {
+            if (HoverIndicator != null)
+            {
+                HoverIndicator.enabled = true;
+            }
+        }
+
+        public virtual void OnPointerExit(PointerEventData eventData)
+        {
+            if (HoverIndicator != null)
+            {
+                HoverIndicator.enabled = false;
+            }
+        }
 
         private void Update()
         {
@@ -92,10 +137,16 @@ namespace BogGames.Tools.Inventory
 
         private void ShowPopupMenu()
         {
-            if (popupMenuInstance == null && popupMenuPrefab != null)
+            // If there is a menu already and the user requires another then destroy the old one
+            if (popupMenuInstance != null)
+            {
+                DestroyPopupMenu();
+            }
+
+            if (popupMenuPrefab != null)
             {
                 popupMenuInstance = Instantiate(popupMenuPrefab, transform.position, Quaternion.identity, Inventory?.PopupMenuTransform);
-                popupMenuInstance.SetupMenu(Item, this);
+                popupMenuInstance.SetupMenu(Item, this, Inventory);
             }
         }
     }

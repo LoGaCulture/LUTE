@@ -13,18 +13,24 @@ namespace BogGames.Tools.Inventory
         [SerializeField] protected Button moveButton;
         [SerializeField] protected Button dropButton;
 
-        private BogInventoryUIItem ParentUIItem;
-        private BogInventoryItem ParentInventoryItem;
-
-        public virtual void SetupMenu(BogInventoryItem newItem, BogInventoryUIItem parentUIItem)
+        public virtual void SetupMenu(BogInventoryItem newItem, BogInventoryUIItem parentUIItem, BogInventoryBase inventory = null)
         {
-            ParentInventoryItem = newItem;
-            ParentUIItem = parentUIItem;
+            // If there is no item then we cannot use, drop or move it
+            if (newItem == null)
+            {
+                useButton.interactable = false;
+                moveButton.interactable = false;
+                dropButton.interactable = false;
+            }
 
-            useButton.onClick.AddListener(() => { newItem.Use(); });
-            moveButton.onClick.AddListener(() => ParentUIItem.SelectForMove());
-            dropButton.onClick.AddListener(() => newItem.Drop());
+            if (inventory == null)
+            {
+                dropButton.interactable = false;
+            }
 
+            useButton.onClick.AddListener(() => { newItem.Use(); Destroy(this.gameObject); });
+            moveButton.onClick.AddListener(() => { parentUIItem.SelectForMove(); Destroy(this.gameObject); });
+            dropButton.onClick.AddListener(() => { newItem.Drop(); inventory.RemoveItem(newItem); Destroy(this.gameObject); });
         }
     }
 }

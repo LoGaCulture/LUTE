@@ -26,25 +26,51 @@ namespace BogGames.Tools.Inventory
         [SerializeField] protected string itemName;
         [Tooltip("A short description of the item.")]
         [SerializeField] protected string itemDescription;
+        [Tooltip("Whether this item is locked or not.")]
+        [SerializeField] protected bool isLocked;
         [Tooltip("The icon to display when the item is unlocked.")]
         [SerializeField] protected Sprite unlockedIcon;
         [Tooltip("The icon to display when the item is locked.")]
         [SerializeField] protected Sprite lockedIcon;
         [Tooltip("The sound to play when the item is used.")]
-        [SerializeField] protected AudioClip useSound; // replace with other audio library if needed
-        [Tooltip("The sound to play when the item is moved inside the inventory.")]
-        [SerializeField] protected AudioClip moveSound; // replace with other audio library if needed
+        [SerializeField] protected AudioClip useSound;
+        [Tooltip("The sound to play when the item is dropped.")]
+        [SerializeField] protected AudioClip dropSound;
+        [Tooltip("The sound to play when the item is moved.")]
+        [SerializeField] protected AudioClip moveSound;
 
+        public bool IsLocked { get { return isLocked; } }
         public Sprite UnlockedIcon { get { return unlockedIcon; } }
+        public Sprite LockedIcon { get { return lockedIcon; } }
+        public AudioClip UseSound { get { return useSound; } }
+        public AudioClip DropSound { get { return dropSound; } }
         public AudioClip MoveSound { get { return moveSound; } }
 
         public virtual void Use()
         {
-            // play sound
+            BogInventorySignals.DoInventoryItemUsed(this);
         }
         public virtual void Drop()
         {
+            BogInventorySignals.DoInventoryItemRemoved(this);
+        }
 
+        public virtual void UnlockItem()
+        {
+            if (isLocked)
+            {
+                BogInventorySignals.DoInventoryItemUnlocked(this);
+                isLocked = false;
+            }
+        }
+
+        public virtual void LockItem()
+        {
+            if (!isLocked)
+            {
+                BogInventorySignals.DoInventoryItemLocked(this);
+                isLocked = true;
+            }
         }
     }
 }

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: 0
   itemType: 0
-  itemName: 
-  itemDescription: 
+  itemName: Bananas
+  itemDescription: Monkeys do love these, apparently...
   unlockedIcon: {fileID: 21300000, guid: 6729419ee1000cc43a589cdf6625172e, type: 3}
   lockedIcon: {fileID: 21300000, guid: d679edabc7a4a674589c4568ecade2ee, type: 3}
   useSound: {fileID: 0}

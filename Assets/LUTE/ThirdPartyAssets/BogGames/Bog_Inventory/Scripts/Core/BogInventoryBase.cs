@@ -10,8 +10,6 @@ namespace BogGames.Tools.Inventory
     /// </summary>
     public class BogInventoryBase : MonoBehaviour
     {
-        public BogInventoryItem testItem;
-
         // The actual list of items
         private List<BogInventoryItem> items;
 
@@ -33,7 +31,15 @@ namespace BogGames.Tools.Inventory
         protected virtual void Awake()
         {
             items = new List<BogInventoryItem?>(new BogInventoryItem?[inventoryWidth * inventoryHeight]);
-            AddItem(testItem);
+        }
+
+        /// <summary>
+        /// Helper class that will popuplate the inventory then show it to screen.
+        /// </summary>
+        public virtual void ShowInventory()
+        {
+            DrawInventory();
+            inventoryCanvas?.FadeInventoryCanvas();
         }
 
         public virtual void AddItem(BogInventoryItem item)
@@ -41,6 +47,8 @@ namespace BogGames.Tools.Inventory
             int emptyIndex = items.IndexOf(null);
             if (emptyIndex != -1)
             {
+                BogInventorySignals.DoInventoryItemAdded(item);
+
                 items[emptyIndex] = item;
                 inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
             }
@@ -68,9 +76,11 @@ namespace BogGames.Tools.Inventory
         {
             if (fromIndex >= 0 && fromIndex < items.Count && toIndex >= 0 && toIndex < items.Count)
             {
+                BogInventorySignals.DoInventoryItemMoved(items[fromIndex]);
+
                 (items[fromIndex], items[toIndex]) = (items[toIndex], items[fromIndex]);
+                SelectedItemIndex = toIndex;
                 inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
-                // Play sound here using signals and LUTE Inventory sound manager (move sound)
             }
         }
 
