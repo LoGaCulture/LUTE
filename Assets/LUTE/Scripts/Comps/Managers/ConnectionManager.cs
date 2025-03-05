@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -21,7 +22,11 @@ namespace LoGaCulture.LUTE.Logs
         private void Awake()
         {
             if (!LogaConstants.UseLogs)
-                return;
+            {
+                //before final build, maybe change this line or maybe have a new method that just gets the secrets
+                CheckForSecretsFile();
+                return; 
+            }
             if (Instance == null)
             {
                 Instance = this;
@@ -213,10 +218,131 @@ namespace LoGaCulture.LUTE.Logs
             return sb.ToString();
         }
 
+
+        public void SaveSharedVariable(string variableName, string variableType, string data)
+        {
+            if (string.IsNullOrEmpty(secretKey))
+            {
+                Debug.LogWarning("Secret key not found. Shared variables will not be saved.");
+                return;
+            }
+
+
+            Debug.Log("Saving shared variable of type " + variableType + " with name " + variableName + " and data " + data);
+
+            SharedVariableDto sharedVariable = new SharedVariableDto
+            {
+                UUID = LogManager.Instance.UUID,
+                VariableName = variableName,
+                VariableType = variableType,
+                Data = data,
+                CreatedAt = DateTime.UtcNow.ToString("O")
+            };
+            string sharedVariableJson = JsonUtility.ToJson(sharedVariable);
+            StartCoroutine(SendSharedVariable(sharedVariableJson));
+
+
+        }
+
+        //the api is at api/SharedVariable and wants a POST request with the shared variable data and the x-secret-key header
+        private IEnumerator SendSharedVariable(string sharedVariableJson)
+        {
+            UnityWebRequest request = new UnityWebRequest($"https://{serverAddress}/api/SharedVariable", "POST");
+            byte[] bodyRaw = Encoding.UTF8.GetBytes(sharedVariableJson);
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", "application/json");
+            if (!string.IsNullOrEmpty(secretKey))
+            {
+                request.SetRequestHeader("X-Secret-Key", secretKey);
+            }
+            yield return request.SendWebRequest();
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                Debug.Log("Shared variable successfully saved.");
+            }
+            else
+            {
+                Debug.LogError($"Failed to save shared variable: {request.error}");
+            }
+        }
+
+
+        public void FetchSharedVariables(string variableName, Action<SharedVariable[]> callback, int count = 1)
+        {
+            StartCoroutine(GetSharedVariables(variableName, callback, count));
+        }
+
+        private IEnumerator GetSharedVariables(string variableName, Action<SharedVariable[]> callback, int count)
+        {
+            string url = $"https://{serverAddress}/api/SharedVariable?variableName={variableName}&count={count}";
+            UnityWebRequest request = UnityWebRequest.Get(url);
+
+            request.SetRequestHeader("X-Secret-Key", secretKey);
+
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                Debug.Log($"Successfully retrieved shared variables: {request.downloadHandler.text}");
+
+                // Deserialize JSON response into a list of SharedVariable objects
+                List<SharedVariable> sharedVariables = JsonUtility.FromJson<SharedVariableList>("{\"variables\":" + request.downloadHandler.text + "}").variables;
+
+                // Print each shared variable to the console
+                foreach (var variable in sharedVariables)
+                {
+                    Debug.Log($"Variable: {variable.variableName}, Type: {variable.variableType}, Data: {variable.data}, CreatedAt: {variable.createdAt}");
+                }
+
+                callback?.Invoke(sharedVariables.ToArray());
+
+            }
+            else
+            {
+                Debug.LogError($"Failed to fetch shared variables: {request.error}");
+                
+                callback?.Invoke(null);
+
+            }
+        }
+
+
         [System.Serializable]
         public class LogWrapper
         {
             public UserLog[] logs;
         }
+
+
+        //shared variable dto
+        [System.Serializable]
+        public class SharedVariableDto
+        {
+            public string UUID;
+            public string VariableName;
+            public string VariableType;
+            public string Data;
+            public string CreatedAt;
+        }
+
+        // DTO to match the API response
+        [System.Serializable]
+        public class SharedVariable
+        {
+            public string variableName;
+            public string variableType;
+            public string data;
+            public string createdAt;
+        }
+
+        // Wrapper class to help deserialize a list of shared variables
+        [System.Serializable]
+        public class SharedVariableList
+        {
+            public List<SharedVariable> variables;
+        }
+
+
     }
 }
