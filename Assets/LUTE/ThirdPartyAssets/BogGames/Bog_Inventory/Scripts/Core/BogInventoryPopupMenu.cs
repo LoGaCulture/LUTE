@@ -21,6 +21,7 @@ namespace BogGames.Tools.Inventory
                 useButton.interactable = false;
                 moveButton.interactable = false;
                 dropButton.interactable = false;
+                return;
             }
 
             if (inventory == null)
@@ -28,7 +29,18 @@ namespace BogGames.Tools.Inventory
                 dropButton.interactable = false;
             }
 
-            useButton.onClick.AddListener(() => { newItem.Use(); Destroy(this.gameObject); });
+            // If the item is locked then we cannot use it
+            // But we can drop or move it if we have an inventory
+            if (newItem.IsLocked)
+            {
+                useButton.interactable = false;
+            }
+            else
+            {
+                useButton.interactable = true;
+            }
+
+            useButton.onClick.AddListener(() => { newItem.Use(); if (newItem.ConsumeOnUse) inventory.RemoveItem(newItem); Destroy(this.gameObject); });
             moveButton.onClick.AddListener(() => { parentUIItem.SelectForMove(); Destroy(this.gameObject); });
             dropButton.onClick.AddListener(() => { newItem.Drop(); inventory.RemoveItem(newItem); Destroy(this.gameObject); });
         }

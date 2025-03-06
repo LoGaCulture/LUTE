@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9de6170bcd343a545914f16d1606ab5d, type: 3}
+  m_Name: ExampleInventoryItem
+  m_EditorClassIdentifier: 
+  itemID: 0
+  itemType: 0
+  itemName: Apple
+  itemDescription: "Tasty when cooked over an open fire or stewed in a firey cauldron... 
+    \n\nPandas love eating these, apprently..."
+  isLocked: 0
+  consumeOnUse: 1
+  maxStackSize: 1
+  unlockedIcon: {fileID: 285717524, guid: 075289b53d2214247aaee342cc134414, type: 3}
+  lockedIcon: {fileID: 21300000, guid: 9d444302ea516894bbb620b3b22a0a6e, type: 3}
+  useSound: {fileID: 8300000, guid: 59a2ea91da9a6e04a8192fa7e4f59c3f, type: 3}
+  dropSound: {fileID: 8300000, guid: d4938d6649c83134b98eae3d7f42922e, type: 3}
+  moveSound: {fileID: 8300000, guid: ab96aa6e3bc593f4a91b5d476bb440ef, type: 3}
+  unlockSound: {fileID: 8300000, guid: 1e3d59892d32e5e47ac1f68404580781, type: 3}
+  lockSound: {fileID: 8300000, guid: d0f5779e9778b044e89741c419f8dd98, type: 3}
+  addSound: {fileID: 8300000, guid: 1e3d59892d32e5e47ac1f68404580781, type: 3}

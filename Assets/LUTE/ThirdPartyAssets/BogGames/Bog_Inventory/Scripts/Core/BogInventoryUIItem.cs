@@ -1,6 +1,8 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+
 
 namespace BogGames.Tools.Inventory
 {
@@ -21,6 +23,8 @@ namespace BogGames.Tools.Inventory
 
         [Tooltip("The image that will be rendered as the inventory item.")]
         [SerializeField] protected Image ItemIcon;
+        [Tooltip("The text that will render the quantity of the item.")]
+        [SerializeField] protected TextMeshProUGUI ItemQuantityText;
         [Tooltip("The image that will be rendered as the selection indicator.")]
         [SerializeField] protected Image SelectionIndicator;
         [Tooltip("The image that will be rendered as the hover indicator.")]
@@ -57,12 +61,13 @@ namespace BogGames.Tools.Inventory
             }
         }
 
-        public virtual void SetItem(BogInventoryItem newItem, int index)
+        public virtual void SetItem(BogInventorySlot newSlot, int index)
         {
-            if (newItem != null)
+            if (newSlot != null)
             {
-                Item = newItem;
-                ItemIcon.sprite = Item.UnlockedIcon;
+                Item = newSlot.Item;
+                ItemIcon.sprite = Item.IsLocked ? Item.LockedIcon : Item.UnlockedIcon;
+                ItemQuantityText.text = newSlot.Quantity > 1 ? newSlot.Quantity.ToString() : ""; // Show count if >1
             }
 
             ItemIndex = index;
@@ -74,6 +79,7 @@ namespace BogGames.Tools.Inventory
             if (SelectionIndicator != null)
             {
                 SelectionIndicator.enabled = isSelected;
+                Inventory.GetCurrentlySelectedItem();
             }
         }
 
@@ -142,6 +148,8 @@ namespace BogGames.Tools.Inventory
             {
                 DestroyPopupMenu();
             }
+
+            Inventory.SelectedItemIndex = ItemIndex;
 
             if (popupMenuPrefab != null)
             {

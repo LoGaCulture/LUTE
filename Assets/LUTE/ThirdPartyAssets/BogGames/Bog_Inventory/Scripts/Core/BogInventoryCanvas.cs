@@ -29,7 +29,7 @@ namespace BogGames.Tools.Inventory
         public AudioClip OpenSound { get { return openSound; } }
         public AudioClip CloseSound { get { return closeSound; } }
 
-        public virtual void DrawInventory(List<BogInventoryItem?> items, int selectedIndex, BogInventoryBase currentInventory)
+        public virtual void DrawInventory(List<BogInventorySlot?> items, int selectedIndex, BogInventoryBase currentInventory)
         {
             foreach (Transform child in gridLayout)
             {

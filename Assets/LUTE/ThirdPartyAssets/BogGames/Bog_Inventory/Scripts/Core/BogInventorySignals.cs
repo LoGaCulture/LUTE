@@ -53,14 +53,21 @@ namespace BogGames.Tools.Inventory
         /// Inventory opened signal; sent when the inventory is opened.
         /// </summary>
         public static event IventoryMenuOpenedHandler OnInventoryMenuOpened;
-        public delegate void IventoryMenuOpenedHandler();
-        public static void DoInventoryMenuOpened(BogInventoryCanvas canvas) { OnInventoryMenuOpened?.Invoke(); }
+        public delegate void IventoryMenuOpenedHandler(BogInventoryCanvas canvas);
+        public static void DoInventoryMenuOpened(BogInventoryCanvas canvas) { OnInventoryMenuOpened?.Invoke(canvas); }
 
         /// <summary>
         /// Inventory closed signal; sent when the inventory is closed.
         /// </summary>
         public static event InventoryMenuClosedHandler OnInventoryMenuClosed;
-        public delegate void InventoryMenuClosedHandler();
-        public static void DoInventoryMenuClosed(BogInventoryCanvas canvas) { OnInventoryMenuClosed?.Invoke(); }
+        public delegate void InventoryMenuClosedHandler(BogInventoryCanvas canvas);
+        public static void DoInventoryMenuClosed(BogInventoryCanvas canvas) { OnInventoryMenuClosed?.Invoke(canvas); }
+
+        /// <summary>
+        /// Inventory item selected signal; sent when an item is selected in the inventory.
+        /// </summary>
+        public static event InventoryItemSelected OnInventoryItemSelected;
+        public delegate void InventoryItemSelected(BogInventoryItem item);
+        public static void DoInventoryItemSelected(BogInventoryItem item) { OnInventoryItemSelected?.Invoke(item); }
     }
 }
