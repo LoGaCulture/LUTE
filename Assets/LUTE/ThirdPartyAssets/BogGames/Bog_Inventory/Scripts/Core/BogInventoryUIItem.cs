@@ -66,6 +66,7 @@ namespace BogGames.Tools.Inventory
             if (newSlot != null)
             {
                 Item = newSlot.Item;
+                Debug.Log(Item.IsLocked);
                 ItemIcon.sprite = Item.IsLocked ? Item.LockedIcon : Item.UnlockedIcon;
                 ItemQuantityText.text = newSlot.Quantity > 1 ? newSlot.Quantity.ToString() : ""; // Show count if >1
             }

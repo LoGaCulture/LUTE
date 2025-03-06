@@ -28,7 +28,9 @@ namespace BogGames.Tools.Inventory
 
         private void OnInventoryItemSelected(BogInventoryItem item)
         {
-            if (item == null)
+            // If there is no item or the item is locked, reset the details so we cannot see them
+            // One could choose not to do this and show the locked item details
+            if (item == null || item.IsLocked)
             {
                 ResetDetails();
             }

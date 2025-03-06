@@ -55,7 +55,7 @@ namespace BogGames.Tools.Inventory
         public string ItemName { get { return itemName; } }
         public string ItemDescription { get { return itemDescription; } }
         public int MaxStackSize { get { return maxStackSize; } }
-        public bool IsLocked { get { return isLocked; } }
+        public bool IsLocked { get { return isLocked; } set { isLocked = value; } }
         public bool ConsumeOnUse { get { return consumeOnUse; } }
         public Sprite UnlockedIcon { get { return unlockedIcon; } }
         public Sprite LockedIcon { get { return lockedIcon; } }
@@ -77,20 +77,14 @@ namespace BogGames.Tools.Inventory
 
         public virtual void UnlockItem()
         {
-            if (isLocked)
-            {
-                BogInventorySignals.DoInventoryItemUnlocked(this);
-                isLocked = false;
-            }
+            BogInventorySignals.DoInventoryItemUnlocked(this);
+            isLocked = false;
         }
 
         public virtual void LockItem()
         {
-            if (!isLocked)
-            {
-                BogInventorySignals.DoInventoryItemLocked(this);
-                isLocked = true;
-            }
+            BogInventorySignals.DoInventoryItemLocked(this);
+            isLocked = true;
         }
     }
 }

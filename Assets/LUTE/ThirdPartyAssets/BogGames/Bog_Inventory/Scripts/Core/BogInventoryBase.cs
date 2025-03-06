@@ -26,6 +26,7 @@ namespace BogGames.Tools.Inventory
         [HideInInspector]
         public int SelectedItemIndex = -1;
 
+        public BogInventoryCanvas BogInventoryCanvas { get { return inventoryCanvas; } }
         public Transform PopupMenuTransform { get { return popupMenuTransform; } }
 
         protected virtual void Awake()
@@ -56,20 +57,32 @@ namespace BogGames.Tools.Inventory
 
                     if (amount <= 0)
                     {
+                        BogInventorySignals.DoInventoryItemAdded(item);
+
                         inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
                         return;
                     }
                 }
             }
 
-            int emptyIndex = items.FindIndex(slot => slot == null);
-            if (emptyIndex != -1)
+            // If there's remaining amount, place it into new empty slots
+            while (amount > 0)
             {
+                int emptyIndex = items.FindIndex(slot => slot == null);
+                if (emptyIndex == -1)
+                {
+                    Debug.LogWarning("No more space in inventory!");
+                    return;
+                }
+
                 BogInventorySignals.DoInventoryItemAdded(item);
 
-                items[emptyIndex] = new BogInventorySlot(item, Mathf.Min(amount, item.MaxStackSize));
-                inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
+                int amountToPlace = Mathf.Min(amount, item.MaxStackSize);
+                items[emptyIndex] = new BogInventorySlot(item, amountToPlace);
+                amount -= amountToPlace;
             }
+
+            inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
         }
 
         public virtual void AddItem(BogInventoryItem item)
@@ -95,14 +108,24 @@ namespace BogGames.Tools.Inventory
                 }
             }
 
-            int emptyIndex = items.FindIndex(slot => slot == null);
-            if (emptyIndex != -1)
+            // If there's remaining amount, place it into new empty slots
+            while (amount > 0)
             {
+                int emptyIndex = items.FindIndex(slot => slot == null);
+                if (emptyIndex == -1)
+                {
+                    Debug.LogWarning("No more space in inventory!");
+                    return;
+                }
+
                 BogInventorySignals.DoInventoryItemAdded(item);
 
-                items[emptyIndex] = new BogInventorySlot(item, Mathf.Min(amount, item.MaxStackSize));
-                inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
+                int amountToPlace = Mathf.Min(amount, item.MaxStackSize);
+                items[emptyIndex] = new BogInventorySlot(item, amountToPlace);
+                amount -= amountToPlace;
             }
+
+            inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
         }
 
         public virtual void RemoveItem(BogInventoryItem item, int quantity = 1)
@@ -181,6 +204,42 @@ namespace BogGames.Tools.Inventory
                 SelectedItemIndex = toIndex;
                 inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
             }
+        }
+
+        public virtual void UnlockItem(BogInventoryItem item)
+        {
+            int itemIndex = items.FindIndex(slot => slot != null && slot.Item.ItemID == item.ItemID);
+
+            if (itemIndex != -1)
+            {
+                BogInventorySlot slot = items[itemIndex];
+
+                if (slot != null && slot.Item != null && slot.Item.ItemID == item.ItemID)
+                {
+                    slot.Item.IsLocked = false;
+                    slot.Item.UnlockItem();
+                }
+            }
+
+            inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
+        }
+
+        public virtual void LockItem(BogInventoryItem item)
+        {
+            int itemIndex = items.FindIndex(slot => slot != null && slot.Item.ItemID == item.ItemID);
+
+            if (itemIndex != -1)
+            {
+                BogInventorySlot slot = items[itemIndex];
+
+                if (slot != null && slot.Item != null && slot.Item.ItemID == item.ItemID)
+                {
+                    slot.Item.IsLocked = true;
+                    slot.Item.LockItem();
+                }
+            }
+
+            inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
         }
 
 

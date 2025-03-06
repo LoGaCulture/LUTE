@@ -409,4 +409,22 @@ public class OrderEditor : Editor
 
         return false;
     }
+
+    /// <summary>
+    /// Helper method to get all instances of a ScriptableObject in the project with a given type.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public static T[] GetAllInstances<T>() where T : ScriptableObject
+    {
+        string[] guids = AssetDatabase.FindAssets("t:" + typeof(T).Name); //FindAssets uses tags check documentation for more info
+        T[] instances = new T[guids.Length];
+        for (int i = 0; i < guids.Length; i++) //probably could get optimized
+        {
+            string path = AssetDatabase.GUIDToAssetPath(guids[i]);
+            instances[i] = AssetDatabase.LoadAssetAtPath<T>(path);
+        }
+
+        return instances;
+    }
 }
