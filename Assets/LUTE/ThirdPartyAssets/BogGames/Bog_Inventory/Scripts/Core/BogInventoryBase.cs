@@ -94,20 +94,22 @@ namespace BogGames.Tools.Inventory
         public virtual void AddItem(BogInventoryItem item)
         {
             var amount = 1;
+            // Try stacking into existing slots first
             for (int i = 0; i < items.Count; i++)
             {
                 BogInventorySlot? slot = items[i];
+
                 if (slot != null && slot.Item.ItemID == item.ItemID && slot.Item.MaxStackSize > 1)
                 {
                     int spaceLeft = slot.Item.MaxStackSize - slot.Quantity;
                     int amountToAdd = Mathf.Min(spaceLeft, amount);
+
                     slot.Quantity += amountToAdd;
+                    slot.SlotIndex = i;
                     amount -= amountToAdd;
 
                     if (amount <= 0)
                     {
-                        BogInventorySignals.DoInventoryItemAdded(item);
-
                         inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
                         return;
                     }
@@ -125,12 +127,14 @@ namespace BogGames.Tools.Inventory
                 }
 
                 int amountToPlace = Mathf.Min(amount, item.MaxStackSize);
-                items[emptyIndex] = new BogInventorySlot(item, amountToPlace, emptyIndex);
+                BogInventorySlot newSlot = new BogInventorySlot(item, amountToPlace, emptyIndex);
+
+                items[emptyIndex] = newSlot;
                 amount -= amountToPlace;
 
-                BogInventorySignals.DoInventoryItemAdded(item);
             }
 
+            BogInventorySignals.DoInventoryItemAdded(item);
             inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
         }
 
@@ -162,6 +166,31 @@ namespace BogGames.Tools.Inventory
         public virtual void RemoveItem(BogInventoryItem item, int quantity = 1)
         {
             int itemIndex = SelectedItemIndex;
+            if (itemIndex != -1 && items[itemIndex] != null)
+            {
+                BogInventorySlot slot = items[itemIndex];
+
+                if (slot.Item.ItemID == item.ItemID)
+                {
+                    slot.Quantity -= quantity;
+
+                    if (slot.Quantity <= 0)
+                    {
+                        items[itemIndex] = null;
+                    }
+                }
+
+                BogInventorySignals.DoInventoryItemRemoved(item);
+                inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
+            }
+        }
+
+        public virtual void RemoveItem(BogInventoryItem item)
+        {
+            int quantity = 1;
+
+            int itemIndex = items.FindIndex(slot => slot != null && slot.Item.ItemID == item.ItemID);
+
             if (itemIndex != -1 && items[itemIndex] != null)
             {
                 BogInventorySlot slot = items[itemIndex];

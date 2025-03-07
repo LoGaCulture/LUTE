@@ -1,6 +1,6 @@
 using UnityEditor;
 using UnityEngine;
-
+#if UNITY_EDITOR
 namespace BogGames.Tools.Inventory
 {
     /// <summary>
@@ -22,3 +22,4 @@ namespace BogGames.Tools.Inventory
         }
     }
 }
+#endif
