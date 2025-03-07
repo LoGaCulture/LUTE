@@ -117,10 +117,6 @@ namespace BogGames.Tools.Achievements
             return null;
         }
 
-        // Now we have loaded the correct list from the serialised object we can fill it with a save achievement data
-        //  Extract the achievement data from the save file and update our list of achievements
-        // This call is derived from the SaveManager class
-
         #region Serialisation
         /// <summary>
         /// Removes saved data and resets all achievements from a list.

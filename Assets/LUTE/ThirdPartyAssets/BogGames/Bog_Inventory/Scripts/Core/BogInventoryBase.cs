@@ -8,11 +8,9 @@ namespace BogGames.Tools.Inventory
     /// Handles storing of inventory data and basic inventory actions.
     /// Often used in conjunction with BogInventoryItem class and the signalling system for Inventories.
     /// </summary>
+    [System.Serializable]
     public class BogInventoryBase : MonoBehaviour
     {
-        // The actual list of items
-        private List<BogInventorySlot> items;
-
         [SerializeField] protected int inventoryID;
         [Tooltip("The width of the inventory.")]
         [SerializeField] protected int inventoryWidth;
@@ -23,9 +21,13 @@ namespace BogGames.Tools.Inventory
         [Tooltip("The parent that the popup menu will attach to.")]
         [SerializeField] protected Transform popupMenuTransform;
 
+        // The actual list of items
+        public static List<BogInventorySlot> items;
+
         [HideInInspector]
         public int SelectedItemIndex = -1;
 
+        public int InventoryID { get { return inventoryID; } }
         public BogInventoryCanvas BogInventoryCanvas { get { return inventoryCanvas; } }
         public Transform PopupMenuTransform { get { return popupMenuTransform; } }
 
@@ -45,20 +47,22 @@ namespace BogGames.Tools.Inventory
 
         public virtual void AddItem(BogInventoryItem item, int amount = 1)
         {
+            // Try stacking into existing slots first
             for (int i = 0; i < items.Count; i++)
             {
                 BogInventorySlot? slot = items[i];
+
                 if (slot != null && slot.Item.ItemID == item.ItemID && slot.Item.MaxStackSize > 1)
                 {
                     int spaceLeft = slot.Item.MaxStackSize - slot.Quantity;
                     int amountToAdd = Mathf.Min(spaceLeft, amount);
+
                     slot.Quantity += amountToAdd;
+                    slot.SlotIndex = i;
                     amount -= amountToAdd;
 
                     if (amount <= 0)
                     {
-                        BogInventorySignals.DoInventoryItemAdded(item);
-
                         inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
                         return;
                     }
@@ -75,13 +79,15 @@ namespace BogGames.Tools.Inventory
                     return;
                 }
 
-                BogInventorySignals.DoInventoryItemAdded(item);
-
                 int amountToPlace = Mathf.Min(amount, item.MaxStackSize);
-                items[emptyIndex] = new BogInventorySlot(item, amountToPlace);
+                BogInventorySlot newSlot = new BogInventorySlot(item, amountToPlace, emptyIndex);
+
+                items[emptyIndex] = newSlot;
                 amount -= amountToPlace;
+
             }
 
+            BogInventorySignals.DoInventoryItemAdded(item);
             inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
         }
 
@@ -118,13 +124,38 @@ namespace BogGames.Tools.Inventory
                     return;
                 }
 
-                BogInventorySignals.DoInventoryItemAdded(item);
-
                 int amountToPlace = Mathf.Min(amount, item.MaxStackSize);
-                items[emptyIndex] = new BogInventorySlot(item, amountToPlace);
+                items[emptyIndex] = new BogInventorySlot(item, amountToPlace, emptyIndex);
                 amount -= amountToPlace;
+
+                BogInventorySignals.DoInventoryItemAdded(item);
             }
 
+            inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
+        }
+
+        public virtual void InsertItem(BogInventorySlot slot, int amount = 1)
+        {
+            int targetIndex = slot.SlotIndex;
+
+            // Ensure target index is within valid range
+            if (targetIndex < 0 || targetIndex >= items.Count)
+            {
+                Debug.LogWarning($"Invalid item index {targetIndex} for insertion.");
+                return;
+            }
+
+            // If the slot is already occupied, warn and do nothing
+            if (items[targetIndex] != null)
+            {
+                Debug.LogWarning($"Slot {targetIndex} is already occupied. Cannot insert item {slot.Item.ItemID}.");
+                return;
+            }
+
+            // Insert item at the exact index with the given quantity
+            items[targetIndex] = new BogInventorySlot(slot.Item, amount, targetIndex);
+
+            // Redraw inventory UI
             inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
         }
 
@@ -145,6 +176,30 @@ namespace BogGames.Tools.Inventory
                     }
                 }
 
+                BogInventorySignals.DoInventoryItemRemoved(item);
+                inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
+            }
+        }
+
+        public virtual void RemoveItemEditor(BogInventoryItem item, int quantity = 1)
+        {
+            int itemIndex = items.FindIndex(slot => slot != null && slot.Item.ItemID == item.ItemID);
+
+            if (itemIndex != -1 && items[itemIndex] != null)
+            {
+                BogInventorySlot slot = items[itemIndex];
+
+                if (slot.Item.ItemID == item.ItemID)
+                {
+                    slot.Quantity -= quantity;
+
+                    if (slot.Quantity <= 0)
+                    {
+                        items[itemIndex] = null;
+                    }
+                }
+
+                BogInventorySignals.DoInventoryItemRemoved(item);
                 inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
             }
         }
@@ -168,10 +223,10 @@ namespace BogGames.Tools.Inventory
         {
             if (fromIndex >= 0 && fromIndex < items.Count && toIndex >= 0 && toIndex < items.Count)
             {
-                BogInventorySignals.DoInventoryItemMoved(items[fromIndex].Item);
+                if (items[fromIndex] == null) return; // Ensure fromSlot is valid
 
                 BogInventorySlot fromSlot = items[fromIndex];
-                BogInventorySlot toSlot = items[toIndex];
+                BogInventorySlot? toSlot = items[toIndex];
 
                 if (toSlot != null && fromSlot.Item.ItemID == toSlot.Item.ItemID && fromSlot.Item.MaxStackSize > 1)
                 {
@@ -193,13 +248,23 @@ namespace BogGames.Tools.Inventory
                     {
                         // Swap if the items are the same but have different quantities
                         (items[fromIndex], items[toIndex]) = (items[toIndex], items[fromIndex]);
+
+                        // Update both item indexes after swapping
+                        if (items[fromIndex] != null) items[fromIndex].SlotIndex = fromIndex;
+                        if (items[toIndex] != null) items[toIndex].SlotIndex = toIndex;
                     }
                 }
                 else if (toSlot == null || fromSlot.Item.ItemID != toSlot.Item.ItemID)
                 {
                     // Swap only if items are different
                     (items[fromIndex], items[toIndex]) = (items[toIndex], items[fromIndex]);
+
+                    // Update both item indexes after swapping
+                    if (items[fromIndex] != null) items[fromIndex].SlotIndex = fromIndex;
+                    if (items[toIndex] != null) items[toIndex].SlotIndex = toIndex;
                 }
+
+                BogInventorySignals.DoInventoryItemMoved(items[toIndex].Item);
 
                 SelectedItemIndex = toIndex;
                 inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
@@ -261,5 +326,43 @@ namespace BogGames.Tools.Inventory
             BogInventorySignals.DoInventoryItemSelected(null);
             return null;
         }
+
+        #region Serialisation
+
+        /// <summary>
+        /// Resets the inventory to its default state.
+        /// Will clear all items and reset the inventory size to the one provdided in inspector.
+        /// </summary>
+        public virtual void ResetInventory()
+        {
+            if (Application.isPlaying)
+            {
+                items = new List<BogInventorySlot?>(new BogInventorySlot?[inventoryWidth * inventoryHeight]);
+                inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
+                BogInventorySignals.DoInventoryReset(this);
+                Debug.Log("Inventory reset.");
+            }
+        }
+
+        /// <summary>
+        /// Extracts the serialised data from save file and updates the inventory list.
+        /// </summary>
+        /// <param name="serialisedItems"></param>
+        public virtual void ExtractSerialisedBogInventoryData(BogInventoryData serialisedItems)
+        {
+            if (serialisedItems == null)
+                return;
+
+            for (int i = 0; i < serialisedItems.InventoryItems.Length; i++)
+            {
+                var serialisedItem = serialisedItems.InventoryItems[i];
+
+                if (serialisedItem != null)
+                {
+                    InsertItem(serialisedItem.BogInventoryItem, serialisedItem.BogInventoryItem.Quantity);
+                }
+            }
+        }
+        #endregion
     }
 }

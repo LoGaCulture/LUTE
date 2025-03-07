@@ -4,31 +4,28 @@ using UnityEngine;
 namespace LoGaCulture.LUTE
 {
     [OrderInfo("Inventory",
-    "Lock Inventory Item",
-    "Locks an item in the inventory; if multiple items share the same ID then all get locked.")]
-    public class LockInventoryItem : Order
+        "Reset Inventory",
+        "Reset the inventory so it is entirely empty.")]
+    public class ResetInventory : Order
     {
-        [Tooltip("The inventory assoicated with this item.")]
+        [Tooltip("The inventory to reset")]
         [SerializeField] protected BogInventoryBase inventory;
-        [Tooltip("The Item to lock")]
-        [HideInInspector]
-        [SerializeField] protected BogInventoryItem item;
 
         public override void OnEnter()
         {
-            if (item == null || inventory == null)
+            if (inventory == null)
             {
                 Continue();
                 return;
             }
 
-            inventory.LockItem(item);
+            inventory.ResetInventory();
             Continue();
         }
 
         public override string GetSummary()
         {
-            return item != null ? "     Locking " + item.ItemName : "Error: No item set";
+            return inventory != null ? "     Resetting inventory " + "@ " + inventory.InventoryID : "Error: No inventory set";
         }
 
         public override Color GetButtonColour()

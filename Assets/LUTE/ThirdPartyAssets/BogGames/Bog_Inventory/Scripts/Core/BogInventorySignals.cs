@@ -69,5 +69,9 @@ namespace BogGames.Tools.Inventory
         public static event InventoryItemSelected OnInventoryItemSelected;
         public delegate void InventoryItemSelected(BogInventoryItem item);
         public static void DoInventoryItemSelected(BogInventoryItem item) { OnInventoryItemSelected?.Invoke(item); }
+
+        public static event InventoryReset OnInventoryReset;
+        public delegate void InventoryReset(BogInventoryBase inventory);
+        public static void DoInventoryReset(BogInventoryBase inventory) { OnInventoryReset?.Invoke(inventory); }
     }
 }

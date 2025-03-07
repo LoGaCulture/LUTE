@@ -2693,6 +2693,12 @@ GameObject:
   - component: {fileID: 7763346589988194883}
   - component: {fileID: 1863893179755558060}
   - component: {fileID: 3656361743338220324}
+  - component: {fileID: 2072677446231344307}
+  - component: {fileID: 1852015026475899033}
+  - component: {fileID: 3027367136184838001}
+  - component: {fileID: 6963861663992990484}
+  - component: {fileID: 4251967097963899698}
+  - component: {fileID: 8283175735044685520}
   m_Layer: 0
   m_Name: Flow Engine
   m_TagString: Untagged
@@ -3874,6 +3880,160 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory: {fileID: 8306261429006665712}
   item: {fileID: 11400000, guid: 3e541fdc628c0674b96015043e6387b0, type: 2}
+--- !u!114 &2072677446231344307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8861555758513075961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc9f689a21732a34489f55c1ed82a919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeRect:
+    serializedVersion: 2
+    x: 25866.225
+    y: 25148.355
+    width: 123.64
+    height: 40
+  nodeName: Remove Item
+  nodeDescription: Basic building block of a narrative engine
+  groupDescription: A series of nodes that can be executed as a group
+  itemId: 0
+  orderList:
+  - {fileID: 8283175735044685520}
+  eventHandler: {fileID: 0}
+  isGrouped: 0
+  groupIndex: -1
+  repeatable: 1
+  tint: {r: 0.72156864, g: 0.8235295, b: 0.9215687, a: 1}
+  useCustomTint: 1
+  hoverStartTime: 0
+  targetUnlockNode: {fileID: 0}
+  targetKeyNode: {fileID: 0}
+  showDesc: 0
+  saveable: 0
+  updateLocationStatusToComplete: 1
+  NodeComplete: 0
+--- !u!114 &1852015026475899033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8861555758513075961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc9f689a21732a34489f55c1ed82a919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeRect:
+    serializedVersion: 2
+    x: 25826.225
+    y: 25099.355
+    width: 160.72
+    height: 40
+  nodeName: Add Stackable Item
+  nodeDescription: Basic building block of a narrative engine
+  groupDescription: A series of nodes that can be executed as a group
+  itemId: 1
+  orderList:
+  - {fileID: 4251967097963899698}
+  eventHandler: {fileID: 0}
+  isGrouped: 0
+  groupIndex: -1
+  repeatable: 0
+  tint: {r: 0.72156864, g: 0.8235295, b: 0.9215687, a: 1}
+  useCustomTint: 1
+  hoverStartTime: 0
+  targetUnlockNode: {fileID: 0}
+  targetKeyNode: {fileID: 0}
+  showDesc: 0
+  saveable: 0
+  updateLocationStatusToComplete: 1
+  NodeComplete: 0
+--- !u!114 &3027367136184838001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8861555758513075961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc9f689a21732a34489f55c1ed82a919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeRect:
+    serializedVersion: 2
+    x: 25851.225
+    y: 25195.355
+    width: 138.83
+    height: 40
+  nodeName: Reset Inventory
+  nodeDescription: Basic building block of a narrative engine
+  groupDescription: A series of nodes that can be executed as a group
+  itemId: 2
+  orderList:
+  - {fileID: 6963861663992990484}
+  eventHandler: {fileID: 0}
+  isGrouped: 0
+  groupIndex: -1
+  repeatable: 0
+  tint: {r: 0.72156864, g: 0.8235295, b: 0.9215687, a: 1}
+  useCustomTint: 1
+  hoverStartTime: 0
+  targetUnlockNode: {fileID: 0}
+  targetKeyNode: {fileID: 0}
+  showDesc: 0
+  saveable: 0
+  updateLocationStatusToComplete: 1
+  NodeComplete: 0
+--- !u!114 &6963861663992990484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8861555758513075961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc3a63c492263e54f8b5948c65a64522, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 8306261429006665712}
+--- !u!114 &4251967097963899698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8861555758513075961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d41b98a01b76ad04f97b9bac6c09b6a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 8306261429006665712}
+  item: {fileID: 11400000, guid: b0c6903b0563e9d4c9efca8a48155d41, type: 2}
+  amount: 5
+--- !u!114 &8283175735044685520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8861555758513075961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eed2a861d628b4648b8a414fc53153d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 8306261429006665712}
+  item: {fileID: 11400000, guid: b0c6903b0563e9d4c9efca8a48155d41, type: 2}
+  amount: 1
 --- !u!1001 &697138523419227301
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4317,8 +4477,28 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7366789441586497175, guid: d0e21202b35d8cb4e814c9fc6dc089da, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5223165488977222544}
   m_SourcePrefab: {fileID: 100100000, guid: d0e21202b35d8cb4e814c9fc6dc089da, type: 3}
+--- !u!1 &145743763112513338 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7366789441586497175, guid: d0e21202b35d8cb4e814c9fc6dc089da, type: 3}
+  m_PrefabInstance: {fileID: 7222048503005989293}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5223165488977222544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145743763112513338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c77b8a4811ced54f8b58043e886ff8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2300840486415990225 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8923852846273213564, guid: d0e21202b35d8cb4e814c9fc6dc089da, type: 3}
@@ -4329,7 +4509,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1692256266122481245, guid: d0e21202b35d8cb4e814c9fc6dc089da, type: 3}
   m_PrefabInstance: {fileID: 7222048503005989293}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 145743763112513338}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3348209446e930c4a98ae63d9320d91a, type: 3}

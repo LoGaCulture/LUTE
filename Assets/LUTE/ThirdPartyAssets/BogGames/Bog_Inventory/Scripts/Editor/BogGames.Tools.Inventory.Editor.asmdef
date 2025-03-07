@@ -1,3 +1,16 @@
 {
-	"name": "BogGames.Tools.Inventory.Editor"
+    "name": "BogGames.Tools.Inventory.Editor",
+    "rootNamespace": "BogGames.Tools.Inventory",
+    "references": [
+        "GUID:72d66877779799046ba6ff304a090ac9"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

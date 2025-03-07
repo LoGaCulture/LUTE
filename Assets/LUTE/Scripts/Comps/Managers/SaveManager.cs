@@ -15,6 +15,7 @@ public class SaveManager : MonoBehaviour
         SaveAll,
         EngineData,
         BogAchievementData,
+        BogInventoryData,
         None
     }
 

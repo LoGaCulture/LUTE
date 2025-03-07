@@ -20,7 +20,7 @@ namespace BogGames.Tools.Achievements
         /// <summary>
         /// Initialises a new instance of the <see cref="BogGames.Tools.SerialisedBogAchievement"/> class.
         /// </summary>  
-        /// <param name="achievementID">Achievement I.</param>
+        /// <param name="achievementID">Achievement ID.</param>
         /// <param name="unlockedStatus">If set to <c>true</c> unlocked status.</param>
         /// <param name="progressCurrent">Progress current.</param>
         public SerialisedBogAchievement(string achievementID, bool unlockedStatus, int progressCurrent)
