@@ -135,7 +135,7 @@ namespace Mapbox.Unity.Location
         /// </summary>
         protected virtual void Awake()
         {
-            if (Instance != null)
+            if (Instance != null && Application.isPlaying)
             {
                 DestroyImmediate(gameObject);
                 return;

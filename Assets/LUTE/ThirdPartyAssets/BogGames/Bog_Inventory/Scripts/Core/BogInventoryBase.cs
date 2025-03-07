@@ -242,7 +242,6 @@ namespace BogGames.Tools.Inventory
             inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
         }
 
-
         public virtual void DrawInventory()
         {
             inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
