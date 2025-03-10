@@ -8,7 +8,8 @@ namespace BogGames.Tools.Inventory
         Default,
         Consumable,
         Equipment,
-        Misc
+        Misc,
+        Character
     }
 
     /// <summary>
@@ -28,8 +29,14 @@ namespace BogGames.Tools.Inventory
         [SerializeField] protected string itemDescription;
         [Tooltip("Whether this item is locked or not.")]
         [SerializeField] protected bool isLocked;
+        [Tooltip("Allow this item to be used, even if it is locked.")]
+        [SerializeField] protected bool useWhenLocked;
         [Tooltip("Whether to consume this item when used.")]
         [SerializeField] protected bool consumeOnUse;
+        [Tooltip("Whether the item can be dropped.")]
+        [SerializeField] protected bool canDrop = true;
+        [Tooltip("Whether the item can be moved in the inventory.")]
+        [SerializeField] protected bool canMove = true;
         [Tooltip("How many of this item can be stacked; default is 1.")]
         [SerializeField] protected int maxStackSize = 1;
 
@@ -53,10 +60,13 @@ namespace BogGames.Tools.Inventory
 
         public string ItemID { get { return itemID; } }
         public string ItemName { get { return itemName; } }
+        public bool IsLocked { get { return isLocked; } set { isLocked = value; } }
+        public bool UseWhenLocked { get { return useWhenLocked; } }
         public string ItemDescription { get { return itemDescription; } }
         public int MaxStackSize { get { return maxStackSize; } }
-        public bool IsLocked { get { return isLocked; } set { isLocked = value; } }
         public bool ConsumeOnUse { get { return consumeOnUse; } }
+        public bool CanDrop { get { return canDrop; } }
+        public bool CanMove { get { return canMove; } }
         public Sprite UnlockedIcon { get { return unlockedIcon; } }
         public Sprite LockedIcon { get { return lockedIcon; } }
         public AudioClip UseSound { get { return useSound; } }

@@ -18,6 +18,7 @@ MonoBehaviour:
   itemDescription: "Tasty when cooked over an open fire or stewed in a firey cauldron... 
     \n\nPandas love eating these, apprently..."
   isLocked: 0
+  useWhenLocked: 0
   consumeOnUse: 1
   maxStackSize: 1
   unlockedIcon: {fileID: 285717524, guid: 075289b53d2214247aaee342cc134414, type: 3}

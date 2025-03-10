@@ -338,6 +338,32 @@ namespace BogGames.Tools.Inventory
             inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
         }
 
+        public virtual void UnlockRandomItem()
+        {
+            if (items == null || items.Count == 0)
+                return;
+
+            int startIndex = Random.Range(0, items.Count);
+            int index = startIndex;
+
+            do
+            {
+                BogInventorySlot slot = items[index];
+
+                if (slot != null && slot.Item != null && slot.Item.IsLocked)
+                {
+                    slot.Item.IsLocked = false;
+                    slot.Item.UnlockItem();
+
+                    BogInventorySignals.DoInventoryItemUnlocked(slot.Item);
+                    inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
+                    return;
+                }
+
+                index = (index + 1) % items.Count; // Move to the next item, wrapping around
+            } while (index != startIndex); // Stop if we've looped through all items
+        }
+
         public virtual void DrawInventory()
         {
             inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);

@@ -29,15 +29,34 @@ namespace BogGames.Tools.Inventory
                 dropButton.interactable = false;
             }
 
-            // If the item is locked then we cannot use it
-            // But we can drop or move it if we have an inventory
-            if (newItem.IsLocked)
+
+            // Various checks to determine the behaviour of the popup menu buttons 
+            // Derives the behaviour from the actual item
+            if (newItem.IsLocked && !newItem.UseWhenLocked)
             {
                 useButton.interactable = false;
             }
             else
             {
                 useButton.interactable = true;
+            }
+
+            if (newItem.CanDrop)
+            {
+                dropButton.interactable = true;
+            }
+            else
+            {
+                dropButton.interactable = false;
+            }
+
+            if (newItem.CanMove)
+            {
+                moveButton.interactable = true;
+            }
+            else
+            {
+                moveButton.interactable = false;
             }
 
             useButton.onClick.AddListener(() => { newItem.Use(); if (newItem.ConsumeOnUse) inventory.RemoveItem(newItem); Destroy(this.gameObject); });

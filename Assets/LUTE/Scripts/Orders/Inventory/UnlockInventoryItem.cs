@@ -28,7 +28,7 @@ namespace LoGaCulture.LUTE
 
         public override string GetSummary()
         {
-            return item != null ? "     Unlocking " + item.ItemName : "Error: No item set";
+            return item != null ? "     Unlocking " + item.ItemName : " Error: No item set";
         }
 
         public override Color GetButtonColour()
