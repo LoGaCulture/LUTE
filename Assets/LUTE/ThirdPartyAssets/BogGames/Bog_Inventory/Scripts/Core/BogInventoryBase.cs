@@ -315,6 +315,7 @@ namespace BogGames.Tools.Inventory
                 }
             }
 
+            BogInventorySignals.DoInventoryItemUnlocked(item);
             inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
         }
 
@@ -333,6 +334,7 @@ namespace BogGames.Tools.Inventory
                 }
             }
 
+            BogInventorySignals.DoInventoryItemLocked(item);
             inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
         }
 
