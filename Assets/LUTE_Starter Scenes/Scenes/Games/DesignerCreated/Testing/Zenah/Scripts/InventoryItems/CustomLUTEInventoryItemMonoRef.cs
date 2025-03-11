@@ -23,6 +23,11 @@ namespace LoGaCulture.LUTE
         {
             if (item != null)
             {
+                if (item.ItemID != inventoryItem.ItemID)
+                {
+                    return;
+                }
+
                 if (item.IsLocked)
                 {
                     // If the item is locked but is allowed to be used then we should show a hint to how to unlock this item.

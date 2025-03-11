@@ -396,6 +396,7 @@ namespace BogGames.Tools.Inventory
             {
                 items = new List<BogInventorySlot?>(new BogInventorySlot?[inventoryWidth * inventoryHeight]);
                 inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
+
                 BogInventorySignals.DoInventoryReset(this);
                 Debug.Log("Inventory reset.");
             }
