@@ -338,6 +338,20 @@ namespace BogGames.Tools.Inventory
             inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
         }
 
+        public virtual bool InventoryContains(BogInventoryItem item)
+        {
+            bool contains = false;
+            foreach (var slot in items)
+            {
+                if (slot != null && slot.Item.ItemID == item.ItemID)
+                {
+                    contains = true;
+                    break;
+                }
+            }
+            return contains;
+        }
+
         public virtual void UnlockRandomItem()
         {
             if (items == null || items.Count == 0)

@@ -1,4 +1,4 @@
-//using MoreMountains.InventoryEngine;
+//using BogGames.Tools.Inventory;
 //using System.Linq;
 //using UnityEditor;
 //using UnityEngine;
@@ -30,18 +30,6 @@
 //    protected int locationVarIndex = 0;
 //    protected int itemIndex = 0;
 
-//    public static T[] GetAllInstances<T>() where T : ScriptableObject
-//    {
-//        string[] guids = AssetDatabase.FindAssets("t:" + typeof(T).Name); //FindAssets uses tags check documentation for more info
-//        T[] instances = new T[guids.Length];
-//        for (int i = 0; i < guids.Length; i++) //probably could get optimized
-//        {
-//            string path = AssetDatabase.GUIDToAssetPath(guids[i]);
-//            instances[i] = AssetDatabase.LoadAssetAtPath<T>(path);
-//        }
-
-//        return instances;
-//    }
 //    public override void OnEnable()
 //    {
 //        base.OnEnable();
@@ -122,10 +110,10 @@
 //        for (int i = 0; i < itemsProp.arraySize; i++)
 //        {
 //            EditorGUILayout.BeginVertical(GUI.skin.box); // Add a GUI box for readability
-//            var items = GetAllInstances<InventoryItem>();
+//            var items = GetAllInstances<BogInventoryItem>();
 //            for (int j = 0; j < items.Length; j++)
 //            {
-//                if (items[j] == itemsProp.GetArrayElementAtIndex(i).objectReferenceValue as InventoryItem)
+//                if (items[j] == itemsProp.GetArrayElementAtIndex(i).objectReferenceValue as BogInventoryItem)
 //                {
 //                    itemIndex = j;
 //                }

@@ -315,3 +315,6 @@ public class StringDataDrawer : VariableDataDrawer<StringVariable>
 [CustomPropertyDrawer(typeof(SaveKeyData))]
 public class SaveKeyDataDrawer : VariableDataDrawer<SaveKeyVariable>
 { }
+[CustomPropertyDrawer(typeof(InventoryData))]
+public class InventoryDataDrawer : VariableDataDrawer<InventoryVariable>
+{ }

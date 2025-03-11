@@ -1,23 +1,23 @@
-//using System.Collections;
-//using System.Collections.Generic;
-//using MoreMountains.InventoryEngine;
+//using BogGames.Tools.Inventory;
 //using UnityEngine;
 
 //public class GenericContainer : MonoBehaviour
 //{
-//    protected Animator _animator;
-//    protected ItemPicker[] _itemPickerList;
+//    [SerializeField] protected BogInventoryBase inventory;
+
+//    protected Animator animator;
+//    protected BogInventoryItem[] itemList;
 
 //    protected virtual void Start()
 //    {
-//        _animator = GetComponent<Animator>();
-//        _itemPickerList = GetComponents<ItemPicker>();
+//        animator = GetComponent<Animator>();
+//        itemList = GetComponents<BogInventoryItem>();
 //    }
 
-//    public virtual void AddContents(ItemPicker[] itemPickers, Animator animator)
+//    public virtual void AddContents(BogInventoryItem[] items, Animator animator)
 //    {
-//        _itemPickerList = itemPickers;
-//        _animator = animator;
+//        itemList = items;
+//        this.animator = animator;
 //    }
 
 //    public virtual void OpenContainer()
@@ -28,22 +28,22 @@
 
 //    public virtual void TriggerOpeningAnimation()
 //    {
-//        if (_animator == null)
+//        if (animator == null)
 //        {
 //            return;
 //        }
-//        _animator.SetTrigger("Open");
+//        animator.SetTrigger("Open");
 //    }
 
 //    protected virtual void PickContainerContents()
 //    {
-//        if (_itemPickerList.Length == 0)
+//        if (itemList.Length == 0 || inventory == null)
 //        {
 //            return;
 //        }
-//        foreach (ItemPicker picker in _itemPickerList)
+//        foreach (BogInventoryItem item in itemList)
 //        {
-//            picker.Pick();
+//            inventory.AddItem(item);
 //        }
 //    }
 //}

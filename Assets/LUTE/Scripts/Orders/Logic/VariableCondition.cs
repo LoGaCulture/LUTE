@@ -232,6 +232,7 @@ public abstract class VariableCondition : Condition, ISerializationCallbackRecei
     [SerializeField] protected UDateData uDateData;
     [SerializeField] protected UTimeData uTimeData;
     [SerializeField] protected SaveKeyData saveKeyData;
+    [SerializeField] protected InventoryData inventoryData;
 
     void ISerializationCallbackReceiver.OnBeforeSerialize()
     {
@@ -323,6 +324,11 @@ public abstract class VariableCondition : Condition, ISerializationCallbackRecei
             {
                 anyVariable.data.saveKeyData = saveKeyData;
                 saveKeyData = new SaveKeyData();
+            }
+            else if (variable.GetType() == typeof(InventoryVariable) && !inventoryData.Equals(new InventoryData()))
+            {
+                anyVariable.data.inventoryData = inventoryData;
+                inventoryData = new InventoryData();
             }
             //moved to new anyvar storage, clear legacy.
             variable = null;

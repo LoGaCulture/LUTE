@@ -1,4 +1,4 @@
-//using MoreMountains.InventoryEngine;
+//using BogGames.Tools.Inventory;
 //using System.Collections.Generic;
 //using UnityEngine;
 //using UnityEngine.Events;
@@ -54,7 +54,7 @@
 //    [SerializeField] protected AnimationClip closeAnim;
 //    [Header("Items")]
 //    [Tooltip("The items that will be picked up on use")]
-//    [SerializeField] protected List<InventoryItem> itemsToPickup = new List<InventoryItem>();
+//    [SerializeField] protected List<BogInventoryItem> itemsToPickup = new List<BogInventoryItem>();
 //    [HideInInspector]
 //    [SerializeField] protected List<int> itemsQuantities = new List<int>();
 

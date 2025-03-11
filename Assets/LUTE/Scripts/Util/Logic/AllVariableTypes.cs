@@ -30,6 +30,7 @@ public static class AllVariableTypes
         typeof(UDateVariable),
         typeof(UTimeVariable),
         typeof(SaveKeyVariable),
+        typeof(InventoryVariable),
     };
 }
 
@@ -59,6 +60,7 @@ public partial struct AnyVariableData
     public UDateData uDateData;
     public UTimeData uTimeData;
     public SaveKeyData saveKeyData;
+    public InventoryData inventoryData;
 
     public bool HasReference(Variable variable)
     {
@@ -197,8 +199,12 @@ public class AnyVariableAndDataPair
             new TypeActions( "saveKeyData",
                 (anyVar, compareOperator) => {return anyVar.variable.Evaluate(compareOperator, anyVar.data.saveKeyData.Value); },
                 (anyVar) => anyVar.data.saveKeyData.GetDescription(),
-                (anyVar, setOperator) => anyVar.variable.Apply(setOperator, anyVar.data.saveKeyData.Value)) }
-
+                (anyVar, setOperator) => anyVar.variable.Apply(setOperator, anyVar.data.saveKeyData.Value)) },
+                        { typeof(InventoryVariable),
+                new TypeActions( "inventoryData",
+                    (anyVar, compareOperator) => {return anyVar.variable.Evaluate(compareOperator, anyVar.data.inventoryData.item); },
+                    (anyVar) => anyVar.data.inventoryData.GetDescription(),
+                    (anyVar, setOperator) => anyVar.variable.Apply(setOperator, anyVar.data.inventoryData.Value)) }
     };
 
     public bool HasReference(Variable variable)

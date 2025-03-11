@@ -1,5 +1,5 @@
+//using BogGames.Tools.Inventory;
 //using LoGaCulture.LUTE;
-//using MoreMountains.InventoryEngine;
 //using System.Collections;
 //using System.Collections.Generic;
 //using TMPro;
@@ -136,7 +136,7 @@
 //        return ActiveContainerCard;
 //    }
 
-//    public static void CreateNewCard(bool requiresKey, string keyID, UnityEvent keyEvent, bool activable, float delayBetweenUses, bool unlimitedActivations, bool closeOnUse, AudioClip openFeedback, AudioClip closeFeedback, List<InventoryItem> itemsToPickup = null, List<int> itemsQuantities = null, string promtText = "", float promptFadeDuration = 0.2f, Color promptColor = new Color(), bool hideOnPlayer = false, LocationVariable locationVariable = null, BasicFlowEngine engine = null, ContainerCard customPrefab = null, AnimationClip openAnim = null, AnimationClip closeAnim = null, string promtTextOpened = null, bool showPrompt = true)
+//    public static void CreateNewCard(bool requiresKey, string keyID, UnityEvent keyEvent, bool activable, float delayBetweenUses, bool unlimitedActivations, bool closeOnUse, AudioClip openFeedback, AudioClip closeFeedback, List<BogInventoryItem> itemsToPickup = null, List<int> itemsQuantities = null, string promtText = "", float promptFadeDuration = 0.2f, Color promptColor = new Color(), bool hideOnPlayer = false, LocationVariable locationVariable = null, BasicFlowEngine engine = null, ContainerCard customPrefab = null, AnimationClip openAnim = null, AnimationClip closeAnim = null, string promtTextOpened = null, bool showPrompt = true)
 //    {
 //        GameObject go = null;
 

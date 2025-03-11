@@ -1,88 +1,76 @@
-//using System.Collections;
-//using System.Collections.Generic;
-//using MoreMountains.InventoryEngine;
-//using UnityEngine;
+using BogGames.Tools.Inventory;
+using UnityEngine;
 
-//[VariableInfo("", "Inventory")]
-//[AddComponentMenu("")]
-//[System.Serializable]
-//public class InventoryVariable : BaseVariable<Inventory>
-//{
-//    public override bool SupportsArithmetic(SetOperator setOperator)
-//    {
-//        return false;
-//    }
+[VariableInfo("", "Inventory")]
+[AddComponentMenu("")]
+[System.Serializable]
+public class InventoryVariable : BaseVariable<BogInventoryBase>
+{
+    public override bool SupportsArithmetic(SetOperator setOperator)
+    {
+        return false;
+    }
 
-//    public override bool Evaluate(ComparisonOperator comparisonOperator, object value)
-//    {
-//        var item = (InventoryItem)value;
-//        var items = Value.InventoryContains(item.ItemID);
-//        bool result = false;
-//        switch (comparisonOperator)
-//        {
-//            case ComparisonOperator.Equals:
-//                result = items.Count >= 1;
-//                break;
-//            case ComparisonOperator.NotEquals:
-//                result = items.Count <= 0;
-//                break;
-//        }
-//        return result;
-//    }
-//}
+    public override bool Evaluate(ComparisonOperator comparisonOperator, object value)
+    {
+        var item = (BogInventoryItem)value;
 
-////Container for Inventory variables ref
-//[System.Serializable]
-//public struct InventoryData
-//{
-//    [SerializeField]
-//    [VariableProperty("<Value>", typeof(InventoryVariable))]
-//    public InventoryVariable inventoryRef;
-//    [SerializeField]
-//    public Inventory inventoryVal;
-//    [SerializeField]
-//    public InventoryItem item;
+        bool result = Value.InventoryContains(item);
+        return result;
+    }
+}
 
-//    public InventoryData(Inventory val, InventoryItem item)
-//    {
-//        inventoryVal = val;
-//        inventoryRef = null;
-//        this.item = item;
-//    }
+//Container for Inventory variables ref
+[System.Serializable]
+public struct InventoryData
+{
+    [SerializeField]
+    [VariableProperty("<Value>", typeof(InventoryVariable))]
+    public InventoryVariable inventoryRef;
+    [SerializeField]
+    public BogInventoryBase inventoryVal;
+    [SerializeField]
+    public BogInventoryItem item;
 
-//    public static implicit operator Inventory(InventoryData inventoryData)
-//    {
-//        return inventoryData.Value;
-//    }
+    public InventoryData(BogInventoryBase val, BogInventoryItem item)
+    {
+        inventoryVal = val;
+        inventoryRef = null;
+        this.item = item;
+    }
 
-//    [SerializeField]
-//    public Inventory Value
-//    {
-//        get { return (inventoryRef == null) ? inventoryVal : inventoryRef.Value; }
-//        set
-//        {
-//            if (inventoryRef == null)
-//            {
-//                inventoryVal = value;
-//            }
-//            else
-//            {
-//                inventoryRef.Value = value;
-//            }
-//        }
-//    }
+    public static implicit operator BogInventoryBase(InventoryData inventoryData)
+    {
+        return inventoryData.Value;
+    }
 
-//    public string GetDescription()
-//    {
-//        // if (inventoryRef == null)
-//        // {
-//        //     return inventoryVal.ToString();
-//        // }
-//        // else
-//        // {
-//        //     return inventoryRef.Key;
-//        // }
+    [SerializeField]
+    public BogInventoryBase Value
+    {
+        get { return (inventoryRef == null) ? inventoryVal : inventoryRef.Value; }
+        set
+        {
+            if (inventoryRef == null)
+            {
+                inventoryVal = value;
+            }
+            else
+            {
+                inventoryRef.Value = value;
+            }
+        }
+    }
 
-//        return "";
-//    }
-//}
+    public string GetDescription()
+    {
+        //if (inventoryRef == null)
+        //{
+        //    return inventoryVal.ToString();
+        //}
+        //else
+        //{
+        //    return inventoryRef.Key;
+        //}
+        return "";
+    }
+}
