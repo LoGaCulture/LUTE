@@ -157,9 +157,9 @@ public class Sticker : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
             return null;
 
         stickerName = sticker.ItemName;
-        stickerDescription = sticker.ShortDescription;
+        //stickerDescription = sticker.ShortDescription;
         stickerType = sticker.StickerType;
-        stickerImage = sticker.Icon;
+        //stickerImage = sticker.Icon;
 
         if (stickerImage != null)
             SetStickerIcon();

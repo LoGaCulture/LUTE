@@ -1,7 +1,6 @@
 using LoGaCulture.LUTE;
 using Mapbox.Examples;
 using Mapbox.Unity.Map;
-using MoreMountains.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -172,8 +171,6 @@ public class BasicFlowEngine : MonoBehaviour, ISubstitutionHandler
     protected virtual void Start()
     {
         CheckEventSystem();
-        MMGameEvent.Trigger("Load");
-
 
         if (!this.name.Contains("GlobalVariablesEngine"))
             LogaManager.Instance.LogManager.Log(LoGaCulture.LUTE.Logs.LogLevel.Info, "Engine started", "Engine: " + description);

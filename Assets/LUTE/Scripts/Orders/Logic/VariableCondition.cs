@@ -221,7 +221,6 @@ public abstract class VariableCondition : Condition, ISerializationCallbackRecei
     [SerializeField] protected CollectionData collectionData;
     [SerializeField] protected NodeCollectionData nodeCollectionData;
     [SerializeField] protected NodeData nodeData;
-    [SerializeField] protected InventoryData inventoryData;
     [SerializeField] protected DiceData diceData;
     [SerializeField] protected BooleanData booleanData;
     [SerializeField] protected FloatData floatData;
@@ -268,11 +267,6 @@ public abstract class VariableCondition : Condition, ISerializationCallbackRecei
             {
                 anyVariable.data.nodeData = nodeData;
                 nodeData = new NodeData();
-            }
-            else if (variable.GetType() == typeof(InventoryVariable) && !inventoryData.Equals(new InventoryData()))
-            {
-                anyVariable.data.inventoryData = inventoryData;
-                inventoryData = new InventoryData();
             }
             else if (variable.GetType() == typeof(DiceVariable) && !diceData.Equals(new DiceData()))
             {

@@ -148,7 +148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 259267083496140413, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
       propertyPath: selectedNodes.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 259267083496140413, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
       propertyPath: selectedOrders.Array.size

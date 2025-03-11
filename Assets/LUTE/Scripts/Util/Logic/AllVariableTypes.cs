@@ -19,7 +19,6 @@ public static class AllVariableTypes
         typeof(CollectionVariable),
         typeof(NodeCollectionVariable),
         typeof(NodeVariable),
-        typeof(InventoryVariable),
         typeof(DiceVariable),
         typeof(BooleanVariable),
         typeof(FloatVariable),
@@ -49,7 +48,6 @@ public partial struct AnyVariableData
     public CollectionData collectionData;
     public NodeCollectionData nodeCollectionData;
     public NodeData nodeData;
-    public InventoryData inventoryData;
     public DiceData diceData;
     public BooleanData booleanData;
     public FloatData floatData;
@@ -137,11 +135,6 @@ public class AnyVariableAndDataPair
                     (anyVar, compareOperator) => {return anyVar.variable.Evaluate(compareOperator, anyVar.data.nodeData.Value); },
                     (anyVar) => anyVar.data.nodeData.GetDescription(),
                     (anyVar, setOperator) => anyVar.variable.Apply(setOperator, anyVar.data.nodeData.Value)) },
-            { typeof(InventoryVariable),
-                new TypeActions( "inventoryData",
-                    (anyVar, compareOperator) => {return anyVar.variable.Evaluate(compareOperator, anyVar.data.inventoryData.item); },
-                    (anyVar) => anyVar.data.inventoryData.GetDescription(),
-                    (anyVar, setOperator) => anyVar.variable.Apply(setOperator, anyVar.data.inventoryData.Value)) },
             { typeof(DiceVariable),
                 new TypeActions( "diceData",
                     (anyVar, compareOperator) => {return anyVar.variable.Evaluate(compareOperator, anyVar.data.diceData.Value); },
