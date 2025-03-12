@@ -16,7 +16,7 @@ MonoBehaviour:
   itemType: 0
   itemName: Coins
   itemDescription: Everybody wants to be filthy rich!
-  isLocked: 0
+  isLocked: 1
   useWhenLocked: 0
   consumeOnUse: 1
   canDrop: 1

@@ -17,8 +17,11 @@ MonoBehaviour:
   itemName: Coin
   itemDescription: "Everybody wants to be filthy rich... \n\nNot everybody wants
     to work for it!"
-  isLocked: 0
+  isLocked: 1
+  useWhenLocked: 0
   consumeOnUse: 1
+  canDrop: 1
+  canMove: 1
   maxStackSize: 99
   unlockedIcon: {fileID: -1922425793, guid: 075289b53d2214247aaee342cc134414, type: 3}
   lockedIcon: {fileID: 21300000, guid: 9d444302ea516894bbb620b3b22a0a6e, type: 3}

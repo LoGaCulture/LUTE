@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5357986ab596a824b80c56d829cec32a, type: 3}
   m_Name: PrincessParrotItem
   m_EditorClassIdentifier: 
-  itemID: 0
+  itemID: 10
   itemType: 4
   itemName: Princess Parrot
   itemDescription: A beautiful bird that loves to sing.

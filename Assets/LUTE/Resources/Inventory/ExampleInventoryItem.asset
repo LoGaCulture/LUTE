@@ -17,9 +17,11 @@ MonoBehaviour:
   itemName: Apple
   itemDescription: "Tasty when cooked over an open fire or stewed in a firey cauldron... 
     \n\nPandas love eating these, apprently..."
-  isLocked: 0
+  isLocked: 1
   useWhenLocked: 0
   consumeOnUse: 1
+  canDrop: 1
+  canMove: 1
   maxStackSize: 1
   unlockedIcon: {fileID: 285717524, guid: 075289b53d2214247aaee342cc134414, type: 3}
   lockedIcon: {fileID: 21300000, guid: 9d444302ea516894bbb620b3b22a0a6e, type: 3}
