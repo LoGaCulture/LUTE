@@ -2699,6 +2699,7 @@ GameObject:
   - component: {fileID: 6963861663992990484}
   - component: {fileID: 4251967097963899698}
   - component: {fileID: 8283175735044685520}
+  - component: {fileID: 628395464137346232}
   m_Layer: 0
   m_Name: Flow Engine
   m_TagString: Untagged
@@ -2742,9 +2743,10 @@ MonoBehaviour:
   localizationId: 
   selectedOrders: []
   selectedNodes: []
-  nodeViewHeight: 354
+  nodeViewHeight: 688
   hideOrders: []
-  variables: []
+  variables:
+  - {fileID: 628395464137346232}
   variablesExpanded: 1
   variablesScrollPos: {x: 0, y: 0}
   mapLocations: []
@@ -2756,7 +2758,7 @@ MonoBehaviour:
   showAnnotations: 1
   labelTint: {r: 0.9966797, g: 0.7216981, b: 1, a: 1}
   zoom: 1
-  scrollPos: {x: -25421.225, y: -24893.355}
+  scrollPos: {x: -25466.543, y: -24823.215}
   version: 1
   sidesOfDie: 6
   postcards: []
@@ -4034,6 +4036,22 @@ MonoBehaviour:
   inventory: {fileID: 8306261429006665712}
   item: {fileID: 11400000, guid: b0c6903b0563e9d4c9efca8a48155d41, type: 2}
   amount: 1
+--- !u!114 &628395464137346232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8861555758513075961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 179b7dd5a0521c646b8d430241a956ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scope: 0
+  key: InventoryVar
+  propertyReferences: []
+  value: {fileID: 8306261429006665712}
 --- !u!1001 &697138523419227301
 PrefabInstance:
   m_ObjectHideFlags: 0

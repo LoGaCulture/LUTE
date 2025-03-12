@@ -268,8 +268,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beepSounds:
-  - {fileID: 8300000, guid: d0f5779e9778b044e89741c419f8dd98, type: 3}
-  - {fileID: 8300000, guid: ba3c9cdb459d3e146b842c73adaf6548, type: 3}
+  - {fileID: 8300000, guid: 3d6a4810e8f2d564892e23541331fdc3, type: 3}
+  - {fileID: 8300000, guid: 60c97364d49cc77429bd52eb7afe285f, type: 3}
+  - {fileID: 8300000, guid: 27627598256ee2f41ae5d9cfd38416d5, type: 3}
   targetAudioSource: {fileID: 7451722129145015450}
   volume: 1
   inputSound: {fileID: 8300000, guid: ba3c9cdb459d3e146b842c73adaf6548, type: 3}
