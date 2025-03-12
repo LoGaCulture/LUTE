@@ -30,6 +30,6 @@ public class LogicEnd : Order
 
     public override Color GetButtonColour()
     {
-        return new Color32(230, 181, 188, 255);
+        return new Color32(253, 150, 150, 255);
     }
 }

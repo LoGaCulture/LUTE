@@ -10,4 +10,9 @@ public class Stop : Order
     {
         StopParentNode();
     }
+
+    public override Color GetButtonColour()
+    {
+        return new Color32(253, 150, 150, 255);
+    }
 }

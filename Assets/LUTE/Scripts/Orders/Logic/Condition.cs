@@ -1,5 +1,3 @@
-using System;
-using System.Net.Http.Headers;
 using UnityEngine;
 
 /// Base class for all condition orders
@@ -193,6 +191,7 @@ public abstract class Condition : Order
     }
 
     public abstract bool EvaluateConditions();
+
     protected virtual bool HasRequiredProperties()
     {
         return true;
