@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b4ddc75f9f1b3043893d0de76d49f2c, type: 3}
+  m_Name: LOCINFO0
+  m_EditorClassIdentifier: 
+  infoID: c9d3471b-3ded-4e85-be2e-3e2717b09ccf
+  Position: 51.42923743920156, -1.8569142846256426
+  Name: The Barn
+  Sprite: {fileID: 21300000, guid: 93a2368be3ed45740870912b34a49ee3, type: 3}
+  InProgressSprite: {fileID: 21300000, guid: 31f30a94ce27dd7459e1d263684c7ab1, type: 3}
+  CompletedSprite: {fileID: 21300000, guid: d764252b019bccb48bc36a1869796494, type: 3}
+  Color: {r: 1, g: 1, b: 1, a: 1}
+  ShowName: 0
+  showRadius: 1
+  defaultRadiusColour: {r: 0.99215686, g: 0.2627451, b: 0.18431373, a: 0.5882353}
+  visitedRadiusColour: {r: 1, g: 0.59696656, b: 0.035294116, a: 0.5882353}
+  completedRadiusColour: {r: 0.18431373, g: 0.74509805, b: 0, a: 0.5882353}
+  locationDisabled: 0
+  objectInfo: {fileID: 11400000, guid: 15bee95146a297441ac693c44c55da6a, type: 2}
+  radiusIncrease: 0
+  locationStatus: 0
+  nodeComplete: DrWebb2 - End
+  executeNode: DrWebb2 - Start
+  interactable: 1
+  saveInfo: 1
+  indepedentMarkerUpdating: 1
+  allowClickWithoutLocation: 1

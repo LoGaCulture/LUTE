@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e584817ecd9d685498c58195ea23716c, type: 3}
+  m_Name: HistoryInfo_Banks
+  m_EditorClassIdentifier: 
+  objectName: The Banks
+  objectDescription: Dug during Alexander Keiller excavations, the Bank has served
+    as a container of all sorts of items, spanning centuries. Antler picks and rakes,
+    prehistoric pottery, human bones, Roman pottery and metal object, the henge has
+    seen them all.
+  shortDescription: A vast earthwork, shaped by hands long gone.
+  voiceOverClip: {fileID: 8300000, guid: 744d09109a63f004fa2e484c72e86b35, type: 3}
+  stopAudioOnClose: 1
+  objectIcon: {fileID: 21300000, guid: 290ed3971153ddb42ae0d6f2c8ecfc36, type: 3}
+  spinningObject: {fileID: 2344481177358540255, guid: d67a85387f5786e4886a2c36494bb29d, type: 3}
+  unlocked: 0
