@@ -312,6 +312,7 @@ namespace BogGames.Tools.Inventory
                 {
                     slot.Item.IsLocked = false;
                     slot.Item.UnlockItem();
+                    item = slot.Item;
                 }
             }
 
@@ -331,6 +332,7 @@ namespace BogGames.Tools.Inventory
                 {
                     slot.Item.IsLocked = true;
                     slot.Item.LockItem();
+                    item = slot.Item;
                 }
             }
 
@@ -414,6 +416,10 @@ namespace BogGames.Tools.Inventory
                 BogInventorySignals.DoInventoryReset(this);
                 Debug.Log("Inventory reset.");
             }
+            else
+            {
+                Debug.Log("Please run the game to reset the inventory.");
+            }
         }
 
         /// <summary>
@@ -431,7 +437,11 @@ namespace BogGames.Tools.Inventory
 
                 if (serialisedItem != null)
                 {
-                    InsertItem(serialisedItem.BogInventoryItem, serialisedItem.BogInventoryItem.Quantity);
+                    var item = serialisedItem.BogInventoryItem;
+                    item.Quantity = serialisedItem.Quantity;
+                    item.SlotIndex = serialisedItem.SlotIndex;
+                    item.Item.IsLocked = serialisedItem.LockedState;
+                    InsertItem(item, serialisedItem.BogInventoryItem.Quantity);
                 }
             }
         }

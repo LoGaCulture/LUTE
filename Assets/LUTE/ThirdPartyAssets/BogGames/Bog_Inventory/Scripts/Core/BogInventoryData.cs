@@ -10,8 +10,14 @@ namespace BogGames.Tools.Inventory
     public class SerialisedBogInventoryItem
     {
         [SerializeField] private BogInventorySlot bogInventoryItem;
+        [SerializeField] private int quantity;
+        [SerializeField] private int slotIndex;
+        [SerializeField] private bool lockedState;
 
         public BogInventorySlot BogInventoryItem { get { return bogInventoryItem; } set { bogInventoryItem = value; } }
+        public int Quantity { get { return quantity; } set { quantity = value; } }
+        public int SlotIndex { get { return slotIndex; } set { slotIndex = value; } }
+        public bool LockedState { get { return lockedState; } set { lockedState = value; } }
 
         /// <summary>
         /// Initialises a new instance of the <see cref="BogGames.Tools.Inventory.SerialisedBogInventoryItem"/> class.
@@ -20,6 +26,9 @@ namespace BogGames.Tools.Inventory
         public SerialisedBogInventoryItem(BogInventorySlot bogInventoryItem)
         {
             BogInventoryItem = bogInventoryItem;
+            this.quantity = bogInventoryItem.Quantity;
+            this.slotIndex = bogInventoryItem.SlotIndex;
+            this.lockedState = bogInventoryItem.Item.IsLocked;
         }
     }
 

@@ -21,10 +21,7 @@ public class LoadGamePoint : Order
     {
         var saveManager = LogaManager.Instance.SaveManager;
 
-        if (string.IsNullOrEmpty(saveManager.StartScene))
-        {
-            saveManager.StartScene = SceneManager.GetActiveScene().name;
-        }
+        saveManager.StartScene = SceneManager.GetActiveScene().name;
 
         if (!HandleSaveDataLoad(saveManager))
         {

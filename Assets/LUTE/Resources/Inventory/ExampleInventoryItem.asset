@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9de6170bcd343a545914f16d1606ab5d, type: 3}
   m_Name: ExampleInventoryItem
   m_EditorClassIdentifier: 
-  itemID: 0
+  itemID: 20
   itemType: 0
   itemName: Apple
   itemDescription: "Tasty when cooked over an open fire or stewed in a firey cauldron... 

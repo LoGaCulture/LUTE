@@ -12,7 +12,6 @@ public class ChoiceEditor : OrderEditor
     protected SerializedProperty setMenuDialogProp;
     protected SerializedProperty hideThisOptionProp;
     protected SerializedProperty closeMenuOnSelectProp;
-    protected SerializedProperty buttonFeedbackProp;
     protected SerializedProperty justContinueProp;
     protected SerializedProperty showNextChoiceProp;
     protected SerializedProperty buttonSoundProp;
@@ -29,7 +28,6 @@ public class ChoiceEditor : OrderEditor
         setMenuDialogProp = serializedObject.FindProperty("setMenuDialogue");
         hideThisOptionProp = serializedObject.FindProperty("hideThisOption");
         closeMenuOnSelectProp = serializedObject.FindProperty("closeMenuOnSelect");
-        buttonFeedbackProp = serializedObject.FindProperty("buttonFeedback");
         justContinueProp = serializedObject.FindProperty("justContinue");
         showNextChoiceProp = serializedObject.FindProperty("showNextChoice");
         buttonSoundProp = serializedObject.FindProperty("buttonSound");
@@ -67,7 +65,6 @@ public class ChoiceEditor : OrderEditor
         EditorGUILayout.PropertyField(setMenuDialogProp);
         EditorGUILayout.PropertyField(hideThisOptionProp);
         EditorGUILayout.PropertyField(closeMenuOnSelectProp);
-        EditorGUILayout.PropertyField(buttonFeedbackProp);
         EditorGUILayout.PropertyField(buttonSoundProp);
         EditorGUILayout.PropertyField(justContinueProp);
         EditorGUILayout.PropertyField(showNextChoiceProp);

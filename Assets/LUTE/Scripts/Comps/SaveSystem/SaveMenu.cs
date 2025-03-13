@@ -24,12 +24,14 @@ public class SaveMenu : MonoBehaviour
     [SerializeField] protected Button forwardButton;
     [SerializeField] protected Button restartButton;
     [SerializeField] protected ScrollRect debugView;
+    [SerializeField] protected bool dontDestroyOnLoad = true;
 
     protected static bool saveMenuActive = false;
     protected AudioSource menuAudioSource;
     protected LTDescr fadeTween; //Used for fading menu
-    protected SaveMenu instance; //Used for singleton
+    protected static SaveMenu instance; //Used for singleton
     protected static bool hasLoadedOnStart; //Used to prevent multiple loads on start
+    protected static string defaultSave;
 
     protected virtual void Awake()
     {
@@ -41,7 +43,8 @@ public class SaveMenu : MonoBehaviour
         instance = this;
         if (transform.parent == null)
         {
-            GameObject.DontDestroyOnLoad(this);
+            if (dontDestroyOnLoad)
+                GameObject.DontDestroyOnLoad(this);
         }
         else
         {

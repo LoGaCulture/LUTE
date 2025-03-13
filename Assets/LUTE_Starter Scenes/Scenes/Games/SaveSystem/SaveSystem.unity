@@ -1314,11 +1314,11 @@ PrefabInstance:
     - target: {fileID: 8642065374393819403, guid: ba9b3434c907a5948a27e87a2fde18d9, type: 3}
       propertyPath: 'selectedNodes.Array.data[0]'
       value: 
-      objectReference: {fileID: 1492735693}
+      objectReference: {fileID: 1492735642}
     - target: {fileID: 8642065374393819403, guid: ba9b3434c907a5948a27e87a2fde18d9, type: 3}
       propertyPath: 'selectedOrders.Array.data[0]'
       value: 
-      objectReference: {fileID: 1492735694}
+      objectReference: {fileID: 0}
     - target: {fileID: 8642065374393819403, guid: ba9b3434c907a5948a27e87a2fde18d9, type: 3}
       propertyPath: 'selectedOrders.Array.data[1]'
       value: 
@@ -1621,9 +1621,6 @@ PrefabInstance:
       addedObject: {fileID: 1492735671}
     - targetCorrespondingSourceObject: {fileID: 1480580420229521923, guid: ba9b3434c907a5948a27e87a2fde18d9, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1492735674}
-    - targetCorrespondingSourceObject: {fileID: 1480580420229521923, guid: ba9b3434c907a5948a27e87a2fde18d9, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1492735675}
     - targetCorrespondingSourceObject: {fileID: 1480580420229521923, guid: ba9b3434c907a5948a27e87a2fde18d9, type: 3}
       insertIndex: -1
@@ -1818,10 +1815,6 @@ MonoBehaviour:
         nodeData:
           nodeRef: {fileID: 0}
           nodeVal: {fileID: 0}
-        inventoryData:
-          inventoryRef: {fileID: 0}
-          inventoryVal: {fileID: 0}
-          item: {fileID: 0}
         diceData:
           diceRef: {fileID: 0}
           diceVal: 0
@@ -1858,6 +1851,10 @@ MonoBehaviour:
         saveKeyData:
           saveKeyRef: {fileID: 0}
           saveKeyVal: 
+        inventoryData:
+          inventoryRef: {fileID: 0}
+          inventoryVal: {fileID: 0}
+          item: {fileID: 0}
   compareOperator: 0
   anyVariable:
     variable: {fileID: 0}
@@ -1878,10 +1875,6 @@ MonoBehaviour:
       nodeData:
         nodeRef: {fileID: 0}
         nodeVal: {fileID: 0}
-      inventoryData:
-        inventoryRef: {fileID: 0}
-        inventoryVal: {fileID: 0}
-        item: {fileID: 0}
       diceData:
         diceRef: {fileID: 0}
         diceVal: 0
@@ -1918,6 +1911,10 @@ MonoBehaviour:
       saveKeyData:
         saveKeyRef: {fileID: 0}
         saveKeyVal: 
+      inventoryData:
+        inventoryRef: {fileID: 0}
+        inventoryVal: {fileID: 0}
+        item: {fileID: 0}
   variable: {fileID: 0}
   integerData:
     integerRef: {fileID: 0}
@@ -1935,10 +1932,6 @@ MonoBehaviour:
   nodeData:
     nodeRef: {fileID: 0}
     nodeVal: {fileID: 0}
-  inventoryData:
-    inventoryRef: {fileID: 0}
-    inventoryVal: {fileID: 0}
-    item: {fileID: 0}
   diceData:
     diceRef: {fileID: 0}
     diceVal: 0
@@ -1975,6 +1968,10 @@ MonoBehaviour:
   saveKeyData:
     saveKeyRef: {fileID: 0}
     saveKeyVal: 
+  inventoryData:
+    inventoryRef: {fileID: 0}
+    inventoryVal: {fileID: 0}
+    item: {fileID: 0}
 --- !u!114 &1492735610
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -2179,10 +2176,6 @@ MonoBehaviour:
         nodeData:
           nodeRef: {fileID: 0}
           nodeVal: {fileID: 0}
-        inventoryData:
-          inventoryRef: {fileID: 0}
-          inventoryVal: {fileID: 0}
-          item: {fileID: 0}
         diceData:
           diceRef: {fileID: 0}
           diceVal: 0
@@ -2219,6 +2212,10 @@ MonoBehaviour:
         saveKeyData:
           saveKeyRef: {fileID: 0}
           saveKeyVal: 
+        inventoryData:
+          inventoryRef: {fileID: 0}
+          inventoryVal: {fileID: 0}
+          item: {fileID: 0}
   compareOperator: 0
   anyVariable:
     variable: {fileID: 0}
@@ -2239,10 +2236,6 @@ MonoBehaviour:
       nodeData:
         nodeRef: {fileID: 0}
         nodeVal: {fileID: 0}
-      inventoryData:
-        inventoryRef: {fileID: 0}
-        inventoryVal: {fileID: 0}
-        item: {fileID: 0}
       diceData:
         diceRef: {fileID: 0}
         diceVal: 0
@@ -2279,6 +2272,10 @@ MonoBehaviour:
       saveKeyData:
         saveKeyRef: {fileID: 0}
         saveKeyVal: 
+      inventoryData:
+        inventoryRef: {fileID: 0}
+        inventoryVal: {fileID: 0}
+        item: {fileID: 0}
   variable: {fileID: 0}
   integerData:
     integerRef: {fileID: 0}
@@ -2296,10 +2293,6 @@ MonoBehaviour:
   nodeData:
     nodeRef: {fileID: 0}
     nodeVal: {fileID: 0}
-  inventoryData:
-    inventoryRef: {fileID: 0}
-    inventoryVal: {fileID: 0}
-    item: {fileID: 0}
   diceData:
     diceRef: {fileID: 0}
     diceVal: 0
@@ -2336,6 +2329,10 @@ MonoBehaviour:
   saveKeyData:
     saveKeyRef: {fileID: 0}
     saveKeyVal: 
+  inventoryData:
+    inventoryRef: {fileID: 0}
+    inventoryVal: {fileID: 0}
+    item: {fileID: 0}
 --- !u!114 &1492735618
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -2573,10 +2570,6 @@ MonoBehaviour:
       nodeData:
         nodeRef: {fileID: 0}
         nodeVal: {fileID: 0}
-      inventoryData:
-        inventoryRef: {fileID: 0}
-        inventoryVal: {fileID: 0}
-        item: {fileID: 0}
       diceData:
         diceRef: {fileID: 0}
         diceVal: 0
@@ -2613,6 +2606,10 @@ MonoBehaviour:
       saveKeyData:
         saveKeyRef: {fileID: 0}
         saveKeyVal: 
+      inventoryData:
+        inventoryRef: {fileID: 0}
+        inventoryVal: {fileID: 0}
+        item: {fileID: 0}
   setOperator: 0
   var: {fileID: 0}
   integerData:
@@ -2811,10 +2808,6 @@ MonoBehaviour:
         nodeData:
           nodeRef: {fileID: 0}
           nodeVal: {fileID: 0}
-        inventoryData:
-          inventoryRef: {fileID: 0}
-          inventoryVal: {fileID: 0}
-          item: {fileID: 0}
         diceData:
           diceRef: {fileID: 0}
           diceVal: 0
@@ -2851,6 +2844,10 @@ MonoBehaviour:
         saveKeyData:
           saveKeyRef: {fileID: 0}
           saveKeyVal: 
+        inventoryData:
+          inventoryRef: {fileID: 0}
+          inventoryVal: {fileID: 0}
+          item: {fileID: 0}
   compareOperator: 0
   anyVariable:
     variable: {fileID: 0}
@@ -2871,10 +2868,6 @@ MonoBehaviour:
       nodeData:
         nodeRef: {fileID: 0}
         nodeVal: {fileID: 0}
-      inventoryData:
-        inventoryRef: {fileID: 0}
-        inventoryVal: {fileID: 0}
-        item: {fileID: 0}
       diceData:
         diceRef: {fileID: 0}
         diceVal: 0
@@ -2911,6 +2904,10 @@ MonoBehaviour:
       saveKeyData:
         saveKeyRef: {fileID: 0}
         saveKeyVal: 
+      inventoryData:
+        inventoryRef: {fileID: 0}
+        inventoryVal: {fileID: 0}
+        item: {fileID: 0}
   variable: {fileID: 0}
   integerData:
     integerRef: {fileID: 0}
@@ -2928,10 +2925,6 @@ MonoBehaviour:
   nodeData:
     nodeRef: {fileID: 0}
     nodeVal: {fileID: 0}
-  inventoryData:
-    inventoryRef: {fileID: 0}
-    inventoryVal: {fileID: 0}
-    item: {fileID: 0}
   diceData:
     diceRef: {fileID: 0}
     diceVal: 0
@@ -2968,6 +2961,10 @@ MonoBehaviour:
   saveKeyData:
     saveKeyRef: {fileID: 0}
     saveKeyVal: 
+  inventoryData:
+    inventoryRef: {fileID: 0}
+    inventoryVal: {fileID: 0}
+    item: {fileID: 0}
 --- !u!114 &1492735635
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -3124,7 +3121,6 @@ MonoBehaviour:
   itemId: 1
   orderList:
   - {fileID: 1492735658}
-  - {fileID: 1492735674}
   eventHandler: {fileID: 0}
   isGrouped: 0
   groupIndex: -1
@@ -3358,7 +3354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbdad587763ac83449df1cf4eee6338a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveKey: save_data_example
+  saveKey: save_data_savingdemo
   loadCustomPoint: 0
   customKey: 
   continueToNextOrder: 1
@@ -3624,22 +3620,6 @@ MonoBehaviour:
     stringRef: {fileID: 0}
     stringVal: LevelSelect
   loadingImage: {fileID: 0}
---- !u!114 &1492735674
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1492735604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 694a2949041e0b34c90245eb4017ed7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName:
-    stringRef: {fileID: 0}
-    stringVal: 
-  loadingImage: {fileID: 0}
 --- !u!114 &1492735675
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -3697,10 +3677,6 @@ MonoBehaviour:
         nodeData:
           nodeRef: {fileID: 0}
           nodeVal: {fileID: 0}
-        inventoryData:
-          inventoryRef: {fileID: 0}
-          inventoryVal: {fileID: 0}
-          item: {fileID: 0}
         diceData:
           diceRef: {fileID: 0}
           diceVal: 0
@@ -3737,6 +3713,10 @@ MonoBehaviour:
         saveKeyData:
           saveKeyRef: {fileID: 0}
           saveKeyVal: 
+        inventoryData:
+          inventoryRef: {fileID: 0}
+          inventoryVal: {fileID: 0}
+          item: {fileID: 0}
   compareOperator: 0
   anyVariable:
     variable: {fileID: 0}
@@ -3757,10 +3737,6 @@ MonoBehaviour:
       nodeData:
         nodeRef: {fileID: 0}
         nodeVal: {fileID: 0}
-      inventoryData:
-        inventoryRef: {fileID: 0}
-        inventoryVal: {fileID: 0}
-        item: {fileID: 0}
       diceData:
         diceRef: {fileID: 0}
         diceVal: 0
@@ -3797,6 +3773,10 @@ MonoBehaviour:
       saveKeyData:
         saveKeyRef: {fileID: 0}
         saveKeyVal: 
+      inventoryData:
+        inventoryRef: {fileID: 0}
+        inventoryVal: {fileID: 0}
+        item: {fileID: 0}
   variable: {fileID: 0}
   integerData:
     integerRef: {fileID: 0}
@@ -3814,10 +3794,6 @@ MonoBehaviour:
   nodeData:
     nodeRef: {fileID: 0}
     nodeVal: {fileID: 0}
-  inventoryData:
-    inventoryRef: {fileID: 0}
-    inventoryVal: {fileID: 0}
-    item: {fileID: 0}
   diceData:
     diceRef: {fileID: 0}
     diceVal: 0
@@ -3854,6 +3830,10 @@ MonoBehaviour:
   saveKeyData:
     saveKeyRef: {fileID: 0}
     saveKeyVal: 
+  inventoryData:
+    inventoryRef: {fileID: 0}
+    inventoryVal: {fileID: 0}
+    item: {fileID: 0}
 --- !u!114 &1492735678
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -3869,7 +3849,7 @@ MonoBehaviour:
   scope: 0
   key: SaveKey
   propertyReferences: []
-  value: save_data_example
+  value: save_data_savingdemo
 --- !u!114 &1492735679
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -4372,7 +4352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 851156596007385019, guid: 8c066a527a5039f478fd4b11b3b82540, type: 3}
       propertyPath: saveKey
-      value: save_data_example
+      value: save_data_savingdemo
       objectReference: {fileID: 0}
     - target: {fileID: 851156596007385019, guid: 8c066a527a5039f478fd4b11b3b82540, type: 3}
       propertyPath: autoSave
