@@ -17,7 +17,7 @@ MonoBehaviour:
   position: 51.42887305245766, -1.8524477998629703
   locationStatus: 0
   saveInfo: 0
-  statusDisplayOptionsList: {fileID: 11400000, guid: 2bb28e99de9ab584fa45d093c51f3d5f, type: 2}
+  statusDisplayOptionsList: {fileID: 11400000, guid: db23122809bb4b841a32f68f725e5941, type: 2}
   locationDisabled: 0
   radiusIncrease: 0
   radiusDecrease: 0

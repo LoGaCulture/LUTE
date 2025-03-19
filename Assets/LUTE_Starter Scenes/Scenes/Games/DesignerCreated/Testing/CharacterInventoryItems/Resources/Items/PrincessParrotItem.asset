@@ -16,7 +16,7 @@ MonoBehaviour:
   itemType: 4
   itemName: Princess Parrot
   itemDescription: A beautiful bird that loves to sing.
-  isLocked: 0
+  isLocked: 1
   useWhenLocked: 1
   consumeOnUse: 0
   canDrop: 0
