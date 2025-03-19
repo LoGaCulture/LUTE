@@ -90,6 +90,9 @@ namespace LoGaCulture.LUTE
             if (location == null || location.Value == null)
                 return;
 
+            if (item.ItemID != this.inventoryItem.ItemID)
+                return;
+
             location.Value.LocationDisabled = true;
             // One could hide marker here also via the map manager
         }
