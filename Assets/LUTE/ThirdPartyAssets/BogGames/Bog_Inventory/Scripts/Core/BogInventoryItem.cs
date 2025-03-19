@@ -19,6 +19,8 @@ namespace BogGames.Tools.Inventory
     [Serializable]
     public class BogInventoryItem : ScriptableObject
     {
+        private bool isLocked;
+
         [SerializeField] protected string itemID;
         [Tooltip("The type of item this is. Used for sorting and filtering.")]
         [SerializeField] protected BogItemType itemType;
@@ -28,7 +30,7 @@ namespace BogGames.Tools.Inventory
         [TextArea(3, 10)]
         [SerializeField] protected string itemDescription;
         [Tooltip("Whether this item is locked or not.")]
-        [SerializeField] protected bool isLocked;
+        [SerializeField] protected bool defaultLockedStatus;
         [Tooltip("Allow this item to be used, even if it is locked.")]
         [SerializeField] protected bool useWhenLocked;
         [Tooltip("Whether to consume this item when used.")]
@@ -58,6 +60,7 @@ namespace BogGames.Tools.Inventory
         [Tooltip("The sound to play when an item is added to the inventory.")]
         [SerializeField] protected AudioClip addSound;
 
+        public bool DefaultLockedStatus { get { return defaultLockedStatus; } }
         public string ItemID { get { return itemID; } }
         public string ItemName { get { return itemName; } }
         public bool IsLocked { get { return isLocked; } set { isLocked = value; } }

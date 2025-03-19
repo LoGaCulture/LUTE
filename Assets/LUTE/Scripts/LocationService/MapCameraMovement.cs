@@ -169,8 +169,8 @@ namespace LoGaCulture.LUTE
                         float prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude;
                         float touchDeltaMag = (touchZero.position - touchOne.position).magnitude;
 
-                        // Find the difference in the distances between each frame
-                        zoomFactor = 0.01f * (prevTouchDeltaMag - touchDeltaMag);
+                        // Reverse the zoom behavior
+                        zoomFactor = 0.01f * (touchDeltaMag - prevTouchDeltaMag);
                     }
                     if (allowZoom)
                     {

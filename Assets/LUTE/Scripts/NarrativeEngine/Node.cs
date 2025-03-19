@@ -340,11 +340,12 @@ public class Node : MonoBehaviour
                 // This node has been restarted while it was executing, so we need to stop
                 // executing the current order and start again from the beginning and prevent stopping future runs
                 ReturnToIdle();
+                yield break;
             }
         }
         //If any locations or nodes unlocked become false then we need to reset the node to idle
-        // ReturnToIdle();
-        // yield return null;
+        ReturnToIdle();
+        yield break;
     }
 
     //if you wish to force a node to complete, call this method as this will ensure the node will break out of the execution loop

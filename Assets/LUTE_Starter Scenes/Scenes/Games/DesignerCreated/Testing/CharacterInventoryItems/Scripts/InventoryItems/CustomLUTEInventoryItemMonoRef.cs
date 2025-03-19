@@ -94,6 +94,9 @@ namespace LoGaCulture.LUTE
                 return;
 
             location.Value.LocationDisabled = true;
+            // Add a save point here to save location information to file
+            var saveManager = LogaManager.Instance.SaveManager;
+            saveManager.AddSavePoint("ObjectInfo" + location.Value.LocationName, "A list of location info to be stored " + System.DateTime.UtcNow.ToString("HH:mm dd MMMM, yyyy"), false);
             // One could hide marker here also via the map manager
         }
     }

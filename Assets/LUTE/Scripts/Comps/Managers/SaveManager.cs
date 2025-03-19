@@ -234,7 +234,7 @@ public class SaveManager : MonoBehaviour
     }
     public virtual void AddSavePoint(string savePointKey, string savePointDescription, bool settingsOnly, SaveProfile newProfile = SaveProfile.EngineData)
     {
-        saveHistory.AddSavePoint(savePointKey, savePointDescription, settingsOnly, newProfile);
+        saveHistory.AddSavePoint(savePointKey, savePointDescription, settingsOnly, SaveManager.SaveProfile.SaveAll);
         SaveManagerSignals.DoSavePointAdded(savePointKey, savePointDescription);
     }
 

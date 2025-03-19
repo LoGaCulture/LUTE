@@ -34,7 +34,8 @@ namespace LoGaCulture.LUTE
         [Header("Location Info")]
         [Tooltip("The coordinates of the location in the format 'latitude, longitude'")]
         [SerializeField] private string position;
-        [SerializeField] private LocationStatus locationStatus = LocationStatus.Unvisited;
+        [SerializeField] private LocationStatus defaultStatus = LocationStatus.Unvisited;
+
         [Tooltip("Whether the location information should be saved or not")]
         [SerializeField] private bool saveInfo = true;
         // The display options
@@ -44,7 +45,7 @@ namespace LoGaCulture.LUTE
 
         [Header("Location Settings")]
         [Tooltip("Whether or not this location can be used (can be set with location failure handling)")]
-        [SerializeField] private bool locationDisabled = false;
+        [SerializeField] private bool defaultDisabledStatus = false;
         [Tooltip("The amount to increase the default radius of the location by ")]
         [SerializeField] private float radiusIncrease = 0.0f;
         [Tooltip("The amount to decrease the default radius of the location by ")]
@@ -59,6 +60,8 @@ namespace LoGaCulture.LUTE
         [SerializeField] private string executeNode;
 
         private string customStatusLabel; // To be used in conjunction with the custom status
+        private LocationStatus locationStatus = LocationStatus.Unvisited;
+        private bool locationDisabled = false;
 
         public string InfoID
         {
@@ -77,6 +80,11 @@ namespace LoGaCulture.LUTE
             get { return position; }
         }
 
+        public LocationStatus DefaultLocationStatus
+        {
+            get { return defaultStatus; }
+        }
+
         public LocationStatus LocationStatus
         {
             get { return locationStatus; }
@@ -87,6 +95,11 @@ namespace LoGaCulture.LUTE
         {
             get { return saveInfo; }
             set { saveInfo = value; }
+        }
+
+        public bool DefaultDisabledStatus
+        {
+            get { return defaultDisabledStatus; }
         }
 
         public bool AllowNodeControls

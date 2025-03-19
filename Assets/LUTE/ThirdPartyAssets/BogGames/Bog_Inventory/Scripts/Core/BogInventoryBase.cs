@@ -48,9 +48,9 @@ namespace BogGames.Tools.Inventory
         public virtual void AddItem(BogInventoryItem item, int amount = 1, bool addIfExists = true)
         {
             // Check if item already exists in the inventory
-            if(!addIfExists)
+            if (!addIfExists)
             {
-                if(items.FindIndex(slot => slot != null && slot.Item.ItemID == item.ItemID) != -1)
+                if (items.FindIndex(slot => slot != null && slot.Item.ItemID == item.ItemID) != -1)
                 {
                     return;
                 }
@@ -419,6 +419,15 @@ namespace BogGames.Tools.Inventory
         {
             if (Application.isPlaying)
             {
+                // First ensure we reset the locked status back to default in case we do not reload the scene when resetting the saved inventory file
+                foreach (var item in items)
+                {
+                    if (item != null)
+                    {
+                        item.Item.IsLocked = item.Item.DefaultLockedStatus;
+                    }
+                }
+
                 items = new List<BogInventorySlot?>(new BogInventorySlot?[inventoryWidth * inventoryHeight]);
                 inventoryCanvas?.DrawInventory(items, SelectedItemIndex, this);
 

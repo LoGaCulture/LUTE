@@ -120,8 +120,6 @@ namespace LoGaCulture.LUTE
         {
             locationHidden = true;
 
-            locVar.Value.LocationDisabled = true;
-
             locVar.Value.StatusDisplayOptionsList.list.ForEach(x =>
             {
                 if (x.locationDisplayOptions != null)
@@ -136,12 +134,11 @@ namespace LoGaCulture.LUTE
         public void ResetHiddenStatus()
         {
             locationHidden = false;
-            locVar.Value.LocationDisabled = false;
         }
 
         public void ShowMarker()
         {
-            if(locationHidden)
+            if (locationHidden)
                 return;
 
             locVar.Value.StatusDisplayOptionsList.list.ForEach(x =>
@@ -355,6 +352,8 @@ namespace LoGaCulture.LUTE
             }
             else
             {
+                if (locationHidden)
+                    ResetHiddenStatus();
                 ShowMarker();
             }
 
@@ -454,9 +453,9 @@ namespace LoGaCulture.LUTE
 
         private void SaveLocationInfo()
         {
-            if (locVar.Value.LocationStatus != locVar.Value.LocationStatus)
+            if (locVar.Value.LocationStatus != priorStatus)
             {
-                locVar.Value.LocationStatus = locVar.Value.LocationStatus;
+                priorStatus = locVar.Value.LocationStatus;
 
                 var saveManager = LogaManager.Instance.SaveManager;
                 saveManager.AddSavePoint("ObjectInfo" + locVar.Value.LocationName, "A list of location info to be stored " + System.DateTime.UtcNow.ToString("HH:mm dd MMMM, yyyy"), false);

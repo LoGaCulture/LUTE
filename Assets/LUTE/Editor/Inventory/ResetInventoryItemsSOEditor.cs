@@ -39,7 +39,7 @@ namespace LoGaCulture.LUTE
                     // If an item is locked then unlock it
                     // If an item is unlocked then lock it
                     // Essentially resetting the item back to whatever it was before runtime began
-                    item.IsLocked = !item.IsLocked;
+                    item.IsLocked = item.DefaultLockedStatus;
                 }
             }
 

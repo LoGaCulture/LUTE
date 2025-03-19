@@ -30,6 +30,11 @@ public class SaveData : MonoBehaviour
             case SaveManager.SaveProfile.BogInventoryData:
                 SaveInventoryData(saveDataItems);
                 break;
+            case SaveManager.SaveProfile.SaveAll:
+                SaveEngineData(saveDataItems, settingsOnly);
+                SaveAchievementData(saveDataItems);
+                SaveInventoryData(saveDataItems);
+                break;
         }
     }
 

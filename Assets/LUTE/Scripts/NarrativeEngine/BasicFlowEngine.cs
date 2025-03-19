@@ -888,14 +888,24 @@ public class BasicFlowEngine : MonoBehaviour, ISubstitutionHandler
         }
     }
 
-    public virtual void SetLocationInfo(string infoID, LoGaCulture.LUTE.LocationStatus status)
+    public virtual void SetLocationInfo(string infoID, LoGaCulture.LUTE.LocationStatus status, bool disabled)
     {
         foreach (var item in GetComponents<LocationVariable>())
         {
             if (item.Value.InfoID == infoID)
             {
                 item.Value.LocationStatus = status;
+                item.Value.LocationDisabled = disabled;
             }
+        }
+    }
+
+    public virtual void ResetLocationsToDefault()
+    {
+        foreach (var item in GetComponents<LocationVariable>())
+        {
+            item.Value.LocationStatus = item.Value.DefaultLocationStatus;
+            item.Value.LocationDisabled = item.Value.DefaultDisabledStatus;
         }
     }
 
