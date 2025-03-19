@@ -45,8 +45,17 @@ namespace BogGames.Tools.Inventory
             inventoryCanvas?.FadeInventoryCanvas();
         }
 
-        public virtual void AddItem(BogInventoryItem item, int amount = 1)
+        public virtual void AddItem(BogInventoryItem item, int amount = 1, bool addIfExists = true)
         {
+            // Check if item already exists in the inventory
+            if(!addIfExists)
+            {
+                if(items.FindIndex(slot => slot != null && slot.Item.ItemID == item.ItemID) != -1)
+                {
+                    return;
+                }
+            }
+
             // Try stacking into existing slots first
             for (int i = 0; i < items.Count; i++)
             {

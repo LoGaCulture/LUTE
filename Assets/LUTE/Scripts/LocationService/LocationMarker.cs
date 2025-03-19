@@ -24,6 +24,7 @@ namespace LoGaCulture.LUTE
         private LocationStatus priorStatus = LocationStatus.Unvisited;
         private bool preventUpdatingVisuals = false; // When a status gets updated the user has an option to ensure that the other settings will never change after the fact
         private BoxCollider2D markerCollider2D; // Used to detect clicks on the marker
+        private bool locationHidden = false;
 
         [Tooltip("The location pin sprite renderer")]
         [SerializeField] protected SpriteRenderer markerSpriteRenderer;
@@ -117,16 +118,41 @@ namespace LoGaCulture.LUTE
 
         public void HideMarker()
         {
-            if (markerCollider2D)
-                markerCollider2D.enabled = false;
-            visualisationObject?.gameObject.SetActive(false);
+            locationHidden = true;
+
+            locVar.Value.LocationDisabled = true;
+
+            locVar.Value.StatusDisplayOptionsList.list.ForEach(x =>
+            {
+                if (x.locationDisplayOptions != null)
+                {
+                    x.locationDisplayOptions.ShowSprite = false;
+                    x.locationDisplayOptions.ShowName = false;
+                    x.locationDisplayOptions.ShowRadius = false;
+                }
+            });
+        }
+
+        public void ResetHiddenStatus()
+        {
+            locationHidden = false;
+            locVar.Value.LocationDisabled = false;
         }
 
         public void ShowMarker()
         {
-            if (markerCollider2D)
-                markerCollider2D.enabled = true;
-            visualisationObject?.gameObject.SetActive(true);
+            if(locationHidden)
+                return;
+
+            locVar.Value.StatusDisplayOptionsList.list.ForEach(x =>
+            {
+                if (x.locationDisplayOptions != null)
+                {
+                    x.locationDisplayOptions.ShowSprite = true;
+                    x.locationDisplayOptions.ShowName = true;
+                    x.locationDisplayOptions.ShowRadius = true;
+                }
+            });
         }
 
         protected void OnEnable()

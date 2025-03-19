@@ -29,8 +29,7 @@ public class LocationVariable : BaseVariable<LUTELocationInfo>
         // Any other logic should be handled by the class that has called this method
         if (Value.LocationDisabled)
         {
-            LocationServiceSignals.DoLocationComplete(this);
-            return true;
+            return false;
         }
         bool condition = false;
         Vector2 location = Vector2.zero;

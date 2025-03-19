@@ -128,7 +128,7 @@ namespace LoGaCulture.LUTE
             {
                 foreach (var locationMarker in relatedLocationMarkers)
                 {
-                    locationMarker.ShowMarker();
+                    locationMarker.ResetHiddenStatus();
                 }
             }
         }

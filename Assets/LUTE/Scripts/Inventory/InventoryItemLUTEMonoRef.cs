@@ -21,6 +21,7 @@ namespace LoGaCulture.LUTE
             if (inventoryItem != null)
             {
                 BogInventorySignals.OnInventoryItemUsed += OnItemUse;
+                BogInventorySignals.OnInventoryItemUnlocked += OnItemUnlock;
                 BogInventorySignals.OnInventoryItemRemoved += OnItemRemoved;
                 BogInventorySignals.OnInventoryReset += OnInventoryReset;
             }
@@ -31,6 +32,7 @@ namespace LoGaCulture.LUTE
             if (inventoryItem != null)
             {
                 BogInventorySignals.OnInventoryItemUsed -= OnItemUse;
+                BogInventorySignals.OnInventoryItemUnlocked -= OnItemUnlock;
                 BogInventorySignals.OnInventoryItemRemoved -= OnItemRemoved;
                 BogInventorySignals.OnInventoryReset -= OnInventoryReset;
             }
@@ -38,11 +40,14 @@ namespace LoGaCulture.LUTE
 
         protected virtual void OnItemUse(BogInventoryItem item) { }
 
+        protected virtual void OnItemUnlock(BogInventoryItem item) { }
+
         protected virtual void OnItemRemoved(BogInventoryItem item)
         {
             if (item != null)
             {
                 BogInventorySignals.OnInventoryItemUsed -= OnItemUse;
+                BogInventorySignals.OnInventoryItemUnlocked -= OnItemUnlock;
             }
         }
 
@@ -51,6 +56,7 @@ namespace LoGaCulture.LUTE
             if (inventoryItem != null)
             {
                 BogInventorySignals.OnInventoryItemUsed -= OnItemUse;
+                BogInventorySignals.OnInventoryItemUnlocked -= OnItemUnlock;
             }
         }
     }

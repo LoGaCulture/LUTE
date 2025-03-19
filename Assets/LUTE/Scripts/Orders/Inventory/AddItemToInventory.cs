@@ -15,6 +15,8 @@ namespace LoGaCulture.LUTE
         [SerializeField] protected BogInventoryItem item;
         [Tooltip("The amount of the item to add to the inventory")]
         [SerializeField] protected int amount = 1;
+        [Tooltip("If true, the item will be added if it already exists in the inventory")]
+        [SerializeField] protected bool addIfAlreadyExists = true;
 
         public override void OnEnter()
         {
@@ -24,7 +26,7 @@ namespace LoGaCulture.LUTE
                 return;
             }
 
-            inventory.AddItem(item, amount);
+            inventory.AddItem(item, amount, addIfAlreadyExists);
             Continue();
         }
 

@@ -15,6 +15,9 @@ namespace LoGaCulture.LUTE
         [Tooltip("Portrait that represents the character.")]
         [HideInInspector]
         [SerializeField] protected Sprite characterPortrait;
+        [Tooltip("If a location is related to this item then it can be set here.")]
+        [VariableProperty(typeof(LocationVariable))]
+        [SerializeField] protected LocationVariable location;
 
         public Character Character { get { return character; } }
         public Sprite Portrait { get { return characterPortrait; } set { characterPortrait = value; } }
@@ -80,6 +83,15 @@ namespace LoGaCulture.LUTE
                     characterPanel.TogglePanel();
                 }
             }
+        }
+
+        protected override void OnItemUnlock(BogInventoryItem item)
+        {
+            if (location == null || location.Value == null)
+                return;
+
+            location.Value.LocationDisabled = true;
+            // One could hide marker here also via the map manager
         }
     }
 }
