@@ -25,6 +25,7 @@ namespace LoGaCulture.LUTE
         private bool preventUpdatingVisuals = false; // When a status gets updated the user has an option to ensure that the other settings will never change after the fact
         private BoxCollider2D markerCollider2D; // Used to detect clicks on the marker
         private bool locationHidden = false;
+        private bool hiddenByZoom = false;
 
         [Tooltip("The location pin sprite renderer")]
         [SerializeField] protected SpriteRenderer markerSpriteRenderer;
@@ -50,7 +51,6 @@ namespace LoGaCulture.LUTE
         public SpriteRenderer RadiusRenderer { get => radiusSpriteRenderer; }
         public TextMesh MarkerTextMesh { get => markerTextMesh; }
         public bool ForceUpdateInEditor { get; set; }
-
 
         public void OnPointerClick(PointerEventData eventData)
         {
@@ -118,8 +118,6 @@ namespace LoGaCulture.LUTE
 
         public void HideMarker()
         {
-            locationHidden = true;
-
             locVar.Value.StatusDisplayOptionsList.list.ForEach(x =>
             {
                 if (x.locationDisplayOptions != null)
@@ -131,6 +129,11 @@ namespace LoGaCulture.LUTE
             });
         }
 
+        public void SetHiddenStatus()
+        {
+            locationHidden = true;
+        }
+
         public void ResetHiddenStatus()
         {
             locationHidden = false;
@@ -138,16 +141,13 @@ namespace LoGaCulture.LUTE
 
         public void ShowMarker()
         {
-            if (locationHidden)
-                return;
-
             locVar.Value.StatusDisplayOptionsList.list.ForEach(x =>
             {
                 if (x.locationDisplayOptions != null)
                 {
-                    x.locationDisplayOptions.ShowSprite = true;
-                    x.locationDisplayOptions.ShowName = true;
-                    x.locationDisplayOptions.ShowRadius = true;
+                    x.locationDisplayOptions.ShowSprite = x.locationDisplayOptions.DefaultShowSprite;
+                    x.locationDisplayOptions.ShowName = x.locationDisplayOptions.DefaultShowName;
+                    x.locationDisplayOptions.ShowRadius = x.locationDisplayOptions.DefaultShowRadius;
                 }
             });
         }
@@ -352,9 +352,10 @@ namespace LoGaCulture.LUTE
             }
             else
             {
-                if (locationHidden)
-                    ResetHiddenStatus();
-                ShowMarker();
+                if (!locationHidden)
+                {
+                    ShowMarker();
+                }
             }
 
             // If zoom is below the threshold stop scaling and retain the default scale

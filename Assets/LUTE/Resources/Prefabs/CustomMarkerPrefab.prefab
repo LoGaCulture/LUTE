@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 3993826640174674435}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -289,6 +289,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 3d69bf4b1f575644db3fcca0cb5c60f8, type: 3}
+    - target: {fileID: 8333115561107234584, guid: 9b5cceeaef4cbf5428e63d32049ddb46, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8559514904495585917, guid: 9b5cceeaef4cbf5428e63d32049ddb46, type: 3}
       propertyPath: m_Name
       value: LocSprite
@@ -493,6 +497,10 @@ PrefabInstance:
     - target: {fileID: 5790737691150376730, guid: d6ed17cc88af03542adfd3f2762a73e0, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138538478120909439, guid: d6ed17cc88af03542adfd3f2762a73e0, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

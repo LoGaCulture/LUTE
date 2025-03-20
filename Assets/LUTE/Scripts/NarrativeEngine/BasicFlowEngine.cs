@@ -902,6 +902,7 @@ public class BasicFlowEngine : MonoBehaviour, ISubstitutionHandler
 
     public virtual void ResetLocationsToDefault()
     {
+        Debug.Log("Resetting locations to default");
         foreach (var item in GetComponents<LocationVariable>())
         {
             item.Value.LocationStatus = item.Value.DefaultLocationStatus;

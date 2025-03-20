@@ -105,6 +105,7 @@ namespace LoGaCulture.LUTE
 
             foreach (var locationMarker in relatedLocationMarkers)
             {
+                locationMarker.SetHiddenStatus();
                 locationMarker.HideMarker();
             }
         }
@@ -129,6 +130,7 @@ namespace LoGaCulture.LUTE
                 foreach (var locationMarker in relatedLocationMarkers)
                 {
                     locationMarker.ResetHiddenStatus();
+                    locationMarker.ShowMarker();
                 }
             }
         }
@@ -246,7 +248,19 @@ namespace LoGaCulture.LUTE
             bool shouldShowTracker = engine.DemoMapMode && mapCam.enabled;
             if (playerTracker != null)
             {
-                playerTracker.gameObject.SetActive(shouldShowTracker);
+                var astroController = playerTracker.GetComponent<Mapbox.Examples.AstronautMouseController>();
+                if (astroController != null)
+                {
+                    astroController.enabled = shouldShowTracker;
+                }
+                else
+                    return;
+
+                var raycastPlane = playerTracker.GetComponentInChildren<MeshCollider>();
+                if (raycastPlane != null)
+                {
+                    raycastPlane.enabled = shouldShowTracker;
+                }
             }
         }
     }

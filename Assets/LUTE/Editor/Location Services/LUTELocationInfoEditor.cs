@@ -3,32 +3,24 @@ using UnityEngine;
 
 namespace LoGaCulture.LUTE
 {
-    //[CustomEditor(typeof(LUTELocationInfo))]
+    [CustomEditor(typeof(LUTELocationInfo))]
     public class LUTELocationInfoEditor : Editor
     {
-        SerializedProperty executeNodeProp;
-
-        private void OnEnable()
-        {
-            executeNodeProp = serializedObject.FindProperty("executeNode");
-        }
-
         public override void OnInspectorGUI()
         {
-            DrawDefaultInspector(); // Draws all other fields
+            DrawDefaultInspector();
 
-            serializedObject.Update(); // Sync with the actual object
-            EditorGUI.BeginChangeCheck();
+            var t = target as LUTELocationInfo;
 
-            NodeEditor.NodeField(executeNodeProp,
-                     new GUIContent("Execute Node", "Node to execute when location is clicked."),
-                     new GUIContent("<None>"),
-                     GraphWindow.GetEngine());
-
-
-            if (EditorGUI.EndChangeCheck())
+            // A button to reset this location to default
+            if (GUILayout.Button("Reset Location"))
             {
-                serializedObject.ApplyModifiedProperties();
+                t.LocationStatus = t.DefaultLocationStatus;
+                t.LocationDisabled = t.DefaultDisabledStatus;
+
+                string locName = t.LocationName;
+
+                Debug.Log($"Location {locName} has been reset to default.");
             }
         }
     }

@@ -15,10 +15,10 @@ MonoBehaviour:
   infoID: 1479e2c3-7de5-4396-b0a9-d24189958481
   locationName: Central Avebury
   position: 51.42887305245766, -1.8524477998629703
-  locationStatus: 0
+  defaultStatus: 0
   saveInfo: 1
   statusDisplayOptionsList: {fileID: 11400000, guid: db23122809bb4b841a32f68f725e5941, type: 2}
-  locationDisabled: 0
+  defaultDisabledStatus: 0
   radiusIncrease: 0
   radiusDecrease: 0
   forcePermanentChange: 0

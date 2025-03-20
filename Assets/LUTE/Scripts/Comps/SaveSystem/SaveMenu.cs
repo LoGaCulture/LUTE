@@ -1,3 +1,4 @@
+using BogGames.Tools.Inventory;
 using LoGaCulture.LUTE;
 using TMPro;
 using UnityEngine;
@@ -24,6 +25,8 @@ public class SaveMenu : MonoBehaviour
     [SerializeField] protected Button forwardButton;
     [SerializeField] protected Button restartButton;
     [SerializeField] protected ScrollRect debugView;
+    [SerializeField] protected BasicFlowEngine engine;
+    [SerializeField] protected BogInventoryBase inventory;
     [SerializeField] protected bool dontDestroyOnLoad = true;
 
     protected static bool saveMenuActive = false;
@@ -156,6 +159,18 @@ public class SaveMenu : MonoBehaviour
     public virtual string SaveKey
     {
         get { return saveKey; }
+    }
+
+    public virtual void ResetSave()
+    {
+        if (engine != null)
+        {
+            engine.ResetLocationsToDefault();
+        }
+        if (inventory != null)
+        {
+            inventory.ResetInventory();
+        }
     }
 
     public void ToggleSaveMenu()

@@ -8,7 +8,7 @@ using UnityEngine;
 public class ShowLocationMarkers : Order
 {
     [Tooltip("The locations of the markers to reveal.")]
-    [SerializeField] protected LocationData[] locations;
+    [SerializeField] protected LocationVariable[] locations;
 
     private LUTEMapManager mapManager;
     public override void OnEnter()
@@ -43,10 +43,10 @@ public class ShowLocationMarkers : Order
 
     private void ShowLocations()
     {
-        foreach (LocationData location in locations)
+        foreach (LocationVariable location in locations)
         {
-            if (location.locationRef != null)
-                mapManager.ShowLocationMarker(location.locationRef);
+            if (location.Value != null)
+                mapManager.ShowLocationMarker(location);
         }
     }
 
@@ -62,9 +62,9 @@ public class ShowLocationMarkers : Order
     {
         bool hasReference = false;
 
-        foreach (LocationData location in locations)
+        foreach (LocationVariable location in locations)
         {
-            hasReference = location.locationRef == variable || hasReference;
+            hasReference = location == variable || hasReference;
         }
         return hasReference;
     }
@@ -76,10 +76,10 @@ public class ShowLocationMarkers : Order
 
         if (locations != null)
         {
-            foreach (LocationData location in locations)
+            foreach (LocationVariable location in locations)
             {
-                if (location.locationRef != null)
-                    GetEngine().DetermineSubstituteVariables(location.locationRef.Key, referencedVariables);
+                if (location.Value != null)
+                    GetEngine().DetermineSubstituteVariables(location.Key, referencedVariables);
             }
         }
     }

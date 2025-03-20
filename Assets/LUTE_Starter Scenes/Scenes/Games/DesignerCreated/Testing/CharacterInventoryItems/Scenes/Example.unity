@@ -243,11 +243,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 259267083496140413, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
       propertyPath: scrollPos.x
-      value: -25536.791
+      value: -25418.791
       objectReference: {fileID: 0}
     - target: {fileID: 259267083496140413, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
       propertyPath: scrollPos.y
-      value: -24752.48
+      value: -24831.48
       objectReference: {fileID: 0}
     - target: {fileID: 259267083496140413, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
       propertyPath: nodeViewHeight
@@ -255,7 +255,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 259267083496140413, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
       propertyPath: variables.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 259267083496140413, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
       propertyPath: 'variables.Array.data[0]'
@@ -274,8 +274,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1078745601}
     - target: {fileID: 259267083496140413, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
+      propertyPath: 'variables.Array.data[4]'
+      value: 
+      objectReference: {fileID: 1078745733}
+    - target: {fileID: 259267083496140413, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
       propertyPath: selectedNodes.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 259267083496140413, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
       propertyPath: selectedOrders.Array.size
@@ -284,11 +288,11 @@ PrefabInstance:
     - target: {fileID: 259267083496140413, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
       propertyPath: 'selectedNodes.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1078745672}
     - target: {fileID: 259267083496140413, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
       propertyPath: 'selectedOrders.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1078745683}
     - target: {fileID: 877388378425128865, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.34608158
@@ -361,6 +365,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -6
       objectReference: {fileID: 0}
+    - target: {fileID: 3209145392840924028, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
+      propertyPath: location.locationRef
+      value: 
+      objectReference: {fileID: 1078745601}
     - target: {fileID: 5294199930791624613, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
       propertyPath: m_Name
       value: LUTE Prefab (Full)
@@ -373,6 +381,10 @@ PrefabInstance:
       propertyPath: 'orderList.Array.data[0]'
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7283881883931099656, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
+      propertyPath: conditions.Array.data[0].anyVariable.variable
+      value: 
+      objectReference: {fileID: 1078745733}
     - target: {fileID: 8402369712545932868, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
       propertyPath: text
       value: Delete Save File
@@ -510,6 +522,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8861555758513075961, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1078745666}
+    - targetCorrespondingSourceObject: {fileID: 8861555758513075961, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1078745733}
     - targetCorrespondingSourceObject: {fileID: 145743763112513338, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1818651360}
@@ -2356,6 +2371,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentNode: {fileID: 1078745664}
   waitForFrames: 1
+--- !u!114 &1078745672 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7776012543760205945, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
+  m_PrefabInstance: {fileID: 1078745453}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078745455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc9f689a21732a34489f55c1ed82a919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1078745683 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7283881883931099656, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
+  m_PrefabInstance: {fileID: 1078745453}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078745455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93b38f47b6de1de4baa9eb142b211426, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1078745733
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078745455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5971f93dba6a1104f816d7c70c408499, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scope: 0
+  key: SaveKey
+  propertyReferences: []
+  value: save_data_demo_zenah
 --- !u!1001 &1171981239
 PrefabInstance:
   m_ObjectHideFlags: 0

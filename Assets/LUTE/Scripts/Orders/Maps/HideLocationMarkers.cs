@@ -8,7 +8,7 @@ using UnityEngine;
 public class HideLocationMarkers : Order
 {
     [Tooltip("The locations of the markers to hide.")]
-    [SerializeField] protected LocationData[] locations;
+    [SerializeField] protected LocationVariable[] locations;
 
     private LUTEMapManager mapManager;
 
@@ -44,10 +44,10 @@ public class HideLocationMarkers : Order
 
     private void HideLocations()
     {
-        foreach (LocationData location in locations)
+        foreach (LocationVariable location in locations)
         {
-            if (location.locationRef != null)
-                mapManager.HideLocationMarker(location.locationRef);
+            if (location.Value != null)
+                mapManager.HideLocationMarker(location);
         }
     }
 
@@ -63,9 +63,9 @@ public class HideLocationMarkers : Order
     {
         bool hasReference = false;
 
-        foreach (LocationData location in locations)
+        foreach (LocationVariable location in locations)
         {
-            hasReference = location.locationRef == variable || hasReference;
+            hasReference = location == variable || hasReference;
         }
         return hasReference;
     }
@@ -77,10 +77,10 @@ public class HideLocationMarkers : Order
 
         if (locations != null)
         {
-            foreach (LocationData location in locations)
+            foreach (LocationVariable location in locations)
             {
-                if (location.locationRef != null)
-                    GetEngine().DetermineSubstituteVariables(location.locationRef.Key, referencedVariables);
+                if (location.Value != null)
+                    GetEngine().DetermineSubstituteVariables(location.Key, referencedVariables);
             }
         }
     }
