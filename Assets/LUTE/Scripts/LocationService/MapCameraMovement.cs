@@ -19,7 +19,7 @@ namespace LoGaCulture.LUTE
         [Tooltip("Whether to allow panning of the map.")]
         [SerializeField] protected bool allowPan = true;
         [Tooltip("The speed that is used when panning the map.")]
-        [Range(0.0f, 1.0f)]
+        [Range(0.0f, 5.0f)]
         [SerializeField] protected float panSpeed = 1.0f;
         [Tooltip("The speed of map movement when using keyboard input.")]
         [SerializeField] float keysSensitivity = 2f;
@@ -169,7 +169,6 @@ namespace LoGaCulture.LUTE
                         float prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude;
                         float touchDeltaMag = (touchZero.position - touchOne.position).magnitude;
 
-                        // Reverse the zoom behavior
                         zoomFactor = 0.01f * (touchDeltaMag - prevTouchDeltaMag);
                     }
                     if (allowZoom)
