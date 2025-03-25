@@ -1581,24 +1581,12 @@ public class GraphWindow : EventWindow
         }
 
         bool locationFound = false;
+        List<LocationVariable> nodeLocations = new List<LocationVariable>();
+        node.GetAllLocations(ref nodeLocations);
 
-        // Determine location on node or any order
-        //if (node.NodeLocation != null)
-        //{
-        //    locationFound = true;
-        //}
-        //else 
-        if (node._EventHandler != null && node._EventHandler.GetType() == typeof(LocationClickEventHandler))
+        if (nodeLocations.Count >= 1)
         {
-            var handler = node._EventHandler as LocationClickEventHandler;
-            locationFound = handler.Location.locationRef != null;
-        }
-
-        if (!locationFound)
-        {
-            List<Order> locationOrders = new List<Order>();
-            node.GetLocationOrders(ref locationOrders);
-            locationFound = locationOrders.Count > 0;
+            locationFound = true;
         }
 
         if (locationFound)

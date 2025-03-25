@@ -1,4 +1,6 @@
 using LoGaCulture.LUTE;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [OrderInfo("Map",
@@ -8,6 +10,7 @@ using UnityEngine;
 public class HideLocationMarkers : Order
 {
     [Tooltip("The locations of the markers to hide.")]
+    [VariableProperty(typeof(LocationVariable))]
     [SerializeField] protected LocationVariable[] locations;
 
     private LUTEMapManager mapManager;
@@ -59,6 +62,18 @@ public class HideLocationMarkers : Order
         return "Error: No locations provided.";
     }
 
+    public override void GetLocationVariables(ref List<LocationVariable> locationVariables)
+    {
+        if (locations != null && locations.Count() >= 1)
+        {
+            foreach (LocationVariable location in locations)
+            {
+                if (location != null && location.Value != null)
+                    locationVariables.Add(location);
+            }
+        }
+    }
+
     public override bool HasReference(Variable variable)
     {
         bool hasReference = false;
@@ -79,7 +94,7 @@ public class HideLocationMarkers : Order
         {
             foreach (LocationVariable location in locations)
             {
-                if (location.Value != null)
+                if (location != null && location.Value != null)
                     GetEngine().DetermineSubstituteVariables(location.Key, referencedVariables);
             }
         }

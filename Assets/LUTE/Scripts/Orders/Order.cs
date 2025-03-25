@@ -57,6 +57,9 @@ public abstract class Order : MonoBehaviour
     public virtual void GetConnectedNodes(ref List<Node> connectedNodes)
     { }
 
+    public virtual void GetLocationVariables(ref List<LocationVariable> locationVariables)
+    { }
+
     public virtual void GetConditions(ref List<ConditionExpression> conditions)
     { }
 
@@ -100,26 +103,6 @@ public abstract class Order : MonoBehaviour
         if (locVar != null)
         {
             locVar = locationVariable;
-        }
-    }
-
-    public virtual void GetLocationVariables(ref List<LocationVariable> locationVariables)
-    {
-        foreach (var field in this.GetType().GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public))
-        {
-            if (field.FieldType == typeof(LocationVariable) && field.GetValue(this) != null)
-            {
-                var locationVariable = (LocationVariable)field.GetValue(this);
-                locationVariables.Add(locationVariable);
-            }
-            if (field.FieldType == typeof(List<LocationVariable>) || field.FieldType == typeof(LocationVariable[]))
-            {
-                var collection = field.GetValue(this) as IEnumerable<LocationVariable>;
-                if (collection != null)
-                {
-                    locationVariables.AddRange(collection);
-                }
-            }
         }
     }
 

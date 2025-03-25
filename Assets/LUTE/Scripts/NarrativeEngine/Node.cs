@@ -423,7 +423,6 @@ public class Node : MonoBehaviour
         }
     }
 
-
     public virtual void GetConditionOrders(ref List<Order> conditionOrders)
     {
         for (int i = 0; i < orderList.Count; i++)
@@ -486,6 +485,12 @@ public class Node : MonoBehaviour
                 }
             }
         }
+
+        // Finally, check to see if any of the orders explicity reference a location variable
+        foreach (var order in orderList)
+        {
+            //order.GetLocationVariables(ref locationOrders);
+        }
     }
 
     // Find all locations in any possible case on the Node.
@@ -539,6 +544,10 @@ public class Node : MonoBehaviour
                                 nodeLocations.Add(locationVar);
                         }
                     }
+                }
+                else
+                {
+                    order.GetLocationVariables(ref nodeLocations);
                 }
             }
         }

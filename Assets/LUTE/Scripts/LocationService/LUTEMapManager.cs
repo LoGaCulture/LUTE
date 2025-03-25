@@ -79,6 +79,11 @@ namespace LoGaCulture.LUTE
             return latlongDelta;
         }
 
+        public Transform TrackerTransform()
+        {
+            return playerTracker.transform;
+        }
+
         public virtual void SpawnMarkers()
         {
             foreach (LocationVariable location in allLocationsAtRuntime)
@@ -175,6 +180,20 @@ namespace LoGaCulture.LUTE
             }
             spawnedLocationMarkers.Clear();
             allLocationsAtRuntime.Clear();
+        }
+
+        public virtual List<Transform> GetMarkerTransforms(LocationVariable locationVar)
+        {
+            if (locationVar == null || locationVar.Value == null)
+            {
+                return null;
+            }
+
+            var relatedLocationMarkers = spawnedLocationMarkers.FindAll(spawnedLocationMarkers =>
+                spawnedLocationMarkers != null && spawnedLocationMarkers.LocationVariable.Value != null &&
+                spawnedLocationMarkers.LocationVariable.Value.InfoID == locationVar.Value.InfoID);
+
+            return relatedLocationMarkers.ConvertAll(marker => marker.transform);
         }
 
         protected virtual void Awake()

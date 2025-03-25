@@ -60,8 +60,8 @@ namespace LoGaCulture.LUTE
         [SerializeField] private string executeNode;
 
         private string customStatusLabel; // To be used in conjunction with the custom status
-        private LocationStatus locationStatus = LocationStatus.Unvisited;
-        private bool locationDisabled = false;
+        [SerializeField] private LocationStatus locationStatus = LocationStatus.Unvisited;
+        [SerializeField] private bool locationDisabled = false;
 
         public string InfoID
         {

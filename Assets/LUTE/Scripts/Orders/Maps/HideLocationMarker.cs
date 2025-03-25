@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [OrderInfo("Map",
@@ -7,10 +8,11 @@ using UnityEngine;
 public class HideLocationMarker : Order
 {
     [Tooltip("The location of the marker to hide.")]
-    [SerializeField] protected LocationData location;
+    [VariableProperty(typeof(LocationVariable))]
+    [SerializeField] protected LocationVariable location;
     public override void OnEnter()
     {
-        if (location.locationRef == null)
+        if (location.Value == null)
         {
             Continue();
             return;
@@ -38,20 +40,28 @@ public class HideLocationMarker : Order
             Continue();
             return;
         }
-        mapManager.HideLocationMarker(location.locationRef);
+        mapManager.HideLocationMarker(location);
     }
 
     public override string GetSummary()
     {
-        if (location.locationRef != null)
-            return "Hides location marker at: " + location.locationRef?.Key;
+        if (location != null)
+            return "Hides location marker at: " + location?.Key;
 
         return "Error: No location provided.";
     }
 
+    public override void GetLocationVariables(ref List<LocationVariable> locationVariables)
+    {
+        if (location != null && location.Value != null)
+        {
+            locationVariables.Add(location);
+        }
+    }
+
     public override bool HasReference(Variable variable)
     {
-        return location.locationRef == variable || base.HasReference(variable);
+        return location == variable || base.HasReference(variable);
     }
 
 #if UNITY_EDITOR
@@ -59,9 +69,9 @@ public class HideLocationMarker : Order
     {
         base.RefreshVariableCache();
 
-        if (location.locationRef != null)
+        if (location != null)
         {
-            GetEngine().DetermineSubstituteVariables(location.locationRef.Key, referencedVariables);
+            GetEngine().DetermineSubstituteVariables(location.Key, referencedVariables);
         }
     }
 #endif

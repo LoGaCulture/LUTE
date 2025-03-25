@@ -31,22 +31,8 @@ namespace LoGaCulture.LUTE
         private bool defaultShowSprite;
         private bool defaultShowRadius;
 
-        public bool DefaultShowName => defaultShowName;
-        public bool DefaultShowSprite => defaultShowSprite;
-        public bool DefaultShowRadius => defaultShowRadius;
-
-        private void OnEnable()
-        {
-            defaultShowName = ShowName;
-            defaultShowSprite = ShowSprite;
-            defaultShowRadius = ShowRadius;
-        }
-
-        private void OnDisable()
-        {
-            ShowName = defaultShowName;
-            ShowSprite = defaultShowSprite;
-            ShowRadius = defaultShowRadius;
-        }
+        public bool DefaultShowName { get { return defaultShowName; } set { defaultShowName = value; } }
+        public bool DefaultShowSprite { get { return defaultShowSprite; } set { defaultShowSprite = value; } }
+        public bool DefaultShowRadius { get { return defaultShowRadius; } set { defaultShowRadius = value; } }
     }
 }

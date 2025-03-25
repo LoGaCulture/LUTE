@@ -1,4 +1,4 @@
-using Mapbox.Unity.Map;
+﻿using Mapbox.Unity.Map;
 using Mapbox.Unity.Utilities;
 using Mapbox.Utils;
 using System;
@@ -34,6 +34,8 @@ namespace LoGaCulture.LUTE
         [SerializeField] protected float maxZoomLevel = 21.0f;
         [Tooltip("Whether to allow rotation of the map.")]
         [SerializeField] protected bool allowRotate = true;
+        [Tooltip("Whether to allow tilting of the map.")]
+        [SerializeField] protected bool allowTilt = true;
         [Tooltip("The camera that is used to render the map during runtime.")]
         [SerializeField] protected Camera gameCamera;
         [Tooltip("The camera that is used to render the map during editor mode.")]
@@ -92,10 +94,13 @@ namespace LoGaCulture.LUTE
 
         public virtual void PanOrRotateCamera(float zInput)
         {
+            // Update the rotation value
             rotationZ += zInput * keysSensitivity;
 
-            gameCamera.transform.localEulerAngles = new Vector3(defaultRotation.x, defaultRotation.y, rotationZ);
+            // Apply rotation to the map instead of the camera
+            map.transform.localEulerAngles = new Vector3(0, rotationZ, 0);
         }
+
 
         public virtual void PanMapUsingTouchOrMouse()
         {
@@ -135,50 +140,72 @@ namespace LoGaCulture.LUTE
         protected virtual void HandleTouch()
         {
             float zoomFactor = 0.0f;
+            float tiltFactor = 0.0f;
 
             switch (Input.touchCount)
             {
-                case 1:
+                case 1: // One finger → Pan
+                    if (allowPan)
                     {
-                        if (allowPan)
-                        {
-                            PanMapUsingTouchOrMouse();
-                        }
-
-                        Touch touch = Input.GetTouch(0);
-                        float touchX = touch.deltaPosition.x;
-                        float touchY = touch.deltaPosition.y;
-
-                        if (allowRotate)
-                        {
-                            PanOrRotateCamera(touchX);
-                        }
+                        PanMapUsingTouchOrMouse();
                     }
                     break;
-                case 2:
+                case 2: // Two fingers → Rotate, Zoom, or Tilt
                     {
-                        // Store both touches
                         Touch touchZero = Input.GetTouch(0);
                         Touch touchOne = Input.GetTouch(1);
 
-                        // Find the position in the previous frame of each touch
+                        // Find previous positions
                         Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
                         Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
 
-                        // Find the magnitude of the vector (the distance) between the touches in each frame
+                        // Calculate pinch distance for zoom
                         float prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude;
                         float touchDeltaMag = (touchZero.position - touchOne.position).magnitude;
-
                         zoomFactor = 0.01f * (touchDeltaMag - prevTouchDeltaMag);
-                    }
-                    if (allowZoom)
-                    {
-                        ZoomMapUsingTouchOrMouse(zoomFactor);
+
+                        // Detect rotation
+                        float rotationAngle = GetTouchRotationAngle(touchZero, touchOne);
+
+                        // Detect tilting (vertical movement of two fingers)
+                        tiltFactor = GetTouchTiltFactor(touchZero, touchOne);
+
+                        if (allowZoom) ZoomMapUsingTouchOrMouse(zoomFactor);
+                        if (allowRotate) PanOrRotateCamera(rotationAngle);
+                        if (allowTilt) TiltCamera(tiltFactor);
                     }
                     break;
                 default:
                     break;
             }
+        }
+
+        protected virtual void TiltCamera(float tiltAmount)
+        {
+            gameCamera.transform.Rotate(Vector3.right, tiltAmount, Space.Self);
+        }
+
+        private float GetTouchTiltFactor(Touch touchZero, Touch touchOne)
+        {
+            float deltaYZero = touchZero.deltaPosition.y;
+            float deltaYOne = touchOne.deltaPosition.y;
+
+            // Check if fingers move in the same vertical direction
+            if (Mathf.Sign(deltaYZero) == Mathf.Sign(deltaYOne))
+            {
+                return 0.01f * (deltaYZero + deltaYOne); // Return tilt value
+            }
+
+            return 0f; // No tilt if fingers move in opposite directions
+        }
+
+        private float GetTouchRotationAngle(Touch touchZero, Touch touchOne)
+        {
+            Vector2 prevDir = (touchZero.position - touchOne.position).normalized;
+            Vector2 currentDir = (touchZero.deltaPosition - touchOne.deltaPosition).normalized;
+
+            float angle = Vector2.SignedAngle(prevDir, currentDir);
+            return angle; // Returns positive or negative rotation angle
         }
 
         protected virtual void HandleMouseAndKeyboard()
@@ -205,6 +232,11 @@ namespace LoGaCulture.LUTE
                 if (allowRotate)
                 {
                     PanOrRotateCamera(xMouse);
+                }
+
+                if (allowTilt)
+                {
+                    TiltCamera(yMouse * 0.5f);
                 }
             }
 

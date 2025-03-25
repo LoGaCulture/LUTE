@@ -183,6 +183,16 @@ namespace LoGaCulture.LUTE
             }
 
             locVar = engine.GetComponents<LocationVariable>().FirstOrDefault(x => x.Value.InfoID == locVar.Value.InfoID);
+
+            locVar.Value.StatusDisplayOptionsList.list.ForEach(x =>
+            {
+                if (x.locationDisplayOptions != null)
+                {
+                    x.locationDisplayOptions.DefaultShowSprite = x.locationDisplayOptions.ShowSprite;
+                    x.locationDisplayOptions.DefaultShowName = x.locationDisplayOptions.ShowName;
+                    x.locationDisplayOptions.DefaultShowRadius = x.locationDisplayOptions.ShowRadius;
+                }
+            });
         }
 
         protected void Update()
@@ -425,7 +435,7 @@ namespace LoGaCulture.LUTE
             if (locVar.Value == null)
                 return;
 
-            if (location.Value.LocationStatus != LocationStatus.Completed)
+            if (location.Value.LocationStatus != LocationStatus.Completed && this.locVar.Value.InfoID == location.Value.InfoID)
             {
                 locVar.Value.LocationStatus = LocationStatus.Visited;
                 if (locVar.Value.SaveInfo)
@@ -461,6 +471,19 @@ namespace LoGaCulture.LUTE
                 var saveManager = LogaManager.Instance.SaveManager;
                 saveManager.AddSavePoint("ObjectInfo" + locVar.Value.LocationName, "A list of location info to be stored " + System.DateTime.UtcNow.ToString("HH:mm dd MMMM, yyyy"), false);
             }
+        }
+
+        private void OnDisable()
+        {
+            locVar.Value.StatusDisplayOptionsList.list.ForEach(x =>
+            {
+                if (x.locationDisplayOptions != null)
+                {
+                    x.locationDisplayOptions.ShowSprite = x.locationDisplayOptions.DefaultShowSprite;
+                    x.locationDisplayOptions.ShowName = x.locationDisplayOptions.DefaultShowName;
+                    x.locationDisplayOptions.ShowRadius = x.locationDisplayOptions.DefaultShowRadius;
+                }
+            });
         }
     }
 }
