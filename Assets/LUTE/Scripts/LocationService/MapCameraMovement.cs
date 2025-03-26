@@ -36,7 +36,7 @@ namespace LoGaCulture.LUTE
         [SerializeField] protected bool allowRotate = true;
         [Tooltip("Whether to allow tilting of the map.")]
         /*[SerializeField] */
-        protected bool allowTilt = true;
+        protected bool allowTilt = false;
         [Tooltip("The camera that is used to render the map during runtime.")]
         [SerializeField] protected Camera gameCamera;
         [Tooltip("The camera that is used to render the map during editor mode.")]
