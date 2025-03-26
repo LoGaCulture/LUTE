@@ -75,3 +75,5 @@ crashlytics-build.properties
 # Generated URL and server related files
 secrets.txt
 secrets.txt.meta
+*.log
+UserSettings/Layouts/default-6000.dwlt
