@@ -49,7 +49,7 @@ MonoBehaviour:
   map: {fileID: 0}
   engine: {fileID: 0}
   meshModifiers:
-  - {fileID: 11400000, guid: 72a54fd58e79618408c60d91df61d553, type: 2}
+  - {fileID: 11400000, guid: 5a29f4dc16f377c49a7fac659a7eff82, type: 2}
   meshMaterial: {fileID: 2100000, guid: 49b5d148287c83443bd632e6d5b5bd6f, type: 2}
   waypoints:
   - {fileID: 6791765868727910514}

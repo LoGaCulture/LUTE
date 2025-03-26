@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/LUTE_Starter Scenes/Scenes/Games/Demo/Demo.unity
     guid: ebd0ee8f77144eb40abb4a8ac59a1acf
   - enabled: 1
+    path: Assets/LUTE_Starter Scenes/Scenes/Games/Directions/LUTEDirections.unity
+    guid: c1c4379fcc56bc64c9b2f093afaa5625
+  - enabled: 1
     path: Assets/LUTE_Starter Scenes/Scenes/Games/SaveSystem/SaveSystem.unity
     guid: f1524d17f8d1fa64190f27eecffefe1d
   - enabled: 1
