@@ -167,6 +167,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5578865515465083505, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      propertyPath: allowTilt
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5578865515465083505, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      propertyPath: allowRotate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5578865515465083505, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      propertyPath: rotationThreshold
+      value: 3.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5578865515465083505, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
+      propertyPath: rotationSensitivity
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7056499817285349525, guid: 69d44f7ad440d2e4697c6536d141ba16, type: 3}
       propertyPath: m_TargetTexture
       value: 

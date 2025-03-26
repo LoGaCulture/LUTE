@@ -35,7 +35,8 @@ namespace LoGaCulture.LUTE
         [Tooltip("Whether to allow rotation of the map.")]
         [SerializeField] protected bool allowRotate = true;
         [Tooltip("Whether to allow tilting of the map.")]
-        [SerializeField] protected bool allowTilt = true;
+        /*[SerializeField] */
+        protected bool allowTilt = true;
         [Tooltip("The camera that is used to render the map during runtime.")]
         [SerializeField] protected Camera gameCamera;
         [Tooltip("The camera that is used to render the map during editor mode.")]
@@ -44,6 +45,23 @@ namespace LoGaCulture.LUTE
         [SerializeField] protected AbstractMap map;
         [Tooltip("Whether to use degree method to render and move map around.")]
         [SerializeField] protected bool useDegree = false;
+
+        [Header("Touch Interaction Settings")]
+        [Tooltip("Minimum angle change to trigger rotation")]
+        [SerializeField] protected float rotationThreshold = 3.2f;
+        [Tooltip("Sensitivity of zoom interaction")]
+        [SerializeField] protected float zoomSensitivity = 0.01f;
+        [Tooltip("Sensitivity of rotation interaction")]
+        [SerializeField] protected float rotationSensitivity = 4f;
+        [Tooltip("Sensitivity of tilt interaction")]
+        protected float tiltSensitivity = 0.5f;
+        [Tooltip("Maximum tilt angle for the camera")]
+        protected float maxTiltAngle = 60f;
+
+        // Touch tracking
+        private float currentTiltAngle = 0f;
+        private Vector2 initialTouchZeroDelta;
+        private Vector2 initialTouchOneDelta;
 
         private Vector3 origin;
         private Vector3 mousePosition;
@@ -139,45 +157,147 @@ namespace LoGaCulture.LUTE
 
         protected virtual void HandleTouch()
         {
-            float zoomFactor = 0.0f;
-            float tiltFactor = 0.0f;
-
             switch (Input.touchCount)
             {
                 case 1: // One finger → Pan
-                    if (allowPan)
-                    {
-                        PanMapUsingTouchOrMouse();
-                    }
+                    HandleOneFinggerTouch();
                     break;
-                case 2: // Two fingers → Rotate, Zoom, or Tilt
-                    {
-                        Touch touchZero = Input.GetTouch(0);
-                        Touch touchOne = Input.GetTouch(1);
-
-                        // Find previous positions
-                        Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
-                        Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
-
-                        // Calculate pinch distance for zoom
-                        float prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude;
-                        float touchDeltaMag = (touchZero.position - touchOne.position).magnitude;
-                        zoomFactor = 0.01f * (touchDeltaMag - prevTouchDeltaMag);
-
-                        // Detect rotation
-                        float rotationAngle = GetTouchRotationAngle(touchZero, touchOne);
-
-                        // Detect tilting (vertical movement of two fingers)
-                        tiltFactor = GetTouchTiltFactor(touchZero, touchOne);
-
-                        if (allowZoom) ZoomMapUsingTouchOrMouse(zoomFactor);
-                        if (allowRotate) PanOrRotateCamera(rotationAngle);
-                        if (allowTilt) TiltCamera(tiltFactor);
-                    }
+                case 2: // Two fingers → Multi-touch interactions
+                    HandleTwoFingerTouch();
                     break;
                 default:
                     break;
             }
+        }
+
+        private void HandleOneFinggerTouch()
+        {
+            if (!allowPan) return;
+
+            Touch touch = Input.GetTouch(0);
+
+            switch (touch.phase)
+            {
+                case TouchPhase.Moved:
+                    if (useDegree)
+                    {
+                        UseDegreeConversion();
+                    }
+                    else
+                    {
+                        UseMeterConversion();
+                    }
+                    break;
+            }
+        }
+
+        private void HandleTwoFingerTouch()
+        {
+            Touch touchZero = Input.GetTouch(0);
+            Touch touchOne = Input.GetTouch(1);
+
+            // Simultaneous interaction detection
+            bool canRotateAndZoom = CanPerformSimultaneousGestures(touchZero, touchOne);
+
+            // Rotation detection
+            if (allowRotate && IsRotationGesture(touchZero, touchOne))
+            {
+                HandleRotation(touchZero, touchOne);
+            }
+
+            // Zoom detection (can be simultaneous with rotation)
+            if (allowZoom && IsPinchGesture(touchZero, touchOne))
+            {
+                HandleZoom(touchZero, touchOne);
+            }
+
+            // Tilt detection (prioritize rotation and zoom)
+            if (allowTilt && IsTiltGesture(touchZero, touchOne) && !canRotateAndZoom)
+            {
+                HandleTilt(touchZero, touchOne);
+            }
+        }
+
+        private bool CanPerformSimultaneousGestures(Touch touchZero, Touch touchOne)
+        {
+            // Detect if rotation and zoom can happen simultaneously
+            Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
+            Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
+
+            float prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude;
+            float touchDeltaMag = (touchZero.position - touchOne.position).magnitude;
+
+            // Check if there's significant change in both rotation and distance
+            return Mathf.Abs(Vector2.Angle(
+                (touchZeroPrevPos - touchOnePrevPos).normalized,
+                (touchZero.position - touchOne.position).normalized)) > rotationThreshold
+                && Mathf.Abs(touchDeltaMag - prevTouchDeltaMag) > 10f;
+        }
+
+        private bool IsRotationGesture(Touch touchZero, Touch touchOne)
+        {
+            Vector2 prevDir = (touchZero.position - touchOne.position).normalized;
+            Vector2 currentDir = ((touchZero.position + touchZero.deltaPosition) -
+                                  (touchOne.position + touchOne.deltaPosition)).normalized;
+
+            float rotationAngle = Vector2.Angle(prevDir, currentDir);
+            return rotationAngle > rotationThreshold;
+        }
+
+        private bool IsPinchGesture(Touch touchZero, Touch touchOne)
+        {
+            Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
+            Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
+
+            float prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude;
+            float touchDeltaMag = (touchZero.position - touchOne.position).magnitude;
+
+            return Mathf.Abs(touchDeltaMag - prevTouchDeltaMag) > 10f;
+        }
+
+        private bool IsTiltGesture(Touch touchZero, Touch touchOne)
+        {
+            // Tilt is when both fingers move vertically at similar rates
+            return Mathf.Abs(touchZero.deltaPosition.y - touchOne.deltaPosition.y) < 10f &&
+                   (touchZero.deltaPosition.y > 5f || touchOne.deltaPosition.y > 5f);
+        }
+
+        private void HandleRotation(Touch touchZero, Touch touchOne)
+        {
+            Vector2 prevDir = (touchZero.position - touchOne.position).normalized;
+            Vector2 currentDir = ((touchZero.position + touchZero.deltaPosition) -
+                                  (touchOne.position + touchOne.deltaPosition)).normalized;
+
+            float rotationAngle = Vector2.SignedAngle(prevDir, currentDir);
+            map.transform.Rotate(Vector3.up, -rotationAngle * rotationSensitivity, Space.World);
+        }
+
+        private void HandleZoom(Touch touchZero, Touch touchOne)
+        {
+            Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
+            Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
+
+            float prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude;
+            float touchDeltaMag = (touchZero.position - touchOne.position).magnitude;
+
+            float zoomFactor = (touchDeltaMag - prevTouchDeltaMag) * zoomSensitivity;
+            ZoomMapUsingTouchOrMouse(zoomFactor);
+        }
+
+        private void HandleTilt(Touch touchZero, Touch touchOne)
+        {
+            // Average vertical movement of both fingers
+            float avgDeltaY = (touchZero.deltaPosition.y + touchOne.deltaPosition.y) * 0.5f;
+
+            // Update and clamp tilt angle
+            currentTiltAngle = Mathf.Clamp(
+                currentTiltAngle - avgDeltaY * tiltSensitivity,
+                -maxTiltAngle,
+                maxTiltAngle
+            );
+
+            // Apply tilt to camera
+            gameCamera.transform.localRotation = Quaternion.Euler(currentTiltAngle, 0, 0);
         }
 
         protected virtual void TiltCamera(float tiltAmount)
@@ -185,28 +305,6 @@ namespace LoGaCulture.LUTE
             gameCamera.transform.Rotate(Vector3.right, tiltAmount, Space.Self);
         }
 
-        private float GetTouchTiltFactor(Touch touchZero, Touch touchOne)
-        {
-            float deltaYZero = touchZero.deltaPosition.y;
-            float deltaYOne = touchOne.deltaPosition.y;
-
-            // Check if fingers move in the same vertical direction
-            if (Mathf.Sign(deltaYZero) == Mathf.Sign(deltaYOne))
-            {
-                return 0.01f * (deltaYZero + deltaYOne); // Return tilt value
-            }
-
-            return 0f; // No tilt if fingers move in opposite directions
-        }
-
-        private float GetTouchRotationAngle(Touch touchZero, Touch touchOne)
-        {
-            Vector2 prevDir = (touchZero.position - touchOne.position).normalized;
-            Vector2 currentDir = (touchZero.deltaPosition - touchOne.deltaPosition).normalized;
-
-            float angle = Vector2.SignedAngle(prevDir, currentDir);
-            return angle; // Returns positive or negative rotation angle
-        }
 
         protected virtual void HandleMouseAndKeyboard()
         {

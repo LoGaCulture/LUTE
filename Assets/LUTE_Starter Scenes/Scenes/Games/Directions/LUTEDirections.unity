@@ -280,6 +280,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2974358871897496610, guid: fd31fc52e8e90d24eb784d9544983b24, type: 3}
+      propertyPath: demoMapMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3203990915385212394, guid: fd31fc52e8e90d24eb784d9544983b24, type: 3}
       propertyPath: directionsFactory
       value: 
@@ -290,7 +294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4906544725415624734, guid: fd31fc52e8e90d24eb784d9544983b24, type: 3}
       propertyPath: Speed
-      value: 0.01
+      value: 0.025
       objectReference: {fileID: 0}
     - target: {fileID: 6128258014101046513, guid: fd31fc52e8e90d24eb784d9544983b24, type: 3}
       propertyPath: m_Name

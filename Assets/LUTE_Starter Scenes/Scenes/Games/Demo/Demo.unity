@@ -1933,6 +1933,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LUTE Prefab (Full)
       objectReference: {fileID: 0}
+    - target: {fileID: 6319625410823743473, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
+      propertyPath: moveWithMap
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7901413944237338926, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
       propertyPath: customButtonIcon
       value: 
