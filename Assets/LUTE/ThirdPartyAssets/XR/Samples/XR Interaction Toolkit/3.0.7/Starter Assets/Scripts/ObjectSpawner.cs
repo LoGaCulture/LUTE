@@ -9,10 +9,6 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
     /// </summary>
     public class ObjectSpawner : MonoBehaviour
     {
-
-
-        public static bool IsCurrentlyPlacingObject = false;
-
         [SerializeField]
         [Tooltip("The camera that objects will face when spawned. If not set, defaults to the main camera.")]
         Camera m_CameraToFace;
@@ -180,9 +176,6 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             m_SpawnOptionIndex = -1;
         }
 
-
-
-
         /// <summary>
         /// Attempts to spawn an object from <see cref="objectPrefabs"/> at the given position. The object will have a
         /// yaw rotation that faces <see cref="cameraToFace"/>, plus or minus a random angle within <see cref="spawnAngleRange"/>.
@@ -199,15 +192,6 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         /// <seealso cref="objectSpawned"/>
         public bool TrySpawnObject(Vector3 spawnPoint, Vector3 spawnNormal)
         {
-
-
-            // PlaceObjectXR.IsCurrentlyPlacingObject = true;
-            //check if the PlaceObjectXR iscurentlyplacing object variable is true, and if it is, return false
-            if (!IsCurrentlyPlacingObject)
-            {
-                return false;
-            }
-
             if (m_OnlySpawnInView)
             {
                 var inViewMin = m_ViewportPeriphery;
@@ -225,12 +209,9 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             if (m_SpawnAsChildren)
                 newObject.transform.parent = transform;
 
-  
-
-
             newObject.transform.position = spawnPoint;
             EnsureFacingCamera();
-                
+
             var facePosition = m_CameraToFace.transform.position;
             var forward = facePosition - spawnPoint;
             BurstMathUtility.ProjectOnPlane(forward, spawnNormal, out var projectedForward);
@@ -249,104 +230,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
                 visualizationTrans.rotation = newObject.transform.rotation;
             }
 
-
-
-            //get the prefab Spawnable in Resources/Prefabs folder
-            var prefab = Resources.Load<GameObject>("Prefabs/Spawnable");
-
-            //instantiate the prefab
-            var spawnedObject = Instantiate(prefab);
-
-            //set the position of the spawned object to the spawn point
-            spawnedObject.transform.position = spawnPoint;
-
-            //set the newObject as a child of the spawned object
-            newObject.transform.parent = spawnedObject.transform;
-
-
-
-            UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable xRGrabInteractable;
-
-            //if object doesn't have XRGrabInteractable component
-            if (spawnedObject.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>() == null)
-            {
-
-                //add an XRGrabInteractable component to the object
-                xRGrabInteractable = spawnedObject.AddComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
-
-                
-            }
-            else
-            {
-                xRGrabInteractable = spawnedObject.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
-            }
-
-
-
-            //get ar transformer and if it's null, add it
-            var arTransformer = spawnedObject.GetComponent<Transformers.ARTransformer>();
-
-            if (arTransformer == null)
-            {
-                arTransformer = spawnedObject.AddComponent<Transformers.ARTransformer>();
-                arTransformer.minScale = newObject.transform.localScale.x;
-            }
-
-
-            ////if object doesn't have ARTransformer component
-            //if (newObject.GetComponent<Transformers.ARTransformer>() == null)
-            //{
-
-            //    //add an ARTransformer component to the object
-            //    var arTransformer = newObject.AddComponent<Transformers.ARTransformer>();
-
-            //    //set the min scale to the current scale of the object
-            //    arTransformer.minScale = newObject.transform.localScale.x;
-            //}
-
-            //if object doesn't have a rigidbody component
-
-
-            //if object doesn't have a collider component
-            if (spawnedObject.GetComponentInChildren<Collider>() == null)
-            {
-
-                //add a collider component to the object
-                //spawnedObject.AddComponent<BoxCollider>();
-
-                newObject.AddComponent<MeshCollider>();
-            }
-
-            var collider = newObject.GetComponent<MeshCollider>();
-
-
-            xRGrabInteractable.colliders.Add(collider);
-
-
-
-            //if (spawnedObject.GetComponent<Rigidbody>() == null)
-            //{
-
-            //    //add a rigidbody component to the object
-            //    spawnedObject.AddComponent<Rigidbody>();
-            //}
-            //var rigidBody = spawnedObject.GetComponent<Rigidbody>();
-
-
-
-
-            //rigidBody.useGravity = false;
-            ////make it kinematic
-            //rigidBody.isKinematic = true;
-
-            //add one to the index for spawning 
-            //m_SpawnOptionIndex++;
-
-
-
-            objectSpawned?.Invoke(spawnedObject);
-
-
+            objectSpawned?.Invoke(newObject);
             return true;
         }
     }
