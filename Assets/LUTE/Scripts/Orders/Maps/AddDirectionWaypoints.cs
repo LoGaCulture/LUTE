@@ -1,3 +1,4 @@
+using Mapbox.Unity.MeshGeneration.Modifiers;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,10 @@ namespace LoGaCulture.LUTE
         [SerializeField] protected LUTEDirectionsFactory directionsFactory;
         [Tooltip("Whether to draw the directions from the player's location.")]
         [SerializeField] protected bool drawFromPlayer = true;
+        [Tooltip("The mesh modifier to use for the directions.")]
+        [SerializeField] protected MeshModifier meshModifier;
+        [Tooltip("The material to use for the mesh.")]
+        [SerializeField] protected Material meshMaterial;
         [Tooltip("The locations to draw the directions for.")]
         [VariableProperty(typeof(LocationVariable))]
         [SerializeField] protected List<LocationVariable> locationVariables = new List<LocationVariable>();
@@ -25,6 +30,16 @@ namespace LoGaCulture.LUTE
             }
 
             directionsFactory.ClearWaypoints();
+
+            if (meshModifier != null)
+            {
+                directionsFactory.UpdateMeshModifiers(meshModifier);
+            }
+
+            if (meshMaterial != null)
+            {
+                directionsFactory.UpdateMeshMaterial(meshMaterial);
+            }
 
             if (drawFromPlayer)
             {

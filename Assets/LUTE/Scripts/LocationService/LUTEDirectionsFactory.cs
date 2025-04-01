@@ -298,5 +298,23 @@ namespace LoGaCulture.LUTE
             cachedWaypoints.Clear();
             recalculateNext = true;
         }
+
+        public virtual void UpdateMeshModifiers(MeshModifier newMod)
+        {
+            // Clear the current list of modifiers
+            Array.Clear(meshModifiers, 0, meshModifiers.Length);
+            // Add only one modifier as we only allow one modifier
+            meshModifiers[0] = newMod;
+            meshModifiers[0].Initialize();
+        }
+
+        public virtual void UpdateMeshMaterial(Material newMat)
+        {
+            meshMaterial = newMat;
+            if (directionsGameObject != null)
+            {
+                directionsGameObject.GetComponent<MeshRenderer>().material = meshMaterial;
+            }
+        }
     }
 }
