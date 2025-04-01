@@ -246,13 +246,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcf32ea2cc0514b569329f6b6b68f9b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tracker: {fileID: 10478890}
-  _map: {fileID: 112672271}
-  engine: {fileID: 543519183}
-  _directionPrefab: {fileID: 0}
-  _radiusCirclePrefab: {fileID: 5790737691150376730, guid: d6ed17cc88af03542adfd3f2762a73e0, type: 3}
-  _markerPrefab: {fileID: 4158092623677246474, guid: 94b683dc45eda974897842ef5fcc2301, type: 3}
-  _spawnScale: 4
 --- !u!114 &112672270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -910,7 +903,6 @@ GameObject:
   - component: {fileID: 543519222}
   - component: {fileID: 543519223}
   - component: {fileID: 543519225}
-  - component: {fileID: 543519224}
   - component: {fileID: 543519226}
   - component: {fileID: 543519229}
   - component: {fileID: 543519228}
@@ -939,7 +931,8 @@ MonoBehaviour:
   description: 
   hideComponents: 1
   localizationId: 
-  selectedOrders: []
+  selectedOrders:
+  - {fileID: 543519210}
   selectedNodes: []
   nodeViewHeight: 431
   hideOrders: []
@@ -956,7 +949,7 @@ MonoBehaviour:
   showAnnotations: 1
   labelTint: {r: 1, g: 1, b: 1, a: 1}
   zoom: 1
-  scrollPos: {x: 96, y: 64}
+  scrollPos: {x: 76, y: 5}
   version: 1
   sidesOfDie: 6
   postcards: []
@@ -1001,7 +994,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -1009,6 +1001,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!4 &543519191
 Transform:
@@ -1323,8 +1316,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 688
-    y: 168
+    x: 686
+    y: 165
     width: 122.7
     height: 40
   nodeName: Simple Plane
@@ -1342,7 +1335,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -1350,6 +1342,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &543519210
 MonoBehaviour:
@@ -1363,7 +1356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e25b71ff91e05740a6eb925390d6f15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PrefabToPlace: {fileID: 919132149155446097, guid: a35ac90d68e0d8b478e3b9f662727f39, type: 3}
+  m_PrefabToPlace: {fileID: 919132149155446097, guid: 73b694bb0f61cd14e9e1ed7b578ac09a, type: 3}
   m_ObjectName: Cylinder
   raycastHitEvent: {fileID: 11400000, guid: 503648b3444113b4896ceded8c86c177, type: 2}
   automaticallyPlaceObject: 1
@@ -1398,8 +1391,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _toggle: 1
   _planeDetectionMode: 1
-  _planeVisualizer: {fileID: 1585201990951412, guid: 58ac1e8ab6d461541b41066e0a2539f3, type: 3}
-  _pointCloudVisualizer: {fileID: 1854016325464908, guid: a6fdae211cffd2543aa5cd7bef76d698, type: 3}
+  _planeVisualizer: {fileID: 1585201990951412, guid: 7cb7daef68e35614facef8bebb2d4f19, type: 3}
+  _pointCloudVisualizer: {fileID: 1854016325464908, guid: 5eb8dccc8c676cc479dc2734af5dcf00, type: 3}
 --- !u!114 &543519213
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -1496,7 +1489,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -1504,6 +1496,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &543519216
 MonoBehaviour:
@@ -1520,11 +1513,10 @@ MonoBehaviour:
   customButtonIcon: {fileID: 0}
   setIconButton: {fileID: 0}
   showIcon: 1
-  buttonFeedback: {fileID: 0}
+  buttonSound: {fileID: 0}
   buttonEvent:
     m_PersistentCalls:
       m_Calls: []
-  buttonSound: {fileID: 0}
   popupWindow: {fileID: 0}
   allowRedraw: 0
 --- !u!114 &543519218
@@ -1547,7 +1539,6 @@ MonoBehaviour:
   setMenuDialogue: {fileID: 0}
   hideThisOption: 0
   closeMenuOnSelect: 1
-  buttonFeedback: {fileID: 0}
   buttonSound: {fileID: 0}
   saveSettings: 0
 --- !u!114 &543519219
@@ -1566,7 +1557,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 929
     y: 265
-    width: 119.18
+    width: 118.94
     height: 40
   nodeName: Level Select
   nodeDescription: Basic building block of a narrative engine
@@ -1578,7 +1569,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -1586,6 +1576,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &543519220
 MonoBehaviour:
@@ -1651,27 +1642,6 @@ MonoBehaviour:
   waitUntilFinished: 1
   durationOLD: 0
   targetColorOLD: {r: 0, g: 0, b: 0, a: 0}
---- !u!114 &543519224
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 543519182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ff5d05b32c24db409e01e50a2be8298, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentNode: {fileID: 543519225}
-  location:
-    locationRef: {fileID: 543519193}
-    locationVal: {fileID: 0}
-  requiresPress: 0
-  autoTrigger: 1
-  requiresLocation: 1
-  triggerWhenAtLocation: 0
-  updateLocationMarkerOnComplete: 0
 --- !u!114 &543519225
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -1695,11 +1665,10 @@ MonoBehaviour:
   groupDescription: A series of nodes that can be executed as a group
   itemId: 0
   orderList: []
-  eventHandler: {fileID: 543519224}
+  eventHandler: {fileID: 0}
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 543519193}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -1707,6 +1676,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &543519226
 MonoBehaviour:
@@ -1728,12 +1698,11 @@ MonoBehaviour:
   setMenuDialogue: {fileID: 0}
   hideThisOption: 0
   closeMenuOnSelect: 1
-  buttonFeedback: {fileID: 0}
   buttonSound: {fileID: 0}
   saveSettings: 0
 --- !u!114 &543519227
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -1751,7 +1720,6 @@ MonoBehaviour:
   setMenuDialogue: {fileID: 0}
   hideThisOption: 0
   closeMenuOnSelect: 1
-  buttonFeedback: {fileID: 0}
   buttonSound: {fileID: 0}
   saveSettings: 0
 --- !u!114 &543519228
@@ -1783,7 +1751,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 1070.185
     y: 178
-    width: 129.63
+    width: 129.97
     height: 40
   nodeName: Restart Scene
   nodeDescription: Basic building block of a narrative engine
@@ -1795,7 +1763,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -1803,6 +1770,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!1 &680917997
 GameObject:
@@ -2216,7 +2184,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1255304985
@@ -2660,7 +2628,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1073741943
+    m_Bits: 119
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2901,7 +2869,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1889931404}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -2933,7 +2901,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2147483648
+    m_Bits: 0
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

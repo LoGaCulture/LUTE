@@ -327,7 +327,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -335,6 +334,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &543519185
 MonoBehaviour:
@@ -505,7 +505,7 @@ MonoBehaviour:
   characterNameColour:
     serializedVersion: 2
     rgba: 0
-  storyText: Now that we  haveenabled the XR system, let's spawn a simple object
+  storyText: Now that we have enabled the XR system, let's spawn a simple object
     with the Place Object on plane order. We can choose between it being placed automatically
     on the first plane it detects, or for the user to have to press it.
   typingSpeed: 40
@@ -533,7 +533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e25b71ff91e05740a6eb925390d6f15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PrefabToPlace: {fileID: 919132149155446097, guid: a35ac90d68e0d8b478e3b9f662727f39, type: 3}
+  m_PrefabToPlace: {fileID: 919132149155446097, guid: 9e1dc1c14313460d872de39e35129b39, type: 3}
   m_ObjectName: Cylinder
   raycastHitEvent: {fileID: 11400000, guid: 503648b3444113b4896ceded8c86c177, type: 2}
   automaticallyPlaceObject: 1
@@ -554,7 +554,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectName: Cylinder
-  _transparentMaterial: {fileID: 2100000, guid: dbbf39fbee9037a4ba6c7b13e55515e0, type: 2}
+  _transparentMaterial: {fileID: 2100000, guid: fe335d436e69bc14f8a8f0c64e152261, type: 2}
   _dragOffset: {x: 0.6, y: 0, z: 0}
   _minimumOverlapPercentage: 75
   onPuzzleSolvedEvent:
@@ -689,7 +689,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -697,6 +696,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &543519208
 MonoBehaviour:
@@ -727,11 +727,10 @@ MonoBehaviour:
   customButtonIcon: {fileID: 0}
   setIconButton: {fileID: 0}
   showIcon: 1
-  buttonFeedback: {fileID: 0}
+  buttonSound: {fileID: 0}
   buttonEvent:
     m_PersistentCalls:
       m_Calls: []
-  buttonSound: {fileID: 0}
   popupWindow: {fileID: 0}
   allowRedraw: 0
 --- !u!114 &543519211
@@ -754,7 +753,6 @@ MonoBehaviour:
   setMenuDialogue: {fileID: 0}
   hideThisOption: 0
   closeMenuOnSelect: 1
-  buttonFeedback: {fileID: 0}
   buttonSound: {fileID: 0}
   saveSettings: 0
 --- !u!114 &543519212
@@ -773,7 +771,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 611
     y: 219
-    width: 119.18
+    width: 118.94
     height: 40
   nodeName: Level Select
   nodeDescription: Basic building block of a narrative engine
@@ -785,7 +783,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -793,6 +790,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &543519213
 MonoBehaviour:
@@ -830,7 +828,6 @@ MonoBehaviour:
   setMenuDialogue: {fileID: 0}
   hideThisOption: 0
   closeMenuOnSelect: 1
-  buttonFeedback: {fileID: 0}
   buttonSound: {fileID: 0}
   saveSettings: 0
 --- !u!114 &543519215
@@ -853,7 +850,6 @@ MonoBehaviour:
   setMenuDialogue: {fileID: 0}
   hideThisOption: 0
   closeMenuOnSelect: 1
-  buttonFeedback: {fileID: 0}
   buttonSound: {fileID: 0}
   saveSettings: 0
 --- !u!114 &543519216
@@ -872,7 +868,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 748
     y: 122
-    width: 129.63
+    width: 129.97
     height: 40
   nodeName: Restart Scene
   nodeDescription: Basic building block of a narrative engine
@@ -884,7 +880,6 @@ MonoBehaviour:
   isGrouped: 0
   groupIndex: -1
   repeatable: 0
-  nodeLocation: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   hoverStartTime: 0
@@ -892,6 +887,7 @@ MonoBehaviour:
   targetKeyNode: {fileID: 0}
   showDesc: 0
   saveable: 0
+  updateLocationStatusToComplete: 1
   NodeComplete: 0
 --- !u!114 &543519217
 MonoBehaviour:
