@@ -10,6 +10,7 @@ public class PopupIcon : MonoBehaviour
     private Popup popupWindow;
     private Button[] cachedButtons;
     private int nextOptionIndex;
+    private readonly string BUTTON_NAME = "PopupIconButton";
 
     public virtual Button[] CachedButtons { get { return cachedButtons; } }
 
@@ -34,7 +35,7 @@ public class PopupIcon : MonoBehaviour
 
     protected virtual void CheckEventSystem()
     {
-        EventSystem eventSystem = GameObject.FindObjectOfType<EventSystem>();
+        EventSystem eventSystem = GameObject.FindFirstObjectByType<EventSystem>();
         if (eventSystem == null)
         {
             // Auto spawn an Event System from the prefab - ensure you have one in a Resources folder
@@ -51,7 +52,7 @@ public class PopupIcon : MonoBehaviour
     {
         if (ActivePopupIcon == null)
         {
-            var pi = GameObject.FindObjectOfType<PopupIcon>();
+            var pi = GameObject.FindFirstObjectByType<PopupIcon>();
             if (pi != null)
             {
                 ActivePopupIcon = pi;
@@ -96,13 +97,37 @@ public class PopupIcon : MonoBehaviour
         }
     }
 
-    public bool SetAction(UnityAction onClick)
+    public bool SetAction(UnityAction onClick, string buttonName = "")
     {
         if (nextOptionIndex >= CachedButtons.Length)
         {
             Debug.LogWarning("Unable to add popup option, not enough buttons!");
             return false;
         }
+
+        // Just in case a user passes in an empty string then reset to default
+        if (string.IsNullOrEmpty(buttonName))
+        {
+            buttonName = BUTTON_NAME;
+        }
+
+        if (buttonName != BUTTON_NAME)
+        {
+            // Go through all cached buttons and check if a button has the same name
+            // If it does then simply reset on click event, set it to the unityaction provided, switch it on and return true
+            foreach (Button button in CachedButtons)
+            {
+                if (button.gameObject.name == buttonName)
+                {
+                    button.onClick.RemoveAllListeners();
+                    button.onClick.AddListener(() => { onClick.Invoke(); });
+                    button.gameObject.SetActive(true);
+                    return true;
+                }
+            }
+        }
+
+        ActivePopupIcon.CachedButtons[nextOptionIndex].gameObject.name = buttonName;
         ActivePopupIcon.CachedButtons[nextOptionIndex].onClick.AddListener(() => { onClick.Invoke(); });
         ActivePopupIcon.CachedButtons[nextOptionIndex].gameObject.SetActive(true);
         return true;
@@ -116,5 +141,35 @@ public class PopupIcon : MonoBehaviour
     public virtual void SetActive(bool state)
     {
         gameObject.SetActive(state);
+    }
+
+    public virtual void RemoveButton(string buttonName)
+    {
+        if (string.IsNullOrEmpty(buttonName))
+        {
+            return;
+        }
+
+        foreach (Button button in CachedButtons)
+        {
+            if (button.gameObject.name == buttonName)
+            {
+                button.name = BUTTON_NAME;
+                button.onClick.RemoveAllListeners();
+                button.gameObject.SetActive(false);
+
+                // The next option will be the first button found which is disabled
+                for (int i = 0; i < CachedButtons.Length; i++)
+                {
+                    if (!CachedButtons[i].gameObject.activeSelf)
+                    {
+                        nextOptionIndex = i;
+                        break;
+                    }
+                }
+
+                return;
+            }
+        }
     }
 }

@@ -28,7 +28,7 @@ public class MapMenu : GenericButton
         mapManager.ToggleMap();
     };
 
-        SetAction(popupIcon, action);
+        SetAction(popupIcon, action, "MapButton");
 
         Continue();
     }

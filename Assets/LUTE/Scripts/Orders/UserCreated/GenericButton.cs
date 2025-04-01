@@ -58,7 +58,7 @@ public class GenericButton : Order
         return popupIcon;
     }
 
-    protected virtual void SetAction(PopupIcon popup, UnityAction action)
+    protected virtual void SetAction(PopupIcon popup, UnityAction action, string name = "")
     {
         if (popup == null || action == null)
         {
@@ -73,7 +73,15 @@ public class GenericButton : Order
             }
         };
 
-        popup.SetAction(action);
+        if (string.IsNullOrEmpty(name))
+        {
+            popup.SetAction(action);
+        }
+        else
+        {
+            popup.SetAction(action, name);
+        }
+
         popup.MoveToNextOption();
     }
 

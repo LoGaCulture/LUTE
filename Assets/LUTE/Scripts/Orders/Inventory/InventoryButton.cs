@@ -28,7 +28,7 @@ namespace LoGaCulture.LUTE
                 inventory.BogInventoryCanvas.FadeInventoryCanvas();
             };
 
-            SetAction(popupIcon, action);
+            SetAction(popupIcon, action, "InventoryButton");
 
             Continue();
         }
