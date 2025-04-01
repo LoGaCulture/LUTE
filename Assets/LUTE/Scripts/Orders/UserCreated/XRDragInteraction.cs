@@ -42,6 +42,13 @@ public class XRDragInteraction : Order
 
         _scaleOfObject = _gameObjectToDrag.transform.localScale;
 
+        //get the Transparent Material if it is not set from the resources
+        if (_transparentMaterial == null)
+        {
+            _transparentMaterial = Resources.Load<Material>("Transparent Material");
+        }
+
+
         StartDrag();
     }
 

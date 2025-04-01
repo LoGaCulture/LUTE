@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 6616758448961480695}
   - component: {fileID: 7861377888064534998}
   - component: {fileID: 1631342573933100230}
+  - component: {fileID: 1779502759001742613}
   m_Layer: 0
   m_Name: Object Spawner
   m_TagString: Untagged
@@ -134,6 +135,19 @@ MonoBehaviour:
     m_ManualQueueValue: 0
     m_ManualQueueTargetFrame: 0
   m_BlockSpawnWhenInteractorHasSelection: 1
+--- !u!114 &1779502759001742613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735189126172715117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 784c01f79e2cd27459fb6a87394ffda1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnableResourcePath: Prefabs/Spawnable
 --- !u!1 &1840697773827465097
 GameObject:
   m_ObjectHideFlags: 0
