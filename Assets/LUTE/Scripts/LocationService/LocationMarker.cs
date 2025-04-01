@@ -182,6 +182,9 @@ namespace LoGaCulture.LUTE
                 visualisationObject = transform.GetChild(0); // On the default location marker prefab we only have one child which is used to hold the visualisation objects; users can override this using the serialised field
             }
 
+            if (engine == null)
+                return;
+
             locVar = engine.GetComponents<LocationVariable>().FirstOrDefault(x => x.Value.InfoID == locVar.Value.InfoID);
 
             locVar.Value.StatusDisplayOptionsList.list.ForEach(x =>
@@ -475,6 +478,9 @@ namespace LoGaCulture.LUTE
 
         private void OnDisable()
         {
+            if (locVar == null || locVar.Value == null)
+                return;
+
             locVar.Value.StatusDisplayOptionsList.list.ForEach(x =>
             {
                 if (x.locationDisplayOptions != null)
