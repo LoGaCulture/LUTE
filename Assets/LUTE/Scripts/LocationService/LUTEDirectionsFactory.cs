@@ -39,6 +39,9 @@ namespace LoGaCulture.LUTE
         [Tooltip("Whether to query the directions based on the defined update time; helps to update the direction path based on the API.")]
         [SerializeField] protected bool queryWithTime = true;
 
+        [VariableProperty(typeof(LocationVariable))]
+        [SerializeField] protected LocationVariable[] locs;
+
         private List<Vector3> cachedWaypoints;
         private Directions directions;
         private int counter;
@@ -207,7 +210,8 @@ namespace LoGaCulture.LUTE
             mesh.subMeshCount = data.Triangles.Count;
 
             mesh.SetVertices(data.Vertices);
-            counter = data.Triangles.Count;
+
+            int counter = data.Triangles.Count;
             for (int i = 0; i < counter; i++)
             {
                 var triangle = data.Triangles[i];
@@ -222,13 +226,73 @@ namespace LoGaCulture.LUTE
             }
 
             mesh.RecalculateNormals();
+
+            // Assigning default colors (fully visible)
+            List<Color> colors = new List<Color>();
+            for (int i = 0; i < data.Vertices.Count; i++)
+            {
+                colors.Add(Color.white); // Fully visible (alpha = 1)
+            }
+
+            mesh.SetColors(colors); // Assign colors
+
             directionsGameObject.AddComponent<MeshRenderer>().material = meshMaterial;
             directionsGameObject.layer = (int)Mathf.Log(directionLayerMask.value, 2);
 
             directionsGameObject.AddComponent<DirectionsObjectUpdater>().SetupDirectionObject(this.map);
 
-
             return directionsGameObject;
+        }
+
+        public void UpdatePathVisibility(List<Vector3> hideStartEndPairs, bool hide = true)
+        {
+            Mesh mesh = directionsGameObject.GetComponent<MeshFilter>().mesh;
+            if (mesh == null) return;
+
+            List<Color> colors = new List<Color>(mesh.vertexCount);
+            mesh.GetColors(colors);
+            List<Vector3> vertices = new List<Vector3>(mesh.vertices); // Get vertex positions
+
+            for (int j = 0; j < hideStartEndPairs.Count; j += 2)
+            {
+                int startIndex = FindClosestVertexIndex(vertices, hideStartEndPairs[j]);
+                int endIndex = FindClosestVertexIndex(vertices, hideStartEndPairs[j + 1]);
+
+                if (startIndex != -1 && endIndex != -1)
+                {
+                    if (startIndex > endIndex)
+                    {
+                        int temp = startIndex;
+                        startIndex = endIndex;
+                        endIndex = temp;
+                    }
+
+                    for (int i = startIndex; i <= endIndex; i++)
+                    {
+                        colors[i] = new Color(1, 1, 1, hide ? 0 : 1);
+                    }
+                }
+            }
+
+            mesh.SetColors(colors);
+        }
+
+        private int FindClosestVertexIndex(List<Vector3> vertices, Vector3 target)
+        {
+            int closestIndex = -1;
+            float minDistance = float.MaxValue;
+
+            for (int i = 0; i < vertices.Count; i++)
+            {
+                float distance = Vector3.Distance(vertices[i], target);
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    closestIndex = i;
+                }
+            }
+
+            return closestIndex;
         }
 
         public virtual void Query()
@@ -315,6 +379,11 @@ namespace LoGaCulture.LUTE
             {
                 directionsGameObject.GetComponent<MeshRenderer>().material = meshMaterial;
             }
+        }
+
+        public virtual void HideSections(List<Vector3> hideStartEndPairs)
+        {
+            UpdatePathVisibility(hideStartEndPairs);
         }
     }
 }

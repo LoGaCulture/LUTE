@@ -483,7 +483,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  targetNode: {fileID: 259267083010903809}
+  targetNode: {fileID: 0}
   targetEngine: {fileID: 259267083010903768}
 --- !u!114 &1174431417 stripped
 MonoBehaviour:
@@ -646,75 +646,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directionsFactory: {fileID: 1174431417}
---- !u!114 &259267083010903809
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 619525753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc9f689a21732a34489f55c1ed82a919, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nodeRect:
-    serializedVersion: 2
-    x: 26083.543
-    y: 24811.215
-    width: 114.79
-    height: 40
-  nodeName: Hello World
-  nodeDescription: Basic building block of a narrative engine
-  groupDescription: A series of nodes that can be executed as a group
-  itemId: 0
-  orderList:
-  - {fileID: 259267083010903810}
-  eventHandler: {fileID: 0}
-  isGrouped: 0
-  groupIndex: -1
-  repeatable: 0
-  tint: {r: 1, g: 1, b: 1, a: 1}
-  useCustomTint: 0
-  hoverStartTime: 0
-  targetUnlockNode: {fileID: 0}
-  targetKeyNode: {fileID: 0}
-  showDesc: 0
-  saveable: 0
-  updateLocationStatusToComplete: 1
-  NodeComplete: 0
---- !u!114 &259267083010903810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 619525753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56d6b77eb00dafe45bc66ef633cccddc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  character: {fileID: 0}
-  characterPortrait: {fileID: 0}
-  characterName: 
-  characterNameColour:
-    serializedVersion: 2
-    rgba: 0
-  storyText: Hello World!
-  typingSpeed: 40
-  extendPrevious: 0
-  voiceOverClip: {fileID: 0}
-  showAlways: 1
-  showCount: 1
-  fadeWhenDone: 0
-  allowLineSkip: 1
-  waitForClick: 1
-  timeToWait: 1
-  stopVoiceover: 1
-  waitForVO: 0
-  setDialogueBox: {fileID: 0}
-  showButton: 1
 --- !u!20 &4743639311714359854 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 1777330519878385037, guid: fd31fc52e8e90d24eb784d9544983b24, type: 3}
@@ -750,7 +681,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2974358871897496610, guid: fd31fc52e8e90d24eb784d9544983b24, type: 3}
       propertyPath: selectedNodes.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2974358871897496610, guid: fd31fc52e8e90d24eb784d9544983b24, type: 3}
       propertyPath: selectedOrders.Array.size
@@ -759,11 +690,11 @@ PrefabInstance:
     - target: {fileID: 2974358871897496610, guid: fd31fc52e8e90d24eb784d9544983b24, type: 3}
       propertyPath: 'selectedNodes.Array.data[0]'
       value: 
-      objectReference: {fileID: 259267083010903809}
+      objectReference: {fileID: 0}
     - target: {fileID: 2974358871897496610, guid: fd31fc52e8e90d24eb784d9544983b24, type: 3}
       propertyPath: 'selectedOrders.Array.data[0]'
       value: 
-      objectReference: {fileID: 259267083010903810}
+      objectReference: {fileID: 0}
     - target: {fileID: 3203990915385212394, guid: fd31fc52e8e90d24eb784d9544983b24, type: 3}
       propertyPath: directionsFactory
       value: 
@@ -971,12 +902,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5589175694459137782, guid: fd31fc52e8e90d24eb784d9544983b24, type: 3}
       insertIndex: -1
       addedObject: {fileID: 259267083010903808}
-    - targetCorrespondingSourceObject: {fileID: 5589175694459137782, guid: fd31fc52e8e90d24eb784d9544983b24, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 259267083010903809}
-    - targetCorrespondingSourceObject: {fileID: 5589175694459137782, guid: fd31fc52e8e90d24eb784d9544983b24, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 259267083010903810}
   m_SourcePrefab: {fileID: 100100000, guid: fd31fc52e8e90d24eb784d9544983b24, type: 3}
 --- !u!114 &9196987337599087353 stripped
 MonoBehaviour:
