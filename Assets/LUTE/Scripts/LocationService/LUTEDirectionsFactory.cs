@@ -244,11 +244,30 @@ namespace LoGaCulture.LUTE
             return directionsGameObject;
         }
 
-        public void UpdatePathVisibility(List<Vector3> hideStartEndPairs, bool hide = true)
+        public virtual void UpdatePathVisibility(List<Vector3> hideStartEndPairs, bool hide = true, float maxWaitTime = 3f)
         {
-            Mesh mesh = directionsGameObject.GetComponent<MeshFilter>().mesh;
-            if (mesh == null) return;
+            StartCoroutine(UpdatePathSections(hideStartEndPairs, hide, maxWaitTime));
+        }
 
+        private IEnumerator UpdatePathSections(List<Vector3> hideStartEndPairs, bool hide = true, float maxWaitTime = 5f)
+        {
+            float elapsedTime = 0f;
+            float waitInterval = 0.1f;
+
+            while (directionsGameObject == null && elapsedTime < maxWaitTime)
+            {
+                elapsedTime += waitInterval;
+                yield return new WaitForSeconds(waitInterval);
+            }
+
+            if (directionsGameObject == null) yield break; // Exit if still null after max wait time
+
+            Debug.Log("Updating path visibility");
+
+            MeshFilter meshFilter = directionsGameObject.GetComponent<MeshFilter>();
+            if (meshFilter == null || meshFilter.mesh == null) yield break;
+
+            Mesh mesh = meshFilter.mesh;
             List<Color> colors = new List<Color>(mesh.vertexCount);
             mesh.GetColors(colors);
             List<Vector3> vertices = new List<Vector3>(mesh.vertices); // Get vertex positions

@@ -16,6 +16,8 @@ namespace LoGaCulture.LUTE
         [Tooltip("The end location to stop hiding the path at.")]
         [VariableProperty(typeof(LocationVariable))]
         [SerializeField] protected LocationVariable endLocation;
+        [Tooltip("The maximum time to wait for the path to be hidden. If using this Order after creating a path then this helps to remove null ref errors. If set to 0 then we will not wait.")]
+        [SerializeField] protected float maxWaitTime = 3.0f;
 
         public override void OnEnter()
         {
