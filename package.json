@@ -3,7 +3,8 @@
   "version": "1.2.0-alpha",
   "displayName": "LoGaCulture LUTE",
   "description": "LUTELUTE stands for LoGaCulture Unity Toolkit/Engine. A Unity tool to create narrative location games for the purposes of heritage preservation.",
-  "unity": "6000.0.39f1",
+  "unity": "6000.0",
+  "unityRelease": "39f1",
   "keywords": [
     "xr",
     "ar",
