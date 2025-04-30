@@ -27,7 +27,7 @@ namespace LoGaCulture.LUTE
     public class LUTELocationInfo : ScriptableObject
     {
         [Tooltip("The ID of the location to be used in conditions and other checks.")]
-        [SerializeField] private string infoID; // Unique ID for the location - this is sometimes created within editor code (such as when adding a new location to an editor map or in cases where this scriptable object is created not through context menus).
+        [SerializeField] private string infoID; // Unique ID for the location - t   s is sometimes created within editor code (such as when adding a new location to an editor map or in cases where this scriptable object is created not through context menus).
         [Tooltip("The name of the location.")]
         [SerializeField] private string locationName;
 
@@ -62,6 +62,8 @@ namespace LoGaCulture.LUTE
         private string customStatusLabel; // To be used in conjunction with the custom status
         [SerializeField] private LocationStatus locationStatus = LocationStatus.Unvisited;
         [SerializeField] private bool locationDisabled = false;
+
+        private bool locationHidden = false;
 
         public string InfoID
         {
@@ -153,6 +155,12 @@ namespace LoGaCulture.LUTE
         public virtual Vector2d LatLongString()
         {
             return Mapbox.Unity.Utilities.Conversions.StringToLatLon(position);
+        }
+
+        public bool LocationHidden
+        {
+            get { return locationHidden; }
+            set { locationHidden = value; }
         }
 
         public virtual void SetNewPosition(string newPosition)

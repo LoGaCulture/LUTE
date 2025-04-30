@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4ddc75f9f1b3043893d0de76d49f2c, type: 3}
   m_Name: CentralAvebury
   m_EditorClassIdentifier: 
-  infoID: 1479e2c3-7de5-4396-b0a9-d24189958481
+  infoID: Central1
   locationName: Central Avebury
   position: 51.42887305245766, -1.8524477998629703
   defaultStatus: 0
@@ -24,3 +24,5 @@ MonoBehaviour:
   forcePermanentChange: 0
   allowNodeControls: 0
   executeNode: 
+  locationStatus: 0
+  locationDisabled: 0

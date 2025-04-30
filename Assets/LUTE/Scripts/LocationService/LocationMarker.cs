@@ -24,7 +24,6 @@ namespace LoGaCulture.LUTE
         private LocationStatus priorStatus = LocationStatus.Unvisited;
         private bool preventUpdatingVisuals = false; // When a status gets updated the user has an option to ensure that the other settings will never change after the fact
         private BoxCollider2D markerCollider2D; // Used to detect clicks on the marker
-        private bool locationHidden = false;
         private bool hiddenByZoom = false;
 
         [Tooltip("The location pin sprite renderer")]
@@ -118,38 +117,32 @@ namespace LoGaCulture.LUTE
 
         public void HideMarker()
         {
-            locVar.Value.StatusDisplayOptionsList.list.ForEach(x =>
+            if (visualisationObject != null)
             {
-                if (x.locationDisplayOptions != null)
-                {
-                    x.locationDisplayOptions.ShowSprite = false;
-                    x.locationDisplayOptions.ShowName = false;
-                    x.locationDisplayOptions.ShowRadius = false;
-                }
-            });
+                visualisationObject.gameObject.SetActive(false);
+            }
         }
 
-        public void SetHiddenStatus()
+        public void SetHiddenStatus(bool save = false)
         {
-            locationHidden = true;
+            locVar.Value.LocationHidden = true;
+            if (save)
+                SaveData();
         }
 
-        public void ResetHiddenStatus()
+        public void ResetHiddenStatus(bool save = false)
         {
-            locationHidden = false;
+            locVar.Value.LocationHidden = false;
+            if (save)
+                SaveData();
         }
 
         public void ShowMarker()
         {
-            locVar.Value.StatusDisplayOptionsList.list.ForEach(x =>
+            if (visualisationObject != null)
             {
-                if (x.locationDisplayOptions != null)
-                {
-                    x.locationDisplayOptions.ShowSprite = x.locationDisplayOptions.DefaultShowSprite;
-                    x.locationDisplayOptions.ShowName = x.locationDisplayOptions.DefaultShowName;
-                    x.locationDisplayOptions.ShowRadius = x.locationDisplayOptions.DefaultShowRadius;
-                }
-            });
+                visualisationObject.gameObject.SetActive(true);
+            }
         }
 
         protected void OnEnable()
@@ -365,9 +358,13 @@ namespace LoGaCulture.LUTE
             }
             else
             {
-                if (!locationHidden)
+                if (!locVar.Value.LocationHidden)
                 {
                     ShowMarker();
+                }
+                else
+                {
+                    HideMarker();
                 }
             }
 
@@ -470,10 +467,15 @@ namespace LoGaCulture.LUTE
             if (locVar.Value.LocationStatus != priorStatus)
             {
                 priorStatus = locVar.Value.LocationStatus;
-
                 var saveManager = LogaManager.Instance.SaveManager;
                 saveManager.AddSavePoint("ObjectInfo" + locVar.Value.LocationName, "A list of location info to be stored " + System.DateTime.UtcNow.ToString("HH:mm dd MMMM, yyyy"), false);
             }
+        }
+
+        private void SaveData()
+        {
+            var saveManager = LogaManager.Instance.SaveManager;
+            saveManager.AddSavePoint("ObjectInfo" + locVar.Value.LocationName, "A list of location info to be stored " + System.DateTime.UtcNow.ToString("HH:mm dd MMMM, yyyy"), false);
         }
 
         private void OnDisable()

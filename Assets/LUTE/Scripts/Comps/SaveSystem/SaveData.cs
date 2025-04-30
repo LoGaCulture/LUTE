@@ -67,6 +67,7 @@ public class SaveData : MonoBehaviour
         var inventoryItems = BogInventoryBase.items.Where(x => x != null).ToList();
         if (inventoryItems == null)
         {
+
             return;
         }
 
@@ -80,6 +81,7 @@ public class SaveData : MonoBehaviour
         for (int i = 0; i < saveDataItems.Count; i++)
         {
             var saveDataItem = saveDataItems[i];
+
             if (saveDataItem == null)
             {
                 continue;
@@ -91,7 +93,7 @@ public class SaveData : MonoBehaviour
                 if (engineData == null)
                 {
                     Debug.LogError("Engine data is null so failed to decode engine data");
-                    return;
+                    continue;
                 }
 
                 EngineData.Decode(engineData);
@@ -102,28 +104,28 @@ public class SaveData : MonoBehaviour
                 LogaManager.Instance.SaveLog.LoadLogData(saveDataItem.Data);
             }
 
-            if (saveDataItem.Type == AchievementDataKey)
-            {
-                var achievementData = JsonUtility.FromJson<BogAchievementsData>(saveDataItem.Data);
-                if (achievementData == null)
-                {
-                    Debug.LogError("Achievement data is null so failed to decode achievement data");
-                    return;
-                }
-
-                BogAchievementsData.Decode(achievementData, LogaManager.Instance.BogAchievementsManager);
-            }
-
             if (saveDataItem.Type == InventoryDataKey)
             {
                 var inventoryData = JsonUtility.FromJson<BogInventoryData>(saveDataItem.Data);
                 if (inventoryData == null)
                 {
-                    Debug.LogError("Inventory data is null so failed to decode inventory data");
-                    return;
+                    continue;
                 }
 
                 BogInventoryData.Decode(inventoryData, null);
+            }
+
+            if (saveDataItem.Type == AchievementDataKey)
+            {
+                var achievementData = JsonUtility.FromJson<BogAchievementsData>(saveDataItem.Data);
+                if (achievementData == null)
+                {
+                    // Using a return statement here would break the loop which is fine as we have reached the end of the list
+                    // However this is left open for future save data files
+                    continue;
+                }
+
+                BogAchievementsData.Decode(achievementData, LogaManager.Instance.BogAchievementsManager);
             }
         }
     }

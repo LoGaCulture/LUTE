@@ -131,11 +131,13 @@ public class LocationInfoVar
     [SerializeField] protected LocationStatus locationStatus;
     [SerializeField] protected string locationName;
     [SerializeField] protected bool locationDisabled;
+    [SerializeField] protected bool locationHidden;
 
     public string LocationID { get { return locationID; } set { locationID = value; } }
     public LocationStatus LocationStatus { get { return locationStatus; } set { locationStatus = value; } }
     public string LocationName { get { return locationName; } set { locationName = value; } }
     public bool LocationDisabled { get { return locationDisabled; } set { locationDisabled = value; } }
+    public bool LocationHidden { get { return locationHidden; } set { locationHidden = value; } }
 }
 
 /// Serializable container for encoding the state of variables.
@@ -293,6 +295,8 @@ public class EngineData
                 d.LocationStatus = item.Value.LocationStatus;
                 d.LocationName = item.Value.LocationName;
                 d.LocationDisabled = item.Value.LocationDisabled;
+                d.LocationHidden = item.Value.LocationHidden;
+
                 engineData.LocationInfoVars.Add(d);
             }
         }
@@ -371,7 +375,7 @@ public class EngineData
         {
             var locationInfoVar = engineData.LocationInfoVars[i];
 
-            engine.SetLocationInfo(locationInfoVar.LocationID, locationInfoVar.LocationStatus, locationInfoVar.LocationDisabled);
+            engine.SetLocationInfo(locationInfoVar.LocationID, locationInfoVar.LocationStatus, locationInfoVar.LocationDisabled, locationInfoVar.LocationHidden);
         }
     }
 }

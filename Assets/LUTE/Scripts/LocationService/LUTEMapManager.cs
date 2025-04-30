@@ -110,8 +110,7 @@ namespace LoGaCulture.LUTE
 
             foreach (var locationMarker in relatedLocationMarkers)
             {
-                locationMarker.SetHiddenStatus();
-                locationMarker.HideMarker();
+                locationMarker.SetHiddenStatus(true);
             }
         }
 
@@ -134,8 +133,7 @@ namespace LoGaCulture.LUTE
             {
                 foreach (var locationMarker in relatedLocationMarkers)
                 {
-                    locationMarker.ResetHiddenStatus();
-                    locationMarker.ShowMarker();
+                    locationMarker.ResetHiddenStatus(true);
                 }
             }
         }
@@ -250,12 +248,32 @@ namespace LoGaCulture.LUTE
 
         protected virtual void SpawnMarker(LocationVariable location)
         {
+            if (location == null || location.Value == null)
+            {
+                return;
+            }
+
+            // Check if a marker with the same location info already exists
+            var existingMarker = spawnedLocationMarkers.Find(marker =>
+                marker != null &&
+                marker.LocationVariable != null &&
+                marker.LocationVariable.Value != null &&
+                marker.LocationVariable.Value.InfoID == location.Value.InfoID);
+
+            if (existingMarker != null)
+            {
+                // A marker with the same location info already exists, so we skip spawning
+                return;
+            }
+
+            // Instantiate a new marker
             var marker = Instantiate(markerPrefab);
             marker.SetCanvasCam(mapMovement.ReferenceCamera);
             marker.SetInfo(location, engine);
             marker.transform.localScale = Vector3.one * markerScale;
             marker.transform.localPosition = map.GeoToWorldPosition(location.Value.LatLongString(), true);
 
+            // Add the new marker to the list
             spawnedLocationMarkers.Add(marker);
         }
 

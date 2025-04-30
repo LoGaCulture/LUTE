@@ -26,20 +26,18 @@ namespace LoGaCulture.LUTE
 
             serializedObject.Update();
 
-            var inventory = inventoryProp.objectReferenceValue as BogInventoryBase;
-            if (inventory != null)
-            {
-                inventory.ResetInventory();
-            }
-
             if (GUILayout.Button("Reset Inventory Scriptable Objects"))
             {
                 foreach (var item in scriptableItems)
                 {
-                    // If an item is locked then unlock it
-                    // If an item is unlocked then lock it
                     // Essentially resetting the item back to whatever it was before runtime began
                     item.IsLocked = item.DefaultLockedStatus;
+                }
+
+                var inventory = inventoryProp.objectReferenceValue as BogInventoryBase;
+                if (inventory != null)
+                {
+                    inventory.ResetInventory();
                 }
             }
 
