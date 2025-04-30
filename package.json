@@ -1,0 +1,27 @@
+{
+  "name": "loga.lute.games",
+  "version": "1.2.0-alpha",
+  "displayName": "LoGaCulture LUTE",
+  "description": "LUTELUTE stands for LoGaCulture Unity Toolkit/Engine. A Unity tool to create narrative location games for the purposes of heritage preservation.",
+  "unity": "6000.0.39f1",
+  "keywords": [
+    "xr",
+    "ar",
+    "location",
+    "narrative"
+  ],
+  "author": {
+    "name": "Bog Games/LoGaCulture",
+    "url": "https://logaculture.eu/"
+  },
+  "dependencies": {
+    "com.unity.xr.arfoundation": "6.0.5",
+    "com.unity.xr.arcore": "6.0.5",
+    "com.unity.xr.interaction.toolkit": "3.0.7",
+    "com.unity.xr.core-utils": "2.5.1",
+    "com.unity.xr.legacyinputhelpers": "2.1.12",
+    "com.unity.xr.management": "4.5.0"
+  },
+  "documentationUrl": "https://github.com/LoGaCulture/LUTE/wiki",
+  "changelogUrl": "https://github.com/LoGaCulture/LUTE/compare/v1.1.0-alpha...v1.2.0-alpha"
+}
