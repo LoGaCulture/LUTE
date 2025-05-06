@@ -85,6 +85,11 @@ namespace LoGaCulture.LUTE
                 return;
             }
 
+            if (location.Value.InfoID != this.location.Value.InfoID)
+            {
+                return;
+            }
+
             bool locationMet = false;
             if (!requiresLocation)
             {
@@ -103,8 +108,9 @@ namespace LoGaCulture.LUTE
 
         protected bool CheckLocationStatus()
         {
-            if(location.Value.LocationDisabled)
+            if (location.Value.LocationDisabled)
                 return false;
+
 
             return true;
         }

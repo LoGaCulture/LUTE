@@ -540,7 +540,7 @@ public class Node : MonoBehaviour
                         if (condition.AnyVariable.variable != null)
                         {
                             var locationVar = condition.AnyVariable.variable as LocationVariable;
-                            if (!nodeLocations.Contains(locationVar))
+                            if (!nodeLocations.Contains(locationVar) && locationVar is LocationVariable)
                                 nodeLocations.Add(locationVar);
                         }
                     }

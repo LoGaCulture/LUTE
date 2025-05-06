@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9de6170bcd343a545914f16d1606ab5d, type: 3}
+  m_Name: BUSampleItem2
+  m_EditorClassIdentifier: 
+  itemID: 
+  itemType: 0
+  itemName: Simple Key
+  itemDescription: Who knows what it may unlock...?
+  defaultLockedStatus: 0
+  useWhenLocked: 0
+  consumeOnUse: 0
+  canDrop: 1
+  canMove: 1
+  maxStackSize: 1
+  unlockedIcon: {fileID: 21300000, guid: 19726cced070f084988c40c2dbecdd6c, type: 3}
+  lockedIcon: {fileID: 0}
+  useSound: {fileID: 0}
+  dropSound: {fileID: 0}
+  moveSound: {fileID: 0}
+  unlockSound: {fileID: 0}
+  lockSound: {fileID: 0}
+  addSound: {fileID: 0}

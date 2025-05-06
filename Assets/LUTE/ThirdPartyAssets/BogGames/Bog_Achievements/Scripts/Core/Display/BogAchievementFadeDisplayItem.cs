@@ -72,6 +72,10 @@ namespace BogGames.Tools.Achievements
             }
 
             target.alpha = targetAlpha;
+            if (targetAlpha == 0f)
+            {
+                Destroy(this.gameObject);
+            }
         }
 
         /// <summary>

@@ -84,7 +84,7 @@ namespace LoGaCulture.LUTE
                 case ClickMode.Disabled:
                     break;
                 case ClickMode.ClickAnywhere:
-                    if (Input.GetMouseButtonDown(0)) // Will work on android not sure on iOS
+                    if (Input.GetMouseButtonDown(0) || Input.GetKeyUp(KeyCode.Space)) // Will work on android not sure on iOS
                     {
                         SetClickAnywhereClickedFlag();
                     }

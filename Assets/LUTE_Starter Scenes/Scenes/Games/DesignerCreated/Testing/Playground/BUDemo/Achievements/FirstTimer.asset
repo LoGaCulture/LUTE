@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a5dbba5ef0460c4591c3df7a442d72d, type: 3}
+  m_Name: FirstTimer
+  m_EditorClassIdentifier: 
+  achievementID: FirstTimer
+  achievementType: 0
+  hiddenAchievement: 0
+  unlockedStatus: 0
+  title: Welcome to BU!
+  description: Complete the tutorial for the BU game
+  lockedImage: {fileID: 21300000, guid: b91e4efbf5609634389a18c2b2dba4f8, type: 3}
+  unlockedImage: {fileID: 21300000, guid: 60a12c7b23c4d1b42aef9511a36c42b2, type: 3}
+  unlockedSound: {fileID: 0}
+  progressSound: {fileID: 0}
+  progressTarget: 0
+  progressCurrent: 0
