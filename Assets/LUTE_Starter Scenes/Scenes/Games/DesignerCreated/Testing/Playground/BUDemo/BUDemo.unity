@@ -232,9 +232,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 622828021590996519, guid: 199492fe25020c044950554127d1f57b, type: 3}
       propertyPath: storyText
-      value: Seriously it is pretty cool... You can play around with {color=red}
-        rich text tags{/color} and even some neat effects such as {flash=0.5}flashing
-        the screen!
+      value: Seriously, it is pretty cool... You can play around with {color=red}
+        rich text tags{/color} and even some neat effects such as flashing the screen!
+        {flash=0.5}
       objectReference: {fileID: 0}
     - target: {fileID: 1066756330625101132, guid: 199492fe25020c044950554127d1f57b, type: 3}
       propertyPath: autoTrigger
@@ -393,6 +393,18 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3115229390268190339, guid: 199492fe25020c044950554127d1f57b, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3115229390268190339, guid: 199492fe25020c044950554127d1f57b, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3115229390268190339, guid: 199492fe25020c044950554127d1f57b, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3251002917203914092, guid: 199492fe25020c044950554127d1f57b, type: 3}
       propertyPath: showDesc
       value: 0
@@ -417,6 +429,14 @@ PrefabInstance:
       propertyPath: showDesc
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3912974111083658954, guid: 199492fe25020c044950554127d1f57b, type: 3}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 2115538221}
+    - target: {fileID: 3912974111083658954, guid: 199492fe25020c044950554127d1f57b, type: 3}
+      propertyPath: characterPortrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 7176a911d29efbc4b89a1994bb1ac4ca, type: 3}
     - target: {fileID: 4334173497827940515, guid: 199492fe25020c044950554127d1f57b, type: 3}
       propertyPath: autoTrigger
       value: 0
@@ -457,6 +477,14 @@ PrefabInstance:
       propertyPath: 'orderList.Array.data[5]'
       value: 
       objectReference: {fileID: 1389064884}
+    - target: {fileID: 4423057763268258306, guid: 199492fe25020c044950554127d1f57b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4423057763268258306, guid: 199492fe25020c044950554127d1f57b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.9
+      objectReference: {fileID: 0}
     - target: {fileID: 4596931729257957926, guid: 199492fe25020c044950554127d1f57b, type: 3}
       propertyPath: fadeWhenDone
       value: 1
@@ -532,6 +560,10 @@ PrefabInstance:
     - target: {fileID: 5359444886579339739, guid: 199492fe25020c044950554127d1f57b, type: 3}
       propertyPath: typingSpeed
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5359444886579339739, guid: 199492fe25020c044950554127d1f57b, type: 3}
+      propertyPath: waitForClick
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5591113547210319943, guid: 199492fe25020c044950554127d1f57b, type: 3}
       propertyPath: orderList.Array.size
@@ -695,7 +727,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7851448136404917962, guid: 199492fe25020c044950554127d1f57b, type: 3}
       propertyPath: selectedNodes.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7851448136404917962, guid: 199492fe25020c044950554127d1f57b, type: 3}
       propertyPath: selectedOrders.Array.size
