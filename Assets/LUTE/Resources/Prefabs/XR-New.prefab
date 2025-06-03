@@ -42,9 +42,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6616758448961480695}
-  - component: {fileID: 7861377888064534998}
-  - component: {fileID: 1631342573933100230}
   - component: {fileID: 1779502759001742613}
+  - component: {fileID: 8835661984690436622}
   m_Layer: 0
   m_Name: Object Spawner
   m_TagString: Untagged
@@ -67,74 +66,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6540259858249135389}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7861377888064534998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 735189126172715117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3294a4012a23b954791563a18135207b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_CameraToFace: {fileID: 0}
-  m_ObjectPrefabs: []
-  m_SpawnVisualizationPrefab: {fileID: 0}
-  m_SpawnOptionIndex: 0
-  m_OnlySpawnInView: 1
-  m_ViewportPeriphery: 0
-  m_ApplyRandomAngleAtSpawn: 1
-  m_SpawnAngleRange: 45
-  m_SpawnAsChildren: 0
---- !u!114 &1631342573933100230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 735189126172715117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35df92a24f2d2de4489a9e598132cedc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ARInteractor: {fileID: 1227354936037840761}
-  m_ObjectSpawner: {fileID: 0}
-  m_RequireHorizontalUpSurface: 0
-  m_SpawnTriggerType: 0
-  m_SpawnObjectInput:
-    m_InputSourceMode: 2
-    m_InputActionPerformed:
-      m_Name: Spawn Object
-      m_Type: 1
-      m_ExpectedControlType: 
-      m_Id: 5da679b4-1a0e-437f-82a6-c65c002ba91e
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_InputActionValue:
-      m_Name: Spawn Object Value
-      m_Type: 0
-      m_ExpectedControlType: Axis
-      m_Id: 92024052-ceaf-4c3c-90b3-9f9ed007e710
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_InputActionReferencePerformed: {fileID: 0}
-    m_InputActionReferenceValue: {fileID: 0}
-    m_ObjectReferenceObject: {fileID: 0}
-    m_ManualPerformed: 0
-    m_ManualValue: 0
-    m_ManualQueuePerformed: 0
-    m_ManualQueueWasPerformedThisFrame: 0
-    m_ManualQueueWasCompletedThisFrame: 0
-    m_ManualQueueValue: 0
-    m_ManualQueueTargetFrame: 0
-  m_BlockSpawnWhenInteractorHasSelection: 1
 --- !u!114 &1779502759001742613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,6 +79,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnableResourcePath: Prefabs/Spawnable
+--- !u!114 &8835661984690436622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735189126172715117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 956dd6cf70eaca449a45b6a95b96c8c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CameraToFace: {fileID: 0}
+  m_ObjectPrefabs: []
+  m_SpawnVisualizationPrefab: {fileID: 0}
+  m_SpawnOptionIndex: -1
+  m_OnlySpawnInView: 1
+  m_ViewportPeriphery: 0.15
+  m_ApplyRandomAngleAtSpawn: 1
+  m_SpawnAngleRange: 45
+  m_SpawnAsChildren: 0
 --- !u!1 &1840697773827465097
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,7 +156,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_InputActionReference: {fileID: -8156239294363760665, guid: 8eb74754e2f9bf14ca8db113706a47de, type: 3}
+    m_InputActionReference: {fileID: -8156239294363760665, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     m_ObjectReferenceObject: {fileID: 0}
     m_ManualValue: 0
   m_DragDeltaInput:
@@ -218,7 +170,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_InputActionReference: {fileID: -3603844561257126198, guid: 8eb74754e2f9bf14ca8db113706a47de, type: 3}
+    m_InputActionReference: {fileID: -3603844561257126198, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     m_ObjectReferenceObject: {fileID: 0}
     m_ManualValue: {x: 0, y: 0}
   m_ScreenTouchCountInput:
@@ -232,7 +184,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_InputActionReference: {fileID: 4162966010302970412, guid: 8eb74754e2f9bf14ca8db113706a47de, type: 3}
+    m_InputActionReference: {fileID: 4162966010302970412, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     m_ObjectReferenceObject: {fileID: 0}
     m_ManualValue: 0
 --- !u!1 &3251175818870438362
@@ -249,6 +201,7 @@ GameObject:
   - component: {fileID: 47894125291581984}
   - component: {fileID: 2608294347530504057}
   - component: {fileID: 1690830410254024112}
+  - component: {fileID: 4857736835143964502}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -389,7 +342,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 7862207684358717888, guid: 8eb74754e2f9bf14ca8db113706a47de, type: 3}
+    m_Reference: {fileID: 7862207684358717888, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_RotationInput:
     m_UseReference: 1
     m_Action:
@@ -417,7 +370,7 @@ MonoBehaviour:
         m_Action: Rotation
         m_Flags: 0
       m_Flags: 0
-    m_Reference: {fileID: -530380113134220495, guid: 8eb74754e2f9bf14ca8db113706a47de, type: 3}
+    m_Reference: {fileID: -530380113134220495, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_TrackingStateInput:
     m_UseReference: 1
     m_Action:
@@ -437,7 +390,7 @@ MonoBehaviour:
         m_Action: Tracking State
         m_Flags: 0
       m_Flags: 0
-    m_Reference: {fileID: 1031966339891076899, guid: 8eb74754e2f9bf14ca8db113706a47de, type: 3}
+    m_Reference: {fileID: 1031966339891076899, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_PositionAction:
     m_Name: 
     m_Type: 0
@@ -456,6 +409,50 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+--- !u!114 &4857736835143964502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3251175818870438362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &4335798765723329653
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,7 +895,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_InputActionReference: {fileID: 2494954584338170553, guid: 8eb74754e2f9bf14ca8db113706a47de, type: 3}
+    m_InputActionReference: {fileID: 2494954584338170553, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     m_ObjectReferenceObject: {fileID: 0}
     m_ManualValue: {x: 0, y: 0}
   m_DragCurrentPositionInput:
@@ -912,7 +909,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_InputActionReference: {fileID: -7530398834462728267, guid: 8eb74754e2f9bf14ca8db113706a47de, type: 3}
+    m_InputActionReference: {fileID: -7530398834462728267, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     m_ObjectReferenceObject: {fileID: 0}
     m_ManualValue: {x: 0, y: 0}
   m_ScreenTouchCountInput:
@@ -926,7 +923,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_InputActionReference: {fileID: 4162966010302970412, guid: 8eb74754e2f9bf14ca8db113706a47de, type: 3}
+    m_InputActionReference: {fileID: 4162966010302970412, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     m_ObjectReferenceObject: {fileID: 0}
     m_ManualValue: 0
 --- !u!1 &6173059895961511636
@@ -1044,7 +1041,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_InputActionReference: {fileID: 2494954584338170553, guid: 8eb74754e2f9bf14ca8db113706a47de, type: 3}
+    m_InputActionReference: {fileID: 2494954584338170553, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     m_ObjectReferenceObject: {fileID: 0}
     m_ManualValue: {x: 0, y: 0}
   m_DragCurrentPositionInput:
@@ -1058,7 +1055,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_InputActionReference: {fileID: -7530398834462728267, guid: 8eb74754e2f9bf14ca8db113706a47de, type: 3}
+    m_InputActionReference: {fileID: -7530398834462728267, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     m_ObjectReferenceObject: {fileID: 0}
     m_ManualValue: {x: 0, y: 0}
   m_PinchGapDeltaInput:
@@ -1072,7 +1069,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_InputActionReference: {fileID: -5112888916153672211, guid: 8eb74754e2f9bf14ca8db113706a47de, type: 3}
+    m_InputActionReference: {fileID: -5112888916153672211, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     m_ObjectReferenceObject: {fileID: 0}
     m_ManualValue: 0
   m_TwistDeltaRotationInput:
@@ -1086,7 +1083,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_InputActionReference: {fileID: -8156239294363760665, guid: 8eb74754e2f9bf14ca8db113706a47de, type: 3}
+    m_InputActionReference: {fileID: -8156239294363760665, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     m_ObjectReferenceObject: {fileID: 0}
     m_ManualValue: 0
 --- !u!1 &6899784196862049953
@@ -1180,7 +1177,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_InputActionReference: {fileID: -5112888916153672211, guid: 8eb74754e2f9bf14ca8db113706a47de, type: 3}
+    m_InputActionReference: {fileID: -5112888916153672211, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     m_ObjectReferenceObject: {fileID: 0}
     m_ManualValue: 0
   m_TwistDeltaRotationInput:
@@ -1194,7 +1191,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_InputActionReference: {fileID: -8156239294363760665, guid: 8eb74754e2f9bf14ca8db113706a47de, type: 3}
+    m_InputActionReference: {fileID: -8156239294363760665, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     m_ObjectReferenceObject: {fileID: 0}
     m_ManualValue: 0
 --- !u!1 &8639148664273460610
@@ -1268,7 +1265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ActionAssets:
-  - {fileID: -944628639613478452, guid: 8eb74754e2f9bf14ca8db113706a47de, type: 3}
+  - {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!114 &7986443663940458253
 MonoBehaviour:
   m_ObjectHideFlags: 0
