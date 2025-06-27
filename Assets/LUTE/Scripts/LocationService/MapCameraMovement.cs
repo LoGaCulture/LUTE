@@ -423,13 +423,25 @@ namespace LoGaCulture.LUTE
                     {
                         if (null != map)
                         {
-                            // Get the number of degrees in a tile at the current zoom level.
-                            // Divide it by the tile width in pixels ( 256 in our case)
-                            // to get degrees represented by each pixel.
-                            // Mouse offset is in pixels, therefore multiply the factor with the offset to move the center.
+                            // Get the map's current rotation in the Y axis
+                            float mapRotationY = map.transform.eulerAngles.y;
+                            float rotationRadians = mapRotationY * Mathf.Deg2Rad;
+
+                            // Rotate the offset vector to compensate for map rotation
+                            float cosAngle = Mathf.Cos(rotationRadians);
+                            float sinAngle = Mathf.Sin(rotationRadians);
+
+                            float rotatedX = offset.x * cosAngle - offset.z * sinAngle;
+                            float rotatedZ = offset.x * sinAngle + offset.z * cosAngle;
+
+                            // Calculate the degree factor as before
                             float factor = panSpeed * Conversions.GetTileScaleInDegrees((float)map.CenterLatitudeLongitude.x, map.AbsoluteZoom) / map.UnityTileSize;
 
-                            var latitudeLongitude = new Vector2d(map.CenterLatitudeLongitude.x + offset.z * factor, map.CenterLatitudeLongitude.y + offset.x * factor);
+                            // Apply rotated offset
+                            var latitudeLongitude = new Vector2d(
+                                map.CenterLatitudeLongitude.x + rotatedZ * factor,
+                                map.CenterLatitudeLongitude.y + rotatedX * factor
+                            );
                             map.UpdateMap(latitudeLongitude, map.Zoom);
                         }
                     }
@@ -492,8 +504,23 @@ namespace LoGaCulture.LUTE
                     {
                         if (null != map)
                         {
+                            // Get the map's current rotation in the Y axis
+                            float mapRotationY = map.transform.eulerAngles.y;
+
+                            // Convert to radians for the rotation calculation
+                            float rotationRadians = mapRotationY * Mathf.Deg2Rad;
+
+                            // Create a rotation matrix to adjust the offset vector based on map rotation
+                            float cosAngle = Mathf.Cos(rotationRadians);
+                            float sinAngle = Mathf.Sin(rotationRadians);
+
+                            // Apply rotation to the offset vector to get screen-aligned movement
+                            float rotatedX = offset.x * cosAngle - offset.z * sinAngle;
+                            float rotatedZ = offset.x * sinAngle + offset.z * cosAngle;
+
+                            // Calculate map movement using the rotated offset
                             float factor = panSpeed * Conversions.GetTileScaleInMeters((float)0, map.AbsoluteZoom) / map.UnityTileSize;
-                            var latlongDelta = Conversions.MetersToLatLon(new Vector2d(offset.x * factor, offset.z * factor));
+                            var latlongDelta = Conversions.MetersToLatLon(new Vector2d(rotatedX * factor, rotatedZ * factor));
                             var newLatLong = map.CenterLatitudeLongitude + latlongDelta;
 
                             map.UpdateMap(newLatLong, map.Zoom);
