@@ -1,5 +1,10 @@
+#if UNITY_EDITOR
 using UnityEditor;
+using System;
+using System.Linq;
+#endif
 using UnityEngine;
+using UnityEditor.Build;
 
 [InitializeOnLoad]
 public static class LogaEditorPreferences
@@ -10,6 +15,8 @@ public static class LogaEditorPreferences
 
     public static bool hideIconInHierarchy;
     public static bool useLogs;
+
+    const string LOGA_DEFINE = "LOGA_ENABLE_PLAYER_LOGS";
 
     static LogaEditorPreferences()
     {
@@ -45,8 +52,17 @@ public static class LogaEditorPreferences
 
         EditorGUILayout.Space();
 
-        useLogs = EditorGUILayout.Toggle("Use Logs", useLogs);
-        LogaConstants.UseLogs = useLogs;
+        bool newUseLogs = EditorGUILayout.Toggle("Use Logs", useLogs);
+
+        if(newUseLogs != useLogs)
+        {
+            useLogs = newUseLogs;
+            LogaConstants.UseLogs = useLogs;
+
+            EditorPrefs.SetBool(USE_LOGS_KEY, useLogs);
+            ToggleDefine(LOGA_DEFINE, useLogs);
+        }
+       
 
         EditorGUILayout.Space();
 
@@ -76,6 +92,47 @@ public static class LogaEditorPreferences
             EditorPrefs.SetBool(USE_LOGS_KEY, useLogs);
         }
     }
+
+#if UNITY_EDITOR
+    static void ToggleDefine(string symbol, bool enable)
+    {
+
+
+        var definesAndroid = PlayerSettings.GetScriptingDefineSymbols(NamedBuildTarget.Android);
+        var definesiOS = PlayerSettings.GetScriptingDefineSymbols(NamedBuildTarget.iOS);
+
+        bool changed = false;
+
+        if (enable && !definesAndroid.Contains(symbol))
+        {
+            definesAndroid += ";" + symbol;
+            changed = true;
+        }
+        else if (!enable && definesAndroid.Contains(symbol))
+        {
+            definesAndroid = definesAndroid.Replace(symbol, "").Replace(";;", ";").Trim(';');
+            changed = true;
+        }
+        if(enable && !definesiOS.Contains(symbol))
+        {
+            definesiOS += ";" + symbol;
+            changed = true;
+        }
+        else if (!enable && definesiOS.Contains(symbol))
+        {
+            definesiOS = definesiOS.Replace(symbol, "").Replace(";;", ";").Trim(';');
+            changed = true;
+        }
+
+
+        if (changed)
+        {
+            PlayerSettings.SetScriptingDefineSymbols(NamedBuildTarget.Android, definesAndroid);
+            PlayerSettings.SetScriptingDefineSymbols(NamedBuildTarget.iOS, definesiOS);
+        }
+
+    }
+#endif
 
     public static void LoadOnScript()
     {
