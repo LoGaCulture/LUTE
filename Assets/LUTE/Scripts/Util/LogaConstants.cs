@@ -67,7 +67,15 @@ public static class LogaConstants
     /// <summary>
     /// Whether to use logs during runtime.
     /// </summary>
-    public static bool UseLogs;
+    /// 
+#if LOGA_ENABLE_PLAYER_LOGS
+
+    public static bool UseLogs = true;
+
+#else
+    public static bool UseLogs = false;
+
+#endif
 
     /// <summary>
     /// Default colour of the marker radius.
