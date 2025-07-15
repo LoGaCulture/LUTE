@@ -108,6 +108,8 @@ public class Node : MonoBehaviour
     public bool ShouldCancel { get; set; }
     public virtual bool UpdateLocationStatusToComplete { get { return updateLocationStatusToComplete; } }
 
+    private bool logSent = false;
+
     protected virtual void Awake()
     {
         SetExecutionInfo();
@@ -213,7 +215,23 @@ public class Node : MonoBehaviour
             yield break;
         }
 
-        LogaManager.Instance.LogManager.Log(LoGaCulture.LUTE.Logs.LogLevel.Info, "Executing node: " + _NodeName);
+        string defaultLog = $"Executing node: {_NodeName}";
+
+        bool isUpdateHandler = eventHandler is UpdateEventHandler;
+        if (isUpdateHandler)
+        {
+            defaultLog += " (Update Event Handler)";
+        }
+
+        if (!logSent)
+        {
+            LogaManager.Instance.LogManager.Log(LoGaCulture.LUTE.Logs.LogLevel.Info, defaultLog);
+
+            if (isUpdateHandler)
+            {
+                logSent = true;
+            }
+        }
 
         {
             lastOnCompleteAction = onComplete;
