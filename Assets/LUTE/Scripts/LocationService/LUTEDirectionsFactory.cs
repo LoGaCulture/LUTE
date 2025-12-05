@@ -172,7 +172,7 @@ namespace LoGaCulture.LUTE
 
         private void HandleDirectionsResponse(DirectionsResponse response)
         {
-            if (response == null || response.Routes == null || response.Routes.Count == 0)
+            if (response == null || response.Routes == null || response.Routes.Count == 0 || map == null)
             {
                 return;
             }

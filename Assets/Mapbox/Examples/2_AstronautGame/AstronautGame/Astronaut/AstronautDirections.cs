@@ -36,7 +36,7 @@ namespace Mapbox.Examples
 
         void HandleDirectionsResponse(DirectionsResponse response)
         {
-            if (null == response.Routes || response.Routes.Count < 1)
+            if (null == response.Routes || response.Routes.Count < 1 || _map == null)
             {
                 return;
             }
