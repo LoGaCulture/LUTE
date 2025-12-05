@@ -2080,7 +2080,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 25333.475
     y: 24941.137
-    width: 98.34
+    width: 99.03
     height: 40
   nodeName: Troll Lair
   nodeDescription: Basic building block of a narrative engine
@@ -4638,6 +4638,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4659,6 +4661,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 830121435
   m_SortingLayer: 1
   m_SortingOrder: 1

@@ -64,6 +64,9 @@ public class SaveData : MonoBehaviour
 
     private void SaveInventoryData(List<SaveDataItem> saveDataItems)
     {
+        if(BogInventoryBase.items == null)
+            return;
+
         var inventoryItems = BogInventoryBase.items.Where(x => x != null).ToList();
         if (inventoryItems == null)
         {

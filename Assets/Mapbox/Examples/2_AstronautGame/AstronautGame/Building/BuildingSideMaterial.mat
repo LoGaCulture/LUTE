@@ -103,7 +103,7 @@ Material:
     - __dirty: 0
     m_Colors:
     - _BaseColor: {r: 0, g: 0, b: 0, a: 0}
-    - _CharacterPosition: {r: 57.12, g: 0.10713112, b: -11.247134, a: 0}
+    - _CharacterPosition: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 0, g: 0.5034485, b: 1, a: 1}
     - _EmissionColor: {r: 1, g: 0.2275863, b: 0, a: 1}
   m_BuildTextureStacks: []

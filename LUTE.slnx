@@ -1,0 +1,12 @@
+﻿<Solution>
+  <Project Path="Assembly-CSharp-Editor.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="BogGames.Tools.Achievements.csproj" />
+  <Project Path="Unity.XR.Interaction.Toolkit.Samples.StarterAssets.csproj" />
+  <Project Path="BogGames.Tools.Inventory.csproj" />
+  <Project Path="BogGames.Tools.Inventory.Editor.csproj" />
+  <Project Path="BogGames.Tools.csproj" />
+  <Project Path="BogGames.Tools.Achievements.Editor.csproj" />
+  <Project Path="Unity.XR.Interaction.Toolkit.Samples.StarterAssets.Editor.csproj" />
+  <Project Path="BogGames.Tools.Attributes.Editor.csproj" />
+</Solution>
