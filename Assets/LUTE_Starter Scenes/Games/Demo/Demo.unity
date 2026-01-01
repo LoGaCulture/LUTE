@@ -370,6 +370,52 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0973709683afc8b49b81c6eeed1e4c3f, type: 3}
+--- !u!28 &803276680
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 4
+  m_Width: 2
+  m_Height: 2
+  m_CompleteImageSize: 20
+  m_MipsStripped: 0
+  m_TextureFormat: 4
+  m_MipCount: 2
+  m_IsReadable: 1
+  m_IsPreProcessed: 0
+  m_IgnoreMipmapLimit: 1
+  m_MipmapLimitGroupName: 
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_VTOnly: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  m_PlatformBlob: 
+  image data: 20
+  _typelessdata: e2e2e2ffe2e2e2ffe2e2e2ffe2e2e2ffe2e2e2ff
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
 --- !u!1001 &870886688
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1440,6 +1486,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1708972110}
   m_CullTransparentMesh: 1
+--- !u!28 &1755183291
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 4
+  m_Width: 2
+  m_Height: 2
+  m_CompleteImageSize: 20
+  m_MipsStripped: 0
+  m_TextureFormat: 4
+  m_MipCount: 2
+  m_IsReadable: 1
+  m_IsPreProcessed: 0
+  m_IgnoreMipmapLimit: 1
+  m_MipmapLimitGroupName: 
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_VTOnly: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  m_PlatformBlob: 
+  image data: 20
+  _typelessdata: e2e2e2ffe2e2e2ffe2e2e2ffe2e2e2ffe2e2e2ff
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
 --- !u!1001 &1818930279
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1706,12 +1798,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 259267083496140413, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
+      propertyPath: labelTint.b
+      value: 0.8867924
+      objectReference: {fileID: 0}
+    - target: {fileID: 259267083496140413, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
+      propertyPath: labelTint.g
+      value: 0.8867924
+      objectReference: {fileID: 0}
+    - target: {fileID: 259267083496140413, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
+      propertyPath: labelTint.r
+      value: 0.8867924
+      objectReference: {fileID: 0}
+    - target: {fileID: 259267083496140413, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
       propertyPath: scrollPos.x
-      value: -25793.543
+      value: -25432.594
       objectReference: {fileID: 0}
     - target: {fileID: 259267083496140413, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
       propertyPath: scrollPos.y
-      value: -24790.215
+      value: -24703.875
       objectReference: {fileID: 0}
     - target: {fileID: 259267083496140413, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
       propertyPath: variables.Array.size
@@ -1727,7 +1831,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 259267083496140413, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
       propertyPath: selectedNodes.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 259267083496140413, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
       propertyPath: selectedOrders.Array.size
@@ -1736,7 +1840,7 @@ PrefabInstance:
     - target: {fileID: 259267083496140413, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
       propertyPath: 'selectedNodes.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2115643080}
     - target: {fileID: 259267083496140413, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
       propertyPath: 'selectedNodes.Array.data[1]'
       value: 
@@ -1937,6 +2041,14 @@ PrefabInstance:
       propertyPath: moveWithMap
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6781731928994709425, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
+      propertyPath: nodeRect.x
+      value: 26021.697
+      objectReference: {fileID: 0}
+    - target: {fileID: 6781731928994709425, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
+      propertyPath: nodeRect.y
+      value: 25002.72
+      objectReference: {fileID: 0}
     - target: {fileID: 7122912232810681446, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1992,6 +2104,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8861555758513075961, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2115643081}
+    - targetCorrespondingSourceObject: {fileID: 8861555758513075961, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2115643084}
+    - targetCorrespondingSourceObject: {fileID: 8861555758513075961, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2115643083}
+    - targetCorrespondingSourceObject: {fileID: 8861555758513075961, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2115643082}
+    - targetCorrespondingSourceObject: {fileID: 8861555758513075961, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2115643086}
+    - targetCorrespondingSourceObject: {fileID: 8861555758513075961, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2115643085}
   m_SourcePrefab: {fileID: 100100000, guid: 4e5ad4b6faa38e14fbd27f0bbe609644, type: 3}
 --- !u!1 &2115643074 stripped
 GameObject:
@@ -2107,8 +2234,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 26903.543
-    y: 24897.215
+    x: 26901.543
+    y: 24894.215
     width: 115.92
     height: 40
   nodeName: Raise Event
@@ -2143,6 +2270,277 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameEvent: {fileID: 11400000, guid: 519a9a3f2919b3441ba0544404e3f3db, type: 2}
+--- !u!114 &2115643082
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115643074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0edd3be99a3bc342a2936f413f54c9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnnotationLine
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  useCustomTint: 0
+  itemId: 0
+  start:
+    serializedVersion: 2
+    x: 25963.594
+    y: 24801.875
+    width: 65
+    height: 65
+  end:
+    serializedVersion: 2
+    x: 26034.594
+    y: 24948.875
+    width: 65
+    height: 65
+  lineColor: {r: 1, g: 1, b: 1, a: 1}
+  lineWidth: 1
+  startSelected: 1
+--- !u!114 &2115643083
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115643074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0edd3be99a3bc342a2936f413f54c9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnnotationLine
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  useCustomTint: 0
+  itemId: 0
+  start:
+    serializedVersion: 2
+    x: 25919.594
+    y: 24800.875
+    width: 65
+    height: 65
+  end:
+    serializedVersion: 2
+    x: 25850.594
+    y: 24950.875
+    width: 65
+    height: 65
+  lineColor: {r: 1, g: 1, b: 1, a: 1}
+  lineWidth: 1
+  startSelected: 0
+--- !u!114 &2115643084
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115643074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be523a2ad79cc4143b7f1002f5188df7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Label
+  tint: {r: 0.8867924, g: 0.8867924, b: 0.8867924, a: 1}
+  useCustomTint: 0
+  itemId: 0
+  labelRect:
+    serializedVersion: 2
+    x: 25871.594
+    y: 24772.875
+    width: 125
+    height: 127.14
+  labelText: These Nodes are used in conjunction with UI buttons to allow for testing
+    features (for simple debugging)
+  labelStyle:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 1755183291}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 0}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_Alignment: 0
+    m_WordWrap: 1
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
+--- !u!114 &2115643085
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115643074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0edd3be99a3bc342a2936f413f54c9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnnotationLine
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  useCustomTint: 0
+  itemId: 0
+  start:
+    serializedVersion: 2
+    x: 26821.594
+    y: 24801.875
+    width: 65
+    height: 65
+  end:
+    serializedVersion: 2
+    x: 27012.594
+    y: 24867.875
+    width: 65
+    height: 65
+  lineColor: {r: 1, g: 1, b: 1, a: 1}
+  lineWidth: 1
+  startSelected: 1
+--- !u!114 &2115643086
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115643074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be523a2ad79cc4143b7f1002f5188df7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Label
+  tint: {r: 0.8867924, g: 0.8867924, b: 0.8867924, a: 1}
+  useCustomTint: 0
+  itemId: 1
+  labelRect:
+    serializedVersion: 2
+    x: 26754.594
+    y: 24705.875
+    width: 125
+    height: 170.71
+  labelText: You can raise Unity Events using Nodes too - this is highly useful when
+    you want a more modular approach and desire to use more of your own approach
+    and execute it via Nodes
+  labelStyle:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 803276680}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 0}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_Alignment: 0
+    m_WordWrap: 1
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

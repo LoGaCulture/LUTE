@@ -346,11 +346,11 @@ public class GraphWindow : EventWindow
 
         UpdateNodes();
 
-        //List<Label> gameLabels = storyEngine.gameObject.GetComponents<Label>().ToList();
-        //labels = gameLabels.ToArray();
+        List<Label> gameLabels = storyEngine.gameObject.GetComponents<Label>().ToList();
+        labels = gameLabels.ToArray();
 
-        //List<AnnotationLine> gameAnnotationLines = storyEngine.gameObject.GetComponents<AnnotationLine>().ToList();
-        //annotationLines = gameAnnotationLines.ToArray();
+        List<AnnotationLine> gameAnnotationLines = storyEngine.gameObject.GetComponents<AnnotationLine>().ToList();
+        annotationLines = gameAnnotationLines.ToArray();
 
         //List<AnnotationBox> gameAnnotationBoxes = storyEngine.gameObject.GetComponents<AnnotationBox>().ToList();
         //annotationBoxes = gameAnnotationBoxes.ToArray();
@@ -687,12 +687,12 @@ public class GraphWindow : EventWindow
                 Selection.activeObject = storyEngine.GetAbstractMap();
             }
 
-            //string annotationButton = storyEngine.ShowAnnotations ? "Hide Annotations" : "Show Annotations";
+            string annotationButton = storyEngine.ShowAnnotations ? "Hide Annotations" : "Show Annotations";
 
-            //if (GUILayout.Button(annotationButton, EditorStyles.toolbarButton))
-            //{
-            //    storyEngine.ShowAnnotations = !storyEngine.ShowAnnotations;
-            //}
+            if (GUILayout.Button(annotationButton, EditorStyles.toolbarButton))
+            {
+               storyEngine.ShowAnnotations = !storyEngine.ShowAnnotations;
+            }
 
             //string annotationBoxString = isDrawingAnnotationBox ? "Stop Drawing Annotation Box" : "Draw Annotation Box";
             //if (GUILayout.Button(annotationBoxString, EditorStyles.toolbarButton))
@@ -700,14 +700,14 @@ public class GraphWindow : EventWindow
             //    isDrawingAnnotationBox = !isDrawingAnnotationBox;
             //}
 
-            //if (GUILayout.Button("Clear Annotations", EditorStyles.toolbarButton))
-            //{
-            //    storyEngine.ClearAnnotations();
-            //    labels.ToList().Clear();
-            //    annotationLines.ToList().Clear();
+            if (GUILayout.Button("Clear Annotations", EditorStyles.toolbarButton))
+            {
+               storyEngine.ClearAnnotations();
+               labels.ToList().Clear();
+               annotationLines.ToList().Clear();
             //    annotationBoxes.ToList().Clear();
-            //    UpdateAnnotations();
-            //}
+               UpdateAnnotations();
+            }
 
             GUILayout.FlexibleSpace();
 
@@ -2650,8 +2650,8 @@ public class GraphWindow : EventWindow
     {
         var hitNode = GetNodeAtPoint(e.mousePosition);
         var hitGroup = GetGroupAtPoint(e.mousePosition);
-        //var hitLabel = GetLabelAtPoint(e.mousePosition);
-        //var hitLine = GetLineAtPoint(e.mousePosition);
+        var hitLabel = GetLabelAtPoint(e.mousePosition);
+        var hitLine = GetLineAtPoint(e.mousePosition);
         //var hitBox = GetAnnotatedBoxAtPoint(e.mousePosition);
 
         // Convert Ctrl+Left click to a right click on macOS
@@ -2725,18 +2725,18 @@ public class GraphWindow : EventWindow
                         dragGroup = hitGroup;
                         hasDraggedSelected = false;
                     }
-                    //else if (hitLabel != null)
-                    //{
-                    //    startDragPosition = e.mousePosition / storyEngine.Zoom - storyEngine.ScrollPos;
-                    //    dragLabel = hitLabel;
-                    //    hasDraggedSelected = false;
-                    //}
-                    //else if (hitLine != null)
-                    //{
-                    //    startDragPosition = e.mousePosition / storyEngine.Zoom - storyEngine.ScrollPos;
-                    //    dragLine = hitLine;
-                    //    hasDraggedSelected = false;
-                    //}
+                    else if (hitLabel != null)
+                    {
+                       startDragPosition = e.mousePosition / storyEngine.Zoom - storyEngine.ScrollPos;
+                       dragLabel = hitLabel;
+                       hasDraggedSelected = false;
+                    }
+                    else if (hitLine != null)
+                    {
+                       startDragPosition = e.mousePosition / storyEngine.Zoom - storyEngine.ScrollPos;
+                       dragLine = hitLine;
+                       hasDraggedSelected = false;
+                    }
                     //else if (hitBox != null)
                     //{
                     //    startDragPosition = e.mousePosition / storyEngine.Zoom - storyEngine.ScrollPos;
@@ -2949,8 +2949,8 @@ public class GraphWindow : EventWindow
     {
         var hitNode = GetNodeAtPoint(e.mousePosition);
         var hitGroup = GetGroupAtPoint(e.mousePosition);
-        //var hitLabel = GetLabelAtPoint(e.mousePosition);
-        //var hitLine = GetLineAtPoint(e.mousePosition);
+        var hitLabel = GetLabelAtPoint(e.mousePosition);
+        var hitLine = GetLineAtPoint(e.mousePosition);
         //var hitBox = GetAnnotatedBoxAtPoint(e.mousePosition);
 
         // Convert Ctrl+Left click to a right click on mac
@@ -3226,14 +3226,14 @@ public class GraphWindow : EventWindow
                         //ensure that the new nodes are added to a new group
                         //menu.AddItem(new GUIContent("Duplicate Group"), false, () => DuplicateGroup(hitGroup.GroupedNodes));
                     }
-                    //else if (hitLabel != null)
-                    //{
-                    //    menu.AddItem(new GUIContent("Delete Label"), false, () => DeleteLabel(hitLabel));
-                    //}
-                    //else if (hitLine != null)
-                    //{
-                    //    menu.AddItem(new GUIContent("Delete Line"), false, () => DeleteAnnotationLine(hitLine));
-                    //}
+                    else if (hitLabel != null)
+                    {
+                       menu.AddItem(new GUIContent("Delete Label"), false, () => DeleteLabel(hitLabel));
+                    }
+                    else if (hitLine != null)
+                    {
+                       menu.AddItem(new GUIContent("Delete Line"), false, () => DeleteAnnotationLine(hitLine));
+                    }
                     //else if (hitBox != null)
                     //{
                     //    menu.AddItem(new GUIContent("Delete Box"), false, () => DeleteAnnotationBox(hitBox));
@@ -3260,16 +3260,16 @@ public class GraphWindow : EventWindow
                         {
                             menu.AddDisabledItem(new GUIContent("Paste Node"));
                         }
-                        //menu.AddItem(
-                        //    new GUIContent("Add Label"),
-                        //    false,
-                        //    () => AddLabel(mousePosition / storyEngine.Zoom - storyEngine.ScrollPos)
-                        //);
-                        //menu.AddItem(
-                        //    new GUIContent("Start Line"),
-                        //    false,
-                        //    () => StartLine(rightClickDown / storyEngine.Zoom - storyEngine.ScrollPos)
-                        //);
+                        menu.AddItem(
+                           new GUIContent("Add Label"),
+                           false,
+                           () => AddLabel(mousePosition / storyEngine.Zoom - storyEngine.ScrollPos)
+                        );
+                        menu.AddItem(
+                           new GUIContent("Start Line"),
+                           false,
+                           () => StartLine(rightClickDown / storyEngine.Zoom - storyEngine.ScrollPos)
+                        );
                         menu.AddSeparator("");
                         if (!Application.isPlaying)
                         {
