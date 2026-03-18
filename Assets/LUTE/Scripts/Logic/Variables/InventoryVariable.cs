@@ -44,7 +44,6 @@ public struct InventoryData
         return inventoryData.Value;
     }
 
-    [SerializeField]
     public BogInventoryBase Value
     {
         get { return (inventoryRef == null) ? inventoryVal : inventoryRef.Value; }

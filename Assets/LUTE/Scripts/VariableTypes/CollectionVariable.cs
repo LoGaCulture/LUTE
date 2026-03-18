@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [VariableInfo("Other", "Collection")]
@@ -21,8 +19,6 @@ public struct CollectionData
 
     [SerializeField]
     public Collection collectionVal;
-    [SerializeField]
-
     public CollectionData(Collection v)
     {
         collectionVal = v;

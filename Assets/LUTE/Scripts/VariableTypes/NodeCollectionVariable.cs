@@ -119,7 +119,6 @@ public struct NodeCollectionData
     [SerializeField]
     public int total;
 
-    [SerializeField]
     public NodeCollectionData(NodeCollection v, int _total)
     {
         nodeCollectionVal = v;
@@ -127,13 +126,11 @@ public struct NodeCollectionData
         total = _total;
     }
 
-    [SerializeField]
     public static implicit operator NodeCollection(NodeCollectionData NodeCollectionData)
     {
         return NodeCollectionData.Value;
     }
 
-    [SerializeField]
     public NodeCollection Value
     {
         get { return (nodeCollectionRef == null) ? nodeCollectionVal : nodeCollectionRef.Value; }
