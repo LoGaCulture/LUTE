@@ -3,6 +3,10 @@
 
 LUTE stands for LoGaCulture Unity Toolkit/Engine. A Unity tool to create narrative location games for the purposes of heritage preservation.
 
+# YouTube Tutorials
+
+Checkout the [video tutorials](https://www.youtube.com/@LUTELabs) for guidance and in-depth walkthroughs or see the links below for our GitHub wiki!
+
 # Installation
 Head over to the [Installation](https://github.com/LoGaCulture/LUTE/wiki/Installation) page on the wiki for details on setting up.
 
